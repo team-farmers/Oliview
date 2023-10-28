@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" th:href="@{/css/member/signup-info-style.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+
+  <main>
+
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <!-- 회원가입박스 -->
+    <section class="container">
+
+      <form action="signup-fin" method="POST" id="signupForm">
+
+        <section class="input-box" id="id-input-box">
+          <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberId" placeholder="아이디" required>
+        </section>
+
+        <section class="input-box" id="pw-input-box">
+          <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
+          <input type="password" name="memberPw" placeholder="비밀번호" required>
+        </section>
+
+        <section class="input-box" id="pw-input-box">
+          <i class="fa-regular fa-envelope fa-lg" style="color: #cbcbcb;"></i>
+          <input type="email" name="memberEmail" placeholder="이메일" required>
+        </section>
+
+        <article id="alert1"></article>
+
+        <section class="input-box" id="name-input-box">
+          <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberName" placeholder="이름" required>
+        </section>
+
+        <section class="input-box" id="tel-input-box">
+          <i class="fa-solid fa-phone fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberTel" placeholder="전화번호" required>
+        </section>
+
+        <section class="input-box" id="nickname-input-box">
+          <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberNickname" placeholder="닉네임" required>
+        </section>
+
+        <section class="input-box" id="address-input-box">
+          <i class="fa-solid fa-map-pin fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberAddress" placeholder="주소" required>
+        </section>
+
+        <section class="gender-input-box" id="gender-input-box">
+
+          <section class="gender-check-area">
+            <input type="radio" name="gender" id="genderM" value="M" class="gender">
+            <label for="genderM">
+              <i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i>남
+            </label>
+          </section>
+
+          <section class="gender-check-area">
+            <input type="radio" name="gender" id="genderF" value="M" class="gender">
+            <label for="genderF">
+              <i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i>여
+            </label>
+          </section>
+
+        </section>
+    
+        <button class="complete-btn">완료</button>
+      </form>
+
+    </section>
+
+
+  </main>
+
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+/*-------- signup container --------*/
+
+.container{
+  width: 100%;
+  height: 78rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 6rem;
+}
+
+
+/* ---------회원가입1. 약관동의--------- */
+
+#agreeForm{
+  width: 60rem;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#agreeForm * {
+  /* border: 1px solid black; */
+}
+
+/* 동의하기 섹션 */
+.agree-signup-box{
+  width: 50rem;
+  font-size: 1.8rem;
+  
+  margin-bottom: 5rem;
+}
+
+.agree-check-area{
+  width: 100%;
+
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+#agree-signup-box label{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  color: #818181;
+}
+
+/* 상세 설명 */
+.agree-signup-box article{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  color: #a7a7a7;
+
+  font-size: 1.2rem;
+  padding-left: 2.7rem;
+}
+
+/* 인풋박스 사라지게 */
+.agree-check-area > input{
+  display: none;
+}
+
+#agreeAll+label{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#agreeAll+label > i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.agree-check-area > input:checked + label > i{
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: white !important;
+}
+
+
+/* --- 필수 약관 --- */
+.agree-check-area p{
+  color: var(--main-color);
+  margin-right: 0.5rem;
+}
+
+/* 체크 */
+#agreeSite+label{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#agreeSite+label > i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.agree-check-area > input:checked + label > i{
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: white !important;
+}
+
+/* 사이트이용약관 텍스트 */
+#agreeSiteExplain {
+  resize:none;
+  overflow: auto;
+
+  padding: 1rem 1rem;
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  color: #a7a7a7;
+}
+
+
+
+/* -- 개인정보 수집 및 이용 -- */
+
+/* 체크 */
+#agreePersonal+label{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#agreePersonal+label > i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.agree-check-area > input:checked + label > i{
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: white !important;
+}
+
+
+/* 개인정보 수집 및 이용 */
+
+/* 체크 */
+#agreeChoice+label{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#agreeChoice+label > i{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  margin-right: 1rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.agree-check-area > input:checked + label > i{
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: white !important;
+}
+
+
+
+
+
+
+/* 다음 btn */
+.next-btn{
+  cursor: pointer;
+  display: inline-block;
+
+  width: 50rem;
+  height: 7rem;
+  background-color: #66B97E;
+  color: white;
+  
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+
+  margin-top: 8rem;
+}
+
+.next-btn:focus{
+  outline: 0;
+}
+
+.next-btn:focus{
+  transform: scale(0.99);
+}
