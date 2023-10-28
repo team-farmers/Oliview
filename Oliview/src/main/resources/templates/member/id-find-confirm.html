@@ -4,27 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>login</title>
-  <link rel="stylesheet" th:href="@{/css/member/signup-fin-style.css}">
+  <link rel="stylesheet" th:href="@{/css/member/id-find-confirm-style.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
 
   <main>
-
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
 
-    <!-- 회원가입박스 -->
+    <!-- 아이디 출력 박스 -->
     <section class="container">
 
-      <i class="fa-regular fa-circle-check fa-2xl"></i>
+      <p id="idText">
+        <span class="idText">귀하의 아이디는</span>
+        <span id="memberId">member01</span>
+        <span class="idText">입니다</span>
+      </p>
 
-      <article>회원가입 완료!</article>
-      <article>회원님은 사이트의 모든 기능을 이용할 수 있습니다. 로그인 후 이용 가능합니다.</article>
-    
-      <a href="login"><button class="login-btn">로그인</button></a>
-      <button class="set-profile-btn">프로필 설정</button>
+      <a href="login"><button class="btn" id="login-btn">로그인</button></a>
+      <a href="pw-find"><button class="btn" id="findPw-btn">비밀번호 찾기</button></a>
 
     </section>
 

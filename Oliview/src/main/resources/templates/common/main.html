@@ -13,7 +13,7 @@
     <header>
 
       <!-- 로그인 전 header -->
-      <section id="top-header">
+      <!-- <section id="top-header">
 
         <section>
           <article>
@@ -25,10 +25,10 @@
           </article>
         </section>
 
-      </section>
+      </section> -->
 
       <!-- 로그인 후 header -->
-      <!-- <section id="top-header">
+      <section id="top-header">
 
         <section>
           <article>
@@ -36,14 +36,14 @@
           </article>
 
           <article>
-            <a href="#">마이페이지</a>
+            <a href="myPage/profile">마이페이지</a>
           </article>
 
           <article>
-            <a href="#"><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
+            <a href="myPage/profile"><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
           </article>
         </section>
-      </section> -->
+      </section>
 
 
       <section id="main-header">
@@ -265,16 +265,8 @@
     </section>
   </main>
 
-  <footer>
-    <article>
-      <a href="#">고객센터</a>
-      <span>|</span>
-      <a href="#">라이센스</a>
-    </article>
-    <article>
-      &copy Oliview Corp.
-    </article>
-  </footer>
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
 
 
   

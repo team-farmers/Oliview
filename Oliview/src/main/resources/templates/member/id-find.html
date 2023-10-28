@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" th:href="@{/css/member/id-find-style.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+
+  <main>
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+
+    <!-- 정보 입력 박스 -->
+    <section class="container">
+
+      <p id="explainText">찾으려는 아이디의 이메일을 입력해주세요</p>
+
+      <form action="id-find" method="POST" id="findIdForm">
+
+        <section class="input-box">
+          <i class="fa-regular fa-envelope fa-lg" style="color: #cbcbcb;"></i>
+          <input type="email" name="memberEmail" placeholder="이메일" required>
+        </section>
+
+        <section class="input-box">
+          <i class="fa-solid fa-user-pen fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberName" placeholder="이름" required>
+        </section>
+
+        <button class="next-btn">다음</button>
+      </form>
+
+      <p class="text-area">
+        <a href="pw-find">비밀번호 찾기</a>
+        |
+        <a href="signup">회원가입</a>
+      </p>
+    </section>
+  </main>
+
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+</body>
+</html>
