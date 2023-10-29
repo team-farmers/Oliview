@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리뷰 검색 결과</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+  
+  <link rel="stylesheet" href="/css/review/result-style.css">
+
+
+</head>
+<body>
+
+  <main>
+
+    <!-- 헤더 -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <!-- 검색바 영역 -->
+    <section class="search" >
+      <input class="searchInput" style="color: #66b97e;">
+      <button><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
+    </section>
+
+
+    <!-- 정렬 선택 영역 -->
+    <section class="sort">
+      <button class="sortBtn" id="sort-popular" style="color: #66b97e;">인기순</button> <!-- 클릭시 색바꾸기 -->
+      <span>|</span>
+      <button class="sortBtn" id="sort-latest">최신순</button>
+      <span>|</span>
+      <button class="sortBtn" id="sort-rating">평점순</button>
+    </section>
+
+
+    <!-- 리뷰 목록 영역 -->
+    <section class="review-row">
+      
+      <article class="review-col">
+        <a href="#"  id="review-img">
+          <img src="/draft_1/images/image-1.jpg" alt="image-1">
+        </a>
+        <div id="title"><a href="#">칠리칠리</a></div>
+        <div class="nickname-star-date">
+          <section id="nickname"><a href="#">푸바오</a></section>
+          <section id="star" style="color: #f1c93b;">4.5
+            <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+            <section id="date">2023.10.20.</section>
+          </div>
+      </article>
+
+      <article class="review-col">
+        <a href="#"  id="review-img">
+          <img src="/draft_1/images/image-2.jpg" alt="image-2">
+        </a>
+        <div id="title"><a href="#">장어나라</a></div>
+        <div class="nickname-star-date">
+          <section id="nickname"><a href="#">아이바오</a></section>
+          <section id="star" style="color: #f1c93b;">4.0
+            <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+            <section id="date">2023.10.15.</section>
+          </div>
+      </article>
+
+      <article class="review-col">
+        <a href="#"  id="review-img">
+          <img src="/draft_1/images/image-3.jpg" alt="image-3">
+        </a>
+        <div id="title"><a href="#">바삭돈까스</a></div>
+        <div class="nickname-star-date">
+          <section id="nickname"><a href="#">러바오</a></section>
+          <section id="star" style="color: #f1c93b;">3.5
+            <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+            <section id="date">2023.10.05.</section>
+          </div>
+      </article>
+    </section>
+
+
+    <!-- 다음 페이지 화살표 -->
+    <section class="next-row">
+      <a href="#">
+        <div>NEXT</div>
+        <div style="padding: 0.5rem;">
+          <i class="fa-solid fa-circle-arrow-down fa-xl" 
+          style="color: #66b97e; opacity: 70%;"></i></a>
+        </div>
+    </section>
+
+  </main>
+  
+
+  <!-- 풋터 -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+  <script src="/js/review/result.js"></script>
+
+</body>
+</html>

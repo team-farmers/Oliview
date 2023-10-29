@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리뷰 상세조회</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+  
+  <link rel="stylesheet" href="/css/review/reviewDetail-style.css">
+  <link rel="stylesheet" href="/css/review/comment-style.css">
+
+</head>
+<body>
+
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+
+
+    <!-- 리뷰 -->
+    <section class="review-container" th:object="${review}">
+
+      <!-- 리뷰 헤드 - 제목, 평점, 찜,주소 -->
+      <div class="contents-head">
+        <section class="head-1">
+          <section class="head-title" th:text="*{reviewTitle}">스윗레시피
+            <span class="head-rating" style="color: #f1c93b;">(
+              <i class="fa-sharp fa-solid fa-star fa-sm" style="color: #f1c93b;"></i>4.5 )</span>
+          </section>
+          <section class="head-address" th:text="*{reviewAddress}">세종특별자치시 장군면 금암리</section>
+        </section>
+        
+        <section class="head-2">
+          <section class="head-like">
+            <!-- 찜 안눌렀을 때 -->
+            <!-- <i class="fa-regular fa-heart" style="color: #ff3d3d;"></i> -->
+            <!-- 찜 눌렀을 때 -->
+            <i class="fa-solid fa-heart" style="color: #ff3d3d;"></i>
+          </section>
+        </section>
+      </div>
+
+
+
+
+
+
+  </main>
+
+
+
+
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+  <script src="/js/review/reviewDetail.js"></script>
+  <script src="/js/review/comment.js"></script>
+
+
+
+  
+</body>
+</html>
