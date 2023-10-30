@@ -4,43 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>login</title>
-  <link rel="stylesheet" th:href="@{/css/member/login-style.css}">
+  <link rel="stylesheet" th:href="@{/css/member/pw-find-style.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
 
   <main>
-
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
 
-    <!-- 로그인박스 -->
+    <!-- 정보 입력 박스 -->
     <section class="container">
 
-      <form action="#" method="" id="loginForm">
+      <p id="explainText">비밀번호를 찾으려는 아이디를 입력해주세요</p>
 
-        <section class="input-box" id="id-input-box">
+      <form action="pw-find" method="POST" id="findPwForm">
+
+        <section class="input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
           <input type="text" name="memberId" placeholder="아이디" required>
         </section>
 
-        <section class="input-box" id="pw-input-box">
-          <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
-          <input type="password" name="memberPw" placeholder="비밀번호" required>
+        <section class="input-box">
+          <i class="fa-solid fa-user-pen fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" name="memberName" placeholder="이름" required>
         </section>
 
-        <div class="saved-area">
-          <input type="checkbox" name="saveId" id="saveId">
-          <label for="saveId"><i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i>아이디 저장</label>
-        </div>
-        
-        <button class="login-btn">로그인</button>
+        <button class="next-btn">다음</button>
       </form>
 
       <p class="text-area">
-        <a href="pw-find">비밀번호 찾기</a>
-        |
         <a href="id-find">아이디 찾기</a>
         |
         <a href="signup">회원가입</a>
@@ -53,6 +47,6 @@
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
 
-  
+
 </body>
 </html>
