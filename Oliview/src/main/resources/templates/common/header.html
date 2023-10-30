@@ -1,35 +1,35 @@
 <!-- 로그인 전 header -->
-<header>
+<header th:if="${session.loginMember == null}">
   <section>
     <a href="/"><img src="/images/logoSample.png" alt="로고이미지" width="80rem"></a>
   </section>
 
   <section>
     <article>
-      <a href="login">로그인</a>
+      <a href="/member/login">로그인</a>
     </article>
 
     <article>
-      <a href="signup">회원가입</a>
+      <a href="/member/signup">회원가입</a>
     </article>
   </section>
 
 </header> 
 
 
-<!-- 로그인 후 header
-<header>
+<!-- 로그인 후 header-->
+<header th:unless="${session.loginMember == null}">
   <section>
     <a href="/"><img src="/images/logoSample.png" alt="로고이미지" width="80rem"></a>
   </section>
 
   <section>
     <article>
-      <a href="#">로그아웃</a>
+      <a href="/member/logout">로그아웃</a>
     </article>
 
     <article>
-      <a href="#">마이페이지</a>
+      <a href="/myPage/profile">마이페이지</a>
     </article>
 
     <article>
@@ -37,5 +37,5 @@
     </article>
   </section>
 
-</header> -->
+</header>
 
