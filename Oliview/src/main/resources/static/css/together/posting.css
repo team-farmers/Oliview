@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+ul, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.board_wrap {
+  width: 1000px;
+  margin: 100px auto;
+}
+
+.board_title {
+  margin-bottom: 30px;
+}
+
+.board_title strong {
+  font-size: 3rem;
+}
+
+.board_title p {
+  margin-top: 5px;
+  font-size: 1.4rem;
+}
+
+.bt ,.bt2 {
+  margin-top: 30px;
+  text-align: center;
+ font-size: 1rem;
+ color: skyblue;
+
+}
+
+
+.board_write {
+  border-top: 2px solid #66B97E;
+}
+
+.board_write .title,
+.board_write .info {
+  padding: 15px;
+}
+
+.board_write .info {
+  border-top: 2px dashed #ddd;
+  border-bottom: 2px solid #66B97E;
+  font-size: 0;
+}
+
+.board_write .title dl {
+  font-size: 0;
+}
+
+.board_write .info dl {
+  display: inline-block;
+  width: 50%;
+
+}
+
+
+.board_write .title dt,
+.board_write .title dd,
+.board_write .info dt,
+.board_write .info dd {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4rem;
+}
+
+
+
+.board_write .title dt,
+.board_write .info dt {
+  width: 100px;
+}
+
+
+.board_write .title input,
+.board_write .info input,
+.board_write .info input {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+.board_write .cont {
+  border-bottom: 2px solid#66B97e;
+}
+
+.board_write .cont textarea {
+  display: block;
+  width: 100%;
+  height: 300px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 0;
+  resize: vertical;
+}
+:root{
+  font-size: 62.5%;
+  
+  --main-color : #66B97E;
+  --footer-color : #d9d9d9;
+}
+
+* {
+  font-family:'GmarketSansMedium';
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+section{
+  /* display: block; */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+main{
+  width: 144rem;
+}
+
+
+
+
+/*-------- header --------*/
+header{
+  height: 8rem;
+  border-bottom: 2px solid var(--footer-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 로고 */
+header > section:first-child {
+  width: 55%;
+  display: flex;
+  justify-content: end;
+}
+
+/* 헤더메뉴 섹션 */
+header > section:last-child {
+  width: 45%;
+  display: flex;
+  justify-content: end;
+}
+
+/* 헤더 메뉴들 */
+header article{
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header a{
+  color: var(--main-color);
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+
+.foodlist{
+  height: 75rem;
+  width: 100%;
+  border: 0.1rem solid black;
+}
+
+footer{
+width: 100%;
+height: 4rem;
+background-color: var(--footer-color);
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+font-size: 1.2rem;
+font-weight: 1;
+color: rgba(130, 130, 130, 1);
+}
+
+footer > article {
+padding: 1.5rem;
+}
+
+footer a {
+color: rgba(130, 130, 130, 1);
+text-decoration: none;
+}
+
