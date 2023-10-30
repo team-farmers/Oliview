@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지 - 내프로필</title>
+  <link rel="stylesheet" th:href="@{/css/myPage/profile-style.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+  <main>
+    <!-- 로그인 후 header -->
+    <header>
+      <section>
+        <img src="/images/logoSample.png" alt="로고이미지" width="80rem">
+      </section>
+
+      <section>
+        <article>
+          <a href="#">로그아웃</a>
+        </article>
+
+        <article>
+          <a href="profile">마이페이지</a>
+        </article>
+
+        <article>
+          <a href=""><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
+        </article>
+      </section>
+
+    </header>
+
+    <section class="container">
+
+      <!---------- 사이드메뉴 ---------->
+      <th:block th:replace="~{myPage/side-menu}"></th:block>
+
+
+      <!---------- 내 프로필 내용 ---------->
+      <section class="my-profile-container">
+        <section id="my-profile-container">
+
+          <!-- 헤드 -->
+          <section id="my-profile-title-container">
+            <article>내 프로필</article>
+            <article>대표 프로필과 별명, 개인정보를 수정할 수 있습니다.</article>
+          </section>
+
+          <!-- 프로필 정보 -->
+          <section id="my-profile-info-container">
+            <!-- 헤드라인 -->
+            <article class="my-profile-headline">프로필 정보</article>
+            
+            <!-- 프로필정보, 버튼 -->
+            <section id="my-profile-info-container-2">
+
+              <!-- 프로필정보 -->
+              <section>
+                <section class="myPage-row">
+                  <article><p>닉네임</p></article>
+                  <section><input type="text" value="미쉘가잇"></section>
+                </section>
+
+                <section class="myPage-row">
+                  <article><p>프로필 사진</p></article>
+                  <section id="profile-img-change">
+                    <img src="/images/profileImgEx.png" alt="프로필 이미지" width="60rem">
+                    <button>사진 변경</button>
+                    <button>삭제</button>
+                  </section>
+                </section>
+              </section>
+
+              <!-- 적용/취소버튼  -->
+              <section class="btns">
+                <button>적용</button>
+                <button>취소</button>
+              </section>
+              
+            </section>
+
+
+          </section>
+
+          <!-- 필수 회원 정보 -->
+          <section id="my-profile-essential-info-container">
+            <!-- 헤드라인 -->
+            <section class="my-profile-headline">필수 회원 정보</section>
+
+            <!-- 필수회원정보 내용 -->
+            <section id="my-profile-essential-info-container-2">
+              <section class="myPage-row">
+                <article><p>이름</p></article>
+                <section><p>이미자</p></section>
+              </section>
+
+              <section class="myPage-row">
+                <article><p>아이디</p></article>
+                <section><p>heaven01</p></section>
+              </section>
+
+              <section class="myPage-row">
+                <article><p>비밀번호</p></article>
+                <section><button id="modify-pw-btn">비밀번호 수정</button></section>
+              </section>
+
+              <section class="myPage-row">
+                <article><p>이메일</p></article>
+                <section><input type="email" value="hahaha@naver.com" name=""></section>
+              </section>
+
+              <section class="myPage-row">
+                <article><p>전화번호</p></article>
+                <section><input type="tel" value="010-1234-5678" name=""></section>
+              </section>
+            </section>
+
+            <!-- 적용/취소버튼  -->
+            <section class="btns">
+              <button>적용</button>
+              <button>취소</button>
+            </section>
+
+
+          </section>
+
+
+        </section>
+      </section>
+    </section>
+  </main>
+
+
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+  
+</body>
+</html>

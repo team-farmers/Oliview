@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" th:href="@{/css/member/id-find-confirm-style.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+
+  <main>
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+
+    <!-- 아이디 출력 박스 -->
+    <section class="container">
+
+      <p id="idText">
+        <span class="idText">귀하의 아이디는</span>
+        <span id="memberId">member01</span>
+        <span class="idText">입니다</span>
+      </p>
+
+      <a href="login"><button class="btn" id="login-btn">로그인</button></a>
+      <a href="pw-find"><button class="btn" id="findPw-btn">비밀번호 찾기</button></a>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+</body>
+</html>
