@@ -1,5 +1,20 @@
 package com.farmers.oliview.member.model.dto;
 
-public class Member {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class Member {
+	
+	private String memberNo;
+	private String memberId;
+	private String memberPw;
+	private String memberEmail;
+	private String memberName;
+	private String memberNickname;
+	private String memberProfile;
+	private String memberEnrollDate;
+	private String authority;
+	
 }
