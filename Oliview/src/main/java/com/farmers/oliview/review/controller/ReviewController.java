@@ -1,8 +1,13 @@
 package com.farmers.oliview.review.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,16 +29,30 @@ public class ReviewController {
 		return "review/result";
 	}
 	
+	// 리뷰 글쓰기
 	
-	// 1. 로그인 버튼 -> login.html 포워드
+	// 리뷰 수정
 	
-	// 2. 회원가입 버튼 -> login.html 포워드
+	// 리뷰 삭제
+
 	
-	// 3. 검색 결과 (검색어)
+	// 검색 결과 (검색어)
+	@GetMapping("searchReview")
+	public String searchReview(String searchInput, Model model) {
+		
+		List<Review> resultReview = service.searchReview(searchInput);
+		
+		model.addAttribute("resultReview",resultReview);
+		return "result";
+	}
 	
-	// 4. 검색 결과 (닉네임 클릭 시 작성글)
 	
-	// 5. 리뷰 상세 조회 -> reviewDetail 포워드
+	
+	// 검색 결과 (닉네임 클릭 시 작성글)
+	
+	
+	// 리뷰 상세 조회 -> reviewDetail 포워드
+	
 	
 	// (인기순, 최신순, 평점순 -> js)
 	// (NEXT 다음페이지 -> js)

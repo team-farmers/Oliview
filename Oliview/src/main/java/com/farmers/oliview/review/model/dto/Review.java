@@ -21,5 +21,9 @@ public class Review {
 	private int readCount;
 	private String reviewDelFl;
 	private int memberNo;
+	
+	// 리뷰 상세 조회 (reviewDetail) 시 매핑되는 필드
+	private String memberNickname; // 작성자 닉네임
+	private String memberProfile; // 프로필 이미지 경로
 
 }
