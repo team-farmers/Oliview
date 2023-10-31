@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.RequestAttributes;
@@ -99,28 +100,36 @@ public class MemberController {
 	}
 
 	
-	// 회원가입 정보입력 후 완료페이지로 포워드
-	@PostMapping("signup-fin")
-	public String signupFin() { // 개인정보 DB입력
-		return "member/signup-fin";
-	}
-	
-	
 	
 	/*--------- 회원가입 ---------*/
 	
 	// 회원가입 정보입력 받아 가입진행
 //	@PostMapping("signup-fin")
-//	public String signupFin(Member member) {
+//	public String signup(Member inputMember, RedirectAttributes ra) {
 //		
+//		// 회원가입 서비스 호출
+//		int result = service.signup(inputMember);
 //		
+//		// 가입 성공 시
+//		if(result > 0) {
+//			return "member/signup-fin";
+//		}
 //		
-//		return null;
+//		ra.addFlashAttribute("message", "회원가입이 실패하였습니다.");
+//		return "redirect:/";
 //	}
 	
 	
 	
-	
+	/** 이메일 중복 검사
+	 * @param email
+	 * @return
+	 */
+	@GetMapping("checkEmail")
+	@ResponseBody
+	public int checkEmail(String email){
+		return service.checkEmail(email);
+	}
 	
 	
 	

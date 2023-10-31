@@ -19,6 +19,9 @@ public class MemberServiceImpl implements MemberService{
 	private final MemberMapper mapper;
 	private final BCryptPasswordEncoder bcrypt;
 	
+	/** 로그인 서비스
+	 *
+	 */
 	@Override
 	public Member login(Member inputMember) {
 			
@@ -37,6 +40,15 @@ public class MemberServiceImpl implements MemberService{
 			// 비밀번호 일치시 비번 제거 후 loginMember return
 			loginMember.setMemberPw(null);
 			return loginMember;
+	}
+	
+	
+	/** 이메일 중복 검사
+	 *
+	 */
+	@Override
+	public int checkEmail(String email) {
+		return mapper.checkEmail(email);
 	}
 
 	
