@@ -33,9 +33,7 @@ public class ReviewController {
 	
 	// 리뷰 글쓰기
 	
-	// 리뷰 수정
-	
-	// 리뷰 삭제
+	// 리뷰 수정, 리뷰 삭제 => ReviewEditController
 
 	
 	// 검색 결과 (검색어)
@@ -56,6 +54,8 @@ public class ReviewController {
 	
 	
 	// 리뷰 상세 조회 -> reviewDetail 포워드
+	
+	
 	
 	
 	// (인기순, 최신순, 평점순 -> js)
