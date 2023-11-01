@@ -173,13 +173,37 @@ INSERT INTO "REVIEW"
 VALUES (SEQ_REVIEW_NO.NEXTVAL, '칠리칠리', '세종특별자치시 장군면 금암리', 3.0, 2.0, 4.0, 
 	'별로였어요','loadImage2','칠리빵', DEFAULT, DEFAULT, 'N', 1);
 
+-- 리뷰 샘플 데이터-3 생성
+INSERT INTO "REVIEW"
+VALUES (SEQ_REVIEW_NO.NEXTVAL, '바삭돈까스', '경기도', 5.0, 3.0, 4.0, 
+	'바삭합니다','loadImage3','안심돈까스', DEFAULT, DEFAULT, 'N', 1);
+
+-- 리뷰 샘플 데이터-4 생성
+INSERT INTO "REVIEW"
+VALUES (SEQ_REVIEW_NO.NEXTVAL, '김밥일번가', '대구광역시', 1.0, 5.0, 3.0, 
+	'참치김밥 추천','loadImage4','참치김밥, 잔치국수', DEFAULT, DEFAULT, 'N', 1);
+
+-- 리뷰 샘플 데이터-5 생성
+INSERT INTO "REVIEW"
+VALUES (SEQ_REVIEW_NO.NEXTVAL, '서브웨이', '서울시 강서구', 1.0, 5.0, 3.0, 
+	'신선해요','loadImage4','에그마요', DEFAULT, DEFAULT, 'N', 1);
+
 
 -- 샘플 데이터 모두 삭제
 DELETE FROM "REVIEW";
 
 COMMIT;
 
--- 리뷰 조회
+-- 리뷰 검색(제목+)
+SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
+	TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+FROM "REVIEW"
+JOIN "MEMBER" USING (MEMBER_NO)
+WHERE REVIEW_TITLE LIKE '%${searchInput}%' 
+ORDER BY READ_COUNT;
+
+
+
 
 
 /*===============================================================================================*/
