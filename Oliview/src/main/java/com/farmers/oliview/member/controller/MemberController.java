@@ -104,21 +104,33 @@ public class MemberController {
 	/*--------- 회원가입 ---------*/
 	
 	// 회원가입 정보입력 받아 가입진행
-//	@PostMapping("signup-fin")
-//	public String signup(Member inputMember, RedirectAttributes ra) {
-//		
-//		// 회원가입 서비스 호출
-//		int result = service.signup(inputMember);
-//		
-//		// 가입 성공 시
-//		if(result > 0) {
-//			return "member/signup-fin";
-//		}
-//		
-//		ra.addFlashAttribute("message", "회원가입이 실패하였습니다.");
-//		return "redirect:/";
-//	}
+	@PostMapping("signup-fin")
+	public String signup(Member inputMember, RedirectAttributes ra) {
+		
+		// 회원가입 서비스 호출
+		int result = service.signup(inputMember);
+		
+		// 가입 성공 시
+		if(result > 0) {
+			ra.addFlashAttribute("message", "환영합니다! Oliview 회원 가입이 성공하였습니다");
+			return "member/signup-fin";
+		}
+		
+		ra.addFlashAttribute("message", "회원가입이 실패하였습니다.");
+		return "redirect:/";
+	}
 	
+	
+	
+	/** 아이디 중복 검사
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("checkId")
+	@ResponseBody
+	public int checkId(String id){
+		return service.checkId(id);
+	}
 	
 	
 	/** 이메일 중복 검사
@@ -131,6 +143,16 @@ public class MemberController {
 		return service.checkEmail(email);
 	}
 	
+	
+	 /** 닉네임 중복 검사
+	 * @param nickname
+	 * @return
+	 */
+	@GetMapping("checkNickname")
+	@ResponseBody
+	public int checkNickname(String nickname) {
+		return service.checkNickname(nickname);
+	}
 	
 	
 	

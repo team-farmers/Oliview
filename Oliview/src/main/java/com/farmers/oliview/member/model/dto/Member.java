@@ -16,5 +16,6 @@ public class Member {
 	private String memberProfile;
 	private String memberEnrollDate;
 	private String authority;
+	private String agreeChoice;
 	
 }

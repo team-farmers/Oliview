@@ -183,7 +183,17 @@ COMMIT;
 
 
 /*===============================================================================================*/
->>>>>>> b25f3785adeb328c0d8efb402d656edcd560ac08
+-->>>>>>> b25f3785adeb328c0d8efb402d656edcd560ac08;
+
+
+
+
+
+-- 회원가입 SQL
+INSERT INTO "MEMBER"
+VALUES (SEQ_MEMBER_NO.NEXTVAL, 'id', 'pw', 'email', 'name', 'nickname', NULL, DEFAULT, DEFAULT, DEFAULT, NULL);
+
+
 
 
 
