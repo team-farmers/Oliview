@@ -1,11 +1,13 @@
 package com.farmers.oliview.review.controller;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.service.ReviewService;
@@ -43,7 +45,9 @@ public class ReviewController {
 		List<Review> resultReview = service.searchReview(searchInput);
 		
 		model.addAttribute("resultReview",resultReview);
-		return "result";
+		log.debug("에러확인");
+		
+		return "review/result";
 	}
 	
 	

@@ -20,10 +20,10 @@
 
     <!-- 검색바 영역 -->
     <section class="search" >
-      <form action="searchReview">
+      <form id="searchReview" action="searchReview">
         <input type="text" class="searchInput" name="searchInput">
       </form>
-      <button><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
+      <button form="searchReview"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
     </section>
 
 
@@ -41,37 +41,55 @@
 
 
     <!-- 검색 : 리뷰가 존재하지 않을 때 -->
-    <section class="result-no" th:if="${#lists.size(review)} == 0">
-      <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i><br>
-      검색 결과가 없습니다
+    <section class="result-no" th:if="${#lists.isEmpty(resultReview)}">
+      <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>
+      검색 결과가 없습니다.
     </section>
 
+<!-- 
+    <th:block th:each="i : ${#numbers.sequence(0, #lists.size(resultReview), 1)}">
+      <th:block th:if="${i % 4 ==0}">
+        <h3 th:text="${i}"></h3>
+      </th:block>
+      <th:block th:unless="${i % 4 ==0}">
+        [[${i}]]
+      </th:block>
+    </th:block>
+ -->
 
 
     <!-- 검색 : 리뷰가 존재할 때  + 인기순 -->
-    <section class="review-row" th:unless="${#lists.size(review)} == 0" th:object="${review}">
+    <th:block th:each="review, stat : ${resultReview}">
       
-      <article class="review-col">
-        <!-- 이미지 -->
-        <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo},cp=${pagination.currentPage})}" 
-        th:text="*{reviewImg}" class="review-img">
-          <img src="#" alt="image-1">
-        </a>
-        
-        <!-- 제목(가게명) -->
-        <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo},cp=${pagination.currentPage})}" 
-          th:text="*{reviewTitle}">가게이름</a></div>
-        
-          <!-- 닉네임/평점/작성일 -->
-        <div class="nickname-star-date">
-          <section class="nickname"><a th:href="#">푸바오</a></section>
-          <section class="star" style="color: #f1c93b;" th:text="*{star}">4.5
-            <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-            <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
-          </div>
-      </article>
+      <th:block th:if="${stat.index % 4 == 0}">
+        <section class="review-row" th:unless="${#lists.isEmpty(resultReview)}">
+      </th:block>
 
-    </section>
+        <article class="review-col" th:object="${review}">
+  
+          <!-- 이미지 -->
+          <a class="review-img">
+            <img src="#" alt="image-1">
+          </a>
+  
+          <!-- 제목(가게명) -->
+          <div class="reviewTitle"><a th:text="*{reviewTitle}">가게이름</a></div>
+  
+           <!-- 닉네임/평점/작성일 -->
+          <div class="nickname-star-date">
+            <section class="nickname" th:text="*{memberNickname}">푸바오</section>
+            <section class="star" style="color: #f1c93b;" th:text="*{starTaste}">4.5
+              <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+              <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
+            </div>
+  
+        </article>
+  
+      <th:block th:if="${stat.index % 4 == 3}">
+        </section>
+      </th:block>
+
+    </th:block>
 
     <!-- 검색 : 리뷰가 존재 + 최신순 -->
     
