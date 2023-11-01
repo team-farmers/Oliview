@@ -45,13 +45,14 @@
           <input type="text" id="authKey" placeholder="이메일 인증번호 입력" required autocomplete="off">
           <button id="checkAuthKeyBtn" type="button">인증하기</button>
         </section>
+        <article class="alert-message" id="alertId-message"></article>
+        <article class="alert-message" id="alertPw-message"></article>
         <span class="signUp-message" id="authKeyMessage"></span>
-        <article id="alert1"></article>
 
 
         <section class="input-box" id="name-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberName" placeholder="이름" required>
+          <input type="text" name="memberName" id="memberName" placeholder="이름" required>
         </section>
 
         <!-- <section class="input-box" id="tel-input-box">
@@ -61,10 +62,11 @@
 
         <section class="input-box" id="nickname-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberNickname" placeholder="닉네임" required>
+          <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required>
         </section>
 
-        <article id="alert2"></article>
+        <article class="alert-message" id="alertName-message"></article>
+        <article class="alert-message" id="alertNickname-message"></article>
 
         <!-- <section class="input-box" id="address-input-box">
           <i class="fa-solid fa-map-pin fa-lg" style="color: #cbcbcb;"></i>
@@ -90,6 +92,9 @@
         </section> -->
     
         <button class="complete-btn">완료</button>
+
+
+        <input th:if="${param.agreeChoice != null}" type="hidden" name="agreeChoice" value="Y">
       </form>
 
     </section>

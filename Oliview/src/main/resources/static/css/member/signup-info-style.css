@@ -77,22 +77,19 @@
   text-align: left;
   display: block;
   width: 50rem;
-
-  margin-top: 1rem;
-  font-size: 1.5rem;
-
-  font-family: 'GmarketSans';
-  font-weight: 300;
 }
 
 /* 첫번째&두번째 섹션 오류알림 */
-#alert1, #alert2{
+.alert-message{
   text-align: left;
   display: block;
   width: 50rem;
 }
 
-
+/* 유효성메세지 맨위에거 */
+#alertId-message, #alertName-message{
+  margin-top: 1rem;
+}
 
 
 /* 두번째 인풋 섹션 */

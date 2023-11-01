@@ -5,14 +5,19 @@ import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.farmers.oliview.member.controller.MemberController;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.member.model.mapper.MemberMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberServiceImpl implements MemberService{
 	
 	
@@ -43,12 +48,47 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	
+	
+	/** 회원가입
+	 *
+	 */
+	@Override
+	public int signup(Member inputMember) {
+		
+		// 비밀번호 암호화
+		inputMember.setMemberPw( bcrypt.encode(inputMember.getMemberPw()) );
+		
+		
+		log.debug(inputMember.toString());
+		
+		return mapper.signup(inputMember);
+	}
+	
+	
+	/** 아이디 중복 검사
+	 *
+	 */
+	@Override
+	public int checkId(String id) {
+		return mapper.checkId(id);
+	}
+	
+	
+	
 	/** 이메일 중복 검사
 	 *
 	 */
 	@Override
 	public int checkEmail(String email) {
 		return mapper.checkEmail(email);
+	}
+	
+	/** 닉네임 중복 검사
+	 *
+	 */
+	@Override
+	public int checkNickname(String nickname) {
+		return mapper.checkNickname(nickname);
 	}
 
 	

@@ -9,7 +9,7 @@ const checkObj = {
   "memberEmail" : false,
   "authKey" : false,
   "memberName" : false,
-  "memberNickname" : false
+  "memberName" : false
 };
 
 
@@ -36,12 +36,12 @@ memberEmail.addEventListener("input", ()=>{
 
           // 중복되는 이메일이 없음
           if(result == 0){ 
-              authKeyMessage.innerText = "사용 가능한 이메일입니다.";
+              authKeyMessage.innerText = "· 사용 가능한 이메일입니다.";
               authKeyMessage.classList.add("confirm"); // 초록색 글씨
               authKeyMessage.classList.remove("error"); // 빨간글씨 제거
               checkObj.memberEmail = true; // 유효한 상태임을 기록
           } else{ // 중복 O
-              authKeyMessage.innerText = "이미 사용중인 이메일입니다.";
+              authKeyMessage.innerText = "· 이미 사용중인 이메일입니다.";
               authKeyMessage.classList.add("error"); // 초록색 글씨
               authKeyMessage.classList.remove("confirm"); // 빨간글씨 제거
               checkObj.memberEmail = false;
@@ -54,7 +54,7 @@ memberEmail.addEventListener("input", ()=>{
 
   // 입력 받은 이메일이 정규식과 일치하지 않은 경우
   else {
-    authKeyMessage.innerText = "알맞은 이메일 형식으로 작성해주세요.";
+    authKeyMessage.innerText = "· 알맞은 이메일 형식으로 작성해주세요.";
     authKeyMessage.classList.add("error"); // 빨간글씨 글씨
     authKeyMessage.classList.remove("confirm"); // 초록색 제거
     checkObj.memberEmail = false; // 유효하지 않은 상태임을 기록
@@ -137,7 +137,7 @@ sendAuthKeyBtn.addEventListener("click", function(){
         }, 1000)
 
     } else{
-        alert("중복되지 않은 이메일을 작성해주세요.");
+        alert("· 중복되지 않은 이메일을 작성해주세요.");
         memberEmail.focus();
     }
 
@@ -163,7 +163,7 @@ checkAuthKeyBtn.addEventListener("click", function(){
         .then(result => {
             if(result > 0){
                 clearInterval(authTimer);
-                authKeyMessage.innerText = "인증되었습니다.";
+                authKeyMessage.innerText = "· 인증되었습니다.";
                 authKeyMessage.classList.add("confirm");
                 checkObj.authKey = true;
 
@@ -184,3 +184,275 @@ checkAuthKeyBtn.addEventListener("click", function(){
 
 
 //======================================================================
+
+
+/* 아이디 유효성 검사 */
+const memberId = document.getElementById("memberId");
+const alertIdMessage = document.getElementById("alertId-message");
+
+// 아이디 입력 시 유효성 검사
+memberId.addEventListener("input", ()=>{
+
+    // 아이디가 입력되지 않은 경우
+    if(memberId.value.trim().length == 0){
+        memberId.value = ""; //띄어쓰기 못넣게 하기
+
+        alertIdMessage.innerText = "· 아이디는 영어,숫자 5~20글자 사이로 입력해주세요.";
+        alertIdMessage.classList.remove("confirm", "error"); // 검정 글씨
+
+        checkObj.memberId = false; // 빈칸 == 유효 X
+        return;
+    }
+    
+    // 정규 표현식을 이용한 아이디 유효성 검사
+
+    // 영어,숫자 5~20글자 사이
+    const regEx = /^[a-zA-Z0-9]{5,20}$/;
+
+    // 입력한 아이디가 유효한 경우
+    if(regEx.test(memberId.value)){
+
+        /* ============== 아이디 중복 검사(비동기) ============== */
+
+        fetch("/member/checkId?id=" + memberId.value)
+        .then(response => response.text())
+        .then(result => {
+
+            if(result == 0) { // 중복 X
+                alertIdMessage.innerText = "· 사용 가능한 아이디입니다";
+                alertIdMessage.classList.add("confirm");
+                alertIdMessage.classList.remove("error");
+                checkObj.memberId = true; 
+            } else { // 중복 O
+                alertIdMessage.innerText = "· 이미 사용중인 아이디입니다";
+                alertIdMessage.classList.add("error"); 
+                alertIdMessage.classList.remove("confirm");
+                checkObj.중복 = false;
+            }
+        })
+        .catch(e => console.log(e))
+        
+        /* ====================================================== */
+
+
+    } else{ // 유효하지 않은 경우
+        alertIdMessage.innerText = "· 아이디 형식이 유효하지 않습니다";
+        alertIdMessage.classList.add("error");
+        alertIdMessage.classList.remove("confirm");
+        checkObj.memberId = false; 
+    }
+})
+
+
+
+
+
+
+/* 비밀번호 유효성 검사 */
+/*  비밀번호/비밀번호 확인 유효성 검사 */
+const memberPw = document.getElementById("memberPw");
+const memberPwConfirm = document.getElementById("memberPwConfirm");
+const alertPwMessage = document.getElementById("alertPw-message");
+
+
+// 비밀번호 입력 시 유효성 검사
+memberPw.addEventListener("input", ()=>{
+
+    // 비밀번호가 입력되지 않은 경우
+    if(memberPw.value.trim().length == 0){
+        memberPw.value = ""; //띄어쓰기 못넣게 하기
+
+        alertPwMessage.innerText = "· 비밀번호는 영어,숫자,특수문자(!,@,#,-,_) 8~20글자 사이로 입력해주세요.";
+        alertPwMessage.classList.remove("confirm", "error"); // 검정 글씨
+
+        checkObj.memberPw = false; // 빈칸 == 유효 X
+        return;
+    }
+
+    
+    // 정규 표현식을 이용한 비밀번호 유효성 검사
+
+    // 영어,숫자,특수문자(!,@,#,-,_) 8~20글자 사이
+    const regEx = /^[a-zA-Z0-9\!\@\#\-\_]{8,20}$/;
+
+    // 입력한 비밀번호가 유효한 경우
+    if(regEx.test(memberPw.value)){
+        checkObj.memberPw = true; 
+        
+        // 비밀번호가 유효하게 작성된 상태에서
+        // 비밀번호 확인이 입력되지 않았을 때
+        if(memberPwConfirm.value.trim().length == 0){
+
+            alertPwMessage.innerText = "· 유효한 비밀번호 형식입니다";
+            alertPwMessage.classList.add("confirm");
+            alertPwMessage.classList.remove("error");
+        }
+        
+        // 비밀번호가 유효하게 작성된 상태에서
+        // 비밀번호 확인이 입력되어 있을 때
+        else{
+            // 비밀번호 == 비밀번호 확인  (같을 경우)
+            if(memberPw.value == memberPwConfirm.value){
+                alertPwMessage.innerText = "· 비밀번호가 일치합니다";
+                alertPwMessage.classList.add("confirm");
+                alertPwMessage.classList.remove("error");
+                checkObj.memberPwConfirm = true;
+                
+            } else{ // 다를 경우
+                alertPwMessage.innerText = "· 비밀번호가 일치하지 않습니다";
+                alertPwMessage.classList.add("error");
+                alertPwMessage.classList.remove("confirm");
+                checkObj.memberPwConfirm = false;
+            }
+        }
+
+        
+    } else{ // 유효하지 않은 경우
+        
+        alertPwMessage.innerText = "· 비밀번호 형식이 유효하지 않습니다";
+        alertPwMessage.classList.add("error");
+        alertPwMessage.classList.remove("confirm");
+        checkObj.memberPw = false; 
+    }
+})
+
+
+// 비밀번호 확인 유효성 검사
+memberPwConfirm.addEventListener('input', ()=>{
+
+    if(checkObj.memberPw){ // 비밀번호가 유효하게 작성된 경우에
+
+        // 비밀번호 == 비밀번호 확인  (같을 경우)
+        if(memberPw.value == memberPwConfirm.value){
+            alertPwMessage.innerText = "· 비밀번호가 일치합니다";
+            alertPwMessage.classList.add("confirm");
+            alertPwMessage.classList.remove("error");
+            checkObj.memberPwConfirm = true;
+            
+        } else{ // 다를 경우
+            alertPwMessage.innerText = "· 비밀번호가 일치하지 않습니다";
+            alertPwMessage.classList.add("error");
+            alertPwMessage.classList.remove("confirm");
+            checkObj.memberPwConfirm = false;
+        }
+
+    } else { // 비밀번호가 유효하지 않은 경우
+        checkObj.memberPwConfirm = false;
+    }
+});
+
+
+
+/* 이름 유효성 검사 */
+const memberName = document.getElementById("memberName");
+const alertNameMessage = document.getElementById("alertName-message");
+
+memberName.addEventListener("input", ()=>{
+
+    // 미입력 시
+    if(memberName.value.trim().length == 0){
+        memberName.value = '';
+        alertNameMessage.innerText = "· 이름 한글 2~18글자를 입력해주세요.";
+        checkObj.memberName = false;
+        alertNameMessage.classList.remove("confirm", "error");
+        return;
+    }
+
+    const regEx = /^[가-힣]{2,18}$/;
+
+    if( regEx.test(memberName.value) ){
+        alertNameMessage.innerText = "· 유효한 이름 형식입니다";
+        alertNameMessage.classList.add("confirm"); 
+        alertNameMessage.classList.remove("error");
+        checkObj.memberName = true;
+    }
+    
+    else{
+        alertNameMessage.innerText = "· 유효하지 않은 이름 형식입니다";
+        alertNameMessage.classList.add("error");
+        alertNameMessage.classList.remove("confirm");
+        checkObj.memberName = false;
+    }
+})
+
+
+
+/* 닉네임 유효성 검사 */
+const memberNickname = document.getElementById("memberNickname");
+const alertNicknameMessage = document.getElementById("alertNickname-message");
+
+memberNickname.addEventListener("input", ()=>{
+
+    // 미입력 시
+    if(memberNickname.value.trim().length == 0){
+        memberNickname.value = '';
+        alertNicknameMessage.innerText = "· 닉네임은 한글,영어,숫자로만 2~10글자 사이로 입력해주세요.";
+        checkObj.memberNickname = false;
+        alertNicknameMessage.classList.remove("confirm", "error");
+        return;
+    }
+
+    const regEx = /^[가-힣\w\d]{2,10}$/;
+
+    if( regEx.test(memberNickname.value) ){
+
+        /* ============== 닉네임 중복 검사(비동기) ============== */
+
+        fetch("/member/checkNickname?nickname=" + memberNickname.value)
+        .then(response => response.text())
+        .then(result => {
+
+            if(result == 0) { // 중복 X
+                alertNicknameMessage.innerText = "· 사용 가능한 닉네임입니다";
+                alertNicknameMessage.classList.add("confirm"); 
+                alertNicknameMessage.classList.remove("error");
+                checkObj.memberNickname = true;
+
+            } else { // 중복 O
+                alertNicknameMessage.innerText = "· 이미 사용중인 닉네임입니다";
+                alertNicknameMessage.classList.add("error"); 
+                alertNicknameMessage.classList.remove("confirm");
+                checkObj.memberNickname = false;
+            }
+        })
+        .catch(e => console.log(e))
+        
+        /* ====================================================== */
+    }
+    
+    else{
+        alertNicknameMessage.innerText = "· 유효하지 않은 닉네임 형식입니다";
+        alertNicknameMessage.classList.add("error");
+        alertNicknameMessage.classList.remove("confirm");
+        checkObj.memberNickname = false;
+    }
+})
+
+
+
+/* 회원 가입 버튼이 클릭 되었을 때 */
+document.getElementById("signupForm").addEventListener("submit", e => {
+
+    /* checkObj의 모든 값을 검사해서
+       하나라도 false이면 가입 시도 X */
+
+    // 객체 전용 향상된 for문 (for .... in)
+
+    for(let key in checkObj){
+
+        // 객체에서 얻어온 값이 false인 경우
+        // (유효하지 않은 것이 있을 경우)
+        if( !checkObj[key] ){
+
+            alert("가입정보를 정확하게 입력해주세요.");
+
+            // key == input id 속성 값
+            // 유효하지 않은 input 태그로 focus 맞춤
+            document.getElementById(key).focus();
+
+            e.preventDefault(); // form 제출 X
+            return;
+        }
+    }
+})
+
