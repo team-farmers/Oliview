@@ -1,48 +1,9 @@
-:root{
-  font-size: 62.5%;
-  --main-color : #66B97E;
-  --footer-color : #d9d9d9;
-}
-
-* {
-  font-family:'GmarketSans';
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-@font-face {
-  font-family: 'GmarketSans';
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
-
-
-main {
-  width: 1140px;
-  flex-grow: 1;
-  min-height: 500px;
-}
-
-
 /* =========================================================== */
 /* 리뷰 */
+main{
+  height: 300rem;
+}
+
 
 .review-container{
   margin: 1rem 0 5rem;
@@ -84,6 +45,7 @@ main {
 .head-address{
   height: 30%;
   font-size: 2rem;
+  color: var(--footer-color);
 }
 .head-2{
   width: 10%;
@@ -110,6 +72,7 @@ main {
 
 .main-1{
   width: 50%;
+  border: 0.1rem solid var(--main-color); /*임시*/
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -286,6 +249,10 @@ main {
 
 /* =========================================================== */
 /* 다른 리뷰 */
+
+body{
+  height: 200rem;
+}
 
 .others > :nth-child(1){
   padding: 1.5rem 0.5rem 0;

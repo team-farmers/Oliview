@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,7 +55,17 @@ public class ReviewController {
 	
 	
 	// 리뷰 상세 조회 -> reviewDetail 포워드
-	
+	@GetMapping("{reviewNo:[0-9]+}")
+	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
+			Model model, RedirectAttributes ra) {
+		
+		Review detailReview = service.reviewDetail(reviewNo);
+		
+		model.addAttribute("detailReview", detailReview);
+		
+		return "review/reviewDetail";
+		
+	}
 	
 	
 	

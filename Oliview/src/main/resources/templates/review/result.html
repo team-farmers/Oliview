@@ -70,7 +70,7 @@
         <article class="review-col" th:object="${review}">
   
           <!-- 이미지 -->
-          <a class="review-img">
+          <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
             <img src="#" alt="image-1">
           </a>
   
@@ -98,18 +98,18 @@
     <!-- 검색 : 리뷰가 존재 + 평점순 -->
 
 
-    <!-- 다음 페이지 화살표 -->
-    <section class="next-row">
-      <a href="#">
-        <div>NEXT</div>
-        <div style="padding: 0.5rem;">
-          <i class="fa-solid fa-circle-arrow-down fa-xl" 
-          style="color: #66b97e; opacity: 70%;"></i></a>
-        </div>
-    </section>
-
+    
   </main>
   
+  <!-- 다음 페이지 화살표 -->
+  <section class="next-row">
+    <a href="#">
+      <div>NEXT</div>
+      <div style="padding: 0.5rem;">
+        <i class="fa-solid fa-circle-arrow-down fa-xl" 
+        style="color: #66b97e; opacity: 70%;"></i></a>
+      </div>
+  </section>
 
   <!-- 풋터 -->
   <th:block th:replace="~{common/footer}"></th:block>

@@ -18,16 +18,17 @@
 
 
     <!-- 리뷰 -->
-    <section class="review-container" th:object="${review}">
+    <section class="review-container" th:object="${detailReview}">
 
       <!-- 리뷰 헤드 - 제목, 평점, 찜,주소 -->
       <div class="contents-head">
         <section class="head-1">
-          <section class="head-title" th:text="*{reviewTitle}">스윗레시피
+          <section class="head-title" th:text="*{reviewTitle}">가게이름
             <span class="head-rating" style="color: #f1c93b;">(
-              <i class="fa-sharp fa-solid fa-star fa-sm" style="color: #f1c93b;"></i>4.5 )</span>
+              <i class="fa-sharp fa-solid fa-star fa-sm" style="color: #f1c93b;"></i>
+              4.5 )</span>
           </section>
-          <section class="head-address" th:text="*{reviewAddress}">세종특별자치시 장군면 금암리</section>
+          <section class="head-address" th:text="*{reviewAddress}">주소</section>
         </section>
         
         <section class="head-2">
@@ -40,6 +41,118 @@
         </section>
       </div>
 
+
+
+      <!-- 리뷰 내용 - 사진, 평가, 메뉴, 한줄평 -->
+      <div class="contents-main">
+
+        <!-- 리뷰 사진 -->
+        <section class="main-1">
+          <a href="#">
+            <img src="/draft_1/images/food.jpg" alt="음식">
+          </a>
+        </section>
+
+        <!-- 리뷰 글 -->
+        <section class="main-2" th:object="${detailReview}">
+
+          <!-- 별점 부분 -->
+          <article class="review-rating">
+            <section class="rating-total"> 
+              <section class="profile">
+                <span class="profile-img"><img src="/images/original_16.png" alt="프로필사진"></span>
+                <span class="nickname" th:text="*{memberNickname}">미쉘</span>
+              </section>
+              <section class="star-total" th:text="*{starTotal}">총점</section>
+              <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #66B97E;"></i>
+            </section>
+
+            <section class="rating">
+              <article class="rating-1">
+                <span>맛</span>
+                <span style="color: #f1c93b;" th:text="*{starTaste}">맛 점수</span>
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+              </article>
+              <article class="rating-2">
+                <span>양</span>
+                <span style="color: #f1c93b;" th:text="*{starAmount}">양 점수</span>
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+              </article>
+              <article class="rating-3">
+                <span >청결</span>
+                <span style="color: #f1c93b;" th:text="*{starClean}" >청결 점수</span>
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+              </article>
+            </section>
+        
+          </article>
+
+          <!-- 메뉴 -->
+          <article class="review-menu">
+            <div><i class="fa-solid fa-utensils" style="color: #d9d9d9;"></i> 메뉴</div>
+            <section class="menu" th:text="*{reviewMenu}">메뉴</section>
+          </article>
+
+          <!-- 한줄평 -->
+          <article class="review-text">
+            <div><i class="fa-solid fa-pencil" style="color: #d9d9d9;"></i> 한줄평</div>
+            <section class="text" th:text="*{reviewOneLine}">한줄평</section>
+          </article>
+        </section>
+      </div>
+
+          <!-- 조회수, 신고하기 -->
+      <!-- <div class="contents-foot">
+        <section class="foot-1">
+          <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
+          <span class="hits">30</span>
+        </section>
+        <section class="foot-2">
+          <button class="reportBtn"><a href="#"><i class="fa-solid fa-triangle-exclamation" style="color: #d9d9d9;"></i>
+            신고하기</a></button>
+        </section>
+      </div> -->
+
+      <!-- 로그인 시 - 글 수정하기, 삭제하기 -->
+      <div class="contents-foot">
+        <section class="foot-3">
+          <button class="updateBtn"><a href="#">수정하기</a></button>
+        </section>
+        <section class="foot-4">
+          <button class="deleteBtn"><a href="#">삭제하기</a></button>
+        </section>
+      </div>  
+
+      <!-- 댓글 영역 -->
+      <th:block th:replace="~{review/comment}"></th:block>
+
+
+      <!-- 다른리뷰 -->
+      <section class="others">
+
+        <div>
+          <span class="others-title" style="color: #66B97E;" >'스윗레시피'</span> 
+          <span>의 다른 리뷰</span>
+        </div>
+
+        <div>
+          <article class="review-col">
+            <a href="#"  id="review-img">
+              <img src="/draft_1/images/image-1.jpg" alt="image-1">
+            </a>
+            <div id="title"><a href="#">칠리칠리</a></div>
+            <div class="nickname-star-date">
+              <section id="nickname"><a href="#">푸바오</a></section>
+              <section id="star" style="color: #f1c93b;">4.5
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+                <section id="date">2023.10.20.</section>
+              </div>
+          </article>
+
+        </div>
+  
+  
+      </section>  
 
 
 

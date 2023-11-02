@@ -12,4 +12,10 @@ public interface ReviewService {
 	 */
 	List<Review> searchReview(String searchInput);
 
+	/** 리뷰 상세 조회
+	 * @param reviewNo
+	 * @return review
+	 */
+	Review reviewDetail(int reviewNo);
+
 }
