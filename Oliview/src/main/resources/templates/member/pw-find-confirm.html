@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title>
+  <title>비밀번호 변경</title>
   <link rel="stylesheet" th:href="@{/css/member/pw-find-confirm-style.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
@@ -19,7 +19,7 @@
 
       <p id="idText">
         <span class="idText">귀하의 아이디는</span>
-        <span id="memberId">member01</span>
+        <span id="memberId" th:text="${searchMember.memberId}">member01</span>
         <span class="idText">입니다</span>
       </p>
 
@@ -30,21 +30,23 @@
         </p>
       </artcle>
 
-      <form action="#" method="" id="changePwForm">
+      <form action="changePw" method="POST" id="changePwForm">
 
         <section class="input-box">
           <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberPw" placeholder="새 비밀번호" required>
+          <input type="password" name="memberPw" id="memberPw" placeholder="새 비밀번호" required>
         </section>
 
         <section class="input-box">
           <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberPwCheck" placeholder="새 비밀번호 확인" required>
+          <input type="password" name="memberPwCheck" id="memberPwCheck" placeholder="새 비밀번호 확인" required>
         </section>
 
         <article id="pw-explain">
-          <p>· 영문, 특수문자 포함(8자 이상 16자 이하)로 작성해주세요.</p>
+          · 영문, 특수문자 포함(8자 이상 16자 이하)로 작성해주세요.
         </article>
+
+        <input type="hidden" name="memberNo" th:value="${searchMember.memberNo}">
 
         <button class="confirm-btn">확인</button>
       </form>
@@ -56,6 +58,8 @@
 
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/member/pw-find-confirm.js"></script>
 
 
 </body>

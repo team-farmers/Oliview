@@ -34,7 +34,7 @@ public interface MemberService{
 	 */
 	int signup(Member inputMember);
 
-	/** 멤버 찾기
+	/** 멤버 찾기(id)
 	 * @param inputMember
 	 * @return
 	 */
@@ -45,6 +45,24 @@ public interface MemberService{
 	 * @return
 	 */
 	String idFind(Member inputMember);
+
+	/** 멤버 찾기(pw)
+	 * @param inputMember
+	 * @return
+	 */
+	int memberPwFind(Member inputMember);
+
+	/** 비밀번호 찾기
+	 * @param inputMember
+	 * @return
+	 */
+	Member pwFind(Member inputMember);
+
+	/** 비밀번호 변경
+	 * @param inputMember
+	 * @return
+	 */
+	int changePw(Member inputMember);
 
 
 }

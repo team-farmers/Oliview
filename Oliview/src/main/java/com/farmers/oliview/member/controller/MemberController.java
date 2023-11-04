@@ -176,13 +176,59 @@ public class MemberController {
 		return "member/pw-find";
 	}
 	
-	// 비밀번호 찾기 정보 입력 후 아이디 확인페이지로 포워드
+	/** 비밀번호 찾기
+	 * @param inputMember
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("pw-find")
-	public String pwFind(String memberId, String memberName) { 
+	public String pwFind(Member inputMember, Model model, RedirectAttributes ra) {
+		
+		// 입력된 정보가 일치하는 회원유무 확인 
+		int result = service.memberPwFind(inputMember);
+		
+		// 일치하는 회원이 있을 경우 회원 정보 가져오기
+		if (result > 0) {
+			Member searchMember = service.pwFind(inputMember);
+			
+			model.addAttribute("searchMember", searchMember);
+			 
+			return "member/pw-find-confirm";
+		}
+		
+		
+		// 일치하지 않을 경우 비번찾기 페이지로 리다이렉트
+		ra.addFlashAttribute("message", "정보가 일치하는 회원이 존재하지 않습니다.");
+		
+		return "redirect:pw-find";
+	}
+	
+	
+	
+	// 비밀번호 변경 후 메세지+메인으로 리다이렉트 POST
+	@PostMapping("changePw")
+	public String changePw(Member inputMember, RedirectAttributes ra, SessionStatus status) {
+		
+		// 비밀번호 변경 서비스 호출
+		int result = service.changePw(inputMember);
+		
+		// 비밀번호 변경 성공시
+		if(result > 0) {
+			ra.addFlashAttribute("message", "비밀번호가 바뀌었습니다. 기존 비밀번호로 로그인된 기기에서 모두 로그아웃 되었습니다.");
+			
+			// 로그아웃
+			status.setComplete();
+
+			// 로그인페이지 리다이렉트
+			return "redirect:login";
+		}
+		
+		ra.addFlashAttribute("message", "비밀번호 변경이 실패하였습니다. 다시 시도해주세요.");
+		
 		return "member/pw-find-confirm";
 	}
 	
-	// 비밀번호 변경 후 메세지+메인으로 리다이렉트 POST
 	
 	
 	
@@ -216,7 +262,7 @@ public class MemberController {
 			 return "member/id-find-confirm";
 		 }
 		
-		 ra.addFlashAttribute("message", "정보가 일치하는 아이디가 존재하지 않습니다.");
+		 ra.addFlashAttribute("message", "정보가 일치하는 회원이 존재하지 않습니다.");
 		 
 		return "redirect:id-find";
 	}

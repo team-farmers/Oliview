@@ -85,7 +85,6 @@
   width: 50rem;
   padding-top: 1rem;
   font-size: 1.2rem;
-  color: #818181;
 }
 
 #pw-explain > p{
@@ -125,3 +124,7 @@
   transform: scale(0.99);
 }
 
+
+/* 메세지 색상 지정 */
+.confirm{ color : var(--main-color); }
+.error{ color : red; }

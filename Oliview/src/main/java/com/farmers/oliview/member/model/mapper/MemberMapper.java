@@ -39,7 +39,7 @@ public interface MemberMapper {
 	 */
 	int checkNickname(String nickname);
 
-	/** 멤버 일치 확인
+	/** 멤버 일치 확인(id)
 	 * @param inputMember
 	 * @return
 	 */
@@ -50,6 +50,25 @@ public interface MemberMapper {
 	 * @return
 	 */
 	String idFind(Member inputMember);
+
+	/** 멤버 일치 확인(pw)
+	 * @param inputMember
+	 * @return
+	 */
+	int memberPwFind(Member inputMember);
+
+	/** 비밀번호 찾기
+	 * @param inputMember
+	 * @return
+	 */
+	Member pwFind(Member inputMember);
+
+	/** 비밀번호 변경
+	 * @param inputMember
+	 * @return
+	 */
+	int changePw(Member inputMember);
+
 
 
 

@@ -58,7 +58,6 @@ public class MemberServiceImpl implements MemberService{
 		// 비밀번호 암호화
 		inputMember.setMemberPw( bcrypt.encode(inputMember.getMemberPw()) );
 		
-		
 		log.debug(inputMember.toString());
 		
 		return mapper.signup(inputMember);
@@ -92,7 +91,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	
-	/** 멤버 일치 확인
+	/** 멤버 일치 확인 (id)
 	 *
 	 */
 	@Override
@@ -108,6 +107,35 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.idFind(inputMember);
 	}
 	
+	
+	/** 멤버 찾기(pw)
+	 *
+	 */
+	@Override
+	public int memberPwFind(Member inputMember) {
+		return mapper.memberPwFind(inputMember);
+	}
+	
+	/** 비밀번호 찾기
+	 *
+	 */
+	@Override
+	public Member pwFind(Member inputMember) {
+		return mapper.pwFind(inputMember);
+	}
+	
+	
+	/** 비밀번호 변경
+	 *
+	 */
+	@Override
+	public int changePw(Member inputMember) {
+		
+		// 비밀번호 암호화
+		inputMember.setMemberPw( bcrypt.encode(inputMember.getMemberPw()) );
+		
+		return mapper.changePw(inputMember);
+	}
 	
 
 }
