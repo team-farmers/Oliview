@@ -1,6 +1,7 @@
 package com.farmers.oliview.review.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.farmers.oliview.review.model.dto.Review;
 
@@ -17,5 +18,11 @@ public interface ReviewService {
 	 * @return review
 	 */
 	Review reviewDetail(int reviewNo);
+
+	/** 찜
+	 * @param paramMap
+	 * @return
+	 */
+	int reviewLike(Map<String, Object> paramMap);
 
 }

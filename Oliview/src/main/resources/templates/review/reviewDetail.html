@@ -34,9 +34,9 @@
         <section class="head-2">
           <section class="head-like">
             <!-- 찜 안눌렀을 때 -->
-            <!-- <i class="fa-regular fa-heart" style="color: #ff3d3d;"></i> -->
+            <i class="fa-regular fa-heart" style="color: #ff3d3d; font-size: 5rem;" id="reviewLike"></i><br>
             <!-- 찜 눌렀을 때 -->
-            <i class="fa-solid fa-heart" style="color: #ff3d3d;"></i>
+            <!-- <i class="fa-solid fa-heart" style="color: #ff3d3d;"></i> -->
           </section>
         </section>
       </div>
@@ -63,7 +63,7 @@
                 <span class="profile-img"><img src="/images/original_16.png" alt="프로필사진"></span>
                 <span class="nickname" th:text="*{memberNickname}">미쉘</span>
               </section>
-              <section class="star-total" th:text="*{starTotal}">총점</section>
+              <span class="star-total" th:text="*{starTotal}">총점</span>
               <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #66B97E;"></i>
             </section>
 
@@ -102,57 +102,72 @@
       </div>
 
           <!-- 조회수, 신고하기 -->
-      <!-- <div class="contents-foot">
+      <div class="contents-foot">
         <section class="foot-1">
           <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
           <span class="hits">30</span>
         </section>
         <section class="foot-2">
-          <button class="reportBtn"><a href="#"><i class="fa-solid fa-triangle-exclamation" style="color: #d9d9d9;"></i>
-            신고하기</a></button>
+          <button class="reportBtn"><a href="#" onclick="openReportPopup()">
+            <i class="fa-solid fa-triangle-exclamation"></i> 신고하기</a></button>
         </section>
-      </div> -->
+        <section class="foot-5">
+          <button class="prevBtn"><a href="#">목록으로</a></button>
+        </section>
+      </div>
 
       <!-- 로그인 시 - 글 수정하기, 삭제하기 -->
-      <div class="contents-foot">
+      <!-- <div class="contents-foot">
         <section class="foot-3">
           <button class="updateBtn"><a href="#">수정하기</a></button>
         </section>
         <section class="foot-4">
           <button class="deleteBtn"><a href="#">삭제하기</a></button>
         </section>
-      </div>  
+        <section class="foot-5">
+          <button class="prevBtn"><a href="#">목록으로</a></button>
+        </section>
+      </div>   -->
 
       <!-- 댓글 영역 -->
       <th:block th:replace="~{review/comment}"></th:block>
+    
+    </section>  
 
+    <!-- 다른리뷰 -->
+    <section class="others">
 
-      <!-- 다른리뷰 -->
-      <section class="others">
+      <div>
+        <span class="others-title" style="color: #66B97E;" 
+        th:text="|'${detailReview.reviewTitle}'|">'가게이름'</span><span> 의 다른 리뷰</span>
+      </div>
 
-        <div>
-          <span class="others-title" style="color: #66B97E;" >'스윗레시피'</span> 
-          <span>의 다른 리뷰</span>
-        </div>
+      <div>
 
-        <div>
-          <article class="review-col">
-            <a href="#"  id="review-img">
-              <img src="/draft_1/images/image-1.jpg" alt="image-1">
-            </a>
-            <div id="title"><a href="#">칠리칠리</a></div>
-            <div class="nickname-star-date">
-              <section id="nickname"><a href="#">푸바오</a></section>
-              <section id="star" style="color: #f1c93b;">4.5
-                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-                <section id="date">2023.10.20.</section>
-              </div>
-          </article>
-
-        </div>
+        <article class="review-col" th:object="${review}">
   
+          <!-- 이미지 -->
+          <a class="review-img">
+            <img src="#" alt="image-1">
+          </a>
   
-      </section>  
+          <!-- 제목(가게명) -->
+          <div class="reviewTitle"><a >가게이름</a></div>
+  
+           <!-- 닉네임/평점/작성일 -->
+          <div class="others-nickname-star-date">
+            <section class="othersNickname" >푸바오</section>
+            <section class="othersStar" style="color: #f1c93b;">4.5
+              <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+              <section class="othersWriteDate" >2023.10.20.</section>
+            </div>
+  
+        </article>
+
+      </div>
+
+
+    </section>  
 
 
 
@@ -165,6 +180,16 @@
 
 
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script th:inline = "javascript">
+
+    /******* JS 파일에서 사용할 값을 전역 변수로 선언 *******/
+    const reviewNo = /*[[${reviewNo}]]*/ "리뷰 번호";
+
+    // session에 세팅된 loginMember 존재 여부 확인
+    const loginCheck = /*[[${session.loginMember!=null ? true : false}]]*/ "로그인 여부";
+
+  </script> 
 
 
   <script src="/js/review/reviewDetail.js"></script>
