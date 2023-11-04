@@ -39,6 +39,18 @@ public interface MemberMapper {
 	 */
 	int checkNickname(String nickname);
 
+	/** 멤버 일치 확인
+	 * @param inputMember
+	 * @return
+	 */
+	int memberFind(Member inputMember);
+
+	/** 아이디 찾기
+	 * @param inputMember
+	 * @return
+	 */
+	String idFind(Member inputMember);
+
 
 
 

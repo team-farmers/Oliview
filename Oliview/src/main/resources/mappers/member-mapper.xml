@@ -47,7 +47,24 @@
 	   AND MEMBER_NICKNAME = #{nickname}
    </select>
   
+  
+  <!-- 일치하는 멤버 찾기 -->
+  <select id="memberFind" resultType ="_int">
+    SELECT COUNT(*)
+   	FROM "MEMBER"
+	WHERE MEMBER_EMAIL = #{memberEmail} 
+	AND MEMBER_NAME = #{memberName}
+  </select>
 
+
+  <!-- 아이디 찾기 -->  
+  <select id="idFind" resultType="string">
+	SELECT MEMBER_ID 
+   	FROM "MEMBER"
+	WHERE MEMBER_EMAIL = #{memberEmail} 
+	AND MEMBER_NAME = #{memberName}
+  </select> 
+ 
    
 
 </mapper>

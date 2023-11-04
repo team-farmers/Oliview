@@ -92,6 +92,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	
+	/** 멤버 일치 확인
+	 *
+	 */
+	@Override
+	public int memberFind(Member inputMember) {
+		return mapper.memberFind(inputMember);
+	}
+	
+	/** 아이디 찾기
+	 *
+	 */
+	@Override
+	public String idFind(Member inputMember) {
+		return mapper.idFind(inputMember);
+	}
+	
 	
 
 }

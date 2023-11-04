@@ -34,5 +34,17 @@ public interface MemberService{
 	 */
 	int signup(Member inputMember);
 
+	/** 멤버 찾기
+	 * @param inputMember
+	 * @return
+	 */
+	int memberFind(Member inputMember);
+
+	/** 아이디 찾기
+	 * @param inputMember
+	 * @return
+	 */
+	String idFind(Member inputMember);
+
 
 }

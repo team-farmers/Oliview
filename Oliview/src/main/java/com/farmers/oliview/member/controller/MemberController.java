@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.member.service.MemberService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,19 +47,29 @@ public class MemberController {
 	 * @return loginMember
 	 */
 	@PostMapping("login")
-	public String login(Member inputMember, Model model, RedirectAttributes ra) {
+	public String login(Member inputMember, Model model, RedirectAttributes ra,
+			String saveId, HttpServletResponse resp) {
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(inputMember);
 		
-		
 		// 로그인 정보 일치 시
 		if(loginMember != null) {
 			
+			// 로그인 정보 저장(쿠키)
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
+			
+			if(saveId != null) {
+				cookie.setMaxAge(60 * 60 * 24 * 30 * 12); // 1년 유지
+			} else {
+				cookie.setMaxAge(0);
+			}
+			
+			cookie.setPath("/");
+			resp.addCookie(cookie);
+			
 			// 회원정보 세션에 저장
 			model.addAttribute("loginMember", loginMember);
-			
-			// 로그인 정보 저장(쿠키)
 			
 			// 메인페이지 리다이렉트
 			return "redirect:/";
@@ -67,7 +79,7 @@ public class MemberController {
 		if(loginMember == null) {
 			ra.addFlashAttribute("message", "회원정보가 일치하지 않습니다.");
 		}
-		
+
 		// 로그인페이지 리다이렉트
 		return "redirect:login";
 	}
@@ -182,13 +194,32 @@ public class MemberController {
 		return "member/id-find";
 	}
 	
-	// 아이디 찾기 정보 입력 후 아이디 확인페이지로 포워드
+	/** 아이디 찾기 서비스
+	 * @param inputMember
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("id-find")
-	public String idFind(String memberEmail, String memberName) { 
-		return "member/id-find-confirm";
+	public String idFind(Member inputMember, Model model, RedirectAttributes ra) { 
+		
+		
+		 // 일치되는 정보가 있으면 1, 없으면 0 반환
+		 int result = service.memberFind(inputMember);
+		 
+		 // 일치하는 회원있을 경우 아이디 정보 가져오기
+		 if (result > 0) {
+			 String memberId = service.idFind(inputMember);
+			 
+			 model.addAttribute("memberId", memberId);
+			 
+			 return "member/id-find-confirm";
+		 }
+		
+		 ra.addFlashAttribute("message", "정보가 일치하는 아이디가 존재하지 않습니다.");
+		 
+		return "redirect:id-find";
 	}
-	
-	
 	
 	
 	
