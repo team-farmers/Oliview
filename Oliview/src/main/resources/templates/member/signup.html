@@ -41,7 +41,7 @@
 
           <!-- 체크박스 -->
           <section class="agree-check-area">
-            <input type="checkbox" name="agreeSite" id="agreeSite" value="agreeSite">
+            <input type="checkbox" name="agreeSite" id="agreeSite" value="agreeSite" class="agree-check-boxs">
             <label for="agreeSite">
               <i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i><p>[필수]</p>사이트 이용약관 >
             </label>
@@ -121,7 +121,7 @@
 
           <!-- 체크박스 -->
           <section class="agree-check-area">
-            <input type="checkbox" name="agreePersonal" id="agreePersonal" value="agreePersonal">
+            <input type="checkbox" name="agreePersonal" id="agreePersonal" value="agreePersonal" class="agree-check-boxs">
             <label for="agreePersonal">
               <i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i><p>[필수]</p>개인정보 수집 및 이용 >
             </label>
@@ -185,7 +185,7 @@
 
           <!-- 체크박스 -->
           <section class="agree-check-area">
-            <input type="checkbox" name="agreeChoice" id="agreeChoice" value="agreeChoice">
+            <input type="checkbox" name="agreeChoice" id="agreeChoice" value="agreeChoice" class="agree-check-boxs">
             <label for="agreeChoice">
               <i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i>[선택] 개인정보 수집 및 이용 >
             </label>
@@ -208,6 +208,7 @@
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
 
- 
+  <script src="/js/member/signup.js"></script>
+
 </body>
 </html>

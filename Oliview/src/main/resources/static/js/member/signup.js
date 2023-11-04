@@ -1,3 +1,76 @@
+/****** 약관동의 체크 ******/
+const agreeForm = document.getElementById("agreeForm"); // 폼
+const agreeAll = document.getElementById("agreeAll"); // 전체동의 체크박스
+const agreeCheckBoxs = document.querySelectorAll(".agree-check-boxs")// 전체동의를 제외한 3개의 체크박스
+const nextBtn = document.querySelector(".next-btn"); // 다음 버튼
+
+
+const agreements = {
+    agreeSite : false, // 필수_사이트이용약관
+    agreePersonal : false, // 필수_개인정보 이용약관
+    agreeChoice : false // 선택_개인정보 수집
+}
+
+
+agreeAll.addEventListener("click", e=>{
+
+    const checked = e.target.checked;
+
+    if(checked){
+        agreeCheckBoxs.forEach((item) => {
+            item.checked = true;
+            agreements[item.id] = true;
+            item.parentNode.classList.add('active');
+        });
+
+    } else {
+        agreeCheckBoxs.forEach((item)=>{
+            item.checked = false;
+            agreements[item.id] = false;
+            item.parentNode.classList.remove('active');
+        });
+    }
+    
+    toggleNextBtn();
+})
+
+
+agreeCheckBoxs.forEach((item) => item.addEventListener("input", toggleAgreeCheckBoxs));
+
+
+function agreeAllStatus(){
+    const {agreeSite, agreePersonal, agreeChoice } = agreements;
+    if(agreeSite && agreePersonal && agreeChoice) {
+        agreeAll.checked = true;
+    } else{
+        agreeAll.checked = false;
+    }
+}
+
+
+function toggleAgreeCheckBoxs(e){
+    const { checked, id } = e.target;
+    agreements[id] = checked;
+    this.parentNode.classList.toggle('active');
+    agreeAllStatus();
+    toggleNextBtn();
+}
+
+
+function toggleNextBtn(){
+    const { agreeSite, agreePersonal } = agreements;
+
+    if(!(agreeSite && agreePersonal)){
+        agreeForm.addEventListener("submit", e=> {
+            e.preventDefault();
+            alert("약관에 동의해주세요.")
+        }); // 필수 동의사항이 체크되지 않으면 새로고침(submit) 되는 것 막음
+    }
+}
+
+
+
+
 /****** 회원가입 유효성 검사 ******/
 // .confirm : #66B97E / .error : 빨간색 / 아무것도 없음 : 검은색
 
