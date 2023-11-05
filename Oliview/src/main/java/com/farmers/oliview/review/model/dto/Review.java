@@ -14,9 +14,10 @@ public class Review {
 	private double starTaste;
 	private double starAmount;
 	private double starClean;
+	private double starTotal;
 	private String reviewOneLine;
 	private String reviewImg;
-	private String reviewFood;
+	private String reviewMenu;
 	private String writeDate;
 	private int readCount;
 	private String reviewDelFl;

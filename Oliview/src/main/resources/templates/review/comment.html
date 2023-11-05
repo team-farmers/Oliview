@@ -5,11 +5,20 @@
   <section class="comment-container">
 
     <section class="comment-1">
+
+    </section>
+
+
+
+
+
+
+    <!-- <section class="comment-1">
       <div class="comm">
-        <div class="comm-1">
-          <span class="comm-profileImg"><img src="/images/original_16.png" alt="프로필사진"></span>
-          <span class="comm-nickname">냠냠냠냠</span>
-          <span class="comm-date">2023.10.20.18:00</span>
+        <div class="comm-1" th:object="${member}">
+          <span class="comm-profileImg"><img th:text="${memberProfile}" alt="프로필사진"></span>
+          <span class="comm-nickname" th:text="${memberNickname}">냠냠냠냠</span>
+          <span class="comm-date" th:text="${writeDate}">2023.10.20.18:00</span>
         </div>
         <div class="comm-2">
           <span class="comm-text">댓글입니다댓글입니다댓글
@@ -48,7 +57,7 @@
       </div>
 
 
-    </section>
+    </section> -->
 
 
 

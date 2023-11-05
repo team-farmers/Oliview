@@ -2,13 +2,21 @@ package com.farmers.oliview.review.controller;
 
 import java.io.Console;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.service.ReviewService;
 
@@ -18,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("review")
-//@SessionAttributes
+@SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
 public class ReviewController {
 	
@@ -30,22 +38,17 @@ public class ReviewController {
 	public String result() {
 		return "review/result";
 	}
-	
-	// 리뷰 글쓰기
-	
-	// 리뷰 수정
-	
-	// 리뷰 삭제
 
 	
 	// 검색 결과 (검색어)
+	// (인기순, 최신순, 평점순 -> js)
+	// (NEXT 다음페이지 -> js)
 	@GetMapping("searchReview")
 	public String searchReview(String searchInput, Model model) {
 		
 		List<Review> resultReview = service.searchReview(searchInput);
 		
 		model.addAttribute("resultReview",resultReview);
-		log.debug("에러확인");
 		
 		return "review/result";
 	}
@@ -55,11 +58,51 @@ public class ReviewController {
 	// 검색 결과 (닉네임 클릭 시 작성글)
 	
 	
-	// 리뷰 상세 조회 -> reviewDetail 포워드
+	
+	/** 리뷰 상세 조회 / 조회수 추가 예정
+	 * @param reviewNo
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@GetMapping("{reviewNo:[0-9]+}")
+	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
+			Model model, RedirectAttributes ra) {
+		
+		Review detailReview = service.reviewDetail(reviewNo);
+		
+		model.addAttribute("detailReview", detailReview);
+		
+		return "review/reviewDetail";
+		
+	}
 	
 	
-	// (인기순, 최신순, 평점순 -> js)
-	// (NEXT 다음페이지 -> js)
 	
+	/** 찜
+	 * @param paramMap
+	 * @param loginMember
+	 * @return
+	 */
+	@PostMapping("like")
+	@ResponseBody
+	public int like(@RequestBody Map<String, Object> paramMap,
+			@SessionAttribute("loginMember") Member loginMember) {
+		
+		paramMap.put("memberNo",loginMember.getMemberNo());
+		
+		return service.reviewLike(paramMap);
+	}
+	
+	
+	
+	
+	// 신고하기 버튼 클릭시 이동
+	
+	
+	
+	
+	
+
 
 }
