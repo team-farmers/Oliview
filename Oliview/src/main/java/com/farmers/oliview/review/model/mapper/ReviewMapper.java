@@ -17,15 +17,44 @@ public interface ReviewMapper {
 	List<Review> searchReview(String searchInput);
 
 	/** 리뷰 상세 조회
-	 * @param reviewNo
+	 * @param map
 	 * @return review
 	 */
-	Review reviewDetail(int reviewNo);
+	Review reviewDetail(Map<String, Object> map);
+
+	
+	/** 찜 체크
+	 * @param map
+	 * @return 
+	 */
+	int likeCheck(Map<String, Object> map);
+	
 
 	/** 찜
 	 * @param paramMap
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
+
+	
+	/** 찜 테이블에서 행 삭제
+	 * @param paramMap
+	 * @return
+	 */
+	int deleteReviewLike(Map<String, Object> paramMap);
+
+	
+	/** 찜 테이블에서 행 삽입
+	 * @param paramMap
+	 * @return
+	 */
+	int insertReviewLike(Map<String, Object> paramMap);
+
+	/** 찜 개수 조회(필요에 따라 삭제)
+	 * @param integer
+	 * @return
+	 */
+	int countReviewLike(Integer integer);
+
 
 }

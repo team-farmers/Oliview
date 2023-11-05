@@ -14,15 +14,21 @@ public interface ReviewService {
 	List<Review> searchReview(String searchInput);
 
 	/** 리뷰 상세 조회
-	 * @param reviewNo
+	 * @param map
 	 * @return review
 	 */
-	Review reviewDetail(int reviewNo);
+	Review reviewDetail(Map<String, Object> map);
+
+
+	/** 찜 여부 확인
+	 * @param map
+	 * @return
+	 */
+	int likeCheck(Map<String, Object> map);
 
 	/** 찜
 	 * @param paramMap
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
-
 }

@@ -33,10 +33,9 @@
         
         <section class="head-2">
           <section class="head-like">
-            <!-- 찜 안눌렀을 때 -->
-            <i class="fa-regular fa-heart" style="color: #ff3d3d; font-size: 5rem;" id="reviewLike"></i><br>
-            <!-- 찜 눌렀을 때 -->
-            <!-- <i class="fa-solid fa-heart" style="color: #ff3d3d;"></i> -->
+            <!-- 찜 -->
+            <i class="fa-heart" th:classappend="${likeCheck} ? fa-solid : fa-regular" id="reviewLike"></i>
+
           </section>
         </section>
       </div>

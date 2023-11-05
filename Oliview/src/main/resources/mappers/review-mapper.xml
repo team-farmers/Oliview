@@ -3,7 +3,7 @@
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.review.model.mapper.ReviewMapper">
 	
-	
+	<!-- 리뷰 검색 -->
 	<select id="searchReview" resultType="Review">
 		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
 					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
@@ -14,6 +14,8 @@
 	</select>
 	
 	
+	
+	<!-- 리뷰 상세 조회 -->
 	<select id="reviewDetail" resultType="Review">
 		SELECT REVIEW_TITLE, REVIEW_ADDRESS, REVIEW_IMG, MEMBER_PROFILE, MEMBER_NICKNAME, STAR_TASTE,
 				STAR_AMOUNT, STAR_CLEAN,ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL , REVIEW_MENU, REVIEW_ONELINE
@@ -22,6 +24,34 @@
 		WHERE REVIEW_DEL_FL = 'N'
 		AND REVIEW_NO = #{reviewNo}
 	</select>
-   
+	
+	
+	<!-- 리뷰 찜 여부 확인 -->
+	<select id="likeCheck" resultType="_int">
+		SELECT COUNT(*) FROM "LIKE"
+		WHERE REVIEW_NO = #{reviewNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+	
+   	<!-- 찜 테이블 행 삭제 -->
+	<delete id="deleteReviewLike">
+		DELETE FROM "LIKE"
+		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_NO = #{reviewNo}
+	</delete>
+ 
+
+	<!-- 찜 테이블 행 삽입 -->
+	<insert id="insertReviewLike">
+		INSERT INTO "LIKE" (MEMBER_NO, REVIEW_NO)
+		VALUES(#{memberNo}, #{reviewNo})
+	</insert>
+	
+	<!-- 찜 개수 조회 -->
+	<select id="countReviewLike" resultType="_int">
+		SELECT COUNT(*) FROM "LIKE"
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+	
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.farmers.oliview.review.controller;
 
 import java.io.Console;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.service.ReviewService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,7 +62,7 @@ public class ReviewController {
 	
 	
 	
-	/** 리뷰 상세 조회 / 조회수 추가 예정
+	/** 리뷰 상세 조회 
 	 * @param reviewNo
 	 * @param model
 	 * @param ra
@@ -67,14 +70,36 @@ public class ReviewController {
 	 */
 	@GetMapping("{reviewNo:[0-9]+}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo,
-			Model model, RedirectAttributes ra) {
+			Model model, RedirectAttributes ra,
+			@SessionAttribute(value="loginMember", required=false) Member loginMember) {
 		
-		Review detailReview = service.reviewDetail(reviewNo);
+		// 상세 조회 서비스 호출
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewNo", reviewNo);
 		
-		model.addAttribute("detailReview", detailReview);
+		Review detailReview = service.reviewDetail(map);
 		
-		return "review/reviewDetail";
+		// 리턴 path
+		String path = null;
 		
+		// 찜 하트
+		if(detailReview != null) {
+			
+			// 조회 결과 review/reviewDetail로 포워드
+			model.addAttribute("detailReview", detailReview);
+			path = "review/reviewDetail";
+			
+			if(loginMember!=null) {
+				map.put("memberNo", loginMember.getMemberNo());
+				int likeCheck = service.likeCheck(map);
+				
+				if(likeCheck == 1) model.addAttribute("likeCheck", "on");
+			}	
+			
+		}
+		
+		return path;
+
 	}
 	
 	
