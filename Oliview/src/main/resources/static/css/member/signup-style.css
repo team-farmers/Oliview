@@ -218,7 +218,3 @@
 .next-btn:focus{
   outline: 0;
 }
-
-.next-btn:focus{
-  transform: scale(0.99);
-}

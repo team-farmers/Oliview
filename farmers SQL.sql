@@ -268,6 +268,30 @@ INSERT INTO "MEMBER"
 VALUES (SEQ_MEMBER_NO.NEXTVAL, 'id', 'pw', 'email', 'name', 'nickname', NULL, DEFAULT, DEFAULT, DEFAULT, NULL);
 
 
+-- 회원정보 일치하는 회원찾기
+SELECT COUNT(*)
+FROM "MEMBER"
+WHERE MEMBER_EMAIL = 'test@naver.com' 
+AND MEMBER_NAME = '테스트'
+;
+
+-- 아이디 찾기
+SELECT MEMBER_ID 
+FROM "MEMBER"
+WHERE MEMBER_EMAIL = 'test@naver.com' 
+AND MEMBER_NAME = 
+;
+
+-- 비밀번호 변경
+UPDATE "MEMBER" SET 
+MEMBER_PW = 'pass01'
+WHERE MEMBER_NO = 1
+;
+
+COMMIT;
+
+SELECT * FROM "MEMBER" m ;
+
 
 
 
