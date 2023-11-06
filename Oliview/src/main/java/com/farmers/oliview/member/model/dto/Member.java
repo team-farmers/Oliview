@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class Member {
 	
-	private String memberNo;
+	private int memberNo;
 	private String memberId;
 	private String memberPw;
 	private String memberEmail;

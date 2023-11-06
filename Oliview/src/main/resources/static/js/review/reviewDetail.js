@@ -1,7 +1,7 @@
 //=========================================================================
 /* 찜 기능  */
 
-/* const reviewLike = document.getElementById("reviewLike");
+const reviewLike = document.getElementById("reviewLike");
 
 reviewLike.addEventListener("click", e => {
 
@@ -33,20 +33,23 @@ reviewLike.addEventListener("click", e => {
     body : JSON.stringify(dataObj)
   })
   .then(resp => resp.text())
-  .then(count =>{
+  .then(result =>{
 
+    if(result == -1){
+      return;
+    }
 
-
+    // 하트 클래스 리스트 있으면 삭제 없으면 추가
+    e.target.classList.toggle("fa-regular");
+    e.target.classList.toggle("fa-solid");
 
   })
 
-
-
-
+  .catch(e => console.log(e));
 
 })
 
-*/
+
 
 
 //=========================================================================

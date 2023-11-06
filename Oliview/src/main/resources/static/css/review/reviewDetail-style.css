@@ -61,6 +61,13 @@ main{
   text-align: center;
 }
 
+
+#reviewLike{
+  color: #ff3d3d;
+  font-size: 5rem;
+  cursor: pointer;
+}
+
 /* =========================================================== */
 /* 리뷰 내용 - 사진, 평가, 메뉴, 한줄평 */
 
