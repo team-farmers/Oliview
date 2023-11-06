@@ -272,7 +272,6 @@ public class MemberController {
 	 */
 	@PostMapping("id-find")
 	public String idFind(Member inputMember, Model model, RedirectAttributes ra) { 
-		
 		 // 일치되는 정보가 있으면 1, 없으면 0 반환
 		 int result = service.memberFind(inputMember);
 		 
