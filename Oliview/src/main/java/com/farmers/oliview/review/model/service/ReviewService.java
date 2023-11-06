@@ -45,4 +45,10 @@ public interface ReviewService {
 	 */
 	int updateReadCount(int reviewNo);
 
+	/** 다른 리뷰 조회
+	 * @param reviewTitle
+	 * @return review
+	 */
+	List<Review> otherReview(String reviewTitle);
+
 }

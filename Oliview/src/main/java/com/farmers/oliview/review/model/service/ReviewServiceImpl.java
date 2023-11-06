@@ -41,6 +41,13 @@ public class ReviewServiceImpl implements ReviewService {
 		return mapper.reviewDetail(map);
 	}
 	
+
+	@Override
+	public List<Review> otherReview(String reviewTitle) {
+		return mapper.otherReview(reviewTitle);
+	}
+	
+	
 	// 찜 체크
 	@Override
 	public int likeCheck(Map<String, Object> map) {
@@ -70,7 +77,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	}
 	
-	
+	// 조회수 증가
 	@Override
 	public int updateReadCount(int reviewNo) {
 		return mapper.updateReadCount(reviewNo);

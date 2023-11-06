@@ -66,5 +66,12 @@ public interface ReviewMapper {
 	int updateReadCount(int reviewNo);
 
 
+	/** 다른 리뷰
+	 * @param reviewTitle
+	 * @return review
+	 */
+	List<Review> otherReview(String reviewTitle);
+
+
 
 }

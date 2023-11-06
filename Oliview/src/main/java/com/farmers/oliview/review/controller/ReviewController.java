@@ -3,6 +3,7 @@ package com.farmers.oliview.review.controller;
 import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -97,9 +98,12 @@ public class ReviewController {
 		
 		Review detailReview = service.reviewDetail(map);
 		
-		
-		
 		// 다른 리뷰 같이 불러오기
+		List<Review> otherReview = service.otherReview(detailReview.getReviewTitle());
+		
+		List<Review> reviewList = new ArrayList<>();
+		reviewList.add(detailReview);
+		reviewList.addAll(otherReview);
 		
 		
 		
@@ -111,7 +115,7 @@ public class ReviewController {
 		if(detailReview != null) {
 			
 			// 조회 결과 review/reviewDetail로 포워드
-			model.addAttribute("detailReview", detailReview);
+			model.addAttribute("reviewList", reviewList);
 			path = "review/reviewDetail";
 			
 			if(loginMember!=null) {
