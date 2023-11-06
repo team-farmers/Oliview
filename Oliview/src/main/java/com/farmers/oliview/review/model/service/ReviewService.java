@@ -13,6 +13,13 @@ public interface ReviewService {
 	 */
 	List<Review> searchReview(String searchInput);
 
+	/** 닉네임 클릭시 검색 결과
+	 * @param searchNick
+	 * @return 
+	 */
+	List<Review> searchReviewNick(String searchInput);
+
+	
 	/** 리뷰 상세 조회
 	 * @param map
 	 * @return review
@@ -31,4 +38,11 @@ public interface ReviewService {
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
+
+	/** 조회수 증가
+	 * @param reviewNo
+	 * @return result
+	 */
+	int updateReadCount(int reviewNo);
+
 }

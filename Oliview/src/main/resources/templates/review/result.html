@@ -75,11 +75,13 @@
           </a>
   
           <!-- 제목(가게명) -->
-          <div class="reviewTitle"><a th:text="*{reviewTitle}">가게이름</a></div>
+          <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+             th:text="*{reviewTitle}">가게이름</a></div>
   
            <!-- 닉네임/평점/작성일 -->
           <div class="nickname-star-date">
-            <section class="nickname" th:text="*{memberNickname}">푸바오</section>
+            <a class="nickname" th:href="@{/review/{memberNickname} (memberNickname=*{memberNickname})}"
+             th:text="*{memberNickname}">푸바오</a>
             <section class="star" style="color: #f1c93b;" th:text="*{starTaste}">4.5
               <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
               <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>

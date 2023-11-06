@@ -15,6 +15,13 @@ public interface ReviewMapper {
 	 * @return 리뷰 List
 	 */
 	List<Review> searchReview(String searchInput);
+	
+	
+	/** 닉네임 검색 결과
+	 * @param searchNick
+	 * @return
+	 */
+	List<Review> searchReviewNick(String searchInput);
 
 	/** 리뷰 상세 조회
 	 * @param map
@@ -50,11 +57,14 @@ public interface ReviewMapper {
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
 
-	/** 찜 개수 조회(필요에 따라 삭제)
-	 * @param integer
-	 * @return
+
+
+	/** 조회수 증가
+	 * @param reviewNo
+	 * @return result
 	 */
-	int countReviewLike(Integer integer);
+	int updateReadCount(int reviewNo);
+
 
 
 }

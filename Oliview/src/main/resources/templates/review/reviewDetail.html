@@ -100,33 +100,27 @@
         </section>
       </div>
 
-          <!-- 조회수, 신고하기 -->
+          <!-- 조회수, 신고하기 / 로그인 시 - 글 수정하기, 삭제하기-->
       <div class="contents-foot">
         <section class="foot-1">
           <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
-          <span class="hits">30</span>
+          <span class="hits" th:text="${detailReview.readCount}">조회수</span>
         </section>
         <section class="foot-2">
           <button class="reportBtn"><a href="#" onclick="openReportPopup()">
             <i class="fa-solid fa-triangle-exclamation"></i> 신고하기</a></button>
         </section>
-        <section class="foot-5">
-          <button class="prevBtn"><a href="#">목록으로</a></button>
-        </section>
-      </div>
-
-      <!-- 로그인 시 - 글 수정하기, 삭제하기 -->
-      <!-- <div class="contents-foot">
-        <section class="foot-3">
+        <section class="foot-3" th:if="${session.loginMember!=null}">
           <button class="updateBtn"><a href="#">수정하기</a></button>
         </section>
-        <section class="foot-4">
+        <section class="foot-4" th:if="${session.loginMember!=null}">
           <button class="deleteBtn"><a href="#">삭제하기</a></button>
         </section>
         <section class="foot-5">
           <button class="prevBtn"><a href="#">목록으로</a></button>
         </section>
-      </div>   -->
+      </div>
+  
 
       <!-- 댓글 영역 -->
       <th:block th:replace="~{review/comment}"></th:block>

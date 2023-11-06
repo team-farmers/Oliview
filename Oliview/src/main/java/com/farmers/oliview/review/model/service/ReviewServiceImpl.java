@@ -28,6 +28,13 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	
+	// 닉네임 리뷰 검색
+	@Override
+	public List<Review> searchReviewNick(String searchNick) {
+		return mapper.searchReviewNick(searchNick);
+	}
+	
+	
 	// 리뷰 상세 조회
 	@Override
 	public Review reviewDetail(Map<String, Object> map) {
@@ -57,13 +64,17 @@ public class ReviewServiceImpl implements ReviewService {
 			result = mapper.insertReviewLike(paramMap);
 		}
 		
-		
 		if(result == 0) return -1;
 		
-		return mapper.countReviewLike((Integer)(paramMap.get("boardNo")));
+		return result;
 
 	}
 	
+	
+	@Override
+	public int updateReadCount(int reviewNo) {
+		return mapper.updateReadCount(reviewNo);
+	}
 	
 
 }
