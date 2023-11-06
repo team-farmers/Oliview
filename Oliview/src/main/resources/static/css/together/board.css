@@ -3,79 +3,92 @@
   padding: 0;
 }
 
-html {
-  font-size: 10px;
-}
 
-ul, li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
+/* board 하나로 감싸기 */
 .board_wrap {
   width: 1000px;
   margin: 100px auto;
 }
 
+/* 게시글 조절*/
 .board_title {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
+/* 제목과 부제목 조절 */
 .board_title strong {
   font-size: 3rem;
 }
 
 .board_title p {
-  margin-top: 5px;
+  margin-top: 1px;
   font-size: 1.4rem;
 }
 
-.bt {
-  margin-top: 20px;
-  text-align: right ;
- font-size: 1rem;
- color: skyblue;
 
+/* 버튼 위치*/
+.btn {
+  text-align: center;
+  
 }
 
-.bt2 {
-  margin-top: 20px;
-  text-align: left ;
- font-size: 1rem;
- color: skyblue;
 
+/* 참여하기 버튼 */
+.btn > .btn1{
+  color: #66B97E;
+    
+  padding: 10px 30px;
 }
 
+
+/* 수정하기 버튼 */
+.btn > .btn2{
+  color: #66B97E;
+    
+  padding: 10px 30px;
+}
+
+/* 삭제하기 버튼 (작성자만 보이게)*/
+.btn > .btn3{
+  color: #66B97E;
+    
+  padding: 10px 30px;
+}
+
+/* 게시글 윗줄 초록색*/
 .board_write {
-  border-top: 2px solid #000;
+  border-top: 2px solid #66B97E;
 }
 
+
+/* 제목과 참여인원 크기조절 */
 .board_write .title,
 .board_write .info {
   padding: 15px;
 }
 
+
+/* 게시글 중간줄 초록색*/
 .board_write .info {
   border-top: 1px dashed #ddd;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #66B97E;
   font-size: 0;
 }
 
+
+/* 제목 글씨 사이즈 조절 */
 .board_write .title dl {
   font-size: 0;
 }
 
+/* 참여인원 및 날짜 시간 조절*/
 .board_write .info dl {
   display: inline-block;
   width: 50%;
 
 }
 
-
+/* 게시글 전체 글씨*/
 .board_write .title dt,
 .board_write .title dd,
 .board_write .info dt,
@@ -86,38 +99,25 @@ a {
 }
 
 
-
+/* title 넓이 조절*/
 .board_write .title dt,
 .board_write .info dt {
   width: 100px;
 }
 
 
-.board_write .title input,
-.board_write .info input,
-.board_write .info input {
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-
+/* 내용 적는 박스 조절 및 밑줄 색상*/
 .board_write .cont {
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #66B97E;
   width: 1010px;
   height: 500px;
   font-size: large;
   
 }
 
+/*--------------------------------------------*/
 
-
-
-
-
-
-
-
-
+/* 폰트 및 로고*/
 :root{
   font-size: 62.5%;
   
@@ -139,9 +139,6 @@ a {
   font-style: normal;
 }
 
-section{
-  /* display: block; */
-}
 
 body {
   display: flex;

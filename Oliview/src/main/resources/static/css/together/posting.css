@@ -34,13 +34,18 @@ a {
   font-size: 1.4rem;
 }
 
-.bt ,.bt2 {
+.bt{
   margin-top: 30px;
   text-align: center;
  font-size: 1rem;
- color: skyblue;
 
 }
+
+.bt > button{
+color: #66B97E;
+
+}
+
 
 
 .board_write {
@@ -128,9 +133,6 @@ a {
   font-style: normal;
 }
 
-section{
-  /* display: block; */
-}
 
 body {
   display: flex;

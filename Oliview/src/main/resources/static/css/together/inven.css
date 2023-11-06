@@ -3,38 +3,34 @@
   padding: 0;
 }
 
-html {
-  font-size: 10px;
-}
-
-ul, li {
-  list-style: none;
-}
-
 a {
   text-decoration: none;
   color: inherit;
 }
 
+/* 게시판 목록 넓이 조절*/
 .board_wrap {
-  width: 1000px;
+  width: 900px;
   margin: 100px auto;
 }
 
+/* 게시글 하단 마진 조절*/
 .board_title {
   margin-bottom: 25px;
 }
 
+/* 같이먹어요 제목 폰트사이즈*/
 .board_title strong {
   font-size: 3rem;
 }
 
+
+
+/**/
 .board_title p {
-  margin-top: 5px;
+  margin-top: 2px;
   font-size: 1.4rem;
 }
-
-
 
 
 .board_list {
@@ -177,9 +173,7 @@ a {
   font-size: 1.4rem;
 }
 
-.board_view .info dl dt {
 
-}
 
 .board_view .info dl dd {
   margin-left: 10px;
