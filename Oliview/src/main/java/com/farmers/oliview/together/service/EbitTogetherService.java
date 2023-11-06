@@ -1,5 +1,5 @@
 package com.farmers.oliview.together.service;
 
-public interface TogetherService {
+public interface EbitTogetherService {
 
 }
