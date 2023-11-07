@@ -4,12 +4,27 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.farmers.oliview.review.model.dto.Review;
 
 @Mapper
 public interface ReviewMapper {
 
+	
+	/** 전체 리뷰수 조회
+	 * @return reviewCount
+	 */
+	int getReviewCount();
+	
+	
+	/** 전체 리뷰 조회
+	 * @param rowBounds
+	 * @return reviewList
+	 */
+	List<Review> AllReview(RowBounds rowBounds);
+	
+	
 	/** 검색 결과
 	 * @param searchInput
 	 * @return 리뷰 List
@@ -71,6 +86,15 @@ public interface ReviewMapper {
 	 * @return review
 	 */
 	List<Review> otherReview(String reviewTitle);
+
+
+
+
+
+
+
+
+
 
 
 

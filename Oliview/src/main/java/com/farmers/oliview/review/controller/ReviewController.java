@@ -44,64 +44,60 @@ public class ReviewController {
 	
 	
 
-//	@GetMapping("result")
-//	public String searchReview(Model model, String searchInput
-//			/*@RequestParam(value="cp", required = false, defaultValue ="1") int cp*/,
-//			@RequestParam Map<String, Object> paramMap) {
+	@GetMapping("searchReview")
+	public String searchReview(Model model, String searchInput,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+
+		// 검색 x
+		if(paramMap.get("key") == null && paramMap.get("query") == null) {
+			Map<String, Object> map = service.AllReview(cp);
+			model.addAttribute("map", map);
+		}
+		// 검색 o
+		else {
+			List<Review> searchReview = service.searchReview(searchInput);
+			model.addAttribute("searchReview",searchReview);
+		}
+		
+		return "review/result";
+		
+	}
+	
+
+	
+//	
+//	// 테스트
+//	@RequestMapping("result")
+//	public String result() {
+//		return "review/result";
+//	}
 //
-//		// 검색 x
-//		if(paramMap.get("key") == null && paramMap.get("query") == null) {
-//			Map<String, Object> map = service.resultReview(cp);
-//			model.addAttribute("map", map);
-//
-//			List<Review> AllReview = service.AllReview();
-//			model.addAttribute("AllReview",AllReview);
-//			
-//		}
-//		// 검색 o
-//		else {
-//			List<Review> searchReview = service.searchReview(searchInput);
-//			model.addAttribute("searchReview",searchReview);
-//		}
+//	
+//	// 검색 결과 (검색어 - 수정중)
+//	// (인기순, 최신순, 평점순 -> js)
+//	// (NEXT 다음페이지 -> js)
+//	@GetMapping("searchReview")
+//	public String searchReview(String searchInput, Model model) {
+//		
+//		List<Review> resultReview = service.searchReview(searchInput);
+//		
+//		model.addAttribute("resultReview",resultReview);
 //		
 //		return "review/result";
+//	}	
+//	// 검색 결과 (닉네임 클릭 시 작성글 - 수정중)
+//	
+//	@GetMapping("result/{memberNickname:^[\\\\w]*$}")
+//	public String searchReviewNick(String searchInput, Model model) {
 //		
+//		List<Review> resultReview = service.searchReviewNick(searchInput);
+//		
+//		model.addAttribute("searchReviewNick",searchInput);
+//		
+//		return "review/result";
 //	}
-	
-
-	
-	
-	// 테스트
-	@RequestMapping("result")
-	public String result() {
-		return "review/result";
-	}
-
-	
-	// 검색 결과 (검색어 - 수정중)
-	// (인기순, 최신순, 평점순 -> js)
-	// (NEXT 다음페이지 -> js)
-	@GetMapping("searchReview")
-	public String searchReview(String searchInput, Model model) {
-		
-		List<Review> resultReview = service.searchReview(searchInput);
-		
-		model.addAttribute("resultReview",resultReview);
-		
-		return "review/result";
-	}	
-	// 검색 결과 (닉네임 클릭 시 작성글 - 수정중)
-	
-	@GetMapping("result/{memberNickname:^[\\\\w]*$}")
-	public String searchReviewNick(String searchInput, Model model) {
-		
-		List<Review> resultReview = service.searchReviewNick(searchInput);
-		
-		model.addAttribute("searchReviewNick",searchInput);
-		
-		return "review/result";
-	}
-	
+//	
 	
 	
 	/** 리뷰 상세 조회 

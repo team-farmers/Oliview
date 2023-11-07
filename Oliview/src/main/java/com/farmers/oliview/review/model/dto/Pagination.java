@@ -14,7 +14,7 @@ public class Pagination {
 	
 	
 	private int currentPage;      // 현재 페이지 번호
-	private int listCount;         // 전체 게시글 수
+	private int reviewCount;         // 전체 게시글 수
 	   
 	private int limit = 8;         // 한 페이지 목록에 보여지는 게시글 수
 	private int pageSize = 10;      // 보여질 페이지 번호 개수
@@ -29,14 +29,14 @@ public class Pagination {
 	
 	public Pagination(int currentPage, int listCount) {
 		this.currentPage = currentPage;
-		this.listCount = listCount;
+		this.reviewCount = reviewCount;
 		
 		calcPagination(); // 객체 생성 시 계산 수행해서 모든 필드 초기화 
 	}
 	
 	public Pagination(int currentPage, int listCount, int limit, int pageSize) {
 		this.currentPage = currentPage;
-		this.listCount = listCount;
+		this.reviewCount = reviewCount;
 		this.limit = limit;
 		this.pageSize = pageSize;
 		
@@ -51,7 +51,7 @@ public class Pagination {
 	}
 
 	public int getListCount() {
-		return listCount;
+		return reviewCount;
 	}
 
 	public int getLimit() {
@@ -92,7 +92,7 @@ public class Pagination {
 	}
 
 	public void setListCount(int listCount) {
-		this.listCount = listCount;
+		this.reviewCount = listCount;
 		calcPagination();
 	}
 
@@ -110,7 +110,7 @@ public class Pagination {
 	
 	@Override
 	public String toString() {
-		return "Pagination [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit
+		return "Pagination [currentPage=" + currentPage + ", listCount=" + reviewCount + ", limit=" + limit
 				+ ", pageSize=" + pageSize + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + "]";
 	}
@@ -131,7 +131,7 @@ public class Pagination {
 		// 전체 게시글 수 : 91개 -> 페이지 :  10페이지
 		// 전체 게시글 수 : 101개 -> 페이지 :  11페이지
 		
-		maxPage = (int)Math.ceil((double)listCount/limit);
+		maxPage = (int)Math.ceil((double)reviewCount/limit);
 		
 		
 		// startPage : 페이지 번호 목록에서 제일 앞 숫자
