@@ -21,24 +21,38 @@
 
         <section class="input-box" id="id-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberId" placeholder="아이디" required>
+          <input type="text" name="memberId" id="memberId" placeholder="아이디" required>
         </section>
 
         <section class="input-box" id="pw-input-box">
           <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
-          <input type="password" name="memberPw" placeholder="비밀번호" required>
+          <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호" required maxlength="20">
         </section>
 
         <section class="input-box" id="pw-input-box">
-          <i class="fa-regular fa-envelope fa-lg" style="color: #cbcbcb;"></i>
-          <input type="email" name="memberEmail" placeholder="이메일" required>
+          <i class="fa-solid fa-lock fa-lg" style="color: #cbcbcb;"></i>
+          <input type="password" name="memberPwConfirm" id="memberPwConfirm" placeholder="비밀번호 확인" required maxlength="20">
         </section>
 
-        <article id="alert1"></article>
+        <section class="input-box" id="email-input-box">
+          <i class="fa-regular fa-envelope fa-lg" style="color: #cbcbcb;"></i>
+          <input type="email" name="memberEmail" id="memberEmail" placeholder="이메일" required autocomplete="off">
+          <button id="sendAuthKeyBtn" type="button">인증번호 받기</button>
+        </section>
+
+        <section class="input-box" id="email-input-box">
+          <i class="fa-regular fa-keyboard fa-lg" style="color: #cbcbcb;"></i>
+          <input type="text" id="authKey" placeholder="이메일 인증번호 입력" required autocomplete="off">
+          <button id="checkAuthKeyBtn" type="button">인증하기</button>
+        </section>
+        <article class="alert-message" id="alertId-message"></article>
+        <article class="alert-message" id="alertPw-message"></article>
+        <span class="signUp-message" id="authKeyMessage"></span>
+
 
         <section class="input-box" id="name-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberName" placeholder="이름" required>
+          <input type="text" name="memberName" id="memberName" placeholder="이름" required>
         </section>
 
         <!-- <section class="input-box" id="tel-input-box">
@@ -48,8 +62,11 @@
 
         <section class="input-box" id="nickname-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
-          <input type="text" name="memberNickname" placeholder="닉네임" required>
+          <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" required>
         </section>
+
+        <article class="alert-message" id="alertName-message"></article>
+        <article class="alert-message" id="alertNickname-message"></article>
 
         <!-- <section class="input-box" id="address-input-box">
           <i class="fa-solid fa-map-pin fa-lg" style="color: #cbcbcb;"></i>
@@ -75,6 +92,9 @@
         </section> -->
     
         <button class="complete-btn">완료</button>
+
+
+        <input th:if="${param.agreeChoice != null}" type="hidden" name="agreeChoice" value="Y">
       </form>
 
     </section>
@@ -85,5 +105,6 @@
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
 
+  <script src="/js/member/signup.js"></script>
 </body>
 </html>

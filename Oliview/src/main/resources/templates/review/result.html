@@ -20,20 +20,22 @@
 
     <!-- 검색바 영역 -->
     <section class="search" >
-      <form action="searchInput">
-        <input type="text" class="searchInput">
+      <form id="searchReview" action="searchReview">
+        <input type="text" class="searchInput" name="searchInput">
       </form>
-      <button><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
+      <button form="searchReview"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
     </section>
 
 
+    <!-- th:href="@{/review/result/}" -->
+
     <!-- 정렬 선택 영역 -->
     <section class="sort">
-      <button class="sortBtn" id="sort-popular" style="color: #66b97e;">인기순</button> <!-- 클릭시 색바꾸기 -->
+      <a  class="sortBtn" id="sort-popular" style="color: #66b97e;">인기순</a> <!-- 클릭시 색바꾸기 -->
       <span>|</span>
-      <button class="sortBtn" id="sort-latest">최신순</button>
+      <a class="sortBtn" id="sort-latest">최신순</a>
       <span>|</span>
-      <button class="sortBtn" id="sort-rating">평점순</button>
+      <a class="sortBtn" id="sort-rating">평점순</a>
     </section>
 
 
@@ -41,55 +43,75 @@
 
 
     <!-- 검색 : 리뷰가 존재하지 않을 때 -->
-    <section class="result-no" th:if="${#lists.size(review)} == 0">
-      <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i><br>
-      검색 결과가 없습니다
+    <section class="result-no" th:if="${#lists.isEmpty(resultReview)}">
+      <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>
+      검색 결과가 없습니다.
     </section>
 
+<!-- 
+    <th:block th:each="i : ${#numbers.sequence(0, #lists.size(resultReview), 1)}">
+      <th:block th:if="${i % 4 ==0}">
+        <h3 th:text="${i}"></h3>
+      </th:block>
+      <th:block th:unless="${i % 4 ==0}">
+        [[${i}]]
+      </th:block>
+    </th:block>
+ -->
 
 
     <!-- 검색 : 리뷰가 존재할 때  + 인기순 -->
-    <section class="review-row" th:unless="${#lists.size(review)} == 0" th:object="${review}">
+    <th:block th:each="review, stat : ${resultReview}">
       
-      <article class="review-col">
-        <!-- 이미지 -->
-        <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo},cp=${pagination.currentPage})}" 
-        th:text="*{reviewImg}" class="review-img">
-          <img src="#" alt="image-1">
-        </a>
-        
-        <!-- 제목(가게명) -->
-        <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo},cp=${pagination.currentPage})}" 
-          th:text="*{reviewTitle}">가게이름</a></div>
-        
-          <!-- 닉네임/평점/작성일 -->
-        <div class="nickname-star-date">
-          <section class="nickname"><a th:href="#">푸바오</a></section>
-          <section class="star" style="color: #f1c93b;" th:text="*{star}">4.5
-            <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-            <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
-          </div>
-      </article>
+      <th:block th:if="${stat.index % 4 == 0}">
+        <section class="review-row" th:unless="${#lists.isEmpty(resultReview)}">
+      </th:block>
 
-    </section>
+        <article class="review-col" th:object="${review}">
+  
+          <!-- 이미지 -->
+          <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+            <img src="#" alt="image-1">
+          </a>
+  
+          <!-- 제목(가게명) -->
+          <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+             th:text="*{reviewTitle}">가게이름</a></div>
+  
+           <!-- 닉네임/평점/작성일 -->
+          <div class="nickname-star-date">
+            <a class="nickname" th:href="@{/review/{memberNickname} (memberNickname=*{memberNickname})}"
+             th:text="*{memberNickname}">푸바오</a>
+            <section class="star" style="color: #f1c93b;" th:text="*{starTaste}">4.5
+              <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+              <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
+            </div>
+  
+        </article>
+  
+      <th:block th:if="${stat.index % 4 == 3}">
+        </section>
+      </th:block>
+
+    </th:block>
 
     <!-- 검색 : 리뷰가 존재 + 최신순 -->
     
     <!-- 검색 : 리뷰가 존재 + 평점순 -->
 
 
-    <!-- 다음 페이지 화살표 -->
-    <section class="next-row">
-      <a href="#">
-        <div>NEXT</div>
-        <div style="padding: 0.5rem;">
-          <i class="fa-solid fa-circle-arrow-down fa-xl" 
-          style="color: #66b97e; opacity: 70%;"></i></a>
-        </div>
-    </section>
-
+    
   </main>
   
+  <!-- 다음 페이지 화살표 -->
+  <section class="next-row">
+    <a href="#">
+      <div>NEXT</div>
+      <div style="padding: 0.5rem;">
+        <i class="fa-solid fa-circle-arrow-down fa-xl" 
+        style="color: #66b97e; opacity: 70%;"></i></a>
+      </div>
+  </section>
 
   <!-- 풋터 -->
   <th:block th:replace="~{common/footer}"></th:block>

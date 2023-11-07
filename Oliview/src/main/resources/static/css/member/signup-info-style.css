@@ -44,9 +44,57 @@
   width: 7%
 }
 
+
+/* 이메일 인증 */
+#email-input-box{
+  display: flex;
+  align-items: center;
+}
+
+#email-input-box > input{
+  margin-left: 1.2rem;
+}
+
+/* 인증번호 받기 버튼 */
+#sendAuthKeyBtn, #checkAuthKeyBtn{
+  width: 12rem;
+  height: 3rem;
+
+  border: 1px solid #CBCBCB;
+  background-color: white;
+  color: var(--main-color);
+
+  cursor: pointer;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : var(--main-color); }
+.error{ color : red; }
+
+
+/* 이메일 인증알림 */
+#authKeyMessage{
+  text-align: left;
+  display: block;
+  width: 50rem;
+}
+
+/* 첫번째&두번째 섹션 오류알림 */
+.alert-message{
+  text-align: left;
+  display: block;
+  width: 50rem;
+}
+
+/* 유효성메세지 맨위에거 */
+#alertId-message, #alertName-message{
+  margin-top: 1rem;
+}
+
+
 /* 두번째 인풋 섹션 */
 #name-input-box{
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .input-box input{

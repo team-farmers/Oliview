@@ -37,6 +37,6 @@ public class MyPageController {
 	public String secession() { 
 		return "myPage/secession";
 	}
-	
+	 
 
 }

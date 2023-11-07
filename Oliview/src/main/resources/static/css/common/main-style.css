@@ -110,3 +110,35 @@ header a{
   text-decoration: none;
   font-size: 1.6rem;
 }
+
+/* ============================================ */
+/* 버튼 */
+.buttons-fixed a{
+  font-size: 1.5rem;
+  width: 9rem;
+  height: 9rem;
+  border: solid var(--main-color);
+  border-radius: 50%;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 70%;
+  padding-top: 2.5rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: white;
+  line-height: 5.5rem;
+}
+
+.buttons-fixed{
+  position:fixed;
+  bottom: 3rem;
+  right: 3rem;
+}
+
+/* ============================================ */
+
+
+
+

@@ -13,4 +13,6 @@ public interface TogetherService {
 
 	Map<String, Object> selectBoardList(int boardCode, int cp);
 
+	Map<String, Object> selectBoardList(int boardCode, int cp);
+
 }

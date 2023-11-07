@@ -1,52 +1,12 @@
-:root{
-  font-size: 62.5%;
-  --main-color : #66B97E;
-  --footer-color : #d9d9d9;
-}
-
-* {
-  font-family:'GmarketSans';
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-@font-face {
-  font-family: 'GmarketSans';
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansLight.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
-
-
-main {
-  width: 1140px;
-  flex-grow: 1;
-  min-height: 500px;
-}
-
-
 /* =========================================================== */
 /* 리뷰 */
+main{
+  height: 300rem;
+}
 
 .review-container{
-  margin: 1rem 0 5rem;
-  height: 125rem;
+  margin: 1rem 0 3rem;
+  height: 130rem;
   border: 0.1rem solid var(--footer-color);
 }
 
@@ -57,7 +17,7 @@ main {
   height: 15rem;
   display: flex;
   flex-direction: row;
-  padding: 2rem;
+  padding: 2rem 4rem;
 }
 
 .head-1{
@@ -84,7 +44,10 @@ main {
 .head-address{
   height: 30%;
   font-size: 2rem;
+  color: var(--footer-color);
 }
+
+/* 찜 */
 .head-2{
   width: 10%;
   display: flex;
@@ -94,7 +57,15 @@ main {
 
 .head-like{
   padding-top: 2rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+
+#reviewLike{
+  color: #ff3d3d;
   font-size: 5rem;
+  cursor: pointer;
 }
 
 /* =========================================================== */
@@ -105,11 +76,12 @@ main {
   height: 55rem;
   display: flex;
   flex-direction: row;
-  padding: 0 2rem;
+  padding: 0 4rem;
 }
 
 .main-1{
-  width: 50%;
+  width: 45%;
+  border: 0.1rem solid var(--main-color); /*임시*/
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -121,10 +93,10 @@ main {
 
 /* 리뷰 글 */
 .main-2{
-  width: 50%;
+  width: 55%;
   font-size: 2rem;
   font-weight: bold;
-  padding: 0 0 0 2rem;
+  padding: 0 0 0 4rem;
 
 }
 .main-2 div{
@@ -188,6 +160,9 @@ main {
   align-items: center;
 
 }
+.rating-total span{
+  padding: 0 1rem;
+}
 .rating span{
   padding: 0 1rem;
 }
@@ -200,7 +175,7 @@ main {
 .menu{
   padding: 2rem;
   font-size: 1.8rem;
-  height: 12.5rem;
+  height: 12rem;
   border-radius: 1rem;
   background-color: #f5f5f5;
 }
@@ -211,28 +186,30 @@ main {
 .text{
   padding: 2rem;
   font-size: 1.8rem;
-  height: 12.5rem;
+  height: 12rem;
   border-radius: 1rem;
   background-color: #f5f5f5;
 }
 
 /* =========================================================== */
-/* 조회수, 신고하기 */
+/* 조회수, 신고하기, 수정하기, 삭제하기, 목록으로 */
 
-/* 
+
 .contents-foot{
   height: 5rem;
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 4rem;
+  margin: 3rem 0 1rem;
 }
 .contents-foot > section{
-  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 
+/* 조회수, 신고하기 */
 .foot-1{
   font-size: 1.5rem;
   color: var(--main-color);
@@ -245,27 +222,14 @@ main {
   font-weight: bold;
   width: 10rem;
   height: 3rem;
-  background-color: var(--main-color);
+  background-color: var(--footer-color);
   color: white;
   border: none;
   border-radius: 0.7rem;
-} */
-
-/* 글 수정하기, 삭제하기 */
-
-.contents-foot{
-  height: 5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  padding: 1rem 3rem;
-}
-.contents-foot > section{
-  margin-left: 1rem;
 }
 
 
+/* 글 수정하기, 삭제하기, 목록으로 */
 .contents-foot button{
   font-size: 1.5rem;
   font-family: 'GmarketSansMedium';
@@ -280,12 +244,16 @@ main {
   background-color: var(--footer-color);
 }
 .deleteBtn{
+  background-color: var(--footer-color);
+}
+.prevBtn{
   background-color: var(--main-color);
 }
 
 
 /* =========================================================== */
 /* 다른 리뷰 */
+
 
 .others > :nth-child(1){
   padding: 1.5rem 0.5rem 0;
@@ -304,16 +272,15 @@ main {
   margin-bottom: 5rem;
 }
 
-
 .review-col{
-  width: 30%;
+  width: 23%;
   height: 100%;
   border-radius: 1rem;
-  margin: 0 1.6%;
+  margin: 0 1%;
   box-shadow: 1rem 1rem 2rem var(--footer-color);
 }
 
-#review-img{
+.review-img{
   height: 80%;
   border-radius: 1rem 1rem 0 0;
 
@@ -322,29 +289,29 @@ main {
   justify-content: center;
 }
 
-#review-img>img{
+.review-img>img{
   width: 100%;
   object-fit: cover;
 }
 
-#title{
+.reviewTitle{
   font-size: 2.5rem ;
-  padding: 1.3rem 1rem 0.5rem;
+  padding: 0.5rem 1rem 0.5rem;
 }
 
-.nickname-star-date{
+.others-nickname-star-date{
   display: flex;
   flex-direction: row;
   align-items: end;
 }
-#nickname{
+.othersNickname{
   font-size: 1.5rem;
   padding: 0 1rem;
 }
-#star{
+.othersStar{
   font-size: 1.5rem;
 }
-#date{
+.othersWriteDate{
   font-size: 1.2rem;
   padding: 0 2rem;
   color: #808080;
