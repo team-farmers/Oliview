@@ -103,6 +103,36 @@
     
   </main>
   
+<!-- =====================================================================================
+  <section class="pagination-area">
+  
+    <ul class="pagination">
+  
+      <!-- << , < --
+      <li><a th:href="@{/result, cp=1}">&lt;&lt;</a></li>
+      <li><a th:href="@{/result, cp=${pagination.prevPage}}">&lt;</a></li>
+
+      <!-- 특정 페이지 --
+      <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+        <li th:if="${i == pagination.currentPage}"> <a class="current" th:text="${i}">1</a></li>
+        <li th:unless="${i == pagination.currentPage}"><a th:href="@{/result, cp=${i}}" th:text="${i}">2</a></li>
+      </th:block>
+
+      <!-- >, >> --
+      <li><a th:href="@{/result, cp=${pagination.nextPage}}">&gt;</a></li>
+      <li><a th:href="@{/result, cp=${pagination.maxPage}}">&gt;&gt;</a></li>
+
+    </ul>
+
+  </section>
+  =========================================================================================== -->
+
+
+
+
+
+
+
   <!-- 다음 페이지 화살표 -->
   <section class="next-row">
     <a href="#">
