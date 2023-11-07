@@ -38,7 +38,8 @@ public class TogetherController {
 			
 			@PathVariable("boardCode") int boardCode,
 			Model model, 
-			@RequestParam(value="cp" , required= false, defaultValue="1") int cp) {
+			@RequestParam(value="cp" , required= false, defaultValue="1") int cp,
+			@RequestParam Map<String , Object> paramMap) {
 		
 			
 			Map<String,Object> map = service.selectBoardList(boardCode,cp);
@@ -51,7 +52,9 @@ public class TogetherController {
 	}
 			
 			
-			
+			// 검색인 경우 
+		
+	
 			
 	
 	
