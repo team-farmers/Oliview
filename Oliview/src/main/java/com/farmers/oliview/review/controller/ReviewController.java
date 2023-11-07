@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -42,6 +43,34 @@ public class ReviewController {
 	private final ReviewService service;
 	
 	
+
+//	@GetMapping("result")
+//	public String searchReview(Model model, String searchInput
+//			/*@RequestParam(value="cp", required = false, defaultValue ="1") int cp*/,
+//			@RequestParam Map<String, Object> paramMap) {
+//
+//		// 검색 x
+//		if(paramMap.get("key") == null && paramMap.get("query") == null) {
+//			Map<String, Object> map = service.resultReview(cp);
+//			model.addAttribute("map", map);
+//
+//			List<Review> AllReview = service.AllReview();
+//			model.addAttribute("AllReview",AllReview);
+//			
+//		}
+//		// 검색 o
+//		else {
+//			List<Review> searchReview = service.searchReview(searchInput);
+//			model.addAttribute("searchReview",searchReview);
+//		}
+//		
+//		return "review/result";
+//		
+//	}
+	
+
+	
+	
 	// 테스트
 	@RequestMapping("result")
 	public String result() {
@@ -60,10 +89,7 @@ public class ReviewController {
 		model.addAttribute("resultReview",resultReview);
 		
 		return "review/result";
-	}
-	
-	
-	
+	}	
 	// 검색 결과 (닉네임 클릭 시 작성글 - 수정중)
 	
 	@GetMapping("result/{memberNickname:^[\\\\w]*$}")
@@ -102,6 +128,7 @@ public class ReviewController {
 		List<Review> otherReview = service.otherReview(detailReview.getReviewTitle());
 		
 		List<Review> reviewList = new ArrayList<>();
+		
 		reviewList.add(detailReview);
 		reviewList.addAll(otherReview);
 		
