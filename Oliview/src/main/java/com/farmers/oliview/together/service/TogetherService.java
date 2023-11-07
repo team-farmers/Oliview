@@ -12,7 +12,17 @@ public interface TogetherService {
 	 */
 
 	Map<String, Object> selectBoardList(int boardCode, int cp);
+	
+	
+	/**
+	 * 검색 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
 
-	Map<String, Object> selectBoardList(int boardCode, int cp);
+	Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp);
+
+	
 
 }

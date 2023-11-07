@@ -42,20 +42,52 @@ public class TogetherController {
 			@RequestParam Map<String , Object> paramMap) {
 		
 			
+			if(paramMap.get("key") == null && paramMap.get("query")== null) {
+			
 			Map<String,Object> map = service.selectBoardList(boardCode,cp);
 		
 			
 			model.addAttribute("map",map);
 			
 			return "board/inven";
+			
 		
-	}
+			}
 			
 			
 			// 검색인 경우 
-		
 	
+			else {
+		 	
+				// boardCode를 paramMap에 추가 (한번에 묶어서 sql 전달예정)
+				paramMap.put("boardCode", boardCode);
+		 
+				Map <String, Object> map = service.searchBoardList(paramMap, cp);
+				model.addAttribute("map",map);
+		 
+			}
 			
+				return "board/inven";
+	
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
