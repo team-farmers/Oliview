@@ -292,6 +292,10 @@ COMMIT;
 
 SELECT * FROM "MEMBER" m ;
 
+-- 닉네임 10글자 테스트
+UPDATE MEMBER SET 
+MEMBER_NICKNAME = '하둘셋넷다여일여아열'
+WHERE MEMBER_NO = 1;
 
 
 

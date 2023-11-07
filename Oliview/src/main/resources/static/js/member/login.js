@@ -4,8 +4,9 @@ const getCookie = (key) => {
 
   const cookies = document.cookie;
 
-  const list = cookies.split(';').map(entry => entry.split('='));
+  const list = cookies.split('; ').map(entry => entry.split('='));
 
+  console.log(list);
   const obj = {};
 
   for(let i=0; i<list.length; i++){

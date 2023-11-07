@@ -36,6 +36,7 @@
   display: flex;
   justify-content: end;
   align-items: center;
+  margin-right: 1rem;
 }
 
 #member-id{
@@ -46,6 +47,14 @@
   display: flex;
   align-items: center;
 }
+
+#member-id > p{
+  width: 16rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 #edit-btn{
   width: 17%;
@@ -231,10 +240,20 @@
   border: 0.1rem solid #afafaf
 }
 
-/* 프로필 사진 변경/삭제버튼*/
-#profile-img-change > button{
-  width: 6.5rem;
+/* 프로필 사진 선택/변경/삭제 버튼*/
+.profile-btn-area{
+  width: 40rem;
+  display: flex;
+}
+
+.profile-btn-area > label{
+  margin-left: 2rem;
+}
+
+.profile-btn-area > button, label{
+  width: 7rem;
   height: 3rem;
+  margin: 0 0.5rem 0 0.5rem;
 
   display: flex;
   justify-content: center;
@@ -246,13 +265,14 @@
   font-size: 1.2rem;
 }
 
-#profile-img-change > button:hover{
+#imageInput{
+  display: none;
+}
+
+.profile-btn-area > button:hover, label:hover{
   cursor: pointer;
 }
 
-#profile-img-change > button:nth-child(2){
-  margin: 0 1rem 0 3rem;
-}
 
 
 /* 적용/취소버튼 영역*/

@@ -6,13 +6,20 @@
 
     <!-- 프로필 정보 -->
     <section id="profileInfo-container">
-
       <section id="profile-img">
-        <a href=""><img src="/images/profileImgEx.png" alt="프로필 이미지" width="70rem"></a>
+        <a href="/myPage/profile">
+          <!-- 프로필 이미지가 없으면 기본 이미지(기본이미지는 STS messages.pro에 기재) -->
+          <img th:if="${session.loginMember.memberProfile == null}"
+           th:src="#{user.default.image}" alt="프로필 이미지" width="55rem">
+
+          <!-- 프로필 이미지가 있으면 프로필 이미지 -->
+          <img th:unless="${session.loginMember.memberProfile == null}"
+           th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem">
+        </a>
       </section>
-      
-      <section id="member-id">
-        <p>미쉘가잇..</p> <!-- 멤버 아이디, 4글자 넘어가는건 ... 으로! -->
+
+      <section id="member-id" th:object="${session.loginMember}">
+        <p th:text="*{memberNickname}">미쉘가잇..</p> <!-- 멤버 아이디, 4글자 넘어가는건 ... 으로! -->
       </section>
 
       <section id="edit-btn">
@@ -49,3 +56,18 @@
   </section>
 
 </section>
+
+
+
+
+
+<script>
+
+// 로그아웃 버튼 클릭시 포워드로 이동
+document.getElementById("logout-btn").addEventListener("click", ()=>{
+
+  console.log("버튼클릭!");
+  location.href = "/member/logout";
+})
+
+</script>
