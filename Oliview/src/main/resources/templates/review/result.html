@@ -21,13 +21,11 @@
     <!-- 검색바 영역 -->
     <section class="search" >
       <form id="searchReview" action="searchReview">
-        <input type="text" class="searchInput" name="searchInput">
+        <input type="text" class="searchInput" name="searchInput" id="searchInput">
       </form>
       <button form="searchReview"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
     </section>
 
-
-    <!-- th:href="@{/review/result/}" -->
 
     <!-- 정렬 선택 영역 -->
     <section class="sort">
@@ -41,37 +39,89 @@
 
     <!-- 리뷰 목록 영역 -->
 
+    <div  class="review-full-container">
+      <th:block th:each="review, stat : ${map.reviewList}">
+  
+        <th:block th:if="${stat.index % 4 == 0}">
+          <section class="review-row">
+          </th:block>
+            <article class="review-col" th:object="${review}">
+      
+              <!-- 이미지 -->
+              <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                <img src="#" alt="image-1">
+              </a>
+      
+              <!-- 제목(가게명) -->
+              <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+                th:text="*{reviewTitle}">가게이름</a></div>
+      
+              <!-- 닉네임/평점/작성일 -->
+              <div class="nickname-star-date">
+                <a class="nickname" th:href="@{/review/{memberNickname} (memberNickname=*{memberNickname})}"
+                th:text="*{memberNickname}">푸바오</a>
+                <section class="star" style="color: #f1c93b;" th:text="*{starTaste}">4.5
+                  <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+                  <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
+                </div>
+    
+            </article>
+  
+          
+  
+        <th:block th:if="${stat.index % 4 == 3}">
+          </section>
+        </th:block>
+  
+      </th:block>
 
-    <!-- 검색 : 리뷰가 존재하지 않을 때 -->
-    <section class="result-no" th:if="${#lists.isEmpty(searchReview)}">
-      <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>
-      검색 결과가 없습니다.
-    </section>
-
-
-    <!-- 검색 : 리뷰가 존재할 때  + 인기순 -->
+    </div>
 
 
     
+    <section class="pagination-area" th:with="pagination=${map.pagination}" >
+    
+      <!-- ============ 조회 =========== -->
+      <ul class="pagination" th:if="${param.searchInput == null}">
+  
+        <li><a th:href="@{/review/searchReview(cp=1)}">&lt;&lt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=${pagination.prevPage})}">&lt;</a></li>
+  
+        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+          <li th:if="${i == pagination.currentPage}"> <a class="current" th:text="${i}">1</a></li>
+          <li th:unless="${i == pagination.currentPage}"><a th:href="@{/review/searchReview(cp=${i})}" th:text="${i}">2</a></li>
+        </th:block>
+  
+        <li><a th:href="@{/review/searchReview(cp=${pagination.nextPage})}">&gt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+  
+      </ul>
+
+
+      <!-- ============ 검색 =========== -->
+      <ul class="pagination" th:unless="${param.searchInput == null}">
+
+        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=1)}">&lt;&lt;</a></li>
+        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.prevPage})}">&lt;</a></li>
+
+
+        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+            <li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">1</a></li>              
+            <li th:unless="${i == pagination.currentPage}"> 
+                <a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp = ${i})}" th:text="${i}">2</a>
+            </li>
+        </th:block>
+
+
+        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.nextPage})}">&gt;</a></li>
+        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+      </ul>
+ 
+
+  
+    </section>
+
   </main>
-  
-
-  <section class="pagination-area" >
-  
-    <ul class="pagination">
-  
-      <!-- << , < -->
-      <li><a th:href="@{/result/searchReview, cp=1}">&lt;&lt;</a></li>
-      <li><a th:href="@{/result/searchReview, cp=${pagination.prevPage}}">&lt;</a></li>
-
-      
-
-
-
-    </ul>
-
-  </section>
-
 
 
   <!-- 풋터 -->

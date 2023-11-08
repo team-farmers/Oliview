@@ -11,83 +11,36 @@ import com.farmers.oliview.review.model.dto.Review;
 @Mapper
 public interface ReviewMapper {
 
-	
-	/** 전체 리뷰수 조회
+	/** 전체 리뷰 수
 	 * @return reviewCount
 	 */
 	int getReviewCount();
-	
-	
-	/** 전체 리뷰 조회
+
+	/** 리뷰 조회
 	 * @param rowBounds
 	 * @return reviewList
 	 */
-	List<Review> AllReview(RowBounds rowBounds);
-	
-	
-	/** 검색 결과
+	List<Review> allReview(RowBounds rowBounds);
+
+	/** 검색 리뷰 수 조회
 	 * @param searchInput
-	 * @return 리뷰 List
+	 * @return reviewCount
 	 */
-	List<Review> searchReview(String searchInput);
-	
-	
-	/** 닉네임 검색 결과
-	 * @param searchNick
-	 * @return
-	 */
-	List<Review> searchReviewNick(String searchInput);
+	int searchReviewCount(String searchInput);
 
-	/** 리뷰 상세 조회
-	 * @param map
-	 * @return review
+	/** 검색 리뷰 조회
+	 * @param searchInput
+	 * @param rowBounds
+	 * @return reviewList
 	 */
-	Review reviewDetail(Map<String, Object> map);
+	List<Review> searchReview(String searchInput, RowBounds rowBounds);
 
-	
-	/** 찜 체크
-	 * @param map
-	 * @return 
+	/** 최신순 조회
+	 * @return reviewList
 	 */
-	int likeCheck(Map<String, Object> map);
-	
-
-	/** 찜
-	 * @param paramMap
-	 * @return
-	 */
-	int reviewLike(Map<String, Object> paramMap);
+	List<Review> searchLatest();
 
 	
-	/** 찜 테이블에서 행 삭제
-	 * @param paramMap
-	 * @return
-	 */
-	int deleteReviewLike(Map<String, Object> paramMap);
-
-	
-	/** 찜 테이블에서 행 삽입
-	 * @param paramMap
-	 * @return
-	 */
-	int insertReviewLike(Map<String, Object> paramMap);
-
-
-
-	/** 조회수 증가
-	 * @param reviewNo
-	 * @return result
-	 */
-	int updateReadCount(int reviewNo);
-
-
-	/** 다른 리뷰
-	 * @param reviewTitle
-	 * @return review
-	 */
-	List<Review> otherReview(String reviewTitle);
-
-
 
 
 

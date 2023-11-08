@@ -27,14 +27,14 @@ public class Pagination {
 	private int nextPage;         // 다음 페이지 모음의 시작 번호 
 	
 	
-	public Pagination(int currentPage, int listCount) {
+	public Pagination(int currentPage, int reviewCount) {
 		this.currentPage = currentPage;
 		this.reviewCount = reviewCount;
 		
 		calcPagination(); // 객체 생성 시 계산 수행해서 모든 필드 초기화 
 	}
 	
-	public Pagination(int currentPage, int listCount, int limit, int pageSize) {
+	public Pagination(int currentPage, int reviewCount, int limit, int pageSize) {
 		this.currentPage = currentPage;
 		this.reviewCount = reviewCount;
 		this.limit = limit;
@@ -50,7 +50,7 @@ public class Pagination {
 		return currentPage;
 	}
 
-	public int getListCount() {
+	public int getReviewCount() {
 		return reviewCount;
 	}
 
@@ -84,15 +84,15 @@ public class Pagination {
 	
 	
 	
-	/* listCount, currentPage, limit, pageSize 변경 시 다시 계산 필요!! */
+	/* reviewCount, currentPage, limit, pageSize 변경 시 다시 계산 필요!! */
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 		calcPagination();
 	}
 
-	public void setListCount(int listCount) {
-		this.reviewCount = listCount;
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 		calcPagination();
 	}
 
@@ -110,7 +110,7 @@ public class Pagination {
 	
 	@Override
 	public String toString() {
-		return "Pagination [currentPage=" + currentPage + ", listCount=" + reviewCount + ", limit=" + limit
+		return "Pagination [currentPage=" + currentPage + ", reviewCount=" + reviewCount + ", limit=" + limit
 				+ ", pageSize=" + pageSize + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", prevPage=" + prevPage + ", nextPage=" + nextPage + "]";
 	}
