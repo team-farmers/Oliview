@@ -25,6 +25,38 @@ public interface ReviewService {
 	 */
 	List<Review> searchLatest();
 
+	
+	
+	/** 리뷰 상세 조회
+	 * @param reviewNo
+	 * @return review
+	 */
+	Review reviewDetail(int reviewNo);
+
+	/** 다른 리뷰 조회
+	 * @param reviewTitle
+	 * @return reviewList
+	 */
+	List<Review> otherReview(String reviewTitle);
+
+	/** 리뷰 찜 여부 확인
+	 * @param map
+	 * @return result
+	 */
+	int likeCheck(Map<String, Object> map);
+
+	/** 조회수 업데이트 처리
+	 * @param reviewNo
+	 * @return result
+	 */
+	int updateReadCount(int reviewNo);
+
+	/** 찜 처리
+	 * @param paramMap
+	 * @return
+	 */
+	int reviewLike(Map<String, Object> paramMap);
+
 
 
 

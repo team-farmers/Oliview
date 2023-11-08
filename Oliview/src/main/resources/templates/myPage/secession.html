@@ -100,6 +100,7 @@ const check = {
 };
 
 const agreeCheck = document.getElementById("agreeCheck");
+const secessionBtn = document.querySelector(".secession-btn");
 
 // 동의를 체크하면 true로 변경
 
@@ -108,59 +109,26 @@ agreeCheck.addEventListener("change", ()=>{
   // 동의 체크시 유효성 검사 트루
   if(agreeCheck.checked){
       check.agreeCheck = true;
+      agreeCheck.checked = true;
       console.log("체크됨!!");
 
   } else {
     check.agreeCheck = false;
+    agreeCheck.checked = false;
     console.log("체크안함!!");
   }
 })
 
 // 탈퇴 버튼을 클릭했을 때 _ 동의되어있으면 탈퇴, 아니면 그대로!
+secessionBtn.addEventListener("submit", e=>{
 
-
-
-if(agreeCheck)
-
-
-})
-
-
-
-
-if(confirm("정말 탈퇴 하시겠습니까?")){
-    location.href="";
-  } else {
-    location.href="";
+  // 탈퇴동의가 체크안되어있으면 새로고침 막음
+  if(check.agreeCheck == false){
+    alert("안내사항에 동의 후 진행해주세요.");
+    e.preventDefault();
+    return;
   }
-
-
-
-// 전체동의 클릭 시
-agreeAll.addEventListener("change", ()=>{
-
-// 전체동의가 선택되어있다면 _ 유효성검사, 체크박스 표시
-if(agreeAll.checked){
-    agreements.agreeSite = true;
-    agreements.agreePersonal = true;
-    agreements.agreeChoice = true;
-
-    agreeSite.checked = true;
-    agreePersonal.checked = true;
-    agreeChoice.checked = true;
-
-// 전체동의가 해제되어있다면_ 전체 체크박스 해제
-} else {
-    agreements.agreeSite = false;
-    agreements.agreePersonal = false;
-    agreements.agreeChoice = false;
-
-    agreeSite.checked = false;
-    agreePersonal.checked = false;
-    agreeChoice.checked = false;
-}
 })
-
 
 
 </script>

@@ -86,5 +86,166 @@ public class ReviewController {
 	
 	
 	
+	
+	
+//	=============================================================================================================================
+	
+	@GetMapping("{reviewNo:[0-9]+}")
+	public String reviewDetail(@PathVariable("reviewNo") int reviewNo, Model model, RedirectAttributes ra,
+							@SessionAttribute(value="loginMember", required=false) Member loginMember,
+							HttpServletRequest req, HttpServletResponse resp) throws ParseException {
+		
+		// 상세 조회 서비스 호출
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewNo", reviewNo);
+		
+		Review review = service.reviewDetail(reviewNo);
+		
+		// 다른 리뷰 같이 호출
+		List<Review> otherReview = service.otherReview(review.getReviewTitle());
+		
+		
+		// 리턴 Path
+		String path = null;
+		
+		// ==================== 리뷰가 존재 ========================
+		if(review != null) {
+			
+			// 상세 리뷰, 다른 리뷰 데이터 전달
+			model.addAttribute("review", review);
+			model.addAttribute("otherReview", otherReview);
+			
+			path = "review/reviewDetail";
+			
+			
+			// 로그인 되어있을 때 좋아요 누른 적 있으면 하트 채움
+			if(loginMember != null) {
+				map.put("memberNo", loginMember.getMemberNo());
+				int likeCheck = service.likeCheck(map);
+				
+				if(likeCheck == 1) model.addAttribute("likeCheck","on");
+			}
+			
+			// 로그인 x 비회원 또는 로그인한 멤버가 리뷰 쓴 멤버가 아닌 경우
+			if(loginMember == null || loginMember.getMemberNo() != review.getMemberNo()) {
+				
+				Cookie c = null;
+				
+				// 요청에 담겨있는 모든 쿠키 얻어오기
+				Cookie[] cookies = req.getCookies();
+				
+				// ------ 쿠키가 존재할 경우 ------
+				if(cookies != null) {
+					
+					for(Cookie cookie : cookies) {
+						if(cookie.getName().equals("readReviewNo")) {
+							c = cookie;
+							break;
+						}
+					}
+				}
+				
+				// ------ 쿠키가 없거나 현재 게시글 번호가 쿠키에 없는 경우 ------
+				int result = 0;
+				
+				if(c ==null) {
+					// 쿠키 생성
+					c = new Cookie("readReviewNo", "|" + reviewNo + "|");
+					
+					// 조회수 증가 서비스 호출
+					result = service.updateReadCount(reviewNo);
+				}
+				else {
+					
+					// 현재 리뷰 번호가 쿠키에 있는지 확인
+					
+					if(c.getValue().indexOf("|" + reviewNo + "|") == -1) {
+						// 없으면 리뷰 번호 추가 세팅
+						c.setValue(c.getValue() + "|" + reviewNo + "|");
+						
+						// 조회수 증가 서비스 호출
+						result = service.updateReadCount(reviewNo);
+					}
+					
+					
+				}
+				
+
+				
+				// DB 동기화
+				if(result > 0) {
+		               review.setReadCount(review.getReadCount() + 1);
+		               // 조회된 review 조회 수와 DB 조회 수 동기화
+
+		               
+		               // 적용 경로 설정
+		               c.setPath("/"); // "/" 이하 경로 요청 시 쿠키 서버로 전달
+
+		               // 수명 지정=======================================================================
+		               Calendar cal = Calendar.getInstance(); // 싱글톤 패턴
+		               cal.add(cal.DATE, 1); // 24시간 후의 시간
+
+		               // 날짜 표기법 변경 객체 (DB의 TO_CHAR()와 비슷)
+		               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		               // java.util.Date
+		               Date a = new Date(); // 현재 시간
+		               // 2023-10-31 2:30:14
+
+		               Date temp = new Date(cal.getTimeInMillis()); // 다음날 (24시간 후)
+		               // 2023-11-01 2:30:14
+
+		               Date b= sdf.parse(sdf.format(temp)); // 다음날 0시 0분 0초
+		               // 2023-11-01 00:00:00
+
+		               // 다음날 0시 0분 0초 - 현재 시간 => 9시간 30분
+		               long diff = (b.getTime() - a.getTime()) / 1000;
+		               // -> 다음날 0시 0분 0초까지 남은 시간을 초단위로 반환
+
+		               c.setMaxAge((int) diff); // 수명 설정
+		               //==================================================================================
+
+		               resp.addCookie(c); // 응답 객체를 이용해서
+		                              // 클라이언트에게 전달					
+				}
+
+			}
+			//=====================================================================
+			
+			
+			
+		}
+		// review == null
+		else {
+			path = "redirect:/review/result";
+			ra.addFlashAttribute("message", "해당 리뷰가 존재하지 않습니다");
+		}
+		
+		
+		return path;
+		
+	}
+	
+	
+	/** 찜
+	 * @param paramMap
+	 * @param loginMember
+	 * @return
+	 */
+	@PostMapping("like")
+	@ResponseBody
+	public int like(@RequestBody Map<String, Object> paramMap,
+			@SessionAttribute("loginMember") Member loginMember) {
+		
+		paramMap.put("memberNo",loginMember.getMemberNo());
+		
+		return service.reviewLike(paramMap);
+	}
+	
+//	=============================================================================================================================
+	
+
+	
+	
 
 }
