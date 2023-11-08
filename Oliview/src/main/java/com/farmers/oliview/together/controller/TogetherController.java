@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("board")
+@RequestMapping("together")
 @SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
 public class TogetherController { 
