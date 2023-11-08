@@ -10,7 +10,7 @@ a {
 
 /* 게시판 목록 넓이 조절*/
 .board_wrap {
-  width: 900px;
+  width: 950px;
   margin: 100px auto;
 }
 
@@ -67,16 +67,24 @@ a {
 }
 
 .board_list .title {
-  width: 60%;
-  text-align: left;
-}
-
-.board_list .top .title {
+  width: 35%;
   text-align: center;
 }
 
-.board_list .writer {
+.board_list .people {
   width: 10%;
+  text-align: center;
+}
+
+
+.board_list .top .title {
+ text-align: center; 
+}
+
+.board_list .writer {
+  width: 25%;
+  
+
 }
 
 .board_list .date {
@@ -189,6 +197,7 @@ a {
 
 .board_write {
   border-top: 2px solid #000;
+  
 }
 
 .board_write .title,

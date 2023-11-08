@@ -25,16 +25,13 @@ a {
   margin-bottom: 30px;
 }
 
-.board_title strong {
-  font-size: 3rem;
-}
 
 .board_title p {
   margin-top: 5px;
   font-size: 1.4rem;
 }
 
-.bt{
+.btn{
   margin-top: 30px;
   text-align: center;
  font-size: 1rem;
@@ -78,16 +75,24 @@ color: #66B97E;
 .board_write .title dd,
 .board_write .info dt,
 .board_write .info dd {
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
   font-size: 1.4rem;
+}
+
+.col-form-label > .form-check-input{
+
+  width: 10rem;
+  height: 1.5rem;
+  
 }
 
 
 
 .board_write .title dt,
 .board_write .info dt {
-  width: 100px;
+  width: 120px;
+  
 }
 
 
@@ -100,7 +105,7 @@ color: #66B97E;
 
 
 .board_write .cont {
-  border-bottom: 2px solid#66B97e;
+  border: 3px solid #66B97e;
 }
 
 .board_write .cont textarea {
@@ -112,6 +117,10 @@ color: #66B97E;
   border: 0;
   resize: vertical;
 }
+
+
+
+
 :root{
   font-size: 62.5%;
   

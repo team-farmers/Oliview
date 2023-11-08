@@ -1,5 +1,7 @@
 package com.farmers.oliview.together.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,12 +21,13 @@ public class Together {
 	private String boardDelFl; // 삭제여부
 	private String boardSubtitle; //부제목
 	
-	private String MemberNo; // 회원번호
+	private int memberNo; // 회원번호
 	private int MettingDate; // 모임날짜
+	private int boardCode;
 
 	//-------------------------------------
 	
-	
+
 	
 		
 	
