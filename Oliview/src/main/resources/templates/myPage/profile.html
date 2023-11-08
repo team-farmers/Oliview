@@ -12,7 +12,7 @@
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
-    <section class="container">
+    <section class="container" id="profile-container">
 
       <!---------- 사이드메뉴 ---------->
       <th:block th:replace="~{myPage/side-menu}"></th:block>
@@ -32,59 +32,60 @@
           <section id="my-profile-info-container">
             <!-- 헤드라인 -->
             <article class="my-profile-headline">프로필 정보</article>
-            
-            <!-- 프로필정보, 버튼 -->
-            <form action="info/profile" method="POST" name="myPageFrm" id="updateProfile" th:object="${session.loginMember}">
-              <section id="my-profile-info-container-2">
 
+            <!-- 프로필정보, 버튼 -->
+            <section id="my-profile-info-container-2">
+              <form action="info/profile" method="GET" name="myPageFrm" id="updateProfile" th:object="${session.loginMember}">
                 <!-- 프로필정보 -->
-                <section>
+                <section id="profile"> <!-- 아나!!!! -->
                   <section class="myPage-row">
                     <article><p>닉네임</p></article>
-                    <section><input type="text" name="memberNickname" id="memberNickname" th:value="*{memberNickname}"></section>
-                  </section>
-  
-                  <section class="myPage-row">
-                    <article><p>프로필 사진</p></article>
-
-                    <!-- 프로필 이미지 수정 파일 제출 -->
-                    <form action="profile" method="POST" name="myPageFrm" id="profileImgFrm" enctype="multipart/form-data">
-                      <section id="profile-img-change">
-
-                        <!-- 프로필 이미지가 없으면 기본 이미지(기본이미지는 STS messages.pro에 기재) -->
-                        <img th:if="${session.loginMember.memberProfile == null}"
-                          th:src="#{user.default.image}" alt="프로필 이미지" width="55rem">
-              
-                        <!-- 프로필 이미지가 있으면 프로필 이미지 -->
-                        <img th:unless="${session.loginMember.memberProfile == null}"
-                          th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem">
-                        
-                        <div class="profile-btn-area">
-                          <label for="imageInput">이미지 선택</label>
-                          <input type="file" name="profileImg" id="imageInput" accept="image/*">
-
-                          <button>사진 변경</button>
-                          
-                          <button id="deleteImageBtn">삭제</button>
-                        </div>
-
-                      </section>
-                    </form>
-
+                    <section>
+                      <input type="text" name="memberNickname" id="memberNickname" th:value="*{memberNickname}">
+                    </section>
                   </section>
                 </section>
-  
-                <!-- 적용/취소버튼  -->
-                <section class="btns">
-                  <button>적용</button> <!-- 적용 누르면 닉네임/프로필사진 비동기로 적용되게끔 -->
-                  <button>취소</button> <!-- 취소 누르면 모든 변경사항 해제 -->
-                </section>
-                
+              </form>
+
+              <section class="myPage-row">
+                <article><p>프로필 사진</p></article>
+
+                <!-- 프로필 이미지 수정 파일 제출 -->
+                <form action="profile" method="POST" name="myPageFrm" id="profileImgFrm" enctype="multipart/form-data">
+                  <section id="profile-img-change">
+
+                    <!-- 프로필 이미지가 없으면 기본 이미지(기본이미지는 STS messages.pro에 기재) -->
+                    <img th:if="${session.loginMember.memberProfile == null}"
+                      th:src="#{user.default.image}" alt="프로필 이미지" width="55rem" id="profileImg">
+          
+                    <!-- 프로필 이미지가 있으면 프로필 이미지 -->
+                    <img th:unless="${session.loginMember.memberProfile == null}"
+                      th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem" id="profileImg">
+                    
+                    <div class="profile-btn-area">
+                      <label for="imageInput">이미지 선택</label>
+                      <input type="file" name="profileImg" id="imageInput" accept="image/*">
+
+                      <button>사진 변경</button>
+                      
+                      <button id="deleteImageBtn">삭제</button>
+                    </div>
+                  </section>
+                </form>
+
               </section>
-            </form>
+            </section>
 
+            <!-- 적용/취소버튼  -->
+            <section class="btns" id="myprofile-fitst-btns">
+              <button type="button" id="applyBtn" onclick="submitFrm()">적용</button> <!-- 적용 누르면 닉네임/프로필사진 비동기로 적용되게끔 -->
+              <button>취소</button> <!-- 취소 누르면 모든 변경사항 해제 -->
+            </section>
 
           </section>
+        </section>
+      
+
 
           <!-- 필수 회원 정보 -->
           <section id="my-profile-essential-info-container">
@@ -113,7 +114,6 @@
                   <article><p>이메일</p></article>
                   <section><input type="email" th:value="*{memberEmail}" name="memberEmail"></section>
                 </section>
-  
               </section>
             </form>
 
@@ -124,8 +124,6 @@
             </section>
 
           </section>
-
-        </section>
       </section>
     </section>
   </main>
@@ -151,6 +149,7 @@
     const loginMemberProfileImg = /*[[${session.loginMember.memberProfile}]]*/ "프로필 이미지";
 
   </script>
+  <script src="/js/myPage/myPage.js"></script>
 
 </body>
 </html>

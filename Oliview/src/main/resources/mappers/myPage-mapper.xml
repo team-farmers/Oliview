@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
+<mapper namespace="com.farmers.oliview.myPage.model.mapper.MyPageMapper">
+   
+   
+   <!--회원 탈퇴-->
+   <update id="secession">
+	    UPDATE "MEMBER" 
+ 		SET MEMBER_DEL_FL ='Y'
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
+   
+   <!--프로필 이미지 수정-->
+   <update id="profile">
+	    UPDATE "MEMBER" SET
+		MEMBER_PROFILE = #{memberProfile}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
+   
+   <!--닉네임 수정-->
+   <update id="editProfile">
+	    UPDATE "MEMBER" SET
+		MEMBER_NICKNAME = #{memberNickname}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
+   
+   <!--이메일 수정-->
+   <update id="editInfo">
+	    UPDATE "MEMBER" SET
+		MEMBER_EMAIL = #{memberEmail}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
+   
+   
+
+</mapper>
