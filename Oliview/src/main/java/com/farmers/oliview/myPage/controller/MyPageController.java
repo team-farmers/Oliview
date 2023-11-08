@@ -1,12 +1,16 @@
 package com.farmers.oliview.myPage.controller;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
@@ -14,6 +18,9 @@ import com.farmers.oliview.myPage.service.MyPageService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 
+ */
 @Controller
 @RequestMapping("myPage")
 @RequiredArgsConstructor
@@ -97,6 +104,116 @@ public class MyPageController {
 		
 		return path;
 	}
+	
+	
+	/* -------- 내프로필 정보수정  -------- */
+
+	/* -------- 프로필 이미지수정  -------- */
+	
+	/** 프로필 이미지 수정
+	 * @param profileImg : 업로드된 프로필 이미지
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 * 
+	 * 
+	 */
+	@PostMapping("profile")
+	public String profile(
+			@RequestParam("profileImg") MultipartFile profileImg,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra) throws IllegalStateException, IOException {
+		
+		int result = service.profile(profileImg, loginMember);
+		
+		// 서비스 결과에 따라 응답 제어
+		String message = null;
+		
+		if(result > 0) {
+			message = "프로필 이미지가 변경 되었습니다.";
+			
+		} else {
+			message = "프로필 이미지를 선택 후 변경해주세요.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		// 프로필 페이지로 리다이렉트
+		return "redirect:profile";
+		
+	}
+	
+	
+	/** 닉네임 수정
+	 * @param updateMember
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 * 
+	 * 
+	 * 
+	 */
+	@GetMapping("info/profile")
+	public String editProfile(Member updateMember,
+			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
+		
+		
+		updateMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.editProfile(updateMember);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "회원 정보가 수정 되었습니다.";
+			loginMember.setMemberNickname(updateMember.getMemberNickname());
+			
+		} else {
+			message = "회원 정보 수정 실패하였습니다.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:profile";
+	}
+	
+	
+	// 이메일 수정
+	@PostMapping("info/info")
+	public String editInfo(Member updateMember,
+			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
+		
+		
+		updateMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.editInfo(updateMember);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "회원 정보가 수정 되었습니다.";
+			loginMember.setMemberEmail(updateMember.getMemberEmail());
+			
+		} else {
+			message = "회원 정보 수정 실패하였습니다.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:profile";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

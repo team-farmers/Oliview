@@ -40,7 +40,15 @@
           </article>
 
           <article>
-            <a href="myPage/profile"><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
+            <a href="myPage/profile">
+              <!-- 프로필 이미지가 없으면 기본 이미지(기본이미지는 STS messages.pro에 기재) -->
+              <img th:if="${session.loginMember.memberProfile == null}"
+              th:src="#{user.default.image}" alt="프로필 이미지" width="50rem" id="profileImg">
+
+              <!-- 프로필 이미지가 있으면 프로필 이미지 -->
+              <img th:unless="${session.loginMember.memberProfile == null}"
+              th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="50rem" id="profileImg">
+            </a>
           </article>
         </section>
       </section>

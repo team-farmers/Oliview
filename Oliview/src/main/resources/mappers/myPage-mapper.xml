@@ -11,9 +11,26 @@
 		WHERE MEMBER_NO = #{memberNo}
    </update>
    
+   <!--프로필 이미지 수정-->
+   <update id="profile">
+	    UPDATE "MEMBER" SET
+		MEMBER_PROFILE = #{memberProfile}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
    
+   <!--닉네임 수정-->
+   <update id="editProfile">
+	    UPDATE "MEMBER" SET
+		MEMBER_NICKNAME = #{memberNickname}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
    
-   
+   <!--이메일 수정-->
+   <update id="editInfo">
+	    UPDATE "MEMBER" SET
+		MEMBER_EMAIL = #{memberEmail}
+		WHERE MEMBER_NO = #{memberNo}
+   </update>
    
    
 
