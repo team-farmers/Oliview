@@ -3,6 +3,7 @@ package com.farmers.oliview.review.controller;
 import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -41,40 +43,61 @@ public class ReviewController {
 	private final ReviewService service;
 	
 	
-	// 테스트
-	@RequestMapping("result")
-	public String result() {
+
+	@GetMapping("searchReview")
+	public String searchReview(Model model, String searchInput,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+
+		// 검색 x
+		if(paramMap.get("key") == null && paramMap.get("query") == null) {
+			Map<String, Object> map = service.AllReview(cp);
+			model.addAttribute("map", map);
+		}
+		// 검색 o
+		else {
+			List<Review> searchReview = service.searchReview(searchInput);
+			model.addAttribute("searchReview",searchReview);
+		}
+		
 		return "review/result";
+		
 	}
+	
 
 	
-	// 검색 결과 (검색어 - 수정중)
-	// (인기순, 최신순, 평점순 -> js)
-	// (NEXT 다음페이지 -> js)
-	@GetMapping("searchReview")
-	public String searchReview(String searchInput, Model model) {
-		
-		List<Review> resultReview = service.searchReview(searchInput);
-		
-		model.addAttribute("resultReview",resultReview);
-		
-		return "review/result";
-	}
-	
-	
-	
-	// 검색 결과 (닉네임 클릭 시 작성글 - 수정중)
-	
-	@GetMapping("result/{memberNickname:^[\\\\w]*$}")
-	public String searchReviewNick(String searchInput, Model model) {
-		
-		List<Review> resultReview = service.searchReviewNick(searchInput);
-		
-		model.addAttribute("searchReviewNick",searchInput);
-		
-		return "review/result";
-	}
-	
+//	
+//	// 테스트
+//	@RequestMapping("result")
+//	public String result() {
+//		return "review/result";
+//	}
+//
+//	
+//	// 검색 결과 (검색어 - 수정중)
+//	// (인기순, 최신순, 평점순 -> js)
+//	// (NEXT 다음페이지 -> js)
+//	@GetMapping("searchReview")
+//	public String searchReview(String searchInput, Model model) {
+//		
+//		List<Review> resultReview = service.searchReview(searchInput);
+//		
+//		model.addAttribute("resultReview",resultReview);
+//		
+//		return "review/result";
+//	}	
+//	// 검색 결과 (닉네임 클릭 시 작성글 - 수정중)
+//	
+//	@GetMapping("result/{memberNickname:^[\\\\w]*$}")
+//	public String searchReviewNick(String searchInput, Model model) {
+//		
+//		List<Review> resultReview = service.searchReviewNick(searchInput);
+//		
+//		model.addAttribute("searchReviewNick",searchInput);
+//		
+//		return "review/result";
+//	}
+//	
 	
 	
 	/** 리뷰 상세 조회 
@@ -97,9 +120,13 @@ public class ReviewController {
 		
 		Review detailReview = service.reviewDetail(map);
 		
-		
-		
 		// 다른 리뷰 같이 불러오기
+		List<Review> otherReview = service.otherReview(detailReview.getReviewTitle());
+		
+		List<Review> reviewList = new ArrayList<>();
+		
+		reviewList.add(detailReview);
+		reviewList.addAll(otherReview);
 		
 		
 		
@@ -111,7 +138,7 @@ public class ReviewController {
 		if(detailReview != null) {
 			
 			// 조회 결과 review/reviewDetail로 포워드
-			model.addAttribute("detailReview", detailReview);
+			model.addAttribute("reviewList", reviewList);
 			path = "review/reviewDetail";
 			
 			if(loginMember!=null) {
