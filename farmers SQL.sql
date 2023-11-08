@@ -167,7 +167,7 @@ CREATE SEQUENCE SEQ_REVIEW_NO NOCACHE;
 -- 리뷰 샘플 데이터-1 생성
 INSERT INTO "REVIEW"
 VALUES (SEQ_REVIEW_NO.NEXTVAL, '스윗레시피', '서울시 중구', 4.5, 4.5, 5.0, 
-	'디저트가 맛있어요','loadImage','소금빵', DEFAULT, DEFAULT, 'N', 1);
+	'디저트가 맛있어요','loadImage','소금빵', DEFAULT, DEFAULT, 'N', 3);
 
 -- 리뷰 샘플 데이터-2 생성
 INSERT INTO "REVIEW"
@@ -246,6 +246,13 @@ ALTER TABLE "LIKE" ADD CONSTRAINT "FK_MEMBER_TO_LIKE_1" FOREIGN KEY (
 REFERENCES "MEMBER" (
 	"MEMBER_NO"
 );
+
+
+-- 전체 리뷰 수 조회
+SELECT COUNT(*) FROM "REVIEW"
+WHERE REVIEW_DEL_FL = 'N';
+
+
 
 COMMIT;
 
