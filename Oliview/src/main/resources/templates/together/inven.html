@@ -35,6 +35,8 @@
 
 
 <body>
+
+    <!-- 제목 및 부제목 -->
     <div class="board_wrap">
 
         <div class="board_title">
@@ -43,21 +45,22 @@
         </div>
 
 
-
+        <!--상단 번호, 제목, 작성자, 작성일, 조회수-->
         <div class="board_list_wrap">
             <div class="board_list">
                 <div class="top">
                     <div class="num">번호</div>
                     <div class="title">제목</div>
-                    <div class="writer">글쓴이</div>
+                    <div class="writer">작성자</div>
                     <div class="date">작성일</div>
                     <div class="count">조회</div>
                 </div>
 
 
+           <!-- 글 작성 -->     
                 <div>
                     <div class="num">5</div>
-                    <div class="title"><a href="view.html">불닭.</a></div>
+                    <div class="title"><a href="view.html">불닭</a></div>
                     <div class="writer">파이리</div>
                     <div class="date">2021.1.15</div>
                     <div class="count">33</div>
@@ -100,7 +103,7 @@
                 </div>
             </div>
 
-
+            <!--Pagination 페이지 숫자-->
             <div class="board_page">
                 <a href="#" class="bt first"><<</a>
                 <a href="#" class="bt prev"><</a>
@@ -115,7 +118,8 @@
 
             </div>
 
-
+            <button id="insertBtn">글쓰기</button>                     
+          </div>
 
             <div class="bt_wrap">
         
@@ -123,20 +127,39 @@
             </div>
             
         </div>
+        
     </div>
   </main>
+
+  <!-- 검색창 -->
+  <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
+
+    <select name="key" id="searchKey">
+        <option value="t">제목</option>
+        <option value="c">내용</option>
+        <option value="tc">제목+내용</option>
+        <option value="w">작성자</option>
+    </select>
+
+    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+    <button>검색</button>
+</form>
+
 </body>
 </main>
 
-<footer>
-  <article>
-    <a href="#">고객센터</a>
-    <span>|</span>
-    <a href="#">라이센스</a>
-  </article>
-  <article>
-    &copy Oliview Corp.
-  </article>
-</footer>
 
-</html> 
+  <!-- footer -->
+    <footer>
+      <article>
+        <a href="#">고객센터</a>
+        <span>|</span>
+        <a href="#">라이센스</a>
+      </article>
+      <article>
+        &copy Oliview Corp.
+      </article>
+    </footer>
+
+    </html> 

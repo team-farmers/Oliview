@@ -3,6 +3,25 @@
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.review.model.mapper.ReviewMapper">
 	
+	
+	
+	<!-- 전체 리뷰수 조회 -->
+	<select id="getReviewCount" resultType="_int">
+		SELECT COUNT(*) FROM "REVIEW"
+		WHERE REVIEW_DEL_FL = 'N'
+	</select>
+	
+	<!-- 전체 리뷰 조회 -->
+	<select id="AllReview" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		ORDER BY READ_COUNT
+	</select>
+	
+	
 	<!-- 리뷰 검색 -->
 	<select id="searchReview" resultType="Review">
 		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
@@ -65,6 +84,20 @@
 		READ_COUNT = READ_COUNT + 1
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
+	
+	
+	<!-- 다른 리뷰 -->
+	<select id="otherReview" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_TITLE = #{reviewTitle}
+		AND ROWNUM BETWEEN 1 AND 4
+		ORDER BY READ_COUNT
+	</select>
+	
+	
 	
 
 </mapper>

@@ -54,11 +54,11 @@ reviewLike.addEventListener("click", e => {
 
 //=========================================================================
 /* 신고 팝업창 */
-// function openReportPopup(){
+function openReportPopup(){
 
-//   const url = "report.html";
-//   const name = "신고하기";
-//   const option = ""
+  const url = "report.html";
+  const name = "신고하기";
+  const option = "width = 500, height = 500, top = 200, left = 200, location = no"
 
-//   window.open
-// }
+  window.open(url, name, option);
+}

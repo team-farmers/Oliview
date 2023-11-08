@@ -1,18 +1,103 @@
 package com.farmers.oliview.together.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.farmers.oliview.review.model.dto.Pagination;
+import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.mapper.TogetherMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class TogetherServiceImpl implements TogetherService{
+	
+	private final TogetherMapper mapper;
 	
 	
 	@Override
 	public Map<String, Object> selectBoardList(int boardCode, int cp) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		/*전체 게시글 수 조회*/
+		int listCount = mapper.getListCount(boardCode);
+		
+		/* cp, listCount를 이용해서 Pagination 객체 생성*/
+	    Pagination pagination = new Pagination(cp, listCount);
+	    
+	    /*RowBounds 객체 생성*/
+	    
+	    int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+	    
+	    int limit = pagination.getLimit();/*한 페이지에 가져올 수*/		
+		
+	    RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		
+	    List<Together> boardList = mapper.selectBoardList(boardCode, rowBounds);
+	    
+	    /*Map에 담아서 반환*/
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("boardList", boardList);
+	    map.put("pagination", pagination);
+
+		
+		return map;
 	}
+
+	/*검색 조건 조회*/
+	@Override
+	public Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp) {
+	
+		/* 검색 조건 일치 게시글 수 조회*/
+		
+		int listCount = mapper.searchListCount(paramMap);
+		
+		/*cp ,listCount를 이용해서 Pagination 객체 생성*/
+		Pagination pagination = new Pagination (cp,listCount);
+		
+		/* Row Bounds 객체 생성 */
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		/* 검색어 일치 게시글 목록 조회*/
+		List<Together> boardList = mapper.searchBoardList(paramMap, rowBounds);
+		
+		/*Map에 담아서 반환*/
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardList", boardList);
+		map.put("pagination", pagination);
+		
+
+		return map;
+	}
+	
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

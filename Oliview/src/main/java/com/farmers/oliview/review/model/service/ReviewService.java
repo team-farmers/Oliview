@@ -7,6 +7,14 @@ import com.farmers.oliview.review.model.dto.Review;
 
 public interface ReviewService {
 
+	
+	/** 검색 x 전체 조회
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> AllReview(int cp);
+	
+	
 	/** 검색 결과
 	 * @param searchInput
 	 * @return 리뷰 List
@@ -44,5 +52,13 @@ public interface ReviewService {
 	 * @return result
 	 */
 	int updateReadCount(int reviewNo);
+
+	/** 다른 리뷰 조회
+	 * @param reviewTitle
+	 * @return review
+	 */
+	List<Review> otherReview(String reviewTitle);
+
+
 
 }

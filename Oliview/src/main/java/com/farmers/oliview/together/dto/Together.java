@@ -22,8 +22,8 @@ public class Together {
 	private String MemberNo; // 회원번호
 	private int MettingDate; // 모임날짜
 
+	//-------------------------------------
 	
-
 	
 	
 		
