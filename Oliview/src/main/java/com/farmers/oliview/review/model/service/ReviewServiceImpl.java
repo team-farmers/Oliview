@@ -79,4 +79,71 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> searchLatest() {
 		return mapper.searchLatest();
 	}
+	
+	
+	
+	// ============================================================
+	
+	// 리뷰 상세 조회
+	@Override
+	public Review reviewDetail(int reviewNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	// 다른 리뷰 가져오기
+	@Override
+	public List<Review> otherReview(String reviewTitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	// 리뷰 찜 여부 확인
+	@Override
+	public int likeCheck(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	// 조회수 업데이트 처리
+	@Override
+	public int updateReadCount(int reviewNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	// 찜 처리
+	@Override
+	public int reviewLike(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	// ============================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
