@@ -36,6 +36,7 @@
   display: flex;
   justify-content: end;
   align-items: center;
+  margin-right: 1rem;
 }
 
 #member-id{
@@ -46,6 +47,14 @@
   display: flex;
   align-items: center;
 }
+
+#member-id > p{
+  width: 16rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 #edit-btn{
   width: 17%;

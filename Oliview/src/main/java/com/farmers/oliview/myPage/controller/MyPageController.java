@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("myPage")
 public class MyPageController {
 	
+	
+	/* ---------- 포워드 ----------- */
+	
 	// 프로필화면(마이페이지 메인)으로 포워드
 	@GetMapping("profile")
 	public String idFind() { 
@@ -38,5 +41,13 @@ public class MyPageController {
 		return "myPage/secession";
 	}
 	 
+	// 비밀번호 변경 페이지로 포워드
+	@GetMapping("changePw")
+	public String changePw() { 
+		return "myPage/changePw";
+	}
+	
+	
+	
 
 }

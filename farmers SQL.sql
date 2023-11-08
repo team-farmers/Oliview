@@ -292,7 +292,14 @@ COMMIT;
 
 SELECT * FROM "MEMBER" m ;
 
+-- 닉네임 10글자 테스트
+UPDATE MEMBER SET 
+MEMBER_NICKNAME = '하둘셋넷다여일여아열'
+WHERE MEMBER_NO = 1;
 
+<<<<<<< HEAD
+COMMIT;
+=======
 -- =========================================
 
 -- 같이먹어요 게시판
@@ -384,6 +391,7 @@ REFERENCES "TOGETHER" (
 	"BOARD_NO"
 );
 
+>>>>>>> origin/main
 
 -- 같이먹어요 이미지
 
