@@ -143,12 +143,7 @@ if(imageInput != null){ // #imageInput 존재할 때
 }
 
 
-
-
-// 이미지 삭제
-
-
-
+/* 폼제출 에러!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 // 첫번째 적용버튼 누르면 닉네임 수정 스프링 호출
 // document.getElementById("applyBtn").addEventListener("click", ()=>{
 
@@ -161,4 +156,180 @@ const updateProfile = document.getElementById("updateProfile");
 function submitFrm(){
   updateProfile.submit();
 };
+
+
+
+/* ------- 닉네임 수정, 이메일 수정 유효성 검사 ------- */
+
+const checkObj = {
+  "memberNickname" : false
+}
+
+const memberNickname = document.getElementById("memberNickname");
+const nickMessage = document.getElementById("nickMessage");
+
+
+memberNickname.addEventListener("input", ()=>{
+
+  // 미입력 시
+  if(memberNickname.value.trim().length == 0){
+      memberNickname.value = '';
+      nickMessage.innerText = "· 닉네임은 한글,영어,숫자로만 2~10글자 사이로 입력해주세요.";
+      checkObj.memberNickname = false;
+      nickMessage.classList.remove("confirm", "error");
+      return;
+  }
+
+  const regEx = /^[가-힣\w\d]{2,10}$/;
+
+  if( regEx.test(memberNickname.value) ){
+
+      /* ============== 닉네임 중복 검사(비동기) ============== */
+
+      fetch("/member/checkNickname?nickname=" + memberNickname.value)
+      .then(response => response.text())
+      .then(result => {
+
+          if(result == 0) { // 중복 X
+              nickMessage.innerText = "· 사용 가능한 닉네임입니다";
+              nickMessage.classList.add("confirm"); 
+              nickMessage.classList.remove("error");
+              checkObj.memberNickname = true;
+
+          } else { // 중복 O
+              nickMessage.innerText = "· 이미 사용중인 닉네임입니다";
+              nickMessage.classList.add("error"); 
+              nickMessage.classList.remove("confirm");
+              checkObj.memberNickname = false;
+          }
+      })
+      .catch(e => console.log(e))
+      
+      /* ====================================================== */
+  }
+  
+  else{
+      nickMessage.innerText = "· 유효하지 않은 닉네임 형식입니다";
+      nickMessage.classList.add("error");
+      nickMessage.classList.remove("confirm");
+      checkObj.memberNickname = false;
+  }
+})
+
+
+/* 닉네임 적용 버튼이 클릭 되었을 때 */
+
+document.getElementById("applyBtn").addEventListener("submit", e => {
+
+  /* checkObj의 모든 값을 검사해서
+     하나라도 false이면 가입 시도 X */
+
+  // 객체 전용 향상된 for문 (for .... in)
+
+  for(let key in checkObj){
+
+      // 객체에서 얻어온 값이 false인 경우
+      // (유효하지 않은 것이 있을 경우)
+      if( !checkObj[key] ){
+
+          alert("닉네임을 다시 작성해주세요.");
+
+          // key == input id 속성 값
+          // 유효하지 않은 input 태그로 focus 맞춤
+          document.getElementById(key).focus();
+
+          e.preventDefault(); // form 제출 X
+          return;
+      }
+  }
+})
+
+
+
+
+/* 닉네임 적용 버튼이 클릭 되었을 때 */
+document.getElementById("applyBtn").addEventListener("submit", e => {
+
+  /* checkEmail의 모든 값을 검사해서
+     하나라도 false이면 가입 시도 X */
+
+  // 객체 전용 향상된 for문 (for .... in)
+
+  for(let key in checkEmail){
+
+      // 객체에서 얻어온 값이 false인 경우
+      // (유효하지 않은 것이 있을 경우)
+      if( !checkEmail[key] ){
+
+          alert("닉네임을 다시 작성해주세요.");
+
+          // key == input id 속성 값
+          // 유효하지 않은 input 태그로 focus 맞춤
+          document.getElementById(key).focus();
+
+          e.preventDefault(); // form 제출 X
+          return;
+      }
+  }
+})
+
+
+
+
+
+
+
+/* ------- 이메일 수정 유효성 검사 ------- */
+
+const checkEmail = {
+  "memberEmail" : false
+}
+
+// 1) 이메일 유효성 검사에 사용할 요소 모두 얻어오기
+const memberEmail = document.getElementById("memberEmail");
+const emailMessage = document.getElementById("emailMessage");
+
+// 2) 이메일이 입력(input) 될 때 마다 유효성 검사 실행
+memberEmail.addEventListener("input", ()=>{
+
+  // 3) 이메일 정규식 검사
+  const regEx = /^[A-Za-z\d\-\_]{4,}@[가-힣\w\-\_]+(\.\w+){1,3}$/;
+
+  // 입력 받은 이메일이 정규식과 일치하는 경우
+  if( regEx.test(memberEmail.value) ){
+
+      /* ============== 이메일 중복 검사(비동기) ============== */
+      fetch("/member/checkEmail?email=" + memberEmail.value)
+      .then(response => response.text())
+      .then(result => { 
+
+          // 중복되는 이메일이 없음
+          if(result == 0){ 
+              emailMessage.innerText = "· 사용 가능한 이메일입니다.";
+              emailMessage.classList.add("confirm"); // 초록색 글씨
+              emailMessage.classList.remove("error"); // 빨간글씨 제거
+              checkObj.memberEmail = true; // 유효한 상태임을 기록
+          } else{ // 중복 O
+              emailMessage.innerText = "· 이미 사용중인 이메일입니다.";
+              emailMessage.classList.add("error"); // 초록색 글씨
+              emailMessage.classList.remove("confirm"); // 빨간글씨 제거
+              checkObj.memberEmail = false;
+          }
+       })
+      .catch(e => console.log(e))
+
+      /* ====================================================== */
+  }
+
+  // 입력 받은 이메일이 정규식과 일치하지 않은 경우
+  else {
+    emailMessage.innerText = "· 알맞은 이메일 형식으로 작성해주세요.";
+    emailMessage.classList.add("error"); // 빨간글씨 글씨
+    emailMessage.classList.remove("confirm"); // 초록색 제거
+    checkObj.memberEmail = false; // 유효하지 않은 상태임을 기록
+  }
+});
+
+
+
 

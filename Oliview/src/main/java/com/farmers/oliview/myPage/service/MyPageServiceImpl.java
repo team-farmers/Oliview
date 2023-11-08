@@ -66,10 +66,7 @@ public class MyPageServiceImpl implements MyPageService{
 			loginMember.setMemberProfile( webpath + rename );
 			
 		} else { // 업로드된 파일이 없다면 -> 기본이미지로 변경
-//			loginMember.setMemberProfile(null); // 이미지 제거
-			
-			int result = 0;
-			return result;
+			loginMember.setMemberProfile(null); // 이미지 제거
 		}
 		
 		int result = mapper.profile(loginMember);
