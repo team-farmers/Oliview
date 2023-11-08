@@ -32,23 +32,35 @@
           </header>
     <div class="board_wrap">
         <div class="board_title">
-            <strong>같이 먹어요 글쓰기</strong>
-            <p>같이 먹을 사람들 구합니다</p>
+            <h1>같이 먹어요 글쓰기</h1>
+            <h2>같이 먹을 사람들 구합니다</h2>
         </div>
+
+
         <div class="board_write_wrap">
             <div class="board_write">
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력" ></dd>
+                        <dd><input type="text"placeholder="제목 입력"></dd>
                     </dl>
                 </div>
-                <div class="info">
-                    <dl>
-                        <dt>참여인원</dt>
-                      <input type="number" name="favnum" min="1" max="9" placeholder="0">         
-                    </dl>
 
+
+
+
+                
+                 <!-- 참여인원 설정 -->
+                 <div class="info">
+                  <dl>
+                      <dt>채팅방 인원 설정 (미체크 시 기본 100명)</dt>
+                     
+                        <label for="maxUserCnt" class="col-form-label">
+                            <input class="form-check-input" type="checkbox" id="maxChk"></label>
+                        <input type="text" class="form-control" id="maxUserCnt" name="maxUserCnt">
+                          </dl>
+
+                          
 
                     <dt>날짜 및 시간</dt>
                     <label for="date">
@@ -64,16 +76,46 @@
                      
                 </div>
 
+                  <!-- 업로드 이미지 -->
+                  <h5>업로드 이미지</h5>
+                  <div class="board_img">
+
+                    <!-- img 1-->
+                    <label for="img1">
+                          <img class ="preview" src="">
+                    </label>
+                      <input type="file" name ="images" class="inputImage" id= img1 accept="image/*">
+                      <span class = "delete_image">&times;</span>
+                    </div>
+                    
+                    <!--img 2-->           
+                    <div class="boardImg">
+                    <label for="img2">
+                          <img class = "preview" src="">
+                    </label>
+                    <input type="file" name = "images" class="inputImage" id = img2 accept ="image/*">
+                    </div>
 
 
+                  <!-- img3 -->
+                  <div class="boardImg">
+                  <label for="img3">
+                        <img class= "preview" src="">
+                  </label>
+                  <input type="file" name = "images" class = "inputImage" id = img3 accept="image/*">
+                  </div>
 
-                <div class="cont">
-                  <a href="#"><i class="fa-solid fa-image fa-2xl"></i></a>
-                 
-                    <textarea placeholder="내용 입력">
-                     
-                    </textarea>
-                </div>
+
+                  <!-- 내용 -->
+                  <div class="cont">
+                   
+                      <textarea placeholder="내용 입력">
+                       
+                      </textarea>
+                  </div>
+              </div>
+
+               
             </div>
 
             <div class="bt">
