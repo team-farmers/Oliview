@@ -33,4 +33,12 @@ public interface MyPageService {
 	 */
 	int editInfo(Member updateMember);
 
+	/** 비밀번호 변경
+	 * @param memberPw
+	 * @param loginMember
+	 * @param newPw 
+	 * @return
+	 */
+	int changePw(String memberPw, Member loginMember, String newPw);
+
 }

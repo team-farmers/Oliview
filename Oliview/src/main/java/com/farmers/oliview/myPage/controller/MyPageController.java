@@ -17,6 +17,7 @@ import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.service.MyPageService;
 
 import lombok.RequiredArgsConstructor;
+import oracle.jdbc.proxy.annotation.Post;
 
 /**
  * 
@@ -155,7 +156,7 @@ public class MyPageController {
 	 * 
 	 * 
 	 */
-	@GetMapping("info/profile")
+	@PostMapping("info/profile")
 	public String editProfile(Member updateMember,
 			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
 		
@@ -176,7 +177,7 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:profile";
+		return "redirect:/myPage/profile";
 	}
 	
 	
@@ -202,12 +203,42 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:profile";
+		return "redirect:/myPage/profile";
 	}
 	
 	
 	
-	
+	/** 새 비밀번호로 변경
+	 * @param loginMember
+	 * @param inputMember
+	 * @param newPw
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("changePw")
+	public String changePw(@SessionAttribute("loginMember") Member loginMember,
+			String memberPw, String newPw, RedirectAttributes ra) {
+		
+		
+		int result = service.changePw(memberPw, loginMember, newPw);
+		
+		String message = null;
+		
+		// 비밀번호 변경 성공 시
+		if(result > 0) {
+			message = "비밀번호 변경이 완료되었습니다.";
+
+			// session에 변경된 비밀번호 저장
+			loginMember.setMemberPw(newPw);
+			
+		} else { // 비밀번호 불일치 시
+			message = "비밀번호가 일치하지 않습니다. 다시 시도해주세요.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/myPage/changePw";
+	}
 	
 	
 	

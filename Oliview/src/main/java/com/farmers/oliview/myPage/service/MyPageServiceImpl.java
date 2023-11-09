@@ -15,7 +15,9 @@ import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.model.mapper.MyPageMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -107,6 +109,26 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 
+	/** 비밀번호 변경
+	 *
+	 */
+	@Override
+	public int changePw(String memberPw, Member loginMember, String newPw) {
+		
+		// 로그인 멤버의 암호화된 비밀번호 가져오기
+		String encPw = mapper.findPw(loginMember);
+		
+		// 비밀번호 불일치시 리턴
+		if (!bcrypt.matches(memberPw, encPw)) {
+			return 0;
+		}
+		
+		// 비밀번호 일치시 새 비밀번호로 수정
+		loginMember.setMemberPw(bcrypt.encode(newPw));
+		
+		return mapper.changePw(loginMember);
+	}
+	
 	
 	
 

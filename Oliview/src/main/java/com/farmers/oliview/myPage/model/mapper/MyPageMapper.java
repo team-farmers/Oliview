@@ -31,4 +31,16 @@ public interface MyPageMapper {
 	 */
 	int editInfo(Member updateMember);
 
+	/** 기존 암호화된 비밀번호 가져오기
+	 * @param loginMember
+	 * @return
+	 */
+	String findPw(Member loginMember);
+
+	/** 비밀번호 변경
+	 * @param loginMember
+	 * @return
+	 */
+	int changePw(Member loginMember);
+
 }

@@ -143,19 +143,33 @@ if(imageInput != null){ // #imageInput 존재할 때
 }
 
 
-/* 폼제출 에러!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-// 첫번째 적용버튼 누르면 닉네임 수정 스프링 호출
-// document.getElementById("applyBtn").addEventListener("click", ()=>{
-
-//   document.getElementById("updateProfile").submit();
-
-// })
-
+/* 닉네임 수정 작성버튼 제출 함수 */
 const updateProfile = document.getElementById("updateProfile");
 
 function submitFrm(){
   updateProfile.submit();
 };
+
+
+// 취소 버튼 눌렀을 때 닉네임 input 작성 내용 DB저장된대로 바꾸기
+document.getElementById("cancel-nick-Btn").addEventListener("click", ()=>{
+
+  const memberNicknameInput = document.getElementById("memberNickname");
+  memberNicknameInput.value = loginMemberNickname;
+
+});
+
+
+// 취소 버튼 눌렀을 때 이메일 input 작성 내용 DB저장된대로 바꾸기
+document.getElementById("cancel-email-Btn").addEventListener("click", ()=>{
+
+  const memberEmailInput = document.getElementById("memberEmail");
+  memberEmailInput.value = loginMemberEmail;
+
+});
+
+
+
 
 
 
@@ -272,9 +286,6 @@ document.getElementById("applyBtn").addEventListener("submit", e => {
       }
   }
 })
-
-
-
 
 
 
