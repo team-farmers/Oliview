@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("review")
-@SessionAttributes({ "loginMember" })
+@SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
 public class EditReviewController {
 
@@ -116,5 +116,45 @@ public class EditReviewController {
 
 		return path;
 	}
+
+	
+	/** 게시글 삭제
+	 * @param reviewNo
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 */
+	@GetMapping("{reviewNo:[0-9]+}/delete")
+	public String deleteReview(@PathVariable("reviewNo") int reviewNo, @SessionAttribute(value = "loginMember", required = false) Member loginMember,
+			RedirectAttributes ra) {
+		
+		if(loginMember == null) {
+			ra.addFlashAttribute("message", "로그인 후 이용해주세요");
+			return "redirect:/member/login";
+		}
+		
+		Map<String , Integer> paramMap = new HashMap<>();
+		
+		paramMap.put("reviewNo", reviewNo);
+		paramMap.put("memberNo", loginMember.getMemberNo());
+		
+		int result = service.deleteReview(paramMap);
+		
+		String path = null;
+		String message = null;
+		
+		if(result > 0) {
+			message = "삭제 되었습니다";
+			path = "redirect:/review" + result; // 해당 게시판 첫 페이지
+			
+		} else {
+			message = "삭제 실패";
+			path = "redirect:/";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return path;
+	}
+
 
 }

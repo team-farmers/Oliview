@@ -4,106 +4,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>리뷰 작성 수정</title>
+  <title>리뷰 작성</title>
 
   <th:block th:replace="~{common/common}"></th:block>
 
-  <link rel="stylesheet" href="/css/review/update.css">
+  <link rel="stylesheet" href="/css/review/insert.css">
 </head>
 
 <body>
+  <main>
+    <!-- 헤더 -->
+    <th:block th:replace="~{common/header}"></th:block>
 
-  <!-- 헤더 -->
-  <th:block th:replace="~{common/header}"></th:block>
+    <section class="content">
+      <h3>Review</h3>
+      <hr>
 
-  <section class="content">
-    <h3>Review</h3>
-    <hr>
-    <section class="content-1">
-      <form class="container" action="update" method="POST" th:object="${review}">
-
-        <!-- 제목 -->
-        <div id="title-area">
-          <label for="title" class="title" id="title" name="title" th:value="${title}">제목:</label>
-          <input type="text" class="textbox" id="input-title" name="title">
-        </div>
-
-        <!-- 위치 -->
-        <div id="location-area">
-          <label for="location" class="title" id="location">위치:</label>
-          <input type="text" class="textbox" name="location" name="location">
-        </div>
-
-        <!-- 별점 -->
-        <div class="rating-option-section">
-          <label id="rating" class="title">평점</label>
-          
-          <!-- 맛 -->
-          <div class="rating-option">
-            <label for="taste" id="taste">맛 : </label>
-            <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-
+      <section class="content-1">
+        <form class="container" action="insert" th:object="${review}" method="POST" id="reviewWriteFrm" enctype="multipart/form-data">
+          <!-- 제목 -->
+          <div id="title-area">
+            <label for="title" class="title" id="title" name="title" th:value="*{reviewTitle}">제목:</label>
+            <input type="text" class="textbox" id="input-title" name="title" value="">
           </div>
 
-          <!-- 양 -->
-          <div class="rating-option">
-            <label for="quantity" id="quantity">양: </label>
-            <i class="fa-regular fa-star  fa-2xl star2" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star2" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star2" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star2" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star2" style="color: #f1c93b;"></i>
-
+          <!-- 위치 -->
+          <div id="location-area">
+            <label for="location" class="title" id="location">위치:</label>
+            <input type="text" class="textbox" id="locatonContent" name="location" th:text="*{reviewAddress}">
+            <butto id="locationBtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">주소 검색</butto>
           </div>
 
-          <!-- 청결도 -->
-          <div class="rating-option">
-            <label for="cleanliness" id="cleanliness">청결도: </label>
-            <i class="fa-regular fa-star  fa-2xl star3" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star3" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star3" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star3" style="color: #f1c93b;"></i>
-            <i class="fa-regular fa-star  fa-2xl star3" style="color: #f1c93b;"></i>
+          <!-- 별점 -->
+          <div class="rating-option-section">
+            <label id="rating" class="title">평점</label>
+
+            <!-- 맛 -->
+            <div class="rating-option">
+              <label for="taste" id="taste">맛 : </label>
+              <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <input type="hidden" id="tasteRating">
+
+            </div>
+
+            <!-- 양 -->
+            <div class="rating-option">
+              <label for="quantity" id="quantity">양: </label>
+              <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <input type="hidden" id="quantityRating">
+
+
+            </div>
+
+            <!-- 청결도 -->
+            <div class="rating-option">
+              <label for="cleanliness" id="cleanliness">청결도: </label>
+              <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <input type="hidden" id="cleanlinessyRating">
+
+            </div>
           </div>
-        </div>
 
-        <!-- 내가 먹은 메뉴 -->
-        <div id="menu-area">
-          <label for="menu" class="title" id="menu">내가 먹은 메뉴: </label>
-          <input type="text" class="textbox" id="input-menu" name="menu" th:value="menu">
-        </div>
+          <!-- 내가 먹은 메뉴 -->
+          <div id="menu-area">
+            <label for="menu" class="title" id="menu">내가 먹은 메뉴: </label>
+            <input type="text" class="textbox" id="input-menu" name="menu" th:text="*{reviewMenu}">
+          </div>
 
-        <!-- 이미지 -->
-        <div id="image-area">
-          <label for="image" class="title" id="image-text">이미지 첨부: </label>
-          <input type="file" name="image" id="image" accept="image/*">
-        </div>
+          <!-- 이미지 -->
+          <div id="image-area">
+            <label for="image" class="title" id="image-text">이미지 첨부: </label>
+            <input type="file" name="image" id="image" accept="image/*">
+          </div>
 
-        <!-- 한줄평 -->
-        <div id="comment-area">
-          <label for="comment" class="title" id="comment">한줄평: </label>
-          <textarea id="writeReview" name="writeReview" th:text="writeReview"></textarea>
-        </div>
+          <!-- 한줄평 -->
+          <div id="comment-area">
+            <label for="comment" class="title" id="comment">한줄평: </label>
+            <textarea id="writeReview" name="writeReview" th:text="*{reviewOneLine}"></textarea>
+          </div>
+      </section>
 
 
-
-      </form>
-    </section>
-
-    <section class="content-2">
-      <button id="save-btn">임시저장</button>
       <button type="submit" id="submit-btn">등록</button>
-    </section>
+      </form>
 
-  </section>
+    </section>
 
   </main>
 
-  <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="/js/review/insert.js"></script>
 
 </body>

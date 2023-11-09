@@ -16,22 +16,22 @@
     <!-- 헤더 -->
     <th:block th:replace="~{common/header}"></th:block>
 
-    <section class="content">
-      <h3>Review</h3>
-      <hr>
+    <form class="container" action="insert" method="POST" id="reviewWriteFrm" enctype="multipart/form-data">
+      <section class="content">
+        <h3>Review</h3>
+        <hr>
 
-      <section class="content-1">
-        <form class="container" action="insert" method="POST" id="reviewWriteFrm" enctype="multipart/form-data">
+        <section class="content-1">
           <!-- 제목 -->
           <div id="title-area">
             <label for="title" class="title" id="title" name="title">제목:</label>
-            <input type="text" class="textbox" id="input-title" name="title" value="">
+            <input type="text" class="textbox" id="input-title" name="reviewTitle" value="">
           </div>
 
           <!-- 위치 -->
           <div id="location-area">
             <label for="location" class="title" id="location">위치:</label>
-            <input type="text" class="textbox" id="locatonContent" name="location">
+            <input type="text" class="textbox" id="locatonContent" name="reviewAddress">
             <butto id="locationBtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">주소 검색</butto>
           </div>
 
@@ -47,6 +47,7 @@
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
+              <input type="hidden" id="tasteRating" name="starTaste">
 
             </div>
 
@@ -58,6 +59,8 @@
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
+              <input type="hidden" id="quantityRating" name="starAmount">
+
 
             </div>
 
@@ -69,6 +72,8 @@
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
+              <input type="hidden" id="cleanlinessyRating" name="starClean">
+
             </div>
           </div>
 
@@ -81,24 +86,23 @@
           <!-- 이미지 -->
           <div id="image-area">
             <label for="image" class="title" id="image-text">이미지 첨부: </label>
-            <input type="file" name="image" id="image" accept="image/*">
+            <input type="file" name="image" id="image" accept="image/*" name="reviewImg">
           </div>
 
           <!-- 한줄평 -->
           <div id="comment-area">
             <label for="comment" class="title" id="comment">한줄평: </label>
-            <textarea id="writeReview" name="writeReview"></textarea>
+            <textarea id="writeReview" name="writeReview" name="reviewOneLine"></textarea>
           </div>
+        </section>
+
+
+        <button type="submit" id="submit-btn">등록</button>
+
       </section>
-
-
-      <button type="submit" id="submit-btn">등록</button>
-      </form>
-
-    </section>
+    </form>
 
   </main>
-
   <th:block th:replace="~{common/footer}"></th:block>
 
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
