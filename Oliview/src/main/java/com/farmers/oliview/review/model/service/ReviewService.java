@@ -26,18 +26,20 @@ public interface ReviewService {
 	List<Review> searchLatest();
 
 	
+	//===========================================================================
 	
 	/** 리뷰 상세 조회
-	 * @param reviewNo
+	 * @param map
 	 * @return review
 	 */
-	Review reviewDetail(int reviewNo);
+	Review reviewDetail(Map<String, Object> map);
 
 	/** 다른 리뷰 조회
+	 * @param reviewNo 
 	 * @param reviewTitle
 	 * @return reviewList
 	 */
-	List<Review> otherReview(String reviewTitle);
+	List<Review> otherReview(Map<String, Object> map2);
 
 	/** 리뷰 찜 여부 확인
 	 * @param map
@@ -56,7 +58,8 @@ public interface ReviewService {
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
-
+	
+	//===========================================================================
 
 
 

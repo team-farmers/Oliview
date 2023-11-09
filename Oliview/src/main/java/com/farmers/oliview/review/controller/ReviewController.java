@@ -99,10 +99,14 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewNo", reviewNo);
 		
-		Review review = service.reviewDetail(reviewNo);
+		Review review = service.reviewDetail(map);
 		
 		// 다른 리뷰 같이 호출
-		List<Review> otherReview = service.otherReview(review.getReviewTitle());
+		Map<String, Object> map2 = new HashMap<>();
+		map2.put("reviewNo", reviewNo);
+		map2.put("reviewTitle", review.getReviewTitle());
+		
+		List<Review> otherReview = service.otherReview(map2);
 		
 		
 		// 리턴 Path

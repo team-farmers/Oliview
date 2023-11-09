@@ -86,41 +86,51 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 상세 조회
 	@Override
-	public Review reviewDetail(int reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Review reviewDetail(Map<String, Object> map) {
+		return mapper.reviewDetail(map);
 	}
 	
 	
 	// 다른 리뷰 가져오기
 	@Override
-	public List<Review> otherReview(String reviewTitle) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Review> otherReview(Map<String, Object> map2) {
+		return mapper.otherReview(map2);
 	}
 	
 	
 	// 리뷰 찜 여부 확인
 	@Override
 	public int likeCheck(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.likeCheck(map);
 	}
 	
 	
 	// 조회수 업데이트 처리
 	@Override
 	public int updateReadCount(int reviewNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.updateReadCount(reviewNo);
 	}
 	
 	
 	// 찜 처리
 	@Override
 	public int reviewLike(Map<String, Object> paramMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = 0;
+		
+		// 찜 되어있으면 check == 1
+		// 찜 해제 -> LIKE 테이블에서 DELETE
+		if((Integer)(paramMap.get("check")) == 1) {
+			result = mapper.deleteReviewLike(paramMap);
+		}
+		else { // 찜 안되어 있으면 check == 0
+			// 찜 등록 -> LIKE 테이블에 INSERT
+			result = mapper.insertReviewLike(paramMap);
+		}
+		
+		if(result == 0) return -1;
+		
+		return result;
 	}
 	
 	
