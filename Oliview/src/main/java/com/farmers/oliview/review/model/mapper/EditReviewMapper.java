@@ -4,13 +4,14 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.farmers.oliview.review.model.dto.Review;
+
 @Mapper
 public interface EditReviewMapper {
 
-	/** 게시글 삭제
-	 * @param paramMap
-	 * @return
-	 */
-	int deleteReview(Map<String, Object> paramMap);
+	int insertReview(Review review);
+
+
+
 
 }
