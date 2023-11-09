@@ -199,6 +199,7 @@
   flex-direction: column;
 }
 
+
 /* 프로필 정보 */
 #profileinfoBox{
   height: 100%;
@@ -212,6 +213,7 @@
 
   display: flex;
 }
+
 
 .myPage-row > article{
   width: 12rem;
@@ -245,12 +247,30 @@
   border: 0.1rem solid #afafaf
 }
 
+
+/* 닉네임 수정 옆 유효성검사 */
+.myPage-row span{
+  width: 60rem;
+  margin-left: 1rem;
+}
+
+#nickNameBox, #emailBox{
+  width: 80rem;
+}
+
+
+
+
+
+
+
+
+
 /* 프로필사진 컨테이너 */
 #profile-img-change{
   display: flex;
   margin-left: 3rem;
 }
-
 
 /* 프로필 사진 선택/변경/삭제 버튼*/
 .profile-btn-area{
@@ -284,7 +304,6 @@
 .profile-btn-area > button:hover, label:hover{
   cursor: pointer;
 }
-
 
 /* 적용/취소버튼 영역*/
 #my-profile-info-container-2 > section:last-child{
@@ -360,3 +379,6 @@
   cursor: pointer;
 }
 
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
