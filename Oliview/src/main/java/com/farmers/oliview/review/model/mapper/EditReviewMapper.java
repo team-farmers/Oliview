@@ -11,6 +11,8 @@ public interface EditReviewMapper {
 
 	int insertReview(Review review);
 
+	int deleteReview(Map<String, Integer> paramMap);
+
 
 
 
