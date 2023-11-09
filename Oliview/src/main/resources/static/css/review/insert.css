@@ -1,27 +1,28 @@
 /*-------- main -----------*/
-.content{
+.content {
   display: flex;
   flex-direction: column;
   justify-self: center;
   align-items: center;
 }
 
-.textbox{
+.textbox {
   border: none;
   width: 70.4rem;
   height: 5.3rem;
   background-color: #f5f5f5;
   border-radius: 0.3rem;
   flex-shrink: 0;
+  padding: 1rem;
 }
 
-.title{
+.title {
   display: flex;
   align-items: center;
 }
 
 
-h3{
+h3 {
   margin: 10rem 0rem 5rem 0rem;
   font-size: 2.8rem;
   font-weight: 700;
@@ -29,11 +30,11 @@ h3{
   text-align: center;
 }
 
-.content-1{
+.content-1 {
   margin: 3rem;
 }
 
-#title-area{
+#title-area {
   margin: 0rem 32rem 2.8rem 25.1rem;
   width: calc(100% - 57.1rem);
   display: flex;
@@ -41,16 +42,15 @@ h3{
   flex-shrink: 0;
 }
 
-#title{
+#title {
   margin: 0rem 9.1rem 0.2rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.2575;
   color: #000000;
-  font-family: Gmarket Sans TTF, 'Source Sans Pro';
 }
 
-#location-area{
+#location-area {
   margin: 0rem 31.3rem 3.3rem 25.1rem;
   width: calc(100% - 56.4rem);
   display: flex;
@@ -58,7 +58,7 @@ h3{
   flex-shrink: 0;
 }
 
-#location{
+#location {
   margin: 0rem 9.1rem 0.2rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -66,7 +66,31 @@ h3{
   color: #000000;
 }
 
-.rating-option-section{
+#locatonContent {
+  border: none;
+  width: 60.4rem;
+  height: 5.3rem;
+  background-color: #f5f5f5;
+  border-radius: 0.3rem;
+  flex-shrink: 0;
+  padding: 1rem;
+}
+
+
+#locationBtn {
+  padding: 1rem;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  height: 5.3rem;
+  width: 9rem;
+  font-size: 1.6rem;
+  border-radius: 0.3rem;
+  margin: 1rem;
+}
+
+.rating-option-section {
   margin: 0rem 32.4rem 4.6rem 25.1rem;
   width: calc(100% - 57.5rem);
   display: flex;
@@ -74,19 +98,19 @@ h3{
   align-items: center;
 }
 
-.rating-option{
+.rating-option {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-right: 12rem;
+  margin-right: 7rem;
 }
 
-.fa-regular fa-star{
+.fa-regular fa-star {
   width: 5rem;
   height: 5rem;
 }
 
-#rating{
+#rating {
   margin: 0rem 9.8rem 0.1rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -95,7 +119,7 @@ h3{
   font-family: Gmarket Sans TTF, 'Source Sans Pro';
 }
 
-#taste{
+#taste {
   margin: 0rem 1rem 0rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -104,7 +128,7 @@ h3{
   font-family: Gmarket Sans TTF, 'Source Sans Pro';
 }
 
-#quantity{
+#quantity {
   margin: 0rem 1rem 0rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -113,7 +137,7 @@ h3{
   font-family: Gmarket Sans TTF, 'Source Sans Pro';
 }
 
-#cleanliness{
+#cleanliness {
   margin: 0rem 1rem 0rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -121,7 +145,7 @@ h3{
   color: #000000;
 }
 
-#menu-area{
+#menu-area {
   margin: 0rem 31.3rem 3.1rem 21.6rem;
   width: calc(100% - 52.9rem);
   display: flex;
@@ -130,7 +154,7 @@ h3{
 }
 
 
-#menu{
+#menu {
   margin: 0rem 5.9rem 0.2rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -143,7 +167,7 @@ h3{
 
 
 
-#comment-area{
+#comment-area {
   margin: 0rem 31.3rem 0rem 24.3rem;
   width: calc(100% - 55.6rem);
   height: 15.8rem;
@@ -152,7 +176,7 @@ h3{
   flex-shrink: 0;
 }
 
-#comment{
+#comment {
   margin: 1.3rem 8.7rem 0rem 0rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -163,22 +187,23 @@ h3{
   flex-shrink: 0;
 }
 
-#writeReview{
+#writeReview {
   width: 70.4rem;
   height: 10rem;
   background-color: #f5f5f5;
   border-radius: 0.3rem;
+  padding: 1rem;
 }
 
-#image-area{
+#image-area {
   margin: 0rem 31.3rem 3.3rem 23.1rem;
   width: calc(100% - 56.4rem);
   display: flex;
   align-items: center;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
-#image-text{
+#image-text {
   margin-right: 6.5rem;
   font-size: 1.6rem;
   font-weight: 500;
@@ -187,14 +212,14 @@ h3{
 }
 
 
-.content-2{
+.content-2 {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  
+
 }
 
-#save-btn{
+#save-btn {
   padding: 1rem 2rem;
   background-color: var(--footer-color);
   color: #fff;
@@ -203,7 +228,7 @@ h3{
   margin: 3rem;
 }
 
-#submit-btn{
+#submit-btn {
   padding: 1rem 2rem;
   background-color: var(--main-color);
   color: #fff;
@@ -213,6 +238,6 @@ h3{
 
 }
 
-#save-btn + #submit-btn {
-  margin-left: 0.3rem; 
+#save-btn+#submit-btn {
+  margin-left: 0.3rem;
 }
