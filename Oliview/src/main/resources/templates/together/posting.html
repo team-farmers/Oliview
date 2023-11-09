@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>posting</title>
-    <link rel="stylesheet" href="../../static/css/together/posting.css">
+    <link rel="stylesheet" href="/css/together/posting.css">
     <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
    
 </head>
@@ -87,25 +87,8 @@
                       <input type="file" name ="images" class="inputImage" id= img1 accept="image/*">
                       <span class = "delete_image">&times;</span>
                     </div>
+  
                     
-                    <!--img 2-->           
-                    <div class="boardImg">
-                    <label for="img2">
-                          <img class = "preview" src="">
-                    </label>
-                    <input type="file" name = "images" class="inputImage" id = img2 accept ="image/*">
-                    </div>
-
-
-                  <!-- img3 -->
-                  <div class="boardImg">
-                  <label for="img3">
-                        <img class= "preview" src="">
-                  </label>
-                  <input type="file" name = "images" class = "inputImage" id = img3 accept="image/*">
-                  </div>
-
-
                   <!-- 내용 -->
                   <div class="cont">
                    
@@ -117,9 +100,9 @@
 
                
             </div>
-
+          
             <div class="bt">
-              <button>저장</button>
+              <a href="board"> <button id="insertBtn">저장</button>  </a>
             </div>
 
         </div>
