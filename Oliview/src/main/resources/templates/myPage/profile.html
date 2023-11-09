@@ -35,7 +35,7 @@
 
             <!-- 프로필정보, 버튼 -->
             <section id="my-profile-info-container-2">
-              <form action="info/profile" method="GET" name="myPageFrm" id="updateProfile" th:object="${session.loginMember}">
+              <form action="info/profile" method="POST" name="myPageFrm" id="updateProfile" th:object="${session.loginMember}">
                 <!-- 프로필정보 -->
                 <section id="profile"> <!-- 아나!!!! -->
                   <section class="myPage-row">
@@ -79,7 +79,7 @@
             <!-- 적용/취소버튼  -->
             <section class="btns" id="myprofile-fitst-btns">
               <button type="button" id="applyBtn" onclick="submitFrm()">적용</button> <!-- 적용 누르면 닉네임/프로필사진 비동기로 적용되게끔 -->
-              <button>취소</button> <!-- 취소 누르면 모든 변경사항 해제 -->
+              <button type="button" id="cancel-nick-Btn">취소</button> <!-- 취소 누르면 모든 변경사항 해제 -->
             </section>
 
           </section>
@@ -122,7 +122,7 @@
               <!-- 적용/취소버튼  -->
               <section class="btns">
                 <button>적용</button>
-                <button>취소</button>
+                <button type="button" id="cancel-email-Btn">취소</button>
               </section>
 
             </form>
@@ -151,6 +151,14 @@
 
     // 로그인한 회원의 프로필 이미지 얻어오기 (없으면 null)
     const loginMemberProfileImg = /*[[${session.loginMember.memberProfile}]]*/ "프로필 이미지";
+
+
+    // 로그인한 회원의 닉네임, 이메일 얻어오기
+    const loginMemberNickname = /*[[${session.loginMember.memberNickname}]]*/ "닉네임";
+    const loginMemberEmail = /*[[${session.loginMember.memberEmail}]]*/ "이메일";
+
+
+
 
   </script>
   <script src="/js/myPage/myPage.js"></script>

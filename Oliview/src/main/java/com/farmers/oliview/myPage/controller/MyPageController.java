@@ -17,6 +17,7 @@ import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.service.MyPageService;
 
 import lombok.RequiredArgsConstructor;
+import oracle.jdbc.proxy.annotation.Post;
 
 /**
  * 
@@ -155,7 +156,7 @@ public class MyPageController {
 	 * 
 	 * 
 	 */
-	@GetMapping("info/profile")
+	@PostMapping("info/profile")
 	public String editProfile(Member updateMember,
 			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
 		
@@ -176,7 +177,7 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:profile";
+		return "redirect:/myPage/profile";
 	}
 	
 	
@@ -202,7 +203,7 @@ public class MyPageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:profile";
+		return "redirect:/myPage/profile";
 	}
 	
 	
