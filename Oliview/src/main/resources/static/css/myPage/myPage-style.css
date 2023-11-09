@@ -391,14 +391,14 @@
 }
 
 /* 비밀번호 작성 안내문 */
-#pw-explain{
+.pw-explain{
   width: 50rem;
   padding-top: 1rem;
   font-size: 1.2rem;
   color: #818181;
 }
 
-#pw-explain > p{
+.pw-explain > article{
   font-family: 'GmarketSans';
   font-weight: 300;
 }
@@ -690,3 +690,7 @@
 
   cursor: pointer;
 }
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }

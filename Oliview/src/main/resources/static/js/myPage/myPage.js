@@ -155,7 +155,6 @@ function submitFrm(){
 document.getElementById("cancel-nick-Btn").addEventListener("click", ()=>{
 
   const memberNicknameInput = document.getElementById("memberNickname");
-
   memberNicknameInput.value = loginMemberNickname;
 
 });
@@ -165,23 +164,9 @@ document.getElementById("cancel-nick-Btn").addEventListener("click", ()=>{
 document.getElementById("cancel-email-Btn").addEventListener("click", ()=>{
 
   const memberEmailInput = document.getElementById("memberEmail");
-
   memberEmailInput.value = loginMemberEmail;
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -301,9 +286,6 @@ document.getElementById("applyBtn").addEventListener("submit", e => {
       }
   }
 })
-
-
-
 
 
 
