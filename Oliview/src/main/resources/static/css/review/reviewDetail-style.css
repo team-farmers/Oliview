@@ -262,7 +262,7 @@ main{
 }
 
 
-.others > :nth-child(2){
+.review-row{
   height: 38rem;
   font-weight: bold;
   display: flex;
@@ -271,6 +271,7 @@ main{
   padding: 2rem 0;
   margin-bottom: 5rem;
 }
+
 
 .review-col{
   width: 23%;
@@ -311,6 +312,14 @@ main{
 .othersStar{
   font-size: 1.5rem;
 }
+
+#othersStar-i{
+  font-size: 1.5rem;
+  color: #f1c93b;
+  padding-bottom: 0.3rem;
+}
+
+
 .othersWriteDate{
   font-size: 1.2rem;
   padding: 0 2rem;
@@ -323,3 +332,19 @@ a{
 }
 
 
+/* 다른리뷰 없을 때 */
+.review-row-no{
+  height: 20rem;
+}
+
+.review-col-no{
+  margin-top: 1rem;
+  height: 90%;
+  border: 0.1rem solid var(--footer-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--footer-color);
+}

@@ -18,7 +18,7 @@
 
 
     <!-- 리뷰 -->
-    <section class="review-container" th:object="${reviewList[0]}">
+    <section class="review-container" th:object="${review}">
 
       <!-- 리뷰 헤드 - 제목, 평점, 찜,주소 -->
       <div class="contents-head">
@@ -43,7 +43,7 @@
 
 
       <!-- 리뷰 내용 - 사진, 평가, 메뉴, 한줄평 -->
-      <div class="contents-main" th:object="${reviewList[0]}">
+      <div class="contents-main" th:object="${review}">
 
         <!-- 리뷰 사진 -->
         <section class="main-1">
@@ -127,45 +127,57 @@
     
     </section>  
 
-    <!-- 다른리뷰 -->
+    <!-- 다른 리뷰 -->
     <section class="others" >
 
       <div>
-        <span class="others-title" style="color: #66B97E;" 
-        th:text="|'${reviewList[0].reviewTitle}'|">'가게이름'</span><span> 의 다른 리뷰</span>
+        <span class="others-title" style="color: #66B97E;" th:text="${review.reviewTitle}">'가게이름'</span>
+        <span> 의 다른 리뷰</span>
       </div>
 
-      <div th:each="review: ${reviewList[1]}">
+      <!-- 다른 리뷰가 존재하지 않을 때 -->
+      <div  class="otherReview-container" th:if="${#lists.size(otherReview)} == 0">
+        <section class="review-row-no">
 
-        <article class="review-col"th:object="${reviewList[1]}">
-  
-          <!-- 이미지 -->
-          <a class="review-img">
-            <img src="#" alt="image-1">
-          </a>
-  
-          <!-- 제목(가게명) -->
-          <div class="reviewTitle"><a th:text="*{reviewTitle}">가게이름</a></div>
-  
-           <!-- 닉네임/평점/작성일 -->
-          <div class="others-nickname-star-date">
-            <section class="othersNickname" th:text="*{memberNickname}">푸바오</section>
-            <section class="othersStar" style="color: #f1c93b;">4.5
-              <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-              <section class="othersWriteDate" >2023.10.20.</section>
-            </div>
-  
-        </article>
-
+          <div class="review-col-no"><i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>
+            다른 리뷰가 존재하지 않습니다</div>
+        </section>
       </div>
 
 
+      <!-- 다른 리뷰가 존재할 때 -->
+      <div  class="otherReview-container" th:if="${#lists.size(otherReview)} != 0">
+        <th:block th:each="other, stat : ${otherReview}">
+    
+          <th:block th:if="${stat.index % 4 == 0}">
+            <section class="review-row">
+            </th:block>
+              <article class="review-col" th:object="${other}">
+
+                <!-- 이미지 -->
+                <a class="review-img">
+                  <img src="#" alt="image-1">
+                </a>
+        
+                <!-- 제목(가게명) -->
+                <div class="reviewTitle"><a th:text="*{reviewTitle}">가게이름</a></div>
+        
+                <!-- 닉네임/평점/작성일 -->
+                <div class="others-nickname-star-date">
+                  <section class="othersNickname" th:text="*{memberNickname}">푸바오</section>
+                  <span class="othersStar" style="color: #f1c93b;" th:text="*{starTotal}">4.5</span>
+                    <i class="fa-sharp fa-solid fa-star fa-ml" id="othersStar-i"></i>
+                  <section class="othersWriteDate" th:text="*{writeDate}" >2023.10.20.</section>
+                </div>
+      
+              </article>
+    
+          <th:block th:if="${stat.index % 4 == 3}">
+            </section>
+          </th:block>
+        </th:block>
+      </div>
     </section>  
-
-
-
-
-
   </main>
 
 

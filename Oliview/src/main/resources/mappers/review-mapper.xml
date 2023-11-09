@@ -3,6 +3,22 @@
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.review.model.mapper.ReviewMapper">
 	
+	
+	
+	<resultMap id="review_rm" type="Review">
+		<id property="reviewNo" column="REVIEW_NO"/>
+
+		<collection property="commentList"
+					select="selectCommentList"
+					column="REVIEW_NO"
+					javaType="java.util.ArrayList"
+					ofType="Comment"
+					 />
+
+	</resultMap>
+	
+	
+	
 	<!-- 전체 리뷰 수 조회 -->
 	<select id="getReviewCount" resultType="_int">
 		SELECT COUNT(*) FROM "REVIEW"
@@ -50,6 +66,83 @@
 		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
 		ORDER BY WRITE_DATE
 	</select>
+	
+	
+	
+	
+	<!-- =============================================================================================== -->
+	
+	<!-- 리뷰 상세 조회 -->
+	<select id="reviewDetail" resultMap="review_rm">
+		SELECT REVIEW_TITLE, REVIEW_ADDRESS, REVIEW_IMG, MEMBER_PROFILE, MEMBER_NICKNAME, STAR_TASTE,
+				STAR_AMOUNT, STAR_CLEAN,ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL , REVIEW_MENU, REVIEW_ONELINE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		AND REVIEW_NO = #{reviewNo}
+	</select>	
+	
+	<!-- 특정 게시글 댓글 목록 조회 -->
+	<select id="selectCommentList" resultType="Comment">
+		SELECT LEVEL, C.* FROM
+			(SELECT COMMENT_NO, COMMENT_CONTENT,
+			    TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+			    REVIEW_NO, MEMBER_NO, MEMBER_NICKNAME, MEMBER_PROFILE, PARENT_NO, COMMENT_DEL_FL
+			FROM "COMMENT"
+			JOIN MEMBER USING(MEMBER_NO)
+			WHERE REVIEW_NO = #{reviewNo}) C
+		WHERE COMMENT_DEL_FL = 'N'
+		OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+						WHERE SUB.PARENT_NO = C.COMMENT_NO
+						AND COMMENT_DEL_FL = 'N')
+		START WITH PARENT_NO IS NULL
+		CONNECT BY PRIOR COMMENT_NO = PARENT_NO
+		ORDER SIBLINGS BY COMMENT_NO
+	</select>
+	
+
+	
+	
+	<!-- 다른 리뷰 가져오기 -->
+	<select id="otherReview" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
+					STAR_CLEAN,ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL,
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_TITLE = #{reviewTitle}
+		AND REVIEW_NO != #{reviewNo}
+		AND ROWNUM BETWEEN 1 AND 4
+		ORDER BY READ_COUNT
+	</select>
+	
+	<!-- 리뷰 찜 여부 확인 -->
+	<select id="likeCheck" resultType="_int">
+		SELECT COUNT(*) FROM "LIKE"
+		WHERE REVIEW_NO = #{reviewNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateReadCount">
+		UPDATE "REVIEW" SET
+		READ_COUNT = READ_COUNT + 1
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
+	<!-- 찜 테이블 행 삭제 -->
+	<delete id="deleteReviewLike">
+		DELETE FROM "LIKE"
+		WHERE MEMBER_NO = #{memberNo}
+		AND REVIEW_NO = #{reviewNo}
+	</delete>
+ 
+
+	<!-- 찜 테이블 행 삽입 -->
+	<insert id="insertReviewLike">
+		INSERT INTO "LIKE" (MEMBER_NO, REVIEW_NO)
+		VALUES(#{memberNo}, #{reviewNo})
+	</insert>
 	
 	
 

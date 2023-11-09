@@ -1,5 +1,6 @@
 package com.farmers.oliview.review.model.dto;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,12 @@ public class Review {
 	// 리뷰 상세 조회 (reviewDetail) 시 매핑되는 필드
 	private String memberNickname; // 작성자 닉네임
 	private String memberProfile; // 프로필 이미지 경로
+	
+    private int commentCount; // 댓글 수
+    private int likeCount; // 좋아요 수
+	
+	
+    // 댓글 목록을 저장할 필드
+    private List<Comment> commentList;
 
 }
