@@ -423,4 +423,9 @@ WHERE MEMBER_NO =
 ;
 
 
+-- 비밀번호 찾기
+SELECT MEMBER_PW 
+FROM "MEMBER" m 
+WHERE MEMBER_NO = 1
+;
 

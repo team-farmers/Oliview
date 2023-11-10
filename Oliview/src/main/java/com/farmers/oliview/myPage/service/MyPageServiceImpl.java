@@ -2,6 +2,7 @@ package com.farmers.oliview.myPage.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -127,6 +128,21 @@ public class MyPageServiceImpl implements MyPageService{
 		loginMember.setMemberPw(bcrypt.encode(newPw));
 		
 		return mapper.changePw(loginMember);
+	}
+	
+	
+	
+	/** 내가 쓴 글 조회
+
+	 *
+	 *
+	 *
+	 *
+	 */
+	@Override
+	public Map<String, Object> selectMyArticleList(int cp) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

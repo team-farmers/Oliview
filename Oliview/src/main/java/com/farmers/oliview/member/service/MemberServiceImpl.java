@@ -38,9 +38,10 @@ public class MemberServiceImpl implements MemberService{
 				return null;
 			}
 			
-//			if( !bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
-//				return null;
-//			}
+			// 입력받은 비밀번호(평문)와 조회한 비밀번호(암호문)가 같지 않으면 return null;
+			if(!bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
+				return null;
+			}
 			
 			// 비밀번호 일치시 비번 제거 후 loginMember return
 			loginMember.setMemberPw(null);
@@ -56,9 +57,7 @@ public class MemberServiceImpl implements MemberService{
 	public int signup(Member inputMember) {
 		
 		// 비밀번호 암호화
-		inputMember.setMemberPw( bcrypt.encode(inputMember.getMemberPw()) );
-		
-		log.debug(inputMember.toString());
+		inputMember.setMemberPw( bcrypt.encode(inputMember.getMemberPw()));
 		
 		return mapper.signup(inputMember);
 	}
