@@ -1,6 +1,7 @@
 package com.farmers.oliview.myPage.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.service.MyPageService;
 
+import ch.qos.logback.core.model.Model;
 import lombok.RequiredArgsConstructor;
 import oracle.jdbc.proxy.annotation.Post;
 
@@ -38,12 +40,6 @@ public class MyPageController {
 	@GetMapping("profile")
 	public String idFind() { 
 		return "myPage/profile";
-	}
-	
-	// 내가 쓴 글로 포워드
-	@GetMapping("my-article")
-	public String myArticle() { 
-		return "myPage/my-article";
 	}
 	
 	// 내가 쓴 댓글로 포워드
@@ -238,6 +234,22 @@ public class MyPageController {
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:/myPage/changePw";
+	}
+	
+	
+	
+	/* 내가 쓴 글 */
+	// 내가 쓴 글 목록 조회
+	@GetMapping("my-article")
+	public String myArticle(Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+		
+		// 일반 목록 조회
+		Map<String, Object> map = service.selectMyArticleList(cp);
+		
+		
+		return "myPage/my-article";
 	}
 	
 	
