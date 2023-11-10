@@ -8,8 +8,6 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.farmers.oliview.together.dto.Together;
 
-
-
 @Mapper
 public interface TogetherMapper {
 

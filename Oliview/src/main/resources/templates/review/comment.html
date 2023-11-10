@@ -7,7 +7,7 @@
     <ul id="commentList" class="commentList">
 
       <!-- 대댓글인 경우 child-comment 클래스 추가 -->
-      <li class="comment-row" th:classappend="${comment.parentNo} 1=0 ? child-comment" 
+      <li class="comment-row" th:classappend="${comment.parentNo} != 0 ? child-comment" 
       th:each="comment : ${review.commentList}" th:object="${comment}">
       
         <!-- 삭제된 댓글이지만 자식 댓글 때문에 조회된 경우 -->
@@ -68,8 +68,7 @@
 
 
 <script th:inline="javascript">
-  /* 댓글에서 사용 */
-  // ${객체?.필드} : 안전 탐색 연산자(Safe Navigation Operator)객체가 null인지 판별해서 null이 아닌 경우에 수
+ 
   const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
   const userDefaultImage = /*[[#{user.default.image}]]*/ "회원 기본 이미지";
 

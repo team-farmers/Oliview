@@ -38,6 +38,17 @@
 
     <!-- 리뷰 목록 영역 -->
 
+    <!-- 리뷰 목록이 없을 때 -->
+    <div class="review-full-container" th:if="${map.reviewList} == null">
+      <section class="review-row">
+        <div>
+          <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i><br>
+          검색 결과가 없습니다
+        </div>
+        
+      </section>
+    </div>
+
     <div  class="review-full-container">
       <th:block th:each="review, stat : ${map.reviewList}">
   
