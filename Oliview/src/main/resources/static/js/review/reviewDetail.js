@@ -52,6 +52,48 @@ reviewLike.addEventListener("click", e => {
 
 
 
+// ---------------------------------------------------------------------------
+/* 게시글 삭제 */
+const deleteBtn = document.getElementById("deleteBtn");
+
+// 만약 화면에 버튼이 없으면 null 반환
+if(deleteBtn != null){ // 삭제 버튼이 존재하는 경우
+
+  deleteBtn.addEventListener("click", () => {
+
+    // confirm : 확인 클릭 -> true , 취소 클릭 -> false 반환
+    if(confirm("삭제하시겠습니까?")){
+
+      // 상세 조회 페이지 주소 : /board/{boardCode}/{boardNo}
+      // 삭제 요청 주소 : /editBoard/{boardCode}/{boardNo}/delete (GET)
+
+      location.href = location.pathname.replace("review", "editReview") + "/delete";
+
+    }
+
+  });
+
+}
+
+// ---------------------------------------------------------------------------
+/* 게시글 수정 버튼 클릭 시 수정 화면 요청 */
+
+const updateBtn = document.getElementById("updateBtn");
+
+if(updateBtn != null){ // 수정 버튼 존재 시
+  updateBtn.addEventListener("click", () => {
+
+    // 현재 : /board/{boardCode}/{boardNo}?cp=1
+    // 바꾸고싶음 : /editBoard/{boardCode}/{boardNo}/update?cp=1
+
+
+    let url = `/editReview/${reviewNo}/update${location.search}`;
+
+    location.href = url;
+  });
+}
+
+
 //=========================================================================
 /* 신고 팝업창 */
 function openReportPopup(){
