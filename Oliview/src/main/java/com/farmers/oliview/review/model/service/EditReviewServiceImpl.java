@@ -48,20 +48,29 @@ public class EditReviewServiceImpl implements EditReviewService {
 	@Override
 	public int updateReview(Review review, MultipartFile img) {
 		
+		
 		String backup = review.getReviewImg();
 		
 		String rename = null;
 		
-		if(img.getSize() > 0 ) {
-			
-			rename = Util.fileRename(img.getOriginalFilename());
-			
-			review.setReviewImg(webPath + rename);
-		} else {
-			review.setReviewImg(null);
-		}
-		
 		int result = mapper.updateReview(review);
+		
+	
+		
+		if(result > 0) {
+			if(img.getSize() > 0 ) {
+				
+				rename = Util.fileRename(img.getOriginalFilename());
+				
+				review.setReviewImg(webPath + rename);
+			} else {
+				
+				review.setReviewImg(null);
+			}
+		}
+	
+		
+		
 		
 		
 		return 0;
