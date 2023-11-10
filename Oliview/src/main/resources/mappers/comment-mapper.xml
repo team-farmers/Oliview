@@ -21,5 +21,37 @@
 		ORDER SIBLINGS BY COMMENT_NO
 	</select>
 	
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="insert">
+		INSERT INTO "COMMENT" (COMMENT_NO, COMMENT_CONTENT, MEMBER_NO, REVIEW_NO, PARENT_NO)
+		VALUES (SEQ_COMMENT_NO.NEXTVAL, #{commentContent}, #{memberNo}, #{reviewNo}, 
+		
+		<!-- parentNo가 0이면 NULL로-->
+		<if test="parentNo == 0"> <!-- 일반 댓글 등록 -->
+			NULL
+		</if>		
+		<if test="parentNo != 0"> <!-- 답글(대댓글) 등록 -->
+			#{parentNo}
+		</if>
+		)
+	</insert>
+	
+	
+	<!-- 댓글 수정 -->
+	<update id="update">
+		UPDATE "COMMENT" SET
+		COMMENT_CONTENT = #{commentContent}
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<update id="delete">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_FL ='Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
 
 </mapper>
