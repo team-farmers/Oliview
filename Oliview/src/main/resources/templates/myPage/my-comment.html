@@ -8,7 +8,8 @@
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
-  <main>
+  <!-- commentList, pagination 변수 선언 -->
+  <main th:with="commentList=${map.commentList}, pagination=${map.pagination}">
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
@@ -22,13 +23,14 @@
       <section class="my-article-container">
         <section id="my-article-container">
 
+
           <!-- 헤드 -->
           <section id="my-article-title-container">
             <article>내가 쓴 댓글</article>
             <article>내가 작성한 댓글을 확인할 수 있습니다</article>
           </section>
 
-          <!-- 게시글 목록 -->
+          <!-- 댓글 목록 -->
           <section id="my-article-index-container">
 
             <table class="myPage-table">
@@ -36,41 +38,33 @@
                 <td class="myPage-table-title">내용</td>
                 <td class="myPage-table-title">작성일</td>
               </tr>
-              <tr>
-                <td class="myPage-table-td-comment">
-                  <!-- 내용 안에 선택체크박스 section-->
-                  <section>
-                    <input type="checkbox" name="" id="">
-                  </section>
-                  <!-- 댓글 내용 section -->
-                  <section>
-                    <label id="comment-contents">
-                      <a href="">여기 정말 맛있어요 강추합니다!</a>
-                    </label>
-                    <a href="" id="comment-placeName">레이몬드 제과점 <span class="myPage-table-td-comment-highlight">[2]</span></a>
-                  </section>
-                </td>
-                <td class="myPage-table-td">2023-10-23 19:23</td><!-- 작성일 -->
+
+              <!-- 작성한 댓글이 없을 때 -->
+              <tr th:if="${#lists.size(commentList) == 0}">
+                <td class="myPage-table-title" colspan="2">작성한 댓글이 존재하지 않습니다.</td>
               </tr>
 
+              <!-- 댓글이 존재할 때 -->
+              <th:block th:unless="${#lists.size(commentList) == 0}">
+                <tr th:each="comment : ${commentList}" th:object="${comment}">
+                  <td class="myPage-table-td-comment">
+                    <!-- 내용 안에 선택체크박스 section-->
+                    <section>
+                      <input type="checkbox" name="" id="">
+                    </section>
+                    <!-- 댓글 내용 section -->
+                    <section>
+                      <label id="comment-contents">
+                        <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" th:text="*{commentContent}">댓글 내용</a>
+                      </label>
+                      <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" id="comment-placeName" th:text="*{reviewTitle}">게시글 제목<span class="myPage-table-td-comment-highlight">[[[*{commentCount}]]]</span></a>
+                    </section>
+                  </td>
+                  <td class="myPage-table-td" th:text="*{commentWriteDate}"> 작성일 2023-10-23 19:23</td>
+                </tr>
+              </th:block>
+
               <tr>
-                <td class="myPage-table-td-comment">
-                  <!-- 내용 안에 선택체크박스 section-->
-                  <section>
-                    <input type="checkbox" name="" id="">
-                  </section>
-                  <!-- 댓글 내용 section -->
-                  <section>
-                    <label id="comment-contents">
-                      <a href="">제가 정말 리뷰 안쓰는 사람인데 세상에 여긴 안쓸수가 없네요 정말 아니 이걸 어떻게 표현해야
-할지 모르겠는데 정말 너무 맛있고 입에서 사르르 녹아요 태어나서 이런고기는 처음먹어보네요
-특히 안창살이미쳤어요 사장님 번창하시고 오래오래 장사해주세요 또 친절하셔서 더 좋았네요!</a>
-                    </label>
-                    <a href="" id="comment-placeName">우소우소 <span class="myPage-table-td-comment-highlight">[5]</span></a>
-                  </section>
-                </td>
-                <td class="myPage-table-td">2023-10-23 19:23</td><!-- 작성일 -->
-              </tr>
             </table>
 
           </section>

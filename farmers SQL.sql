@@ -66,7 +66,6 @@ COMMIT;
  ;
  
 
-<<<<<<< HEAD
 -- 이메일 인증 테이블 생성
 
 DROP TABLE "AUTH_KEY";
@@ -360,14 +359,7 @@ COMMIT;
 
 
 
-
-
-
 /*===============================================================================================*/
--->>>>>>> b25f3785adeb328c0d8efb402d656edcd560ac08;
-
-
-
 
 
 -- 회원가입 SQL
@@ -478,21 +470,94 @@ ALTER TABLE "TOGETHER" ADD CONSTRAINT "PK_TOGETHER" PRIMARY KEY (
 
 COMMIT;
 
+-- 비밀번호 찾기
+SELECT MEMBER_PW 
+FROM "MEMBER" m 
+WHERE MEMBER_NO = 2
+;
+
+-- 내가 쓴 글 게시글 목록 불러오기
+SELECT * FROM 
+	(SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/review/' || REVIEW_NO "url"
+	FROM REVIEW
+	WHERE MEMBER_NO = 1
+	AND REVIEW_DEL_FL = 'N'
+	UNION
+	SELECT '같이 먹어요', BOARD_TITLE , 
+	TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/together/' || BOARD_CODE || '/' || BOARD_NO "url"
+	FROM TOGETHER
+	WHERE MEMBER_NO = 1
+	AND BOARD_DEL_FL = 'N')
+	
+ORDER BY "writeDate" DESC
+;
 
 
+-- 샘플계정 비밀번호 수정
+UPDATE "MEMBER" SET 
+MEMBER_PW = '$2a$10$RrOuvmAv4lsQYmmiE4XihOWr01LgZjZtENyap0qw3YplTnWK04Jkm'
+WHERE MEMBER_NO = 3;
 
 
+--내가 찜한 글 목록 불러오기
+SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/review/' || REVIEW_NO "url"
+FROM "LIKE" L
+JOIN REVIEW USING (REVIEW_NO)
+WHERE L.MEMBER_NO = 41
+;
 
+--내가 찜한 글 게시글수 얻어오기
+SELECT COUNT(*)
+FROM "LIKE" L
+JOIN REVIEW USING (REVIEW_NO)
+WHERE L.MEMBER_NO = 41
+;
+
+
+--내가 작성한 댓글 불러오기 (댓글 내용, 게시글 제목, 작성일, 게시글 댓글 수, URL)
+SELECT COMMENT_NO, COMMENT_CONTENT, REVIEW_TITLE, 
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') COMMENT_WRITE_DATE,
+	'/review/' || R.REVIEW_NO "URL",
+	(SELECT COUNT(*)
+		FROM "COMMENT" C2
+		WHERE C2.REVIEW_NO = C.REVIEW_NO)
+		COMMENT_COUNT
+FROM "COMMENT" C
+JOIN REVIEW R ON (C.REVIEW_NO = R.REVIEW_NO)
+WHERE C.MEMBER_NO = 41
+AND COMMENT_DEL_FL = 'N'
+;
+
+
+-- 특정 리뷰의 댓글 수
+SELECT COUNT(*)
+FROM REVIEW R
+WHERE R.REVIEW_NO = C.REVIEW_NO
+;
+
+SELECT COUNT(*)
+FROM "COMMENT" C
+JOIN REVIEW USING (REVIEW_NO)
+WHERE C.REVIEW_NO = R.REVIEW_NO;
+
+-- 내가 작성한 댓글 수
+SELECT COUNT(*)
+FROM "COMMENT" C
+WHERE MEMBER_NO = 41
+;
+
+=======
 ALTER TABLE "TOGETHER" ADD CONSTRAINT "FK_MEMBER_TO_TOGETHER_1" FOREIGN KEY (
 	"MEMBER_NO"
 )
 REFERENCES "MEMBER" (
 	"MEMBER_NO"
 );
-
-
-
-
 
 
 

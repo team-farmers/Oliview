@@ -2,6 +2,7 @@ package com.farmers.oliview.myPage.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.farmers.oliview.common.utility.Util;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.model.mapper.MyPageMapper;
+import com.farmers.oliview.review.model.dto.Comment;
 import com.farmers.oliview.review.model.dto.Pagination;
 
 import lombok.RequiredArgsConstructor;
@@ -139,7 +141,7 @@ public class MyPageServiceImpl implements MyPageService{
 	 *
 	 */
 	@Override
-	public List<Map<String, Object>> selectMyArticleList(Member loginMember, int cp) {
+	public Map<String, Object> selectMyArticleList(Member loginMember, int cp) {
 		
 		// 로그인 된 회원이 작성한 리뷰, 같이먹어요 게시글 수 얻어오기
 		int listCount = mapper.getListCount(loginMember);
@@ -148,7 +150,7 @@ public class MyPageServiceImpl implements MyPageService{
 		Pagination pagination = new Pagination(cp, listCount);
 		
 		// RowBounds 객체 생성
-		int offset = (pagination.getCurrentPage()-1 * pagination.getLimit());
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
 		
 		int limit = pagination.getLimit();
 		
@@ -157,10 +159,77 @@ public class MyPageServiceImpl implements MyPageService{
 		// 마이바티스 호출
 		List<Map<String, Object>> boardList = mapper.selectMyArticleList(loginMember.getMemberNo(), rowBounds);
 		
-		return boardList;
+		// Map에 담아서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		
+		return map;
 	}
 	
 	
+	
+	/** 내가 찜한 글 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> choiceArticleList(Member loginMember, int cp) {
+		
+		// 로그인 된 회원의 찜한글 수 얻어오기
+		int listCount = mapper.getChoiceListCount(loginMember);
+		
+		/* cp, listCount를 이용해서 Pagination 객체 생성 */
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+		
+		int limit = pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		// 마이바티스 호출
+		List<Map<String, Object>> boardList = mapper.choiceArticleList(loginMember.getMemberNo(), rowBounds);
+		
+		// Map에 담아서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+
+		return map;
+	}
+	
+	
+	/** 내가 작성한 댓글 조회
+	 *
+	 */
+	@Override
+	public Map<String, Object> myCommentList(Member loginMember, int cp) {
+		
+		// 로그인 된 회원의 댓글 수 얻어오기
+		int listCount = mapper.getMyCommentListCount(loginMember);
+		
+		/* cp, listCount를 이용해서 Pagination 객체 생성 */
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit();
+		
+		int limit = pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		// 마이바티스 호출
+		List<Comment> commentList = mapper.myCommentList(loginMember.getMemberNo(), rowBounds);
+		
+		// Map에 담아서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("commentList", commentList);
+
+		return map;
+	}
 	
 
 }

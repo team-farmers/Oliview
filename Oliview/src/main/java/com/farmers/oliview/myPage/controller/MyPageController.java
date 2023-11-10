@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.service.MyPageService;
+import com.farmers.oliview.review.model.dto.Comment;
 
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
@@ -41,18 +42,6 @@ public class MyPageController {
 	@GetMapping("profile")
 	public String idFind() { 
 		return "myPage/profile";
-	}
-	
-	// 내가 쓴 댓글로 포워드
-	@GetMapping("my-comment")
-	public String myComment() { 
-		return "myPage/my-comment";
-	}
-	
-	// 내가 찜한 글로 포워드
-	@GetMapping("choice-article")
-	public String choiceArticle() { 
-		return "myPage/choice-article";
 	}
 	
 	// 회원 탈퇴 페이지로 포워드
@@ -239,23 +228,65 @@ public class MyPageController {
 	
 	
 	
-	/* 내가 쓴 글 */
-	// 내가 쓴 글 목록 조회
+	/** 내가 쓴 글 목록 조회
+	 * @param model
+	 * @param loginMember
+	 * @param cp : 현재 페이지 정보
+	 * @param paramMap
+	 * @return
+	 */
 	@GetMapping("my-article")
 	public String myArticle(Model model,
 			@SessionAttribute("loginMember") Member loginMember,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
 			@RequestParam Map<String, Object> paramMap) {
 		
 		// 내가쓴 글 목록 조회
-		List<Map<String, Object>> boardList = service.selectMyArticleList(loginMember, cp);
+		Map<String, Object> map = service.selectMyArticleList(loginMember, cp);
 		
-		model.addAttribute("boardList", boardList);
+		model.addAttribute("map", map);
 		return "myPage/my-article";
+	}
+	
+
+	
+	/** 내가 찜한 글 목록 조회
+	 * @param model
+	 * @param loginMember
+	 * @param cp
+	 * @param paramMap
+	 * @return
+	 */
+	@GetMapping("choice-article")
+	public String choiceArticle(Model model,
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
+			@RequestParam Map<String, Object> paramMap) { 
+		
+		// 내가 찜한 글 목록 조회
+		Map<String, Object> map = service.choiceArticleList(loginMember, cp);
+		
+		model.addAttribute("map", map);
+		
+		return "myPage/choice-article";
 	}
 	
 	
 	
+	// 내가 쓴 댓글
+	@GetMapping("my-comment")
+	public String myComment(Model model, 
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+		
+		// 내가 작성한 댓글 목록 조회
+		Map<String, Object> map = service.myCommentList(loginMember, cp);
+		
+		model.addAttribute("map", map);
+
+		return "myPage/my-comment";
+	}
 	
 	
 	
