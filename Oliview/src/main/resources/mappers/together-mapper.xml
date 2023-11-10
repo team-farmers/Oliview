@@ -68,7 +68,7 @@
 			 
 			 	
 			 		
-			 		 <!-- 게시글 상세 조회 -->
+<!--			 		  게시글 상세 조회 
 			 		 <select id="boardDetail" resultMap="board_rm">
 						  
 						  SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT,
@@ -81,7 +81,7 @@
 									WHERE BOARD_DEL_FL = 'N'
 									AND BOARD_CODE = #{boardCode}
 									AND BOARD_NO = #{boardNo}
-					 </select>
+					 </select>-->
 						
 						
 						

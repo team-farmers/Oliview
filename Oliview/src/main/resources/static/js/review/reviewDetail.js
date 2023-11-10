@@ -50,8 +50,6 @@ reviewLike.addEventListener("click", e => {
 })
 
 
-
-
 //=========================================================================
 /* 신고 팝업창 */
 function openReportPopup(){

@@ -1,11 +1,15 @@
 package com.farmers.oliview.review.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.farmers.oliview.common.utility.Util;
 import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.mapper.EditReviewMapper;
 
@@ -26,18 +30,40 @@ public class EditReviewServiceImpl implements EditReviewService {
 
 	// 게시글 작성
 	@Override
-	public int insertReview(Review review) {
+	public int insertReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
+		
+		String rename = Util.fileRename(img.getOriginalFilename());
+		
+		review.setReviewImg(webPath + rename);
 		
 		int result = mapper.insertReview(review);
-
+		
 		if (result == 0) return 0;
-	 
-
-		return result;
+		
+		img.transferTo(new File(folderPath + rename));
+		
+		return review.getReviewNo();
 	}
-
+	
 	@Override
-	public int updateReview(Review review, String deleteOrder) {
+	public int updateReview(Review review, MultipartFile img) {
+		
+		String backup = review.getReviewImg();
+		
+		String rename = null;
+		
+		if(img.getSize() > 0 ) {
+			
+			rename = Util.fileRename(img.getOriginalFilename());
+			
+			review.setReviewImg(webPath + rename);
+		} else {
+			review.setReviewImg(null);
+		}
+		
+		int result = mapper.updateReview(review);
+		
+		
 		return 0;
 	}
 	
@@ -45,5 +71,9 @@ public class EditReviewServiceImpl implements EditReviewService {
 	public int deleteReview(Map<String, Integer> paramMap) {
 		return mapper.deleteReview(paramMap);
 	}
+
+
+
+
 
 }

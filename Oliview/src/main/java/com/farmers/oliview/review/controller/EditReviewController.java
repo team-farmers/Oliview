@@ -1,5 +1,6 @@
 package com.farmers.oliview.review.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
@@ -56,14 +59,17 @@ public class EditReviewController {
 	 * @param review
 	 * @param loginMember
 	 * @return
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
 	@PostMapping("insert")
-	public String insertReview(RedirectAttributes ra, Review review,
-			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
+	public String insertReview(RedirectAttributes ra, Review review, 
+			@RequestParam("inputImage") MultipartFile img,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember) throws IllegalStateException, IOException {
 
 		review.setMemberNo(loginMember.getMemberNo());
 
-		int reviewNo = service.insertReview(review);
+		int reviewNo = service.insertReview(review, img);
 
 		if (reviewNo > 0) {
 			ra.addFlashAttribute("message", "게시글 작성 성공");
@@ -82,26 +88,23 @@ public class EditReviewController {
 	@GetMapping("/{reviewNo:[0-9]+}/update")
 	public String updateReview(@PathVariable("reviewNo") int reviewNo, Model model) {
 
-		// 게시글 수정 화면에는 수정하려는 게시글의 상세 내용이 작성되어 있어야한다
-		// -> 게시글 상세 조회 진행
-
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewNo", reviewNo);
 
-//		Review review = ReviewService.reviewDetail(map);
-//
-//		model.addAttribute("review", review);
+		Review review = ReviewService.reviewDetail(map);
+
+		model.addAttribute("review", review);
 
 		return "review/update";
 	}
 
 	@PostMapping("/{reviewNo:[0-9]+}/update")
 	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review, String querystring,
-			String deleteOrder) {
+			@RequestParam("reviewImg") MultipartFile img) {
 
 		review.setReviewNo(reviewNo);
 
-		int result = service.updateReview(review, deleteOrder);
+		int result = service.updateReview(review,img);
 
 		String message = null;
 		String path = null;
