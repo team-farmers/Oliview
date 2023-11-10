@@ -120,7 +120,6 @@ public class EditTogetherController {
 				 
 					@PostMapping("posting")
 					public String insertBoard(
-							@PathVariable("boardCode") int boardCode,
 							@SessionAttribute("loginMember") Member loginMember,
 							Together together,
 							@RequestParam("images") List<MultipartFile> images,
@@ -137,7 +136,7 @@ public class EditTogetherController {
 
 						if (boardNo > 0) {
 							ra.addFlashAttribute("message", "게시글 작성 성공");
-							return String.format("redirect:/board/%s/%s", boardCode, boardNo);
+							return String.format("redirect:/together/%s", boardNo);
 						}
 
 						

@@ -23,7 +23,7 @@ public class Together {
 	private String boardSubtitle; //부제목
 	
 	private int memberNo; // 회원번호
-	private int MettingDate; // 모임날짜
+	private String mettingDate; // 모임날짜
 	private int maxPeople;
 	private int currentPeople;
 	

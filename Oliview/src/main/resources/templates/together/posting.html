@@ -13,7 +13,7 @@
     <main>
           <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
-    <form action="insert" method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
+    <form action="posting" method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
 
      
     <div class="board_wrap">
@@ -28,7 +28,7 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
+                        <dd><input type="text" placeholder="제목 입력" name="boardTitle"></dd>
                     </dl>
                 </div>
 
@@ -43,19 +43,19 @@
                      
                         <label for="maxUserCnt" class="col-form-label">
                    
-                        <input type="text" class="form-control" id="maxUserCnt" name="maxUserCnt">
+                        <input type="text" class="form-control" id="maxUserCnt" name="maxPeople">
                           </dl>
 
                           
 
                     <dt>날짜 및 시간</dt>
                     <label for="date">
-                        <input type="date"
+                        <input type="datetime-local"
                                id="date"
                                max="2077-06-20"
                                min="1900-06-05"
+                               name="mettingDate"
                                >
-                               <input type="time" name="birthtime">    
                       </label>
                    
 
@@ -78,9 +78,7 @@
                   <!-- 내용 -->
                   <div class="cont">
                    
-                      <textarea placeholder="내용 입력">
-                       
-                      </textarea>
+                      <textarea placeholder="내용 입력" name="boardContent"></textarea>
                   </div>
               </div>
 
