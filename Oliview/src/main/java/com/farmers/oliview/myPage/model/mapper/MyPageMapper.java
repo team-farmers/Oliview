@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.farmers.oliview.member.model.dto.Member;
+import com.farmers.oliview.review.model.dto.Comment;
 
 @Mapper
 public interface MyPageMapper {
@@ -72,5 +73,18 @@ public interface MyPageMapper {
 	 * @return
 	 */
 	List<Map<String, Object>> choiceArticleList(int memberNo, RowBounds rowBounds);
+
+	/** 내가 작성한 댓글 수 확인
+	 * @param loginMember
+	 * @return
+	 */
+	int getMyCommentListCount(Member loginMember);
+
+	/** 내가 작성한 댓글 목록 불러오기
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Comment> myCommentList(int memberNo, RowBounds rowBounds);
 
 }

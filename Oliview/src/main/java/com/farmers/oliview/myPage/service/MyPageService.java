@@ -57,4 +57,11 @@ public interface MyPageService {
 	 */
 	Map<String, Object> choiceArticleList(Member loginMember, int cp);
 
+	/** 내가 작성한 댓글 조회
+	 * @param loginMember
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> myCommentList(Member loginMember, int cp);
+
 }

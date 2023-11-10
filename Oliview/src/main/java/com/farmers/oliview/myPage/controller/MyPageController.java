@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.myPage.service.MyPageService;
+import com.farmers.oliview.review.model.dto.Comment;
 
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
@@ -249,19 +250,6 @@ public class MyPageController {
 	
 
 	
-	// 내가 쓴 댓글로 포워드
-	@GetMapping("my-comment")
-	public String myComment(Model model,
-			@SessionAttribute("loginMember") Member loginMember,
-			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
-			@RequestParam Map<String, Object> paramMap) { 
-		
-		return "myPage/my-comment";
-	}
-	
-	
-	
-	
 	/** 내가 찜한 글 목록 조회
 	 * @param model
 	 * @param loginMember
@@ -282,6 +270,26 @@ public class MyPageController {
 		
 		return "myPage/choice-article";
 	}
+	
+	
+	
+	// 내가 쓴 댓글
+	@GetMapping("my-comment")
+	public String myComment(Model model, 
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="cp", required = false, defaultValue ="1") int cp,
+			@RequestParam Map<String, Object> paramMap) {
+		
+		// 내가 작성한 댓글 목록 조회
+		Map<String, Object> map = service.myCommentList(loginMember, cp);
+		
+		model.addAttribute("map", map);
+
+		return "myPage/my-comment";
+	}
+	
+	
+	
 	
 	
 

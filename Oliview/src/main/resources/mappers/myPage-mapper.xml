@@ -96,6 +96,30 @@
 		JOIN REVIEW USING (REVIEW_NO)
 		WHERE L.MEMBER_NO = #{memberNo}
 	</select>
+	
+	
+	<!-- 내가 작성한 댓글 수 확인-->
+	<select id="getMyCommentListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM "COMMENT"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 내가 작성한 댓글 목록 불러오기 -->
+	<select id="myCommentList" resultType="Comment">
+		SELECT COMMENT_NO, COMMENT_CONTENT, REVIEW_TITLE, 
+			TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') COMMENT_WRITE_DATE,
+			'/review/' || R.REVIEW_NO "URL",
+			(SELECT COUNT(*)
+				FROM "COMMENT" C2
+				WHERE C2.REVIEW_NO = C.REVIEW_NO)
+				COMMENT_COUNT
+		FROM "COMMENT" C
+		JOIN REVIEW R ON (C.REVIEW_NO = R.REVIEW_NO)
+		WHERE C.MEMBER_NO = #{memberNo}
+		AND COMMENT_DEL_FL = 'N'
+	</select>
+	
    
 
 </mapper>
