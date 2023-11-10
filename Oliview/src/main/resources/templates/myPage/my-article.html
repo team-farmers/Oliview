@@ -8,7 +8,8 @@
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
-  <main>
+  <!-- boardList, pagination 변수 선언 -->
+  <main th:with="boardList=${map.boardList}, pagination=${map.pagination}">
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
@@ -26,7 +27,6 @@
           <section id="my-article-title-container">
             <article>내가 쓴 글</article>
             <article>내가 작성한 게시글을 확인할 수 있습니다</article>
-            [[${boardList}]]
           </section>
 
 
@@ -39,31 +39,65 @@
                 <td class="myPage-table-title">제목</td>
                 <td class="myPage-table-title">작성일</td>
               </tr>
-              <tr>
-                <td class="myPage-table-td"><a href="">REVIEW</a></td><!-- 게시판 -->
-                <td class="myPage-table-td-highlight"><a href="">스윗레시피</a></td><!-- 제목 -->
-                <td class="myPage-table-td">2023-10-23 19:23</td><!-- 작성일 -->
+
+              <!-- 작성한 게시글이 없을 때 -->
+              <tr th:if="${#lists.size(boardList) == 0}">
+                <td class="myPage-table-title" colspan="3">게시글이 존재하지 않습니다.</td>
               </tr>
-              <tr>
-                <td class="myPage-table-td"><a href="">REVIEW</a></td><!-- 게시판 -->
-                <td class="myPage-table-td-highlight"><a href="">파파브레드</a></td><!-- 제목 -->
-                <td class="myPage-table-td">2023-07-04 12:21</td><!-- 작성일 -->
-              </tr>
-              <tr>
-                <td class="myPage-table-td"><a href="">같이 먹어요</a></td><!-- 게시판 -->
-                <td class="myPage-table-td-highlight"><a href="">동네 밥친구 구해요</a></td><!-- 제목 -->
-                <td class="myPage-table-td">2023-06-28 14:16</td><!-- 작성일 -->
-              </tr>
-              <tr>
-                <td class="myPage-table-td"><a href="">REVIEW</a></td><!-- 게시판 -->
-                <td class="myPage-table-td-highlight"><a href="">호남집</a></td><!-- 제목 -->
-                <td class="myPage-table-td">2022-11-14 08:56</td><!-- 작성일 -->
-              </tr>
+              
+              <!-- 게시글이 존재할 때 -->
+              <th:block th:unless="${#lists.size(boardList) == 0}">
+                <tr th:each="board : ${boardList}" th:object="${board}">
+
+                  <td class="myPage-table-td" th:text="*{boardName}">게시판</td>
+                  <td class="myPage-table-td-highlight">
+                    <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" th:text="*{title}">게시글 제목</a>
+                  </td>
+                  <td class="myPage-table-td" th:text="*{writeDate}">작성일 2023-10-23 19:23</td>
+                </tr>
+              </th:block>
             </table>
           </section>
 
-          
+          <!-- 페이지네이션 // 게시글 있을때만 보이게 함 -->
+          <div class="pagination-area" th:if="${#lists.size(boardList) > 0}">
+            <ul class="pagination">
 
+              <!-- 첫 페이지로 이동 -->
+              <li>
+                <a th:href="@{/myPage/my-article(cp=1)}">&lt;&lt;</a>
+              </li>
+
+              <!-- 이전 목록 마지막 번호로 이동 -->
+              <li>
+                <a th:href="@{/myPage/my-article(cp=${pagination.prevPage})}">&lt;</a>
+              </li>
+
+
+              <!-- 특정 페이지로 이동 -->
+              <!-- 타임리프에서 특정 범위만큼 반복하기 (1~10) -->
+              <!-- #numbers.sequence(1,10, 1) : 1~10까지 1씩 증가하며 차례대로 추가한 리스트 생성 -->
+              <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+
+                <!-- 현재 보고있는 페이지 -->
+                <li th:if="${i == pagination.currentPage}">
+                  <a class="current" th:text="${i}">1</a>
+                </li>
+
+                <!-- 보고있지 않은 페이지 -->
+                <li th:unless="${i == pagination.currentPage}">
+                  <a th:href="@{/myPage/my-article(cp=${i})}" th:text="${i}">2</a>
+                </li>
+              </th:block>
+
+              <!-- 다음 목록 시작 번호로 이동 -->
+              <li><a th:href="@{/myPage/my-article(cp=${pagination.nextPage})}">&gt;</a></li>
+
+              <!-- 끝 페이지로 이동 -->
+              <li><a th:href="@{/myPage/my-article(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+            </ul>
+
+          </div>
 
         </section>
       </section>
@@ -73,6 +107,8 @@
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
 
+
+  <script src="/js/myPage/my-article.js"></script>
 
 </body>
 </html>

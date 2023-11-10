@@ -77,7 +77,25 @@
 			
 		ORDER BY "writeDate" DESC
 	</select>   
-   
+	
+	
+	<!--찜한 글 게시글 수 확인-->
+    <select id="getChoiceListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM "LIKE" L
+		JOIN REVIEW USING (REVIEW_NO)
+		WHERE L.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!--찜한 글 게시글 목록 불러오기-->
+	<select id="choiceArticleList" resultType="java.util.HashMap">
+		SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+			TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+			'/review/' || REVIEW_NO "url"
+		FROM "LIKE" L
+		JOIN REVIEW USING (REVIEW_NO)
+		WHERE L.MEMBER_NO = #{memberNo}
+	</select>
    
 
 </mapper>

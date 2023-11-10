@@ -48,6 +48,13 @@ public interface MyPageService {
 	 * @param cp
 	 * @return
 	 */
-	List<Map<String, Object>> selectMyArticleList(Member loginMember, int cp);
+	Map<String, Object> selectMyArticleList(Member loginMember, int cp);
+
+	/** 내가 찜한 글 조회
+	 * @param loginMember
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> choiceArticleList(Member loginMember, int cp);
 
 }

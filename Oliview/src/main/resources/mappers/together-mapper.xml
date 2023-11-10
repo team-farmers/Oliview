@@ -69,7 +69,7 @@
              
                 
                  <!-- 게시글 상세 조회 -->
-                 <select id="boardDetail" resultMap="board_rm">
+                 <select id="boardDetail" resultType="Together">
                     
                     SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT,
                            TO_CHAR(BOARD_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_WRITE_DATE,
@@ -86,11 +86,11 @@
                   
                   
                <!-- 조회수 증가 -->
-                  <update id="updateReadCount">
+<!--                  <update id="updateReadCount">
                      UPDATE "BOARD" SET
                      READ_COUNT = READ_COUNT + 1
                      WHERE BOARD_NO = #{boardNo}
-                  </update>
+                  </update> -->
                   
             
       

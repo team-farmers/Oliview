@@ -60,4 +60,17 @@ public interface MyPageMapper {
 	 */
 	List<Map<String, Object>> selectMyArticleList(int memberNo, RowBounds rowBounds);
 
+	/** 찜한글 게시글 수 확인
+	 * @param loginMember
+	 * @return
+	 */
+	int getChoiceListCount(Member loginMember);
+
+	/** 찜한 글 게시글 목록 불러오기
+	 * @param memberNo
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Map<String, Object>> choiceArticleList(int memberNo, RowBounds rowBounds);
+
 }

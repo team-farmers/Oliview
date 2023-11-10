@@ -435,19 +435,21 @@ WHERE MEMBER_NO =
 -- 비밀번호 찾기
 SELECT MEMBER_PW 
 FROM "MEMBER" m 
-WHERE MEMBER_NO = 1
+WHERE MEMBER_NO = 2
 ;
 
 -- 내가 쓴 글 게시글 목록 불러오기
 SELECT * FROM 
 	(SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
-	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate"
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/review/' || REVIEW_NO "url"
 	FROM REVIEW
 	WHERE MEMBER_NO = 1
 	AND REVIEW_DEL_FL = 'N'
 	UNION
 	SELECT '같이 먹어요', BOARD_TITLE , 
-	TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate"
+	TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/together/' || BOARD_CODE || '/' || BOARD_NO "url"
 	FROM TOGETHER
 	WHERE MEMBER_NO = 1
 	AND BOARD_DEL_FL = 'N')
@@ -466,5 +468,24 @@ SELECT COUNT(*) FROM
 	WHERE MEMBER_NO = 1
 	AND BOARD_DEL_FL = 'N');
 
+-- 샘플계정 비밀번호 수정
+UPDATE "MEMBER" SET 
+MEMBER_PW = '$2a$10$RrOuvmAv4lsQYmmiE4XihOWr01LgZjZtENyap0qw3YplTnWK04Jkm'
+WHERE MEMBER_NO = 3;
 
 
+--내가 찜한 글 목록 불러오기
+SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+	'/review/' || REVIEW_NO "url"
+FROM "LIKE" L
+JOIN REVIEW USING (REVIEW_NO)
+WHERE L.MEMBER_NO = 41
+;
+
+--내가 찜한 글 게시글수 얻어오기
+SELECT COUNT(*)
+FROM "LIKE" L
+JOIN REVIEW USING (REVIEW_NO)
+WHERE L.MEMBER_NO = 41
+;
