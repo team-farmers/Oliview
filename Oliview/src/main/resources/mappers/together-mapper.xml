@@ -68,9 +68,7 @@
 			 
 			 	
 			 		
-			 		 <!-- 게시글 상세 조회 -->
-			 		 <select id="boardDetail" resultType="Together"> <!-- 예리나) resultMap str이 오류나서 mapper 반환 타입인 투게더로 바꿨어요!-->
-						  
+					  
 						  SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT,
 						   		TO_CHAR(BOARD_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_WRITE_DATE,
 								TO_CHAR(BOARD_UPDATE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_UPDATE_DATE,
@@ -81,7 +79,7 @@
 									WHERE BOARD_DEL_FL = 'N'
 									AND BOARD_CODE = #{boardCode}
 									AND BOARD_NO = #{boardNo}
-					 </select>
+					 </select>-->
 						
 						
 						

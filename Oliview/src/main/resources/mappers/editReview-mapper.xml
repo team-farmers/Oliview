@@ -2,14 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.review.model.mapper.EditReviewMapper">
-	
+
 	<!--게시글 작성-->
-	<insert id="insertReview" parameterType="Review">
+	<insert id="insertReview" parameterType="Review" useGeneratedKeys="true">
+		
+		<selectKey order="BEFORE" resultType="_int" keyProperty="reviewNo">
+			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
 		INSERT INTO "REVIEW"
-		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{reviewTitle}, #{reviewAddress}, #{starTaste}, #{starAmount}, #{starClean}, 
-		#{reviewOneLine}, #{reviewImg}, #{reviewMenu}, DEFAULT, DEFAULT, DEFAULT, #{memberNo})
+		VALUES(#{reviewNo}, #{reviewTitle}, #{reviewAddress},
+		#{starTaste}, #{starAmount}, #{starClean},
+		#{reviewOneLine}, #{reviewImg}, #{reviewMenu}, DEFAULT, DEFAULT,
+		DEFAULT, #{memberNo})
 	</insert>
-	
+
 	<!--게시글 삭제-->
 	<update id="deleteReview">
 		UPDATE "REVIEW"
@@ -17,5 +24,18 @@
 		WHERE REVIEW_NO = #{reviewNo}
 		AND MEMBER_N0 = #{memberNo}
 	</update>
+
+	<update id="updateReview">
+		UPDATE "REVIEW" SET
+		REVIEW_TITLE = #{reviewTitle},
+		REVIEW_ADDRESS = #{reviewAddress},
+		STAR_TASTE = #{starTaste},
+		STAR_AMOUNT = #{starAmount},
+		STAR_CLEAN = #{starClean},
+		REVIEW_ONELINE =#{reviewOneLine},
+		REVIEW_MENU = #{reviewMenu}
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+
 
 </mapper>
