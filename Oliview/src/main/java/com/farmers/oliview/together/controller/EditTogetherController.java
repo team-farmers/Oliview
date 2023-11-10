@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.together.dto.Together;
-import com.farmers.oliview.together.service.EbitTogetherService;
+import com.farmers.oliview.together.service.EditTogetherService;
 import com.farmers.oliview.together.service.TogetherService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @SessionAttributes
 public class EditTogetherController {
 
-		private final EbitTogetherService service;
+		private final EditTogetherService service;
 		private final TogetherService togetherservice;
 		
 		/**
