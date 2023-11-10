@@ -1,8 +1,9 @@
 /* 댓글 목록 조회 */
-const selectCommentList = () =>{
-
+const selectCommentList = () => {
+  
   fetch("/comment?reviewNo="+reviewNo)
   .then(response=>response.json())
+
   .then(cList=>{
 
     const commentList = document.getElementById("commentList");
