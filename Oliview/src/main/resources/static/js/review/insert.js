@@ -64,6 +64,7 @@ const title = document.getElementById("input-title");
 const locaton = document.getElementById("locatonContent");
 const menu = document.getElementById("input-menu");
 const writeReview = document.getElementById("writeReview");
+const image = document.getElementById("image");
 
 
 const tasteRating = document.getElementById('tasteRating');
@@ -73,9 +74,9 @@ const cleanlinessRating = document.getElementById('cleanlinessyRating');
 
 reviewWriteFrm.addEventListener("submit", e => {
 
-  const tasteStars = document.querySelectorAll('.rating-option:nth-of-type(1) i.fa-regular.fa-star');
-  const quantityStars = document.querySelectorAll('.rating-option:nth-of-type(2) i.fa-regular.fa-star');
-  const cleanlinessStars = document.querySelectorAll('.rating-option:nth-of-type(3) i.fa-regular.fa-star');
+  const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
+  const quantityStars =document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
+  const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
 
   tasteRating.value = tasteStars.length;
   quantityRating.value = quantityStars.length;
@@ -96,7 +97,24 @@ reviewWriteFrm.addEventListener("submit", e => {
   }
 
   if (tasteStars.length == 0) {
+    e.preventDefault();
     alert("맛을 평가해주세요");
+    locaton.focus();
+    return;
+  }
+
+  if (quantityStars.length == 0) {
+    e.preventDefault();
+    alert("양을 평가해주세요");
+    locaton.focus();
+    return;
+  }
+
+  if (cleanlinessStars.length == 0) {
+    e.preventDefault();
+    alert("청결도를 평가해주세요");
+    locaton.focus();
+    return;
   }
 
   if (menu.value.trim().length == 0) {
@@ -105,6 +123,13 @@ reviewWriteFrm.addEventListener("submit", e => {
     menu.focus();
     return;
 
+  }
+
+  if(image.files.length == 0){
+    e.preventDefault();
+    alert("이미지를 첨부해주세요");
+    menu.focus();
+    return;
   }
 
   if (writeReview.value.trim().length == 0) {

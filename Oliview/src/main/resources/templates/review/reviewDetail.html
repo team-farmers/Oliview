@@ -48,7 +48,8 @@
         <!-- 리뷰 사진 -->
         <section class="main-1">
           <a href="#">
-            <img src="/draft_1/images/food.jpg" alt="음식">
+            <img th:src="*{reviewImg}" alt="음식">
+
           </a>
         </section>
 
@@ -59,7 +60,7 @@
           <article class="review-rating">
             <section class="rating-total"> 
               <section class="profile">
-                <span class="profile-img"><img src="/images/original_16.png" alt="프로필사진"></span>
+                <span class="profile-img"><img th:src="*{memberProfile}" alt="프로필사진"></span>
                 <span class="nickname" th:text="*{memberNickname}">미쉘</span>
               </section>
               <span class="star-total" th:text="*{starTotal}">총점</span>
@@ -110,11 +111,12 @@
           <button class="reportBtn"><a onclick="openReportPopup()">
             <i class="fa-solid fa-triangle-exclamation"></i> 신고하기</a></button>
         </section>
-        <section class="foot-3" th:if="${session.loginMember!=null}">
-          <button class="updateBtn"><a href="#">수정하기</a></button>
+        <!-- <section class="foot-3" th:if="${session.loginMember != null and session.loginMember.memberNo == review.memberNo}"> -->
+        <section class="foot-3">
+          <button class="updateBtn" id="updateBtn">수정하기</button>
         </section>
-        <section class="foot-4" th:if="${session.loginMember!=null}">
-          <button class="deleteBtn"><a href="#">삭제하기</a></button>
+        <section class="foot-4">
+          <button class="deleteBtn" id="deleteBtn">삭제하기</button>
         </section>
         <section class="foot-5">
           <button class="prevBtn"><a href="#">목록으로</a></button>

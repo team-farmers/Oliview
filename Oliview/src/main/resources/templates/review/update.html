@@ -24,14 +24,14 @@
         <form class="container" action="insert" th:object="${review}" method="POST" id="reviewWriteFrm" enctype="multipart/form-data">
           <!-- 제목 -->
           <div id="title-area">
-            <label for="title" class="title" id="title" name="title" th:value="*{reviewTitle}">제목:</label>
-            <input type="text" class="textbox" id="input-title" name="title" value="">
+            <label for="title" class="title" id="title" name="title" >제목:</label>
+            <input type="text" th:value="*{reviewTitle}" class="textbox" id="input-title" name="reviewTitle">
           </div>
 
           <!-- 위치 -->
           <div id="location-area">
-            <label for="location" class="title" id="location">위치:</label>
-            <input type="text" class="textbox" id="locatonContent" name="location" th:text="*{reviewAddress}">
+            <label for="location" class="title" id="location" >위치:</label>
+            <input type="text" th:value="*{reviewAddress}" class="textbox" id="locatonContent" name="reviewAddress">
             <butto id="locationBtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">주소 검색</butto>
           </div>
 
@@ -47,7 +47,7 @@
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-              <input type="hidden" id="tasteRating">
+              <input type="hidden" id="tasteRating" name="starTaste">
 
             </div>
 
@@ -59,7 +59,7 @@
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
-              <input type="hidden" id="quantityRating">
+              <input type="hidden" id="quantityRating" name="starAmount">
 
 
             </div>
@@ -72,7 +72,7 @@
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
-              <input type="hidden" id="cleanlinessyRating">
+              <input type="hidden" id="cleanlinessyRating" name="starClean">
 
             </div>
           </div>
@@ -80,19 +80,19 @@
           <!-- 내가 먹은 메뉴 -->
           <div id="menu-area">
             <label for="menu" class="title" id="menu">내가 먹은 메뉴: </label>
-            <input type="text" class="textbox" id="input-menu" name="menu" th:text="*{reviewMenu}">
+            <input type="text" th:value="*{reviewMenu}" class="textbox" id="input-menu" name="reviewMenu" >
           </div>
 
           <!-- 이미지 -->
           <div id="image-area">
             <label for="image" class="title" id="image-text">이미지 첨부: </label>
-            <input type="file" name="image" id="image" accept="image/*">
+            <input type="file" id="image" th:src="*{reviewImg}" accept="image/*" name="inputImage">
           </div>
 
           <!-- 한줄평 -->
           <div id="comment-area">
             <label for="comment" class="title" id="comment">한줄평: </label>
-            <textarea id="writeReview" name="writeReview" th:text="*{reviewOneLine}"></textarea>
+            <textarea id="writeReview" th:value="*{reviewOneLine}" name="reviewOneLine"></textarea>
           </div>
       </section>
 

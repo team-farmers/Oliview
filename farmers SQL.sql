@@ -96,12 +96,12 @@ CREATE SEQUENCE SEQ_KEY_NO NOCACHE;
 
 /*===============================================================================================*/
 /* -------- REVIEW 테이블 생성 -------*/
-DROP TABLE "REVIEW";
+DROP TABLE "REVIEW" CASCADE CONSTRAINTS;
 
 CREATE TABLE "REVIEW" (
 	"REVIEW_NO"	NUMBER		NOT NULL,
-	"REVIEW_TITLE"	VARCHAR2(20)		NOT NULL,
-	"REVIEW_ADDRESS"	VARCHAR2(100)		NOT NULL,
+	"REVIEW_TITLE"	VARCHAR2(50)		NOT NULL,
+	"REVIEW_ADDRESS"	VARCHAR2(200)		NOT NULL,
 	"STAR_TASTE"	NUMBER		NOT NULL,
 	"STAR_AMOUNT"	NUMBER		NOT NULL,
 	"STAR_CLEAN"	NUMBER		NOT NULL,
@@ -194,6 +194,11 @@ VALUES (SEQ_REVIEW_NO.NEXTVAL, '서브웨이', '서울시 강서구', 1.0, 5.0, 
 INSERT INTO "REVIEW"
 VALUES (SEQ_REVIEW_NO.NEXTVAL, '빵빵베이커리', '서울시 강남구', 3.0, 2.0, 3.0, 
 	'빵이 많아요','loadImage6','무화과 파운드', DEFAULT, DEFAULT, 'N', 1);
+
+-- 리뷰 샘플 데이터-7 생성
+INSERT INTO "REVIEW"
+VALUES (SEQ_REVIEW_NO.NEXTVAL, '신의주찹쌀순대', '서울시 은평구', 4.5, 2.5, 3.5, 
+	'순대국이 맛있어요','loadImage6','순대국', DEFAULT, DEFAULT, 'N', 5);
 
 
 -- 샘플 데이터 모두 삭제
@@ -339,6 +344,10 @@ CHECK(COMMENT_DEL_FL IN ('Y','N'));
 -- COMMENT 시퀀스 생성
 DROP SEQUENCE SEQ_COMMENT_NO;
 CREATE SEQUENCE SEQ_COMMENT_NO NOCACHE;
+
+
+-- 샘플 댓글 데이터 모두 삭제
+DELETE FROM "COMMENT";
 
 
 -- 댓글 샘플 데이터 생성
@@ -601,6 +610,41 @@ AND BOARD_NO = 14;
 
 
 
+
+
+-- 비밀번호 찾기
+SELECT MEMBER_PW 
+FROM "MEMBER" m 
+WHERE MEMBER_NO = 1
+;
+
+-- 내가 쓴 글 게시글 목록 불러오기
+SELECT * FROM 
+	(SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+	TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate"
+	FROM REVIEW
+	WHERE MEMBER_NO = 1
+	AND REVIEW_DEL_FL = 'N'
+	UNION
+	SELECT '같이 먹어요', BOARD_TITLE , 
+	TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate"
+	FROM TOGETHER
+	WHERE MEMBER_NO = 1
+	AND BOARD_DEL_FL = 'N')
+	
+ORDER BY "writeDate" DESC
+;
+
+
+-- 내가 쓴 글 게시글 수 확인
+SELECT COUNT(*) FROM
+	(SELECT 'R-' || REVIEW_NO  FROM REVIEW
+	WHERE MEMBER_NO = 1
+	AND REVIEW_DEL_FL = 'N'
+	UNION
+	SELECT 'T-' || BOARD_NO FROM TOGETHER
+	WHERE MEMBER_NO = 1
+	AND BOARD_DEL_FL = 'N');
 
 
 
