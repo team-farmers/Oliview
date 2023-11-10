@@ -60,7 +60,7 @@
           <article class="review-rating">
             <section class="rating-total"> 
               <section class="profile">
-                <span class="profile-img"><img th:src="*{memberProfile}" alt="프로필사진"></span>
+                <section class="profile-img"><img th:src="*{memberProfile}" alt="프로필사진"></section>
                 <span class="nickname" th:text="*{memberNickname}">미쉘</span>
               </section>
               <span class="star-total" th:text="*{starTotal}">총점</span>
@@ -157,8 +157,8 @@
               <article class="review-col" th:object="${other}">
 
                 <!-- 이미지 -->
-                <a class="review-img">
-                  <img src="#" alt="image-1">
+                <a class="review-img" th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}">
+                  <img th:src="*{reviewImg}" alt="image-1">
                 </a>
         
                 <!-- 제목(가게명) -->

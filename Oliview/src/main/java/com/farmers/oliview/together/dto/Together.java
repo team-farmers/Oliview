@@ -15,7 +15,7 @@ public class Together {
 	private int boardNo; // 게시글 번호
 	private String boardTitle; // 제목
 	private int numberPeople; // 참여인원
-	private int dateCreated; // 작성일
+	private String dateCreated; // 작성일
 	
 	private String boardImg; // 이미지
 	private String boardContent; // 게시글 내용
@@ -23,8 +23,9 @@ public class Together {
 	private String boardSubtitle; //부제목
 	
 	private int memberNo; // 회원번호
-	private int MettingDate; // 모임날짜
-	private int boardCode;
+	private String mettingDate; // 모임날짜
+	private int maxPeople;
+	private int currentPeople;
 	
     private int readCount;
    
