@@ -12,30 +12,12 @@
 </head>
 <body>
     <main>
-        <header>
-            <section>
-              <img src="/images/original_16.png" alt="로고이미지" width="80rem">
-            </section>
-          
-            <section>
-              <article>
-                <a href="#">로그아웃</a>
-              </article>
-          
-              <article>
-                <a href="#">마이페이지</a>
-              </article>
-          
-              <article>
-                <a href=""><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
-              </article>
-            </section>
-          </header>
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
 
 
 
-
-    <div class="board_wrap">
+    <div class="board_wrap" th:object ="${together}">
 
         <div class="board_title">
             <strong>같이 먹어요</strong>
@@ -51,7 +33,7 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><pre>치킨 같이 먹어요</pre></dd>
+                        <dd><pre th:text="*{boardTitle}">치킨 같이 먹어요</pre></dd>
                     </dl>
                 </div>
 
@@ -62,21 +44,19 @@
                 <div class="info">
                     <dl>
                         <dt>참여인원</dt>
-                        <dd><pre>3/6</pre></dd>
+                        <dd><pre th:text="|*{currentPeople}/*{maxPeople}|">3/6</pre></dd>
                     </dl>
                     <dt>날짜 및 시간</dt>
           
-                    <dd><pre>2023-10-23 오후 1:00</pre></dd>
+                    <dd><pre th:text="*{dateCreated}">2023-10-23 오후 1:00</pre></dd>
                               
                       </label>
                 </div>
 
-
-
-
+                
                 <div class="cont">
        
-                  <dd><pre>치킨</pre></dd>
+                  <dd><pre th:text="*{boardContent}" >치킨</pre></dd>
                 </div>
 
               
@@ -84,11 +64,12 @@
 
             <a href="posting"> <button id="insertBtn">글쓰기</button>  </a>
 
-
+         
           <div class="btn">
             <a href="talk"> <button type="button" class="btn1">참여하기</button></a>
             <a href="posting"> <button type="button" class="btn2">수정하기</button></a>
             <a href="inven"> <button type="button" class="btn3">삭제하기</button></a>
+          </th:block>
           </div>
   
 
