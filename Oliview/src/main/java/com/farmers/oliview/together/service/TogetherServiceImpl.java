@@ -27,11 +27,11 @@ public class TogetherServiceImpl implements TogetherService {
 	    * @return
 	    */
 	   @Override
-	   public Map<String, Object> selectBoardList(int boardCode, int cp) {
+	   public Map<String, Object> selectBoardList(int cp) {
 	    
 
 	      /* 전체 게시글 수 조회 */
-	      int listCount = mapper.getListCount(boardCode);
+	      int listCount = mapper.getListCount();
 	      
 	      /* cp, listCount를 이용해서 Pagination 객체 생성 */
 	      Pagination pagination = new Pagination(cp, listCount);
@@ -44,7 +44,7 @@ public class TogetherServiceImpl implements TogetherService {
 	      RowBounds rowBounds = new RowBounds(offset, limit);
 	      
 	      
-	      List<Together> boardList = mapper.selectBoardList(boardCode, rowBounds);
+	      List<Together> boardList = mapper.selectBoardList(null, rowBounds);
 	      
 	      // Map에 담아서 반환
 	      Map<String, Object> map = new HashMap<>();
@@ -83,22 +83,13 @@ public class TogetherServiceImpl implements TogetherService {
 
 				return map;
 			}
-			
-			/* 게시글 상세 조회 + 게시글 댓글 모두 조회 */
-			@Override
-			public Together boardDetail(Map<String, Object> map) {
-			
-				return mapper.boardDetail(map);
-			}
-			
-			/* 조회수 증가 */
-			@Override
-			public int updateReadCount(int boardNo) {
-			
-				return mapper.updateReadCount(boardNo);
-			}
 		
-
+			@Override
+			public Together board(Map<String, Object> map) {
+				// TODO Auto-generated method stub
+				return mapper.board(map);
+			}
+	
 
 }
 

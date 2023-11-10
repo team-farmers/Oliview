@@ -14,27 +14,20 @@ import com.farmers.oliview.together.dto.Together;
 public interface TogetherMapper {
 
 	/** 전체 게시글 수 조회
-	 * @param boardCode
 	 * @return listCount
 	 */
-	int getListCount(int boardCode);
+	int getListCount();
 
 	
 	/** 게시글 목록 조회
-	 * @param boardCode
+	 * @param temp
 	 * @param rowBounds 
 	 * @return boardList
 	 */
-	List<Together> selectBoardList(int boardCode, RowBounds rowBounds);
+	List<Together> selectBoardList(String temp, RowBounds rowBounds);
 
 
-	/** 게시글 상세 조회
-	 * @param map
-	 * @return board
-	 */
-	Together boardDetail(Map<String, Object> map);
-	
-	
+
 	/**
 	 * 조회수 증가
 	 * @param boardNo
@@ -58,6 +51,15 @@ public interface TogetherMapper {
 	 * @return
 	 */
 	List<Together> searchBoardList(Map<String, Object> paramMap, RowBounds rowBounds);
+	
+	
+	/**
+	 * 게시글 상세조회 
+	 * @param map
+	 * @return
+	 */
+
+	Together board(Map<String, Object> map);
 
 
 	
