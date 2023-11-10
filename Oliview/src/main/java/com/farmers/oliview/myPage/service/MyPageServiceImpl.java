@@ -2,6 +2,7 @@ package com.farmers.oliview.myPage.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,6 +157,13 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		// 마이바티스 호출
 		List<Map<String, Object>> boardList = mapper.selectMyArticleList(loginMember.getMemberNo(), rowBounds);
+		
+		// Map에 담아서 반환
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		
 		
 		return boardList;
 	}
