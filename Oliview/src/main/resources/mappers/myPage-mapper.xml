@@ -46,6 +46,37 @@
 		WHERE MEMBER_NO = #{memberNo}
    </update>
    
+   <!--내가 쓴 글 게시글 수 확인-->
+   <select id="getListCount" resultType="_int">
+	   SELECT COUNT(*) FROM
+			(SELECT 'R-' || REVIEW_NO  FROM REVIEW
+			WHERE MEMBER_NO = #{memberNo}
+			AND REVIEW_DEL_FL = 'N'
+			UNION
+			SELECT 'T-' || BOARD_NO FROM TOGETHER
+			WHERE MEMBER_NO = #{memberNo}
+			AND BOARD_DEL_FL = 'N')
+   </select>
+   
+    <!-- 내가 쓴 글 목록 불러오기 -->
+	<select id="selectMyArticleList" resultType="java.util.HashMap">
+		SELECT * FROM 
+			(SELECT 'REIVEW' "boardName", REVIEW_TITLE "title", 
+			TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+			'/review/' || REVIEW_NO "url"
+			FROM REVIEW
+			WHERE MEMBER_NO = #{memberNo}
+			AND REVIEW_DEL_FL = 'N'
+			UNION
+			SELECT '같이 먹어요', BOARD_TITLE , 
+			TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
+			'/together/' || BOARD_CODE || '/' || BOARD_NO "url"
+			FROM TOGETHER
+			WHERE MEMBER_NO = #{memberNo}
+			AND BOARD_DEL_FL = 'N')
+			
+		ORDER BY "writeDate" DESC
+	</select>   
    
    
 

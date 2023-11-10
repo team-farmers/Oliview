@@ -1,6 +1,10 @@
 package com.farmers.oliview.myPage.model.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.farmers.oliview.member.model.dto.Member;
 
@@ -42,5 +46,18 @@ public interface MyPageMapper {
 	 * @return
 	 */
 	int changePw(Member loginMember);
+
+	/** 내가 쓴 글 게시글 수 확인
+	 * @param loginMember
+	 * @return
+	 */
+	int getListCount(Member loginMember);
+
+	/** 내가 쓴 글 목록 불러오기
+	 * @param memberNo 
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Map<String, Object>> selectMyArticleList(int memberNo, RowBounds rowBounds);
 
 }

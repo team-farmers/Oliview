@@ -68,9 +68,7 @@
 			 
 			 	
 			 		
-<!--			 		  게시글 상세 조회 
-			 		 <select id="boardDetail" resultMap="board_rm">
-						  
+					  
 						  SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT,
 						   		TO_CHAR(BOARD_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_WRITE_DATE,
 								TO_CHAR(BOARD_UPDATE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') BOARD_UPDATE_DATE,
@@ -94,11 +92,11 @@
 						
 						
 					   <!-- 특정 게시글 이미지 조회 -->
-					   <select id="selectImageList" resultType="BoardImg">
+				<!-- 	   <select id="selectImageList" resultType="BoardImg">
 					      SELECT * FROM BOARD_IMG
 					      WHERE BOARD_NO = #{boardNo}
 					      ORDER BY IMG_ORDER
-					   </select>
+					   </select>     예리나) 같은 아이디의 매퍼가 없어서 에러가나서 우선 주석처리했어요!--> 
 							
 	
 			

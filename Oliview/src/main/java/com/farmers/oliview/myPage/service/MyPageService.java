@@ -1,6 +1,8 @@
 package com.farmers.oliview.myPage.service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,5 +42,12 @@ public interface MyPageService {
 	 * @return
 	 */
 	int changePw(String memberPw, Member loginMember, String newPw);
+
+	/** 내가 쓴 글 조회
+	 * @param loginMember 
+	 * @param cp
+	 * @return
+	 */
+	List<Map<String, Object>> selectMyArticleList(Member loginMember, int cp);
 
 }

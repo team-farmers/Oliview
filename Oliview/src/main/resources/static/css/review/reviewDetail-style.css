@@ -239,9 +239,11 @@ main{
   color: white;
   border: none;
   border-radius: 0.7rem;
+  cursor: pointer;
 }
 .updateBtn{
   background-color: var(--footer-color);
+
 }
 .deleteBtn{
   background-color: var(--footer-color);
