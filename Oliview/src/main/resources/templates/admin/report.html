@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신고하기</title>
+
+  <link rel="stylesheet" th:href="@{/css/admin/report.css}">
+</head>
+<body>
+
+  <main>
+
+    <form action="#">
+
+      <header>
+        신고하기
+      </header>
+  
+      <div class="report-info">
+        <div>작성자 | &nbsp;
+          <section class="report-nickname">푸바오</section>
+        </div>
+        <div>게시글 | &nbsp;
+          <section class="report-review">칠리칠리</section>
+        </div>
+      </div>
+  
+  
+      <!-- 신고 내용 버튼 -->
+      <div class="report-button">
+  
+        <ul style=" list-style-type: none;">
+          <li><input type="radio" name="report" id="button-1"> 스팸홍보/도배글</input></li>
+          <li><input type="radio" name="report" id="button-2"> 음란물</input></li>
+          <li><input type="radio" name="report" id="button-3"> 불법정보 포함</input></li>
+          <li><input type="radio" name="report" id="button-4"> 청소년 유해 게시물</input></li>
+          <li><input type="radio" name="report" id="button-5"> 욕설/생명경시/혐오/차별적 표현</input></li>
+          <li><input type="radio" name="report" id="button-6"> 개인정보 노출</input></li>
+          <li><input type="radio" name="report" id="button-7"> 불쾌한 표현</input></li>
+          <li><input type="radio" name="report" id="button-8"> 명예훼손/저작권 침해</input></li>
+          <li><input type="radio" name="report" id="button-9"> 불법촬영물 포함</input></li>
+        </ul>
+  
+      </div>
+  
+      <!-- 신고 내용 작성 -->
+      <div class="report-comment">
+        <textarea cols="36" rows="3" placeholder="기타 의견을 적어주세요."></textarea>
+      </div>
+  
+      <!-- 신고 버튼 -->
+      <div class="submit">
+        <button type="submit">신고하기</button>
+      </div>
+    </form>
+  </main>
+
+
+  
+</body>
+</html>

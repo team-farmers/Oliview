@@ -23,10 +23,10 @@
       <!-- 리뷰 헤드 - 제목, 평점, 찜,주소 -->
       <div class="contents-head">
         <section class="head-1">
-          <section class="head-title" th:text="*{reviewTitle}">가게이름
-            <span class="head-rating" style="color: #f1c93b;">(
-              <i class="fa-sharp fa-solid fa-star fa-sm" style="color: #f1c93b;"></i>
-              4.5 )</span>
+          <section class="head-title" >
+            <span class="store-title" th:text="*{reviewTitle}">가게이름</span>
+            <span class="head-rating" style="color: #f1c93b;" th:text="|가게평점 *{storeStarTotal}|">가게평점</span>
+            <i class="fa-sharp fa-solid fa-star fa-sm" style="color: #f1c93b;"></i>
           </section>
           <section class="head-address" th:text="*{reviewAddress}">주소</section>
         </section>
@@ -35,7 +35,6 @@
           <section class="head-like">
             <!-- 찜 -->
             <i class="fa-heart" th:classappend="${likeCheck} ? fa-solid : fa-regular" id="reviewLike"></i>
-
           </section>
         </section>
       </div>
@@ -47,10 +46,7 @@
 
         <!-- 리뷰 사진 -->
         <section class="main-1">
-          <a href="#">
-            <img th:src="*{reviewImg}" alt="음식">
-
-          </a>
+          <img th:src="*{reviewImg}" alt="음식">
         </section>
 
         <!-- 리뷰 글 -->
@@ -61,7 +57,7 @@
             <section class="rating-total"> 
               <section class="profile">
                 <section class="profile-img"><img th:src="*{memberProfile}" alt="프로필사진"></section>
-                <span class="nickname" th:text="*{memberNickname}">미쉘</span>
+                <span class="nickname" th:text="*{memberNickname}">닉네임</span>
               </section>
               <span class="star-total" th:text="*{starTotal}">총점</span>
               <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #66B97E;"></i>
@@ -101,7 +97,7 @@
         </section>
       </div>
 
-          <!-- 조회수, 신고하기 / 로그인 시 - 글 수정하기, 삭제하기-->
+      <!-- 조회수, 신고하기 / 로그인 시 - 글 수정하기, 삭제하기-->
       <div class="contents-foot">
         <section class="foot-1">
           <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
@@ -118,9 +114,9 @@
         <section class="foot-4">
           <button class="deleteBtn" id="deleteBtn">삭제하기</button>
         </section>
-        <section class="foot-5">
+        <!-- <section class="foot-5">
           <button class="prevBtn"><a href="#">목록으로</a></button>
-        </section>
+        </section> -->
       </div>
   
 

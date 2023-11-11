@@ -34,5 +34,8 @@ public class Review {
 	
     // 댓글 목록을 저장할 필드
     private List<Comment> commentList;
+    
+    // 가게평점
+    private double storeStarTotal;
 
 }
