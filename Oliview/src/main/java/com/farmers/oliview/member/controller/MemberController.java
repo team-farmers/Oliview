@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -36,7 +37,11 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("login")
-	public String login() {
+	public String login(@RequestHeader("referer") String referer, Model model) {
+		
+		// 이전페이지 주소 저장해 전달
+		model.addAttribute("referer", referer);
+		
 		return "member/login";
 	}
 	
@@ -45,11 +50,12 @@ public class MemberController {
 	 * @param inputMember
 	 * @param model
 	 * @param ra
+	 * @param referer : 요청 헤더에 기록된 요청 이전페이지 주소
 	 * @return loginMember
 	 */
 	@PostMapping("login")
 	public String login(Member inputMember, Model model, RedirectAttributes ra,
-			String saveId, HttpServletResponse resp) {
+			String saveId, HttpServletResponse resp, String referer) {
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(inputMember);
@@ -72,8 +78,14 @@ public class MemberController {
 			// 회원정보 세션에 저장
 			model.addAttribute("loginMember", loginMember);
 			
-			// 메인페이지 리다이렉트
+			// refer이 null일 경우 에러처리
+//			if(referer == null) {
+//				
+//			}
+			
+			// 이전페이지로 리다이렉트
 			return "redirect:/";
+//			return "redirect:" + referer; // referer 왜 안나옴?? 왜?!?!?!?!?!?!?
 		} 
 		
 		// 로그인 정보 불일치시

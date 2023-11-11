@@ -292,6 +292,8 @@ main::-webkit-scrollbar{
   display: flex;
   justify-content: end;
   align-items: end;
+
+  margin-top: 1rem;
 }
 
 .btns > button{
@@ -720,7 +722,7 @@ main::-webkit-scrollbar{
 
 /* 페이지 */
 .pagination-area{
-  margin-top: 4rem;
+  margin-top: 6rem;
   height: 8rem;
 }
 

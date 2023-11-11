@@ -87,4 +87,10 @@ public interface MyPageMapper {
 	 */
 	List<Comment> myCommentList(int memberNo, RowBounds rowBounds);
 
+	/** 댓글 삭제 기능
+	 * @param map
+	 * @return
+	 */
+	int deleteComments(Map<String, Object> map);
+
 }

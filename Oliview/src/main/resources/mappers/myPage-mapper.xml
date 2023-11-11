@@ -70,7 +70,7 @@
 			UNION
 			SELECT '같이 먹어요', BOARD_TITLE , 
 			TO_CHAR(DATE_CREATED, 'YYYY-MM-DD HH24:MI:SS') "writeDate",
-			'/together/' || BOARD_CODE || '/' || BOARD_NO "url"
+			'/together/' || BOARD_NO "url"
 			FROM TOGETHER
 			WHERE MEMBER_NO = #{memberNo}
 			AND BOARD_DEL_FL = 'N')
@@ -119,6 +119,14 @@
 		WHERE C.MEMBER_NO = #{memberNo}
 		AND COMMENT_DEL_FL = 'N'
 	</select>
+	
+	
+	<!--선택한 댓글 삭제하기-->
+	<update id="deleteComments">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_FL ='Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
 	
    
 

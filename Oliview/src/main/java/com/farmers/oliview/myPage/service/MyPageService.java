@@ -64,4 +64,12 @@ public interface MyPageService {
 	 */
 	Map<String, Object> myCommentList(Member loginMember, int cp);
 
+	/** 댓글 삭제
+	 * @param memberNo 
+	 * @param commentNoList
+	 * @return
+	 */
+	int deleteComments(int memberNo, List<Integer> commentNoList);
+
+
 }

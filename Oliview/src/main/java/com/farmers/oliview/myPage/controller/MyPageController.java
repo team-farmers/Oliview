@@ -295,6 +295,32 @@ public class MyPageController {
 	}
 	
 	
+	/** 내가 쓴 댓글 삭제
+	 * @param commentNoList
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("delete-comment")
+	public String deleteComments(@RequestParam(value="commentNo") List<Integer> commentNoList,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra) {
+		
+		// 댓글 삭제 서비스 호출
+		int result = service.deleteComments(loginMember.getMemberNo(), commentNoList);
+		
+		String message = null;
+		
+		if(result > 0) {
+			message = "댓글 삭제가 완료되었습니다.";
+		} else {
+			message = "댓글 삭제가 실패하였습니다.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:my-comment";
+	}
 	
 	
 	
