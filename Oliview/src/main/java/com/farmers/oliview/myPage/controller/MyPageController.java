@@ -273,7 +273,13 @@ public class MyPageController {
 	
 	
 	
-	// 내가 쓴 댓글
+	/** 내가 쓴 댓글 목록 조회
+	 * @param model
+	 * @param loginMember
+	 * @param cp
+	 * @param paramMap
+	 * @return
+	 */
 	@GetMapping("my-comment")
 	public String myComment(Model model, 
 			@SessionAttribute("loginMember") Member loginMember,
