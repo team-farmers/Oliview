@@ -26,20 +26,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("review")
-@SessionAttributes({"loginMember"})
 @RequiredArgsConstructor
+@RequestMapping("review")
+@SessionAttributes({ "loginMember" })
 public class EditReviewController {
 
 	private final EditReviewService service;
 
 	private final ReviewService ReviewService;
 
-	@RequestMapping("insert")
-	public String insert() {
-		return "review/insert";
-	}
-
+	// 게시글 작성 화면 전환
 	@GetMapping("insert")
 	public String insertReview(@SessionAttribute(value = "loginMember", required = false) Member loginMember,
 			RedirectAttributes ra) {
@@ -52,20 +48,11 @@ public class EditReviewController {
 
 	}
 
-	/**
-	 * 게시글 작성
-	 * 
-	 * @param ra
-	 * @param review
-	 * @param loginMember
-	 * @return
-	 * @throws IOException 
-	 * @throws IllegalStateException 
-	 */
+	// 게시글 작성
 	@PostMapping("insert")
-	public String insertReview(RedirectAttributes ra, Review review, 
-			@RequestParam("inputImage") MultipartFile img,
-			@SessionAttribute(value = "loginMember", required = false) Member loginMember) throws IllegalStateException, IOException {
+	public String insertReview(RedirectAttributes ra, Review review, @RequestParam("inputImage") MultipartFile img,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember)
+			throws IllegalStateException, IOException {
 
 		review.setMemberNo(loginMember.getMemberNo());
 
@@ -80,11 +67,7 @@ public class EditReviewController {
 		return "redirect:insert";
 	}
 
-	/**
-	 * 게시글 수정 화면 전환
-	 * 
-	 * @return
-	 */
+	// 게시글 수정 화면 전환
 	@GetMapping("/{reviewNo:[0-9]+}/update")
 	public String updateReview(@PathVariable("reviewNo") int reviewNo, Model model) {
 
@@ -99,65 +82,57 @@ public class EditReviewController {
 	}
 
 	@PostMapping("/{reviewNo:[0-9]+}/update")
-	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review, String querystring,
-			@RequestParam("reviewImg") MultipartFile img) {
+	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review,
+			@RequestParam("inputImg") MultipartFile img) throws IllegalStateException, IOException {
 
 		review.setReviewNo(reviewNo);
 
-		int result = service.updateReview(review,img);
+		int result = service.updateReview(review, img);
 
 		String message = null;
 		String path = null;
 
 		if (result > 0) {
 			message = "게시글이 수정 되었습니다.";
-			path = String.format("redirect:/review/%d%s", reviewNo, querystring);
+			path = "redirect:/review/" + reviewNo;
 		} else {
 			message = "게시글 수정 실패...";
-			path = "redirect:update";
+			path = "redirect:/review/{reviewNo}/update";
 		}
 
 		return path;
 	}
 
-	
-	/** 게시글 삭제
-	 * @param reviewNo
-	 * @param loginMember
-	 * @param ra
-	 * @return
-	 */
+	// 게시글 삭제
 	@GetMapping("{reviewNo:[0-9]+}/delete")
-	public String deleteReview(@PathVariable("reviewNo") int reviewNo, @SessionAttribute(value = "loginMember", required = false) Member loginMember,
-			RedirectAttributes ra) {
-		
-		if(loginMember == null) {
+	public String deleteReview(@PathVariable("reviewNo") int reviewNo,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember, RedirectAttributes ra) {
+
+		if (loginMember == null) {
 			ra.addFlashAttribute("message", "로그인 후 이용해주세요");
 			return "redirect:/member/login";
 		}
-		
-		Map<String , Integer> paramMap = new HashMap<>();
-		
+
+		Map<String, Integer> paramMap = new HashMap<>();
+
 		paramMap.put("reviewNo", reviewNo);
 		paramMap.put("memberNo", loginMember.getMemberNo());
-		
+
 		int result = service.deleteReview(paramMap);
-		
+
 		String path = null;
 		String message = null;
-		
-		if(result > 0) {
-			message = "삭제 되었습니다";
-			path = "redirect:/review" + result; // 해당 게시판 첫 페이지
-			
+
+		if (result > 0) {
+			message = "게시글을 삭제했습니다.";
+			path = "redirect:/review/searchReview";
 		} else {
-			message = "삭제 실패";
+			message = "게시글 삭제를 실패했습니다.";
 			path = "redirect:/";
 		}
-		
+
 		ra.addFlashAttribute("message", message);
 		return path;
 	}
-
 
 }

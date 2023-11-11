@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.farmers.oliview.common.utility.Util;
@@ -17,72 +18,57 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(rollbackFor = Exception.class)
 @PropertySource("classpath:/config.properties")
 public class EditReviewServiceImpl implements EditReviewService {
 
 	private final EditReviewMapper mapper;
-	
+
 	@Value("${my.board.location}")
 	private String folderPath;
-	
+
 	@Value("${my.board.webpath}")
 	private String webPath;
 
 	// 게시글 작성
 	@Override
 	public int insertReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
-		
+
 		String rename = Util.fileRename(img.getOriginalFilename());
-		
+
 		review.setReviewImg(webPath + rename);
-		
+
 		int result = mapper.insertReview(review);
-		
-		if (result == 0) return 0;
-		
+
+		if (result == 0)
+			return 0;
+
 		img.transferTo(new File(folderPath + rename));
-		
+
 		return review.getReviewNo();
 	}
-	
+
+	// 게시글 수정
 	@Override
-	public int updateReview(Review review, MultipartFile img) {
-		
-		
-		String backup = review.getReviewImg();
-		
-		String rename = null;
-		
+	public int updateReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
+
 		int result = mapper.updateReview(review);
-		
-	
-		
-		if(result > 0) {
-			if(img.getSize() > 0 ) {
-				
-				rename = Util.fileRename(img.getOriginalFilename());
-				
-				review.setReviewImg(webPath + rename);
-			} else {
-				
-				review.setReviewImg(null);
-			}
+
+		if (result > 0) {
+			String rename = Util.fileRename(img.getOriginalFilename());
+			review.setReviewImg(webPath + rename);
+
+			img.transferTo(new File(folderPath + rename));
+
 		}
-	
-		
-		
-		
-		
-		return 0;
+
+		return review.getReviewNo();
 	}
-	
+
+	// 게시글 삭제
 	@Override
 	public int deleteReview(Map<String, Integer> paramMap) {
 		return mapper.deleteReview(paramMap);
 	}
-
-
-
-
 
 }
