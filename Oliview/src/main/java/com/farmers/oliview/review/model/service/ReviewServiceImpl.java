@@ -23,7 +23,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private final ReviewMapper mapper;
 	
 	
-	// 전체 조회
+	// 전체 조회 - 인기순
 	@Override
 	public Map<String, Object> allReview(int cp) {
 		
@@ -51,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 	
-	// 검색 조회
+	// 검색 조회 - 인기순
 	@Override
 	public Map<String, Object> searchReview(String searchInput, int cp) {
 		
@@ -74,12 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 
-	// 최신순 조회
-	@Override
-	public List<Review> searchLatest() {
-		return mapper.searchLatest();
-	}
-	
+
 	
 	
 	// ============================================================

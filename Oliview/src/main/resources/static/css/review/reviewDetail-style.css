@@ -33,11 +33,20 @@ main{
   height: 70%;
   font-size: 3.5rem;
   font-family: 'GmarketSansMedium';
+  display: flex;
   align-items: flex-end;
 }
 
+.head-title >*{
+  margin-right: 0.8rem;
+}
+.head-title>i{
+  font-size: 1.8rem;
+  padding-bottom: 1.4rem;
+}
+
 .head-rating{
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: 'GmarketSansMedium';
 }
 
@@ -81,8 +90,9 @@ main{
 
 .main-1{
   width: 45%;
-  border: 0.1rem solid var(--main-color); /*임시*/
   border-radius: 1rem;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -242,11 +252,11 @@ main{
   cursor: pointer;
 }
 .updateBtn{
-  background-color: var(--footer-color);
+  background-color: var(--main-color);
 
 }
 .deleteBtn{
-  background-color: var(--footer-color);
+  background-color: var(--main-color);
 }
 .prevBtn{
   background-color: var(--main-color);
