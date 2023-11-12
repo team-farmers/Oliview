@@ -42,7 +42,8 @@ public class Together {
 	private String thumbnauil;
 	
 	
-		
+	// 메인페이지 최신게시물 불러올때 사용되는 url
+	private String url;
 	
 	
 	
