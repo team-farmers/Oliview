@@ -13,6 +13,7 @@ import lombok.ToString;
 public class Together {
 	
 	private int boardNo; // 게시글 번호
+	
 	private String boardTitle; // 제목
 	private int numberPeople; // 참여인원
 	private String dateCreated; // 작성일
@@ -24,7 +25,7 @@ public class Together {
 	
 	private int memberNo; // 회원번호
 	private String mettingDate; // 모임날짜
-	private int maxPeople;
+    private String maxPeople;
 	private int currentPeople;
 	
     private int readCount;

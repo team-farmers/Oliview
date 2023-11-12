@@ -60,7 +60,27 @@
                   <a href="#" class="num">5</a>
                   <a href="#" class="bt next">></a>
                   <a href="#" class="bt last">>></a>
+ <ul class="pagination" th:unless="${param.searchInput == null}">
 
+        <li><a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp=1)}">&lt;&lt;</a></li>
+        <li><a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp=${pagination.prevPage})}">&lt;</a></li>
+
+
+        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+            <li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">1</a></li>              
+            <li th:unless="${i == pagination.currentPage}"> 
+                <a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp = ${i})}" th:text="${i}">2</a>
+            </li>
+        </th:block>
+
+
+        <li><a th:href="@{/together/searchReview(searchInput=${param.searchInput}, cp=${pagination.nextPage})}">&gt;</a></li>
+        <li><a th:href="@{/together/searchReview(searchInput=${param.searchInput}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+      </ul>
+ 
+
+  
+    </section>
 
         </div>
 
@@ -92,7 +112,7 @@
 
     <button>검색</button>
   </form>
-
+  <script src="/js/together/inven.js"></script>
 </body>
 </main>
 

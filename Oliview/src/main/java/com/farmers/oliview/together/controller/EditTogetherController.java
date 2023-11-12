@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.together.dto.Together;
-import com.farmers.oliview.together.service.EbitTogetherService;
+import com.farmers.oliview.together.service.EditTogetherService;
 import com.farmers.oliview.together.service.TogetherService;
 
 import lombok.RequiredArgsConstructor;
@@ -31,12 +31,11 @@ import lombok.RequiredArgsConstructor;
 @SessionAttributes
 public class EditTogetherController {
 
-		private final EbitTogetherService service;
+		private final EditTogetherService service;
 		private final TogetherService togetherservice;
 		
 		/**
 		 * 게시글 삭제
-		 * @param boardCode
 		 * @param boardNo
 		 * @param loginMember
 		 * @param ra
@@ -44,10 +43,8 @@ public class EditTogetherController {
 		 * @return
 		 */
 		
-		@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}/delete")
+		@GetMapping("{boardNo:[0-9]+}/delete")
 		public String deleteBoard(
-				
-				@PathVariable("boardCode") int boardCode, 
 				@PathVariable("boardNo") int boardNo,
 				@SessionAttribute(value = "loginMember", required = false) Member loginMember,
 				RedirectAttributes ra, 
@@ -60,7 +57,6 @@ public class EditTogetherController {
 				}
 				
 				Map<String, Integer> paramMap = new HashMap<>();
-				paramMap.put("boardCode" ,boardCode);
 				paramMap.put("boardNo", boardNo);
 				paramMap.put("memberNo", loginMember.getMemberNo());
 				
@@ -69,16 +65,13 @@ public class EditTogetherController {
 				String path = null;
 				String message = null;
 				
-				if (result >0) {
-					
+				if (result >0) {		
 					message ="삭제되었습니다";
-					path = "redirect:/board" + boardCode;
-					
+					path = "redirect:/together/inven";			
 				} else {
-					
-					path = "redirect:" + referer;
-					
 					message = "삭제실패";
+					path = "redirect:/";
+					
 				}
 				 
 				ra.addAttribute("message",message);
@@ -105,18 +98,20 @@ public class EditTogetherController {
 
 				 		}
 				 	
-				 	/**
-				 	 * 게시글 작성
-				 	 * @param boardCode
-				 	 * @param loginMember
-				 	 * @param together
-				 	 * @param images
-				 	 * @param ra
-				 	 * @return
-				 	 * @throws IllegalStateException
-				 	 * @throws IOException
-				 	 */
+	//----------------------------------------------------------------------------------------------------
 				 
+				 
+				 
+				 /**
+				  * 게시글 수정
+				  * @param loginMember
+				  * @param together
+				  * @param images
+				  * @param ra
+				  * @return
+				  * @throws IllegalStateException
+				  * @throws IOException
+				  */
 				 
 					@PostMapping("posting")
 					public String insertBoard(
@@ -136,7 +131,7 @@ public class EditTogetherController {
 
 						if (boardNo > 0) {
 							ra.addFlashAttribute("message", "게시글 작성 성공");
-							return String.format("redirect:/together/%s", boardNo);
+							return String.format("redirect:/together/%d", boardNo);
 						}
 
 						
@@ -146,26 +141,56 @@ public class EditTogetherController {
 
 					}
 
-					@GetMapping("/{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
-					public String updateBoard(@PathVariable("boardCode") int boardCode, 
+					
+					
+					
+					
+					
+					
+					
+					/**
+					 * 게시글 수정 화면 전환
+					 * @param boardNo
+					 * @param model
+					 * @return
+					 */
+					
+					@GetMapping("{boardNo:[0-9]+}/update")
+					public String updateBoard(
 							@PathVariable("boardNo") int boardNo,
 							Model model) {
 
 					
 
 						Map<String, Object> map = new HashMap<>();
-						map.put("boardCode", boardCode);
 						map.put("boardNo", boardNo);
 
 						Together together = togetherservice.board(map);
 
 						model.addAttribute("together", together);
 
-						return "together/boardUpdate";
+						return "together/posting";
 					}
+					
+				
+					
 
-				 @PostMapping("/{boardCode:[0-9]+}/{boardNo:[0-9]+}/update")
-				 public String updeateBoard(@PathVariable("boardCode")int boardCode,
+					
+					
+				/**
+				 * 게시글 수정
+				 * @param boardNo
+				 * @param together
+				 * @param querystring
+				 * @param deleteOrder
+				 * @param images
+				 * @param ra
+				 * @return
+				 * @throws IllegalStateException
+				 * @throws IOException
+				 */
+				 @PostMapping("{boardNo:[0-9]+}/update")
+				 public String updateBoard(
 						 @PathVariable("boardNo") int boardNo,
 							Together together, 
 							String querystring, 
@@ -184,12 +209,12 @@ public class EditTogetherController {
 							
 							if(result > 0) {
 								message = "게시글 수정 성공 ";
-								path = String.format("redirect:/board/%d/%d%s", boardCode, boardNo,querystring);
+								path = "redirect:/together/" + boardNo;
 							}
 							
 							else {
 								message = "게시글 수정 실패";
-								path = "redirect:update";
+								path = "redirect:/together/{boardNo}/update";
 								
 							}
 							
@@ -199,16 +224,6 @@ public class EditTogetherController {
 							
 				 }
 				 
-				 
-				 
-				 
-				 
-				 
-				 
-				 
-				
-				
-	
-	
+
 
 }

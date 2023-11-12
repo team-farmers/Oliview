@@ -25,9 +25,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 @PropertySource("classpath:/config.properties")
-public class EbitTogetherServiceImpl implements EbitTogetherService {
+public class EditTogetherServiceImpl implements EditTogetherService {
 	
 	private final EditTogetherMapper mapper;
+	
 	
 	//@Value("${my.together.location}")
 	//private String folderPath;
@@ -39,7 +40,7 @@ public class EbitTogetherServiceImpl implements EbitTogetherService {
 	@Value("${my.together.location}")
 	private String folderPath;
 	
-	
+	// 게시글 작성
 	@Override
 	public int insertBoard(Together together, List<MultipartFile> images) throws IllegalStateException, IOException {
 		
@@ -51,7 +52,7 @@ public class EbitTogetherServiceImpl implements EbitTogetherService {
 		
 		List<BoardImg> uploadList = new ArrayList<>();
 		
-for(int i = 0; i <images.size() ; i++) {
+		for(int i = 0; i <images.size() ; i++) {
 			
 		
 			if(images.get(i).getSize() > 0) {
@@ -110,6 +111,7 @@ for(int i = 0; i <images.size() ; i++) {
 	
 		}
 	
+		//게시글 삭제
 		@Override
 		public int deleteBoard(Map<String, Integer> paramMap) {
 			
@@ -117,7 +119,7 @@ for(int i = 0; i <images.size() ; i++) {
 		}
 	
 		
-	
+		//게시글 수정
 		@Override
 		public int updateBoard(Together together, List<MultipartFile> images, String deleteOrder) throws IllegalStateException, IOException {
 				

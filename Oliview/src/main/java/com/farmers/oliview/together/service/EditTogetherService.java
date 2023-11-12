@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.farmers.oliview.together.dto.Together;
 
-public interface EbitTogetherService {
+public interface EditTogetherService {
 	
 	
 	/**
