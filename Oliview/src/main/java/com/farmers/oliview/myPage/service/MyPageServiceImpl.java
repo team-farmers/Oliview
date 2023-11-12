@@ -231,5 +231,29 @@ public class MyPageServiceImpl implements MyPageService{
 		return map;
 	}
 	
+	
+	/** 댓글 삭제 기능
+	 *
+	 */
+	@Override
+	public int deleteComments(int memberNo, List<Integer> commentNoList) {
+		
+		int result = 0;
+		int resultSum = 0;
+		
+		for( int i = 0; i < commentNoList.size(); i++) {
+			Map<String, Object> map = new HashMap<>();
+
+			map.put("memberNo", memberNo);
+			map.put("commentNo", commentNoList.get(i));
+			
+			result = mapper.deleteComments(map);
+			
+			resultSum += result;
+		}
+		
+		return resultSum;
+	}
+	
 
 }

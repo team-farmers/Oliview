@@ -17,9 +17,9 @@
 
     <!-- 로그인박스 -->
     <section class="container">
-
+      
       <form action="login" method="POST" id="loginForm">
-
+        
         <section class="input-box" id="id-input-box">
           <i class="fa-regular fa-user fa-lg" style="color: #cbcbcb;"></i>
           <input type="text" name="memberId" placeholder="아이디" required>
@@ -34,9 +34,14 @@
           <input type="checkbox" name="saveId" id="saveId">
           <label for="saveId"><i class="fa-regular fa-circle-check fa-lg" style="color: #cbcbcb;"></i>아이디 저장</label>
         </div>
+
+        <!-- 로그인 이전 페이지 기록 넘기기 _ 정보가왜없을까..?...ㅠ-->
+        <input type="hidden" name="referer" th:value="${session.referer}">
         
         <button class="login-btn">로그인</button>
       </form>
+
+
 
       <p class="text-area">
         <a href="pw-find">비밀번호 찾기</a>

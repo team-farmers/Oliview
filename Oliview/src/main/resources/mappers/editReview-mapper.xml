@@ -22,7 +22,7 @@
 		UPDATE "REVIEW"
 		SET REVIEW_DEL_FL = 'Y'
 		WHERE REVIEW_NO = #{reviewNo}
-		AND MEMBER_N0 = #{memberNo}
+		AND MEMBER_NO = #{memberNo}
 	</update>
 
 	<update id="updateReview">

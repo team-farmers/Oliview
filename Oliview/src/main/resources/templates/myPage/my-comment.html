@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>마이페이지 - 내가 쓴 댓글</title>
-  <link rel="stylesheet" th:href="@{/css/myPage/myPage-style.css}">
+  <link rel="stylesheet" th:href="@{/css/myPage/myComment-style.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 <body>
@@ -33,39 +33,85 @@
           <!-- 댓글 목록 -->
           <section id="my-article-index-container">
 
-            <table class="myPage-table">
-              <tr id="myPage-comment-table-title-row">
-                <td class="myPage-table-title">내용</td>
-                <td class="myPage-table-title">작성일</td>
-              </tr>
-
-              <!-- 작성한 댓글이 없을 때 -->
-              <tr th:if="${#lists.size(commentList) == 0}">
-                <td class="myPage-table-title" colspan="2">작성한 댓글이 존재하지 않습니다.</td>
-              </tr>
-
-              <!-- 댓글이 존재할 때 -->
-              <th:block th:unless="${#lists.size(commentList) == 0}">
-                <tr th:each="comment : ${commentList}" th:object="${comment}">
-                  <td class="myPage-table-td-comment">
-                    <!-- 내용 안에 선택체크박스 section-->
-                    <section>
-                      <input type="checkbox" name="" id="">
-                    </section>
-                    <!-- 댓글 내용 section -->
-                    <section>
-                      <label id="comment-contents">
-                        <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" th:text="*{commentContent}">댓글 내용</a>
-                      </label>
-                      <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" id="comment-placeName" th:text="*{reviewTitle}">게시글 제목<span class="myPage-table-td-comment-highlight">[[[*{commentCount}]]]</span></a>
-                    </section>
-                  </td>
-                  <td class="myPage-table-td" th:text="*{commentWriteDate}"> 작성일 2023-10-23 19:23</td>
+            <form action="delete-comment" method="POST" id="deleteCommentFrm"> <!-- 선택된 댓글 삭제 -->
+              <table class="myPage-table">
+                <tr id="myPage-comment-table-title-row">
+                  <td class="myPage-table-title">내용</td>
+                  <td class="myPage-table-title">작성일</td>
                 </tr>
-              </th:block>
 
-              <tr>
-            </table>
+                <!-- 작성한 댓글이 없을 때 -->
+                <tr th:if="${#lists.size(commentList) == 0}">
+                  <td class="myPage-table-title" colspan="2">작성한 댓글이 존재하지 않습니다.</td>
+                </tr>
+
+                <!-- 댓글이 존재할 때 -->
+                <th:block th:unless="${#lists.size(commentList) == 0}">
+                  <tr th:each="comment : ${commentList}" th:object="${comment}">
+                    <td class="myPage-table-td-comment">
+
+                      <!-- 내용 안에 선택체크박스 section-->
+                      <section>
+                        <input type="checkbox" name="commentNo" id="deleteCheckbox" th:value="*{commentNo}">
+                      </section>
+                      <!-- 댓글 내용 section -->
+                      <section>
+                        <label id="comment-contents">
+                          <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" th:text="*{commentContent}">댓글 내용</a>
+                        </label>
+                        <a th:href="@{{url}(url=*{url}, cp=${pagination.currentPage})}" id="comment-placeName" th:text="*{reviewTitle}">게시글 제목<span class="myPage-table-td-comment-highlight">[[[*{commentCount}]]]</span></a>
+                      </section>
+                    </td>
+                    <td class="myPage-table-td" th:text="*{commentWriteDate}"> 작성일 2023-10-23 19:23</td>
+                  </tr>
+                </th:block>
+              </table>
+
+              <!-- 삭제버튼  -->
+              <section class="btns">
+                <button id="comment-delete-Btn">삭제</button>
+              </section>
+            </form>
+
+            <!-- 페이지네이션 // 댓글글 있을때만 보이게 함 -->
+            <div class="pagination-area" th:if="${#lists.size(commentList) > 0}">
+              <ul class="pagination">
+
+                <!-- 첫 페이지로 이동 -->
+                <li>
+                  <a th:href="@{/myPage/my-comment(cp=1)}">&lt;&lt;</a>
+                </li>
+
+                <!-- 이전 목록 마지막 번호로 이동 -->
+                <li>
+                  <a th:href="@{/myPage/my-comment(cp=${pagination.prevPage})}">&lt;</a>
+                </li>
+
+
+                <!-- 특정 페이지로 이동 -->
+                <!-- 타임리프에서 특정 범위만큼 반복하기 (1~10) -->
+                <!-- #numbers.sequence(1,10, 1) : 1~10까지 1씩 증가하며 차례대로 추가한 리스트 생성 -->
+                <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+
+                  <!-- 현재 보고있는 페이지 -->
+                  <li th:if="${i == pagination.currentPage}">
+                    <a class="current" th:text="${i}">1</a>
+                  </li>
+
+                  <!-- 보고있지 않은 페이지 -->
+                  <li th:unless="${i == pagination.currentPage}">
+                    <a th:href="@{/myPage/my-comment(cp=${i})}" th:text="${i}">2</a>
+                  </li>
+                </th:block>
+
+                <!-- 다음 목록 시작 번호로 이동 -->
+                <li><a th:href="@{/myPage/my-comment(cp=${pagination.nextPage})}">&gt;</a></li>
+
+                <!-- 끝 페이지로 이동 -->
+                <li><a th:href="@{/myPage/my-comment(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+              </ul>
+            </div>
+
 
           </section>
         </section>
@@ -77,6 +123,32 @@
   <!-- footer -->
   <th:block th:replace="~{common/footer}"></th:block>
 
+  <script>
+
+    /* 체크된 댓글이 없으면 삭제되지 않도록 하기 */
+    document.getElementById("deleteCommentFrm").addEventListener("submit", e=>{
+      
+      // 체크박스 요소의 NodeList 가져오기
+      const checkboxs = document.querySelectorAll("input[name='commentNo']");
+      
+      // 체크박스 존재 확인 변수
+      let checked = false;
+      
+      // 체크된 체크박스가 있으면 checked 변수를 true로 변경
+      for(let checkbox of checkboxs){
+        if(checkbox.checked){
+          checked = true;
+        }
+      }
+
+      // 체크박스가 아무것도 없으면 제출 막음
+      if(!checked){
+        alert("선택된 댓글이 없습니다.");
+        e.preventDefault();
+      }
+    })
+
+  </script>
 
 </body>
 </html>
