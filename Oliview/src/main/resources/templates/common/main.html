@@ -86,25 +86,28 @@
       </ul>
     </nav>
     
-    <section class="content">
+    <!-- reviewList, togetherList 변수 선언 -->
+    <section class="content" th:with="reviewList=${reviewList}, togetherList=${togetherList}">
       
+      <!-- review 섹션 -->
       <section class="review-container">
 
-        <section class="review-content">
+        <section class="review-content" th:each="review : ${reviewList}" th:object="${review}">
+
           <section id="review-img">
-            <a href="#">
-              <img src="../images/리뷰이미지1.jpg" alt="리뷰 이미지" height="450rem">
+            <a th:href="@{{url}(url=*{url})}">
+              <img th:src="*{reviewImg}" alt="리뷰 이미지" height="450rem">
             </a>
           </section>
 
           <section class="review-article">
             <section>
-              <article id="review-title"><a href="#">스윗레시피</a></article>
-              <article id="reviewer"><a href="#">푸바오</a></article>
+              <article id="review-title"><a th:href="@{{url}(url=*{url})}" th:text="*{reviewTitle}">리뷰 제목</a></article>
+              <article id="reviewer"><a href="#" th:text="*{memberNickname}">작성자 닉네임</a></article>
             </section>
 
             <section>
-              <article id="review-place"><a href="#">강동</a></article>
+              <article id="review-place"><a href="#" th:text="*{reviewMenu}">리뷰메뉴</a></article>
               <span>|</span>
               <article id="review-stars">
                 <i class="fa-sharp fa-solid fa-star fa-2xl" style="color: #f1c93b;"></i>
@@ -118,7 +121,7 @@
 
         </section>
 
-        <section class="review-content">
+        <!-- <section class="review-content">
           <section id="review-img">
             <a href="#">
               <img src="../images/리뷰이미지2.jpg" alt="리뷰 이미지" height="450rem">
@@ -142,9 +145,9 @@
               </article>
             </section>
           </section>
-        </section>
+        </section> -->
 
-        <section class="review-content">
+        <!-- <section class="review-content">
           <section id="review-img">
             <a href="#">
               <img src="../images/리뷰이미지3.jpg" alt="리뷰 이미지" height="450rem">
@@ -166,10 +169,11 @@
               </article>
             </section>
           </section>
-        </section>
+        </section> -->
 
       </section>
 
+      <!-- 같이먹어요 섹션 -->
       <section class="eating-container">
           <section id="eating-title">
             <article>
@@ -180,28 +184,34 @@
             </article>
           </section>
 
-          <section class="eating-content">
+          <section class="eating-content" th:each="together : ${togetherList}" th:object="${together}">
             <section id="eating-img">
-              <a href="#">
-                <img src="../images/같이먹어요이미지1.jpg" alt="같이먹어요 이미지" height="70px">
+              <a th:href="@{{url}(url=*{url})}">
+
+                <!-- 같이먹어요 이미지가 없으면 -->
+                <img th:if="*{boardImg == null}"
+                th:src="#{user.default.image}" alt="같이먹어요 이미지" height="70px">
+
+                <!-- 같이먹어요 이미지가 있으면 -->
+                <img th:unless="*{boardImg == null}"
+                  th:src="*{boardImg}" alt="같이먹어요 이미지" height="70px">
               </a>
             </section>
 
             <section id="eating-article">
               
-              <article><a href="#">벌집삼겹살 같이먹어요</a></article>
+              <article><a th:href="@{{url}(url=*{url})}" th:text="*{boardTitle}">같이먹어요 타이틀</a></article>
 
               <article>
-                <a href="#">
-                  <span>10월 13일(금) 18:30</a></span>
-                  <span>목동</span>
+                <a th:href="@{{url}(url=*{url})}">
+                  <span th:text="*{mettingDate}">10월 13일(금) 18:30</a></span>
                 </a>
               </article>
 
               <article>
-                <a href="#">
+                <a th:href="@{{url}(url=*{url})}">
                   <i class="fa-solid fa-user fa-lg" style="color: #66b97e; padding: 0 5px;"></i>
-                  <span>2/4</span>
+                  <span th:text="*{maxPeople}">참여인원</span>
                   <span>명</span>
                 </a>
               </article>
@@ -211,7 +221,7 @@
 
 
 
-          <section class="eating-content">
+          <!-- <section class="eating-content">
             <section id="eating-img">
               <a href="#">
                 <img src="../images/같이먹어요이미지2.jpg" alt="같이먹어요 이미지" height="70px">
@@ -266,9 +276,9 @@
                 </a>
               </article>
               
-            </section>
-            
-          </section>
+            </section> 
+          </section>-->
+
       </section>
     </section>
   </main>
