@@ -72,6 +72,56 @@ public class ReviewController {
 		
 	}
 	
+	
+	/** 최신순 조회 
+	 * @param searchInput
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping(value="sortLatest", produces="application/json")
+	public List<Review> sortLatest(String searchInput){
+		
+		List<Review> reviewList = service.sortLatest(searchInput);
+		
+		return reviewList;
+	}
+	
+	
+	
+	/** 평점순 조회
+	 * @param searchInput
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping(value="sortRating", produces="application/json")
+	public List<Review> sortRating(String searchInput){
+
+		List<Review> reviewList = service.sortRating(searchInput);
+		
+		return reviewList;
+		
+	}
+	
+//
+//	오류로 주석처리
+//	
+//	/** 평점순 가게 조회
+//	 * @param reviewTitle
+//	 * @param model
+//	 * @param ra
+//	 * @return
+//	 */
+//	@GetMapping("reviewTitle")
+//	public String reviewStore(@RequestParam(required=false) String reviewTitle, Model model, RedirectAttributes ra) {
+//		
+//		List<Review> reviewList = service.ratingResult(reviewTitle);
+//		model.addAttribute(reviewList);
+//		
+//		return "review/rating-result";
+//		
+//	}
+	
+	
 
 	
 //	=============================================================================================================================

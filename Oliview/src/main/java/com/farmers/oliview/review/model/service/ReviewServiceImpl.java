@@ -74,8 +74,25 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 	
 
-
+	// 최신순
+	@Override
+	public List<Review> sortLatest(String searchInput) {
+		return mapper.sortLatest(searchInput);
+	}
 	
+	// 평점순
+	@Override
+	public List<Review> sortRating(String searchInput) {
+		return mapper.sortRating(searchInput);
+	}
+	
+	 
+	// 평점순 가게조회
+	@Override
+	public List<Review> ratingResult(String reviewTitle) {
+		return mapper.ratingResult(reviewTitle);
+	}
+
 	
 	// ============================================================
 	

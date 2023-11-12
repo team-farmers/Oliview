@@ -8,6 +8,9 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.farmers.oliview.review.model.dto.Review;
 
+/**
+ * 
+ */
 @Mapper
 public interface ReviewMapper {
 
@@ -34,8 +37,27 @@ public interface ReviewMapper {
 	 * @return reviewList
 	 */
 	List<Review> searchReview(String searchInput, RowBounds rowBounds);
+	
+	
+	
+	/** 최신순
+	 * @param searchInput
+	 * @return
+	 */
+	List<Review> sortLatest(String searchInput);
+
+	/** 평점순
+	 * @param searchInput
+	 * @return
+	 */
+	List<Review> sortRating(String searchInput);
 
 
+	/** 평점순 가게리스트 조회
+	 * @param reviewTitle
+	 * @return
+	 */
+	List<Review> ratingResult(String reviewTitle);
 	
 	//=====================================================================
 	
@@ -76,6 +98,11 @@ public interface ReviewMapper {
 	 * @return result
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
+
+
+
+
+
 
 
 

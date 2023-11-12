@@ -41,6 +41,11 @@ public class Review {
 
     // 가게평점
     private double storeStarTotal;
+    
+    
+    // 평점순
+    private int storeCount;
+    private double storeStarTotalRate;
 
 
 }

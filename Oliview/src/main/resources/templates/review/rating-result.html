@@ -15,6 +15,46 @@
   <main>
     <th:block th:replace="~{common/header}"></th:block>
 
+    <div class="outerBox" >
+
+      <!-- 왼쪽 가게 정보 영역 -->
+      <section class="info" th:object="${reviewList}">
+        <!-- <section id="info-rankNo">#1</section> -->
+        <section id="info-title" th:text="${reviewTitle}">가게이름</section>
+        <div class="info-star-i">
+          <section id="info-star" style="color: #f1c93b;" th:text="${reviewList[0].storeStarTotal}">가게총평점</section>
+          <span><i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></span>
+        </div>
+        <section id="info-tag" th:text="|# ${reviewList[0].reviewOneLine}|">#한줄평</section>
+      </section>
+
+      <div>
+        <div id="centerLine"></div>
+      </div>
+
+
+      <!-- 오른쪽 리뷰 모음 영역 -->
+      <section class="reviews">
+
+        <section class="review-row">
+      
+          <article class="review-col">
+            <a href="#"  id="review-img">
+              <img src="/draft_1/images/image-1.jpg" alt="image-1">
+            </a>
+            <div id="title"><a href="#">칠리칠리</a></div>
+            <div class="nickname-star-date">
+              <section id="nickname"><a href="#">푸바오</a></section>
+              <section id="star" style="color: #f1c93b;">4.5
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
+                <section id="date">2023.10.20.</section>
+              </div>
+          </article>
+
+
+        </section>
+
+
 
   </main>
   
