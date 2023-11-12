@@ -34,5 +34,8 @@ public class Review {
 	
     // 댓글 목록을 저장할 필드
     private List<Comment> commentList;
+    
+    // 메인페이지에서 리뷰 목록 불러올때 사용할 URL 필드
+    private String url;
 
 }
