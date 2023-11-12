@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리</title>
+
+    <th:block th:replace="~{common/common}"></th:block>
+</head>
+
+<body>
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <section class="conatiner">
+
+            <section class="member-container">
+                <section id="member-container">
+
+                    <section id="member-title-container">
+                        <article>회원 목록</article>
+                    </section>
+
+                    <section id="member-index-container">
+                        <table id="member-table">
+                            <tr id="member-table-row">
+                                <td>회원 번호</td>
+                                <td>ID</td>
+                                <td>닉네임</td>
+                                <td>이메일</td>
+                                <td>가입일자</td>
+                                <td>탈퇴여부</td>
+                            </tr>
+
+                            <tr th:each="member : ${memberList}" th:object="${member}">
+                                <td th:text="*{memberNo}">회원번호</td>
+                                <td>
+                                    <a th:href="@{/admin/memberInfo}" th:text="*{memberId}"></a>
+                                </td>
+                                <td th:text="*{memberNickname}">닉네임</td>
+                                <td th:text="*{memberEmail}">이메일</td>
+                                <td th:text="*{memberEnrollDate}">가입일자</td>
+                                <td th:text="*{memberDelFl}">탈퇴</td>
+                            </tr>
+                        </table>
+                    </section>
+
+                </section>
+
+            </section>
+        </section>
+
+    </main>
+</body>
+
+</html>

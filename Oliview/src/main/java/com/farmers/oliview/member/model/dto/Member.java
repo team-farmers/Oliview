@@ -17,5 +17,6 @@ public class Member {
 	private String memberEnrollDate;
 	private String authority;
 	private String agreeChoice;
+	private String memberDelFl;
 	
 }
