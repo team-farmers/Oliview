@@ -60,6 +60,7 @@
          </update>
 
 
+
    게시글 목록 조회
    <select id="selectBoardList" resultType="Together"> 
 	   SELECT BOARD_NO,
@@ -118,6 +119,10 @@
 
 
     게시글 상세 조회 
+
+	
+   <!-- 게시글 상세 조회 -->
+
    <select id="boardDetail" resultType="Together">
 
       SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, READ_COUNT,
@@ -141,6 +146,5 @@
                      READ_COUNT = READ_COUNT + 1
                      WHERE BOARD_NO = #{boardNo}
                   </update> 
--->
 
 </mapper>

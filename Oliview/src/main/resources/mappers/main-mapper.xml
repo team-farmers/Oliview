@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
+<mapper namespace="com.farmers.oliview.main.model.mapper.MainMapper">
+   
+    <!--리뷰 최신글 3개 불러오기-->
+	<select id="selectReview" resultType="Review">
+		SELECT *
+		FROM ( SELECT REVIEW_TITLE, 
+				TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') WRITE_DATE,
+				MEMBER_NICKNAME, REVIEW_MENU,
+				'/review/' || REVIEW_NO "url"
+				FROM REVIEW
+				JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE REVIEW_DEL_FL = 'N'
+				ORDER BY WRITE_DATE DESC )
+		<![CDATA[ WHERE ROWNUM <= 3 ]]>
+	</select>   
+	
+	
+	<!--같이먹어요 최신글 3개 불러오기-->
+	<select id="selectTogether" resultType="Together">
+		SELECT *
+		FROM ( SELECT  TO_CHAR(METTING_DATE, 'YYYY-MM-DD HH24:MI:SS') METTING_DATE,
+				BOARD_TITLE, BOARD_IMG, MAX_PEOPLE,
+				'/together/' || BOARD_NO "url"
+				FROM "TOGETHER"
+				WHERE BOARD_DEL_FL = 'N'
+				ORDER BY DATE_CREATED DESC)
+		<![CDATA[ WHERE ROWNUM <= 3 ]]>
+	</select>   
+	
+
+</mapper>

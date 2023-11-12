@@ -28,7 +28,7 @@
 
     <!-- 정렬 선택 영역 -->
     <section class="sort">
-      <a  class="sortBtn" id="sort-popular">인기순</a> <!-- 클릭시 색바꾸기 -->
+      <a  class="sortBtn" id="sort-popular" style="color: #66b97e;">인기순</a> <!-- 클릭시 색바꾸기 -->
       <span>|</span>
       <a class="sortBtn" id="sort-latest">최신순</a>
       <span>|</span>
@@ -61,16 +61,17 @@
       
               <!-- 제목(가게명) -->
               <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
-                th:text="*{reviewTitle}">가게이름</a></div>
+                th:text="*{reviewTitle}">가게이름</a>
+              </div>
       
               <!-- 닉네임/평점/작성일 -->
               <div class="nickname-star-date">
-                <a class="nickname" th:href="@{/review/{memberNickname} (memberNickname=*{memberNickname})}"
-                th:text="*{memberNickname}">푸바오</a>
-                <section class="star" style="color: #f1c93b;" th:text="*{starTotal}">4.5
-                  <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-                  <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
-                </div>
+                <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
+                th:text="*{memberNickname}">닉네임</a>
+                <section class="star" th:text="*{starTotal}">평점</section>
+                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+                <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
+              </div>
     
             </article>
   
@@ -136,6 +137,11 @@
 
   <!-- 풋터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+
+
+  
+
 
   <script src="/js/review/result.js"></script>
 
