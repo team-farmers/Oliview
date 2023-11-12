@@ -61,6 +61,10 @@ input:focus {outline:none;}
   color: var(--main-color);
 }
 
+.unclicked{
+  color: var(--footer-color) !important;
+}
+
 /* =========================================================== */
 /* 리뷰 목록 영역*/
 
@@ -135,7 +139,15 @@ input:focus {outline:none;}
 }
 .star{
   font-size: 1.5rem;
+  color: #f1c93b;
 }
+
+.nickname-star-date i{
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+  padding-bottom: 0.5rem;
+}
+
 .writeDate{
   font-size: 1.2rem;
   padding: 0 2rem;
@@ -146,6 +158,38 @@ a{
   text-decoration: none;
   color: inherit;
 }
+
+/* 평점순 */
+.reviewRank{
+  padding-top: 1rem;
+  display: flex;
+  font-size: 3rem;
+}
+.reviewRank> *{
+  padding: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.star-count{
+  padding-left: 1rem;
+  display: flex;
+}
+.star-count > *{
+  color: #f1c93b;
+  font-size: 1.5rem;
+  padding: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.rankNo-title{
+  display: flex;
+  font-size: 2.5rem ;
+  padding: 1.5rem 1.5rem 0;
+}
+.rankNo-title>*{
+  margin-right: 1rem;
+}
+
 
 /* =========================================================== */
 /* 다음 페이지 화살표 */

@@ -98,7 +98,7 @@
       </div>
 
       <!-- 조회수, 신고하기 / 로그인 시 - 글 수정하기, 삭제하기-->
-      <div class="contents-foot">
+      <div class="contents-foot" th:object="${review}">
         <section class="foot-1">
           <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
           <span class="hits" th:text="*{readCount}">조회수</span>
@@ -107,11 +107,10 @@
           <button class="reportBtn"><a onclick="openReportPopup()">
             <i class="fa-solid fa-triangle-exclamation"></i> 신고하기</a></button>
         </section>
-        <!-- <section class="foot-3" th:if="${session.loginMember != null and session.loginMember.memberNo == review.memberNo}"> -->
-        <section class="foot-3">
+        <section class="foot-3" th:if="${session.loginMember != null and session.loginMember.memberNo == review.memberNo}">
           <button class="updateBtn" id="updateBtn">수정하기</button>
         </section>
-        <section class="foot-4">
+        <section class="foot-4" th:if="${session.loginMember != null and session.loginMember.memberNo == review.memberNo}">
           <button class="deleteBtn" id="deleteBtn">삭제하기</button>
         </section>
         <!-- <section class="foot-5">
