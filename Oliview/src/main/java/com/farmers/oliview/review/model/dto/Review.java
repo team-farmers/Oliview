@@ -3,9 +3,11 @@ package com.farmers.oliview.review.model.dto;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Review {
 	
 	// review 테이블과 매핑되는 필드
@@ -41,6 +43,11 @@ public class Review {
 
     // 가게평점
     private double storeStarTotal;
+    
+    
+    // 평점순
+    private int storeCount;
+    private double storeStarTotalRate;
 
 
 }
