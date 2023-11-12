@@ -1,0 +1,757 @@
+/* 내가쓴 댓글 main 수정 */
+
+body{
+  min-height: 100vh;
+  overflow: auto;
+}
+
+main{
+  overflow: auto;
+}
+
+main::-webkit-scrollbar{
+  display: none;
+}
+
+
+
+/*----- 내 프로필 -----*/
+.container{
+  width: 100%;
+  min-height: 74rem;
+
+  display: flex;
+}
+
+/* 사이드메뉴 */
+#side-menu-container{
+  width: 20%;
+  min-height: 74rem;
+
+  background-color: #66b97d21;
+}
+
+#side-menu-container > section:first-child{
+  width: 100%;
+  height: 25rem;
+  background-color: #66b97d2a;
+
+  border-bottom: 0.5rem solid var(--main-color);
+}
+
+/* 프로필 정보 */
+#profileInfo-container{
+  height: 13rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-img{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+#member-id{
+  width: 53%;
+  height: 100%;
+  font-size: 3.2rem;
+
+  display: flex;
+  align-items: center;
+}
+
+#member-id > p{
+  width: 16rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+#edit-btn{
+  width: 17%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#edit-btn > button{
+  font-size: 0.8rem;
+  color: #5a5a5a; 
+  margin-top: 1.2rem;
+}
+
+
+/* 채팅, 로그아웃 버튼 */
+#btns-container{
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btns-container > button{
+  margin: 0.5rem 0.5rem 3rem;
+  width: 9rem;
+  height: 4rem;
+
+  font-size: 2rem;
+  color: white;
+  border: none;
+}
+
+#btns-container > button:hover{
+  cursor: pointer;
+}
+
+#chatting-btn{
+  background-color: var(--main-color);
+}
+
+#logout-btn{
+  background-color: #afafaf;
+}
+
+/* 마이페이지 타이틀텍스트 */
+#myPage-title{
+  height: 8rem;
+  font-size: 2.4rem;
+  color: var(--main-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 1rem;
+}
+
+
+/* --- 사이드 목차 --- */
+#side-menu-container > section:last-child{
+  display: flex;
+  justify-content: center;
+}
+
+#mypage-index-container{
+  width: 22rem;
+  height: 46rem;
+}
+
+#mypage-index-container > article{
+  height: 7.5rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  border-bottom: 0.2rem solid var(--footer-color);
+}
+
+#mypage-index-container > article > a{
+  font-size: 2.2rem;
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+
+
+/* --- 내 프로필 내용 화면 --- */
+.my-profile-container{
+  width: 80%;
+  min-height: 84rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+#my-profile-container{
+  width: 100rem;
+}
+
+/* 프로필 헤드 */
+#my-profile-title-container{
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+#my-profile-title-container > article:first-child{
+  font-size: 2.4rem;
+  color: var(--main-color);
+}
+
+#my-profile-title-container > article:last-child{
+  font-size: 1.2rem;
+}
+
+
+/* 프로필 정보 */
+
+#my-profile-info-container{
+  height: 5rem;
+  margin-bottom: 2rem;
+}
+
+.my-profile-headline{
+  height: 4rem;
+  font-size: 2.2rem;
+  border-bottom: 0.3rem solid var(--footer-color);
+}
+
+#my-profile-info-container-2{
+  height: 20rem;
+  width: 100%;
+
+  display: flex;
+}
+
+/* 프로필 정보 */
+#my-profile-info-container-2 > section:first-child{
+  height: 100%;
+  width: 80%;
+}
+
+/* 정보칸 */
+.myPage-row{
+  height: 4.4rem;
+  margin: 2rem 0 0 1.5rem;
+
+  display: flex;
+}
+
+.myPage-row > article{
+  width: 12rem;
+  border-right: 0.1rem solid var(--footer-color);
+
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.myPage-row > article > p{
+  font-family: 'GmarketSans';
+  font-weight: 300;
+}
+
+.myPage-row > section{
+  width: 40rem;
+  margin-left: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.myPage-row > section > input{
+  width: 24rem;
+  height: 3.5rem;
+  padding: 0 0.5rem;
+
+  font-size: 1.8rem;
+
+  border: 0.1rem solid #afafaf
+}
+
+/* 프로필 사진 변경/삭제버튼*/
+#profile-img-change > button{
+  width: 6.5rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border: 0.1rem solid #afafaf;
+
+  font-size: 1.2rem;
+}
+
+#profile-img-change > button:hover{
+  cursor: pointer;
+}
+
+#profile-img-change > button:nth-child(2){
+  margin: 0 1rem 0 3rem;
+}
+
+
+/* 적용/취소버튼 영역*/
+#my-profile-info-container-2 > section:last-child{
+  height: 100%;
+  width: 20%;
+}
+
+/* 적용/취소버튼 */
+.btns{
+  display: flex;
+  justify-content: end;
+  align-items: end;
+
+  margin-top: 1rem;
+}
+
+.btns > button{
+  width: 6.5rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border: 0.1rem solid #afafaf;
+
+  font-size: 1.2rem;
+}
+
+.btns > button:hover{
+  cursor: pointer;
+}
+
+/* 적용버튼 */
+.btns > button:nth-child(1){
+  color: white;
+  background-color: var(--main-color);
+  border: none;
+  margin-right: 1rem;
+}
+
+
+/* 필수 회원 정보 */
+#my-profile-essential-info-container{
+  height: 42rem;
+}
+
+#my-profile-essential-info-container-2{
+  width: 80%;
+}
+
+
+.myPage-row > section > p{
+  font-size: 1.8rem;
+}
+
+#modify-pw-btn{
+  height: 3rem;
+  width: 10rem;
+
+  background-color: white;
+  border: 0.1rem solid #afafaf
+}
+
+#modify-pw-btn:hover{
+  cursor: pointer;
+}
+
+
+/* 비밀번호 찾기 컨테이너 */
+.myPage-changePw-container{
+
+  display: flex;
+  justify-content: center;
+}
+
+
+#myPage-changePw-container2{
+  display: flex;
+  justify-content: center;
+
+  width: 60rem;
+  height: 60rem;
+
+  padding-top: 5rem;
+}
+
+
+/* 인풋박스 */
+#changePwForm{
+  width: 60rem;
+  height: 50rem;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-box{
+  border: 0.1rem solid #CBCBCB;
+  display: block;
+  width: 50rem;
+  height: 7rem;
+  padding: 1.5rem 1.5rem;
+
+  font-size: 2.4rem;
+  color: black;
+  box-shadow: 0 2px 6px 0 rgba(68,68,68,.08);
+}
+
+.input-box input{
+  width: 90%;
+  border: none;
+  outline: 0;
+  font-size: 1.8rem;
+  color: black;
+}
+
+.input-box > i{
+  width: 8%;
+}
+
+.input-box input::placeholder{
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  color: #CBCBCB;
+}
+
+/* 비밀번호 작성 안내문 */
+.pw-explain{
+  width: 50rem;
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  color: #818181;
+}
+
+.pw-explain > article{
+  font-family: 'GmarketSans';
+  font-weight: 300;
+}
+
+
+/* 인풋박스에 포커스 맞춰질때 */
+.input-box:focus-within{
+  border: 0.1rem solid #66B97E;
+}
+
+
+/* 확인 btn */
+.confirm-btn{
+  cursor: pointer;
+  display: inline-block;
+
+  width: 50rem;
+  height: 7rem;
+  background-color: #66B97E;
+  color: white;
+  
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-top: 5rem;
+}
+
+.confirm-btn:focus{
+  outline: 0;
+}
+
+.confirm-btn:focus{
+  transform: scale(0.99);
+}
+
+/* 취소 btn */
+.reset-btn{
+  cursor: pointer;
+  display: inline-block;
+
+  width: 50rem;
+  height: 7rem;
+  color: var(--main-color);
+  background-color: white;
+  
+  font-size: 2.5rem;
+  border: 1px solid #A6A6A6;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.confirm-btn:focus{
+  outline: 0;
+}
+
+.confirm-btn:focus{
+  transform: scale(0.99);
+}
+
+
+/* --------- 내가 쓴 글 ------------ */
+
+.my-article-container{
+  width: 80%;
+  min-height: 84rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+#my-article-container{
+  width: 100rem;
+}
+
+/* 내가 쓴 글 헤드 */
+#my-article-title-container{
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+#my-article-title-container > article:first-child{
+  font-size: 2.4rem;
+  color: var(--main-color);
+}
+
+#my-article-title-container > article:last-child{
+  font-size: 1.2rem;
+}
+
+/* 내가 쓴 글 목록 컨테이너 */
+#my-article-index-container{
+  width: 100%;
+  height: 68rem;
+}
+
+/* 글목록 테이블 */
+.myPage-table{
+  width: 100%;
+  border: none;
+}
+
+/* 칸 너비 정렬 */
+#myPage-table-title-row > td:first-child {
+  width: 20%;
+}
+
+#myPage-table-title-row > td:nth-child(2) {
+  width: 50%;
+}
+
+#myPage-table-title-row > td:last-child {
+  width: 30%;
+}
+
+/* 테이블 타이틀 설정 */
+.myPage-table-title{
+  height: 5.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+  border-top: 0.1rem solid var(--main-color);
+  border-bottom: 0.1rem solid var(--main-color);
+}
+
+
+/* 일반 td 설정 */
+.myPage-table-td > a{
+  text-decoration: none;
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  color: black;
+}
+
+.myPage-table-td{
+  text-align: center;
+  height: 5.5rem;
+
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  font-size: 1.8rem;
+
+  border-bottom: 0.1rem solid var(--footer-color);
+}
+
+/* 강조 td 설정 */
+.myPage-table-td-highlight > a{
+  text-decoration: none;
+  color: var(--main-color);
+}
+
+.myPage-table-td-highlight{
+  text-align: center;
+  height: 5.5rem;
+  font-size: 2rem;
+  border-bottom: 0.1rem solid var(--footer-color);
+}
+
+
+/* --------- 내가 쓴 댓글 ------------ */
+
+/* 칸 너비 정렬 */
+#myPage-comment-table-title-row > td:nth-child(1) {
+  width: 75%;
+}
+
+#myPage-comment-table-title-roww > td:last-child {
+  width: 25%;
+}
+
+/* 테이블 타이틀 설정 */
+.myPage-table-title{
+  height: 5.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+  border-top: 0.1rem solid var(--main-color);
+  border-bottom: 0.1rem solid var(--main-color);
+}
+
+
+
+/* 댓글 일반 td 설정 */
+.myPage-table-td-comment a{
+  text-decoration: none;
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  color: black;
+}
+
+.myPage-table-td-comment{
+  
+  display: flex;
+  align-items: center;
+
+  font-family: 'GmarketSans';
+  font-weight: 300;
+  font-size: 1.8rem;
+
+  border-bottom: 0.1rem solid var(--footer-color);
+}
+
+
+/* 댓글창 섹션 정리 */
+/* 체크박스 섹션 */
+.myPage-table-td-comment > section:first-child{
+  margin-right: 3rem;
+
+}
+
+/* 댓글박스 섹션 */
+.myPage-table-td-comment > section:nth-child(2){
+  display: flex;
+  flex-direction: column;
+}
+
+/* 댓글 내용 */
+#comment-contents{
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+/* 가게 이름 */
+#comment-placeName{
+  color: #A6A6A6;
+  margin-bottom: 1rem;
+}
+
+
+/* 강조 td 설정 _ 댓글수 */
+.myPage-table-td-comment-highlight{
+  text-decoration: none;
+  color: var(--main-color);
+}
+
+
+/* ---------- 회원 탈퇴 ---------- */
+.myPage-secession-contents{
+  width: 100%;
+  padding-left: 5rem;
+  font-size: 1.4rem;
+}
+
+.myPage-secession-contents-head{
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.myPage-secession-contents-body{
+  padding-left: 1rem;
+  margin: 1rem 0;
+
+  font-family: 'GmarketSans';
+  font-weight: 300;
+}
+
+.myPage-secession-contents-footer{
+  color: var(--main-color);
+  margin-top: 3rem;
+}
+
+.myPage-secession-contents-footer > span {
+  color: #818181;
+}
+
+.myPage-secession-contents input{
+  margin-top: 3rem;
+  font-size: 1.6rem;
+}
+
+/* 확인 버튼 */
+.secession-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 7rem;
+}
+
+.secession-btn > button{
+  width: 6rem;
+  height: 3rem;
+
+  color: var(--main-color);
+  font-size: 1.2rem;
+  border: 1px solid #A6A6A6;
+  font-weight: bold;
+  background-color: white;
+
+  cursor: pointer;
+}
+
+/* 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
+
+
+
+
+
+/* 페이지네이션 */
+
+/* 페이지 */
+.pagination-area{
+  margin-top: 6rem;
+  height: 8rem;
+}
+
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.pagination a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.current{
+  font-weight: bold;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  color: white !important;
+  letter-spacing: 0 !important;
+}

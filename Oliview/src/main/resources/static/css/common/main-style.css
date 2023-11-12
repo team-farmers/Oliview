@@ -57,6 +57,9 @@ footer{
   justify-content: center;
   align-items: center;
 
+  /* position : relative;
+  transform : translateY(-100%); */
+
   font-size: 1.2rem;
   font-weight: 1;
   color: rgba(130, 130, 130, 1);

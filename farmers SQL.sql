@@ -695,15 +695,41 @@ AND BOARD_NO = 14;
 
 
 
-
-
-
-
-
-
 -- 비밀번호 찾기
 SELECT MEMBER_PW 
 FROM "MEMBER" m 
 WHERE MEMBER_NO = 1
 ;
+
+
+MEMBER_NO
+
+-- 메인페이지_ 리뷰 최신글 3개 불러오기 (review dto로 매핑)
+SELECT *
+FROM ( SELECT REVIEW_TITLE, 
+		TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') WRITE_DATE,
+		MEMBER_NICKNAME, 
+		'/review/' || REVIEW_NO "url"
+		FROM REVIEW
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		ORDER BY WRITE_DATE DESC )
+WHERE ROWNUM <= 3;
+
+
+-- 메인페이지_ 같이먹어요 최신글 3개 불러오기 (together dto로 매핑)
+SELECT *
+FROM ( )
+WHERE ROWNUM <= 3;
+
+
+SELECT  
+		TO_CHAR(WRITE_DATE, 'YYYY-MM-DD HH24:MI:SS') WRITE_DATE,
+		MEMBER_NICKNAME, 
+		'/review/' || REVIEW_NO "url"
+		FROM "TOGETHER"
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		ORDER BY WRITE_DATE DESC 
+
 
