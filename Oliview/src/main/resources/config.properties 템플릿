@@ -53,3 +53,7 @@ spring.servlet.multipart.max-file-size = 10485760
 # 기본값: 10MB
 # 52,428,800 == 50MB
 spring.servlet.multipart.max-request-size = 52428800
+
+# 같이먹어요 이미지 저장 경로
+my.together.location=C:/Users/user/Desktop/TeamProject/project-resources/images/together/
+my.together.webpath=/images/together/
