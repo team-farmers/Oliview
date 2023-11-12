@@ -35,10 +35,6 @@ public interface ReviewMapper {
 	 */
 	List<Review> searchReview(String searchInput, RowBounds rowBounds);
 
-	/** 최신순 조회
-	 * @return reviewList
-	 */
-	List<Review> searchLatest();
 
 	
 	//=====================================================================
@@ -80,6 +76,8 @@ public interface ReviewMapper {
 	 * @return result
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
+
+
 
 	
 	

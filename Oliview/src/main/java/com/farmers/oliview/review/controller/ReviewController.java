@@ -44,7 +44,7 @@ public class ReviewController {
 	
 	
 	
-	/** 리뷰 조회, 검색
+	/** 리뷰 조회, 검색(인기순 조회)
 	 * @param model
 	 * @param searchInput
 	 * @param cp
@@ -62,7 +62,7 @@ public class ReviewController {
 			Map<String, Object> map = service.allReview(cp);
 			model.addAttribute("map",map);
 		}
-		// 검색
+		// 검색 
 		else {
 			Map<String, Object> map = service.searchReview(searchInput, cp);
 			model.addAttribute("map",map);
@@ -72,21 +72,7 @@ public class ReviewController {
 		
 	}
 	
-	
-	
-	/** 최신순 조회
-	 * @return
-	 */
-	@GetMapping(value="searchLatest", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public List<Review> searchLatest(){
-		
-		return service.searchLatest();
-	}
-	
-	
-	
-	
+
 	
 //	=============================================================================================================================
 	

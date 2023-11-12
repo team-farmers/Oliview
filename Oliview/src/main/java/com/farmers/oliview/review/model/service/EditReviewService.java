@@ -9,9 +9,12 @@ import com.farmers.oliview.review.model.dto.Review;
 
 public interface EditReviewService {
 
+	// 게시글 작성
 	int insertReview(Review review, MultipartFile img) throws IllegalStateException, IOException;
 
-	int updateReview(Review review, MultipartFile img);
+	// 게시글 수정
+	int updateReview(Review review, MultipartFile img)  throws IllegalStateException, IOException ;
 
+	// 게시글 삭제
 	int deleteReview(Map<String, Integer> paramMap);
 }

@@ -1,9 +1,4 @@
-/* =========================================================== */
-/* 2줄 박스 */
 
-.review-full-container{
-  height: 95rem;
-}
 
 /* =========================================================== */
 /* 검색바 영역 */
@@ -62,11 +57,19 @@ input:focus {outline:none;}
   cursor: pointer;
 }
 
+.clicked{
+  color: var(--main-color);
+}
+
 /* =========================================================== */
 /* 리뷰 목록 영역*/
 
 
 /* 리뷰가 존재하지 않을 때 */
+.review-full-container-no{
+  height: 70rem;
+}
+
 .result-no{
   display: flex;
   flex-direction: column;
@@ -75,10 +78,17 @@ input:focus {outline:none;}
   font-size: 3rem;
   color: #b6b6b6;
   height: 50vh;
+  border: 0.1rem solid var(--footer-color);
 }
 
-
+/* =========================================================== */
 /* 리뷰가 존재할 때 */
+/* 2줄 박스 */
+
+.review-full-container{
+  height: 95rem;
+}
+
 .review-row{
   height: 45rem;
   display: flex;

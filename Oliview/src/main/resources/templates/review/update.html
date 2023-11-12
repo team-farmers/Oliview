@@ -13,7 +13,7 @@
 
 <body>
   <main>
-    <!-- 헤더 -->
+    <!-- 헤더 --> 
     <th:block th:replace="~{common/header}"></th:block>
 
     <section class="content">
@@ -21,16 +21,17 @@
       <hr>
 
       <section class="content-1">
-        <form class="container" action="insert" th:object="${review}" method="POST" id="reviewWriteFrm" enctype="multipart/form-data">
+        <form class="container" action="update" th:object="${review}" method="POST" id="reviewWriteFrm"
+          enctype="multipart/form-data">
           <!-- 제목 -->
           <div id="title-area">
-            <label for="title" class="title" id="title" name="title" >제목:</label>
+            <label for="title" class="title" id="title" name="title">제목:</label>
             <input type="text" th:value="*{reviewTitle}" class="textbox" id="input-title" name="reviewTitle">
           </div>
 
           <!-- 위치 -->
           <div id="location-area">
-            <label for="location" class="title" id="location" >위치:</label>
+            <label for="location" class="title" id="location">위치:</label>
             <input type="text" th:value="*{reviewAddress}" class="textbox" id="locatonContent" name="reviewAddress">
             <butto id="locationBtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">주소 검색</butto>
           </div>
@@ -80,13 +81,13 @@
           <!-- 내가 먹은 메뉴 -->
           <div id="menu-area">
             <label for="menu" class="title" id="menu">내가 먹은 메뉴: </label>
-            <input type="text" th:value="*{reviewMenu}" class="textbox" id="input-menu" name="reviewMenu" >
+            <input type="text" th:value="*{reviewMenu}" class="textbox" id="input-menu" name="reviewMenu">
           </div>
 
           <!-- 이미지 -->
           <div id="image-area">
             <label for="image" class="title" id="image-text">이미지 첨부: </label>
-            <input type="file" id="image" th:src="*{reviewImg}" accept="image/*" name="inputImage">
+            <input type="file" id="image" accept="image/*" name="inputImg">
           </div>
 
           <!-- 한줄평 -->
@@ -107,7 +108,7 @@
   <th:block th:replace="~{common/footer}"></th:block>
 
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <script src="/js/review/insert.js"></script>
+  <script src="/js/review/update.js"></script>
 
 </body>
 
