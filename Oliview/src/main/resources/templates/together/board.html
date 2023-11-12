@@ -62,13 +62,29 @@
               
             </div>
 
-            <a href="posting"> <button id="insertBtn">글쓰기</button>  </a>
-
-         
-          <div class="btn">
-            <a href="talk"> <button type="button" class="btn1">참여하기</button></a>
-            <a href="posting"> <button type="button" class="btn2">수정하기</button></a>
-            <a href="inven"> <button type="button" class="btn3">삭제하기</button></a>
+           
+         <div class="btn-contents">
+        	<div class="btn-1">
+          <button class="reportBtn"><a onclick="openReportPopup()">
+           신고하기</a></button>
+        </div>
+        
+        
+         <div class="btn-2">
+          <button class="invenBtn" id="invenBtn">목록으로</button>
+        </div>
+      
+        <div class="btn-3">
+          <button class="updateBtn" id="updateBtn">수정하기</button>
+        </div>
+        
+        <div class="btn-4">
+          <button class="deleteBtn" id="deleteBtn">삭제하기</button>
+        </div>
+  
+      </div>
+          
+           
           </th:block>
           </div>
   
@@ -95,7 +111,7 @@
         &copy Oliview Corp.
       </article>
     </footer>
-  
+    <script src="/js/together/board.js"></script>
 </main>
 
 

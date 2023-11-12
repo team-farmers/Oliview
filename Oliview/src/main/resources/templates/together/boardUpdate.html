@@ -1,100 +1,79 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${boardName}">게시판 이름</title>
 
-    <title>board</title>
-    <link rel="stylesheet" href="/css/together/board.css">
-    <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
+    <th:block th:replace="~{common/common}"></th:block>
 
-   
+    <link rel="stylesheet" href="/css/board/boardWrite-style.css">
 </head>
 <body>
     <main>
-        <header>
-            <section>
-              <img src="/images/original_16.png" alt="로고이미지" width="80rem">
-            </section>
-          
-            <section>
-              <article>
-                <a href="#">로그아웃</a>
-              </article>
-          
-              <article>
-                <a href="#">마이페이지</a>
-              </article>
-          
-              <article>
-                <a href=""><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
-              </article>
-            </section>
-          </header>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <form action="update" th:object="${board}" method="POST" 
+            class="board-write" id="boardUpdateFrm" enctype="multipart/form-data">  
+
+            <h1 class="board-name" th:text="${boardName}">게시판 이름</h1>
+
+            <!-- 제목 -->
+            <h1 class="board-title">
+                <input type="text" name="boardTitle" placeholder="제목" th:value="*{boardTitle}">   
+            </h1>
 
 
-
-
-    <div class="board_wrap">
-
-        <div class="board_title">
-            <strong>같이 먹어요</strong>
-            <p>같이 먹을 사람들 모집</p>
-        </div>
-
-
-
-
-        <div class="board_write_wrap">
-          
-            <div class="board_write">
-                <div class="title">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd><pre>치킨 같이 먹어요</pre></dd>
-                    </dl>
+            <!-- 썸네일 영역 -->
+            <h5>썸네일</h5>
+            <div class="img-box">
+                <div class="boardImg thumbnail">
+                    <label for="img0">
+                        <img class="preview">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img0" accept="image/*">
+                    <span class="delete-image">&times;</span>
                 </div>
-
-
-
-
-                
-                <div class="info">
-                    <dl>
-                        <dt>참여인원</dt>
-                        <dd><pre>3/6</pre></dd>
-                    </dl>
-                    <dt>날짜 및 시간</dt>
-          
-                    <dd><pre>2023-10-23 오후 1:00</pre></dd>
-                              
-                      </label>
-                </div>
-
-
-
-
-                <div class="cont">
-       
-                  <dd><pre>치킨</pre></dd>
-                </div>
-
-              
             </div>
 
-            <a href="posting"> <button id="insertBtn">글쓰기</button>  </a>
+
+            <!-- 업로드 이미지 영역 -->
+            <h5>업로드 이미지</h5>
+            <div class="img-box">
+
+                <div class="boardImg">
+                    <label for="img1">
+                        <img class="preview">
+                    </label>
+                    <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+                    <span class="delete-image">&times;</span>
+                </div>
 
 
-          <div class="btn"></div>
-            <a href="posting"> <button type="button" class="btn2">수정하기</button></a>
-          </div>
-  
-
-        </div>
-    </div>
+            <!-- 내용 -->
+            <div class="board-content">
+                <textarea name="boardContent" th:text="*{boardContent}">게시글 내용</textarea>
+            </div>
 
 
-</main>
+            <!-- 버튼 영역 -->
+            <div class="board-btn-area">
+                <button type="submit" id="writebtn">수정하기</button>
+            </div>
+
+            <!-- 기존 있다가 삭제된 이미지의 순서(imgOrder)를 기록-->
+            <input type="hidden" name="deleteOrder" value="">
+
+            <!-- 수정 성공 시 주소(쿼리스트링) 유지용도 -->
+            <input type="hidden" name="querystring">
+        </form>
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+    <script src="/js/together/boardUpdate.js"></script>
 
 
 </body>
