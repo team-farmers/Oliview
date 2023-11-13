@@ -69,8 +69,7 @@
               
                 <input type="text" id="query" name="searchInput" autocomplete="off" placeholder="음식 메뉴나 맛집 지역을 검색해보세요">
   
-                <button id="search-btn" class="fa-solid fa-magnifying-glass"
-                ></button>
+                <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
         
               </fieldset>
             </form>
@@ -107,7 +106,7 @@
             </section>
 
             <section>
-              <article id="review-place"><a href="#" th:text="*{reviewMenu}">리뷰메뉴</a></article>
+              <article id="review-place"><a th:href="@{review/searchReview?searchInput={reviewMenu}(reviewMenu=*{reviewMenu})}" th:text="*{reviewMenu}">리뷰메뉴</a></article>
               <span>|</span>
               <article id="review-stars"> 
                 <i class="fa-sharp fa-solid fa-star fa-2xl" style="color: #f1c93b;"></i>

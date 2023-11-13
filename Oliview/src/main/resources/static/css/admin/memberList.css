@@ -36,6 +36,7 @@ a:hover {
   flex-direction: column;
   flex-shrink: 0;
   border-collapse: collapse;
+  margin-right: 2rem;
 }
 
 #member-table-row {
@@ -101,10 +102,11 @@ a:hover {
   align-items: center;
   background-color: #ffffff;
   flex-shrink: 0;
+  height: 1rem;
 }
 
 #member-table-content > td:nth-child(1){
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
@@ -112,38 +114,44 @@ a:hover {
   text-align: center;
 }
 #member-table-content > td:nth-child(2){
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+    font-weight: 500;
   line-height: 1.2575;
   color: black;
   width: 30rem;
   text-align: center;
 }
 #member-table-content > td:nth-child(3){
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
   width: 20rem;
+  text-align: center;
 }
 #member-table-content > td:nth-child(4){
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
   width: 30rem;
+  text-align: center;
+
 }
 #member-table-content > td:nth-child(5){
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
-  width: 10rem;
+  width: 20rem;
+  text-align: center;
 }
 #member-table-content > td:nth-child(6){
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
-  width: 10rem;
+  width: 20rem;
+  text-align: center;
+
 }
