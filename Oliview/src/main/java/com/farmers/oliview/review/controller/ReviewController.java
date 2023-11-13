@@ -54,17 +54,17 @@ public class ReviewController {
 	@GetMapping("searchReview")
 	public String searchReview(Model model,
 			@RequestParam(required=false) String searchInput,
-			@RequestParam(value="cp", required = false, defaultValue="1") int cp) {
+			@RequestParam(value="cp", required = false, defaultValue="1") int cp,
+			@RequestParam(value="sort", required = false, defaultValue="1") int sort) {
 		
-	
 		// 전체 조회
 		if(searchInput == null) {
-			Map<String, Object> map = service.allReview(cp);
+			Map<String, Object> map = service.allReview(cp, sort);
 			model.addAttribute("map",map);
 		}
 		// 검색 
 		else {
-			Map<String, Object> map = service.searchReview(searchInput, cp);
+			Map<String, Object> map = service.searchReview(searchInput, cp, sort);
 			model.addAttribute("map",map);
 		}
 		
@@ -79,11 +79,11 @@ public class ReviewController {
 	 */
 	@ResponseBody
 	@GetMapping(value="sortLatest", produces="application/json")
-	public List<Review> sortLatest(String searchInput){
+	public Map<String, Object> sortLatest(String searchInput, int cp){
 		
-		List<Review> reviewList = service.sortLatest(searchInput);
+		Map<String, Object> map = service.sortLatest(searchInput, cp);
 		
-		return reviewList;
+		return map;
 	}
 	
 	
@@ -97,30 +97,27 @@ public class ReviewController {
 	public List<Review> sortRating(String searchInput){
 
 		List<Review> reviewList = service.sortRating(searchInput);
-		
+
 		return reviewList;
 		
 	}
+
 	
-//
-//	오류로 주석처리
-//	
-//	/** 평점순 가게 조회
-//	 * @param reviewTitle
-//	 * @param model
-//	 * @param ra
-//	 * @return
-//	 */
-//	@GetMapping("reviewTitle")
-//	public String reviewStore(@RequestParam(required=false) String reviewTitle, Model model, RedirectAttributes ra) {
-//		
-//		List<Review> reviewList = service.ratingResult(reviewTitle);
-//		model.addAttribute(reviewList);
-//		
-//		return "review/rating-result";
-//		
-//	}
-	
+	/** 평점순 가게 조회
+	 * @param reviewTitle
+	 * @param model
+	 * @param ra
+	 * @return
+	 */
+	@GetMapping("store/{reviewTitle}")
+	public String reviewStore(@PathVariable("reviewTitle") String reviewTitle, Model model, RedirectAttributes ra) {
+		
+		List<Review> reviewList = service.ratingResult(reviewTitle);
+		model.addAttribute(reviewList);
+		
+		return "review/rating-result";
+		
+	}
 	
 
 	

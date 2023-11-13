@@ -25,11 +25,37 @@ public interface ReviewMapper {
 	 */
 	List<Review> allReview(RowBounds rowBounds);
 
+	/** 평점순 가게수 조회
+	 * @return
+	 */
+	int ratingCount();
+	
+	/** 최신순 
+	 * @param rowBounds
+	 */
+	List<Review> allSortLatest(RowBounds rowBounds);
+
+	/** 평점순
+	 * @param rowBounds
+	 */
+	List<Review> allSortRating(RowBounds rowBounds);
+
+	
+	
+	//=====================================================================
+	
+	
 	/** 검색 리뷰 수 조회
 	 * @param searchInput
 	 * @return reviewCount
 	 */
 	int searchReviewCount(String searchInput);
+
+	/** 검색 리뷰 수 조회(평점순)
+	 * @param searchInput
+	 * @return
+	 */
+	int searchRatingCount(String searchInput);
 
 	/** 검색 리뷰 조회
 	 * @param searchInput
@@ -38,20 +64,37 @@ public interface ReviewMapper {
 	 */
 	List<Review> searchReview(String searchInput, RowBounds rowBounds);
 	
+
+	/** 검색 리뷰 조회 최신순
+	 * @param searchInput 
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Review> searchSortLatest(String searchInput, RowBounds rowBounds);
+
+	/** 검색 리뷰 조회 평점순
+	 * @param searchInput 
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Review> searchSortRating(String searchInput, RowBounds rowBounds);
 	
+
+	//=====================================================================	
 	
 	/** 최신순
 	 * @param searchInput
+	 * @param rowBounds 
 	 * @return
 	 */
-	List<Review> sortLatest(String searchInput);
+	List<Review> sortLatest(String searchInput, RowBounds rowBounds);
 
 	/** 평점순
 	 * @param searchInput
 	 * @return
 	 */
 	List<Review> sortRating(String searchInput);
-
+	
 
 	/** 평점순 가게리스트 조회
 	 * @param reviewTitle
@@ -98,6 +141,13 @@ public interface ReviewMapper {
 	 * @return result
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
+
+
+
+
+
+
+
 
 
 

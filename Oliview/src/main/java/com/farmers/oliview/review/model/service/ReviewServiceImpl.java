@@ -23,12 +23,19 @@ public class ReviewServiceImpl implements ReviewService {
 	private final ReviewMapper mapper;
 	
 	
-	// 전체 조회 - 인기순
+	// 전체 조회
 	@Override
-	public Map<String, Object> allReview(int cp) {
+	public Map<String, Object> allReview(int cp, int sort) {
 		
-		// 전체 리뷰 수 조회
-		int reviewCount = mapper.getReviewCount();
+		// 인기순 1, 최신순 2, 평점순 3
+		int reviewCount;
+		if(sort == 3) {
+			reviewCount = mapper.ratingCount();
+		} else {
+			// 인기, 최신 리뷰 수 조회
+			reviewCount = mapper.getReviewCount();
+		}
+		
 		
 		// Pagination 객체 생성
 		Pagination pagination = new Pagination(cp, reviewCount);
@@ -40,31 +47,55 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		List<Review> reviewList = mapper.allReview(rowBounds);
+		List<Review> reviewList = null;
+		switch (sort) {
+		case 1 : reviewList =  mapper.allReview(rowBounds); break;
+		case 2 : reviewList = mapper.allSortLatest(rowBounds); break;
+		case 3 : reviewList =  mapper.allSortRating(rowBounds); break;
+			
+		}
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewList", reviewList);
 		map.put("pagination", pagination);
 		
-		
 		return map;
 	}
 	
 	
-	// 검색 조회 - 인기순
+	
+	// 검색 조회 
 	@Override
-	public Map<String, Object> searchReview(String searchInput, int cp) {
+	public Map<String, Object> searchReview(String searchInput, int cp, int sort) {
 		
 		
-		int reviewCount = mapper.searchReviewCount(searchInput);
+		// 인기순 1, 최신순 2, 평점순 3
+		int reviewCount;
+		if(sort == 3) {
+			reviewCount = mapper.searchRatingCount(searchInput);
+		} else {
+			// 인기, 최신 리뷰 수 조회
+			reviewCount = mapper.searchReviewCount(searchInput);
+		}
 		
+		
+		// Pagination 객체 생성
 		Pagination pagination = new Pagination(cp, reviewCount);
 		
+		// RowBounds 객체 생성
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		int limit = pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		List<Review> reviewList = mapper.searchReview(searchInput, rowBounds);
+		
+		List<Review> reviewList = null;
+		switch (sort) {
+		case 1 : reviewList =  mapper.searchReview(searchInput, rowBounds); break;
+		case 2 : reviewList = mapper.searchSortLatest(searchInput, rowBounds); break;
+		case 3 : reviewList =  mapper.searchSortRating(searchInput, rowBounds); break;
+			
+		}
+	
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewList", reviewList);
@@ -76,8 +107,27 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 최신순
 	@Override
-	public List<Review> sortLatest(String searchInput) {
-		return mapper.sortLatest(searchInput);
+	public Map<String, Object> sortLatest(String searchInput, int cp) {
+		
+		
+		// 리뷰 수 조회
+		int reviewCount = mapper.searchReviewCount(searchInput);
+		
+		// Pagination 객체 생성
+		Pagination pagination = new Pagination(cp, reviewCount);
+		
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Review> reviewList =  mapper.sortLatest(searchInput, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewList", reviewList);
+		map.put("pagination", pagination);
+		
+		return map;
 	}
 	
 	// 평점순
@@ -85,8 +135,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> sortRating(String searchInput) {
 		return mapper.sortRating(searchInput);
 	}
-	
-	 
+
 	// 평점순 가게조회
 	@Override
 	public List<Review> ratingResult(String reviewTitle) {

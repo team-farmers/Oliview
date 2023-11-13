@@ -5,29 +5,36 @@ import java.util.Map;
 
 import com.farmers.oliview.review.model.dto.Review;
 
-/**
- * 
- */
+
 public interface ReviewService {
 
 	/** 전체 조회 - 인기순
 	 * @param cp
+	 * @param sort 
 	 * @return reviews
 	 */
-	Map<String, Object> allReview(int cp);
+	Map<String, Object> allReview(int cp, int sort);
 
 	/** 검색 - 인기순
 	 * @param searchInput
 	 * @param cp
+	 * @param sort 
 	 * @return review
 	 */
-	Map<String, Object> searchReview(String searchInput, int cp);
+	Map<String, Object> searchReview(String searchInput, int cp, int sort);
+	
+	
+	
+	
+	
+	
 	
 	/** 최신순
 	 * @param searchInput
+	 * @param cp 
 	 * @return
 	 */
-	List<Review> sortLatest(String searchInput);
+	Map<String, Object> sortLatest(String searchInput, int cp);
 
 	/** 평점순
 	 * @param searchInput
@@ -74,6 +81,8 @@ public interface ReviewService {
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
+
+
 
 
 

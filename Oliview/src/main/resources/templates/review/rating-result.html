@@ -33,26 +33,52 @@
       </div>
 
 
+    
       <!-- 오른쪽 리뷰 모음 영역 -->
-      <section class="reviews">
 
-        <section class="review-row">
+      <div  class="reviews">
+        <th:block th:each="review, stat : ${reviewList}">
+    
+          <th:block th:if="${stat.index % 3 == 0}">
+            <section class="review-row">
+            </th:block>
+              <article class="review-col" th:object="${review}">
+        
+                <!-- 이미지 -->
+                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                  <img th:src="*{reviewImg}" alt="리뷰이미지">
+                </a>
+        
+                <!-- 제목(가게명) -->
+                <div class="title"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+                  th:text="*{reviewTitle}">가게이름</a>
+                </div>
+        
+                <!-- 닉네임/평점/작성일 -->
+                <div class="nickname-star-date">
+                  <section id="nickname">
+                    <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
+                    th:text="*{memberNickname}">닉네임</a>
+                  </section>
+
+                  <section class="star" th:text="*{starTotal}">평점</section>
+                  <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+                  <section class="date" th:text="*{writeDate}">2023.10.20.</section>
+                </div>
       
-          <article class="review-col">
-            <a href="#"  id="review-img">
-              <img src="/draft_1/images/image-1.jpg" alt="image-1">
-            </a>
-            <div id="title"><a href="#">칠리칠리</a></div>
-            <div class="nickname-star-date">
-              <section id="nickname"><a href="#">푸바오</a></section>
-              <section id="star" style="color: #f1c93b;">4.5
-                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></section>
-                <section id="date">2023.10.20.</section>
-              </div>
-          </article>
+              </article>
+    
+            
+    
+          <th:block th:if="${stat.index % 3 == 2}">
+            </section>
+          </th:block>
+    
+        </th:block>
+  
+      </div>
 
-
-        </section>
+      
 
 
 
