@@ -94,7 +94,7 @@ const changeImageFn = (imageInput , order) => {
   // 파일을 다 읽은 경우
   reader.onload = e => {
     const url = e.target.result; // 이미지가 변환된 DataUrl
-
+    
     // order 번째 .preview에 이미지 추가
     previewList[order].src = url;
 

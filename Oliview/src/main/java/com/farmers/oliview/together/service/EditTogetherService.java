@@ -29,17 +29,22 @@ public interface EditTogetherService {
 	 */
 	int deleteBoard(Map<String, Integer> paramMap);
 
+
+	
 	/**
 	 * 게시글 수정
 	 * @param together
-	 * @param images
+	 * @param img
 	 * @param deleteOrder
 	 * @return
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	int updateBoard(Together together, List<MultipartFile> images, String deleteOrder) throws IllegalStateException, IOException;
-	
+
+
+	int updateBoard(Together together, MultipartFile img, String deleteOrder) throws IllegalStateException, IOException;
+
+
 	
 
 

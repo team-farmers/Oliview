@@ -22,9 +22,9 @@ a {
 }
 
 .board_title {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+ 
 }
-
 
 .board_title p {
   margin-top: 5px;
@@ -60,17 +60,9 @@ a {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+#date {
+  display: none;
+}
 
 
 
@@ -99,6 +91,22 @@ a {
   width: 50%;
 
 }
+
+#date2{
+  margin-top: 20px; /* date2와 title 간 간격 조절 */
+  width: 21%; /* date2의 너비를 조절 (원하는 크기로 조절 가능) */
+}
+
+
+#date_time > dt {
+  display:none;
+}
+
+
+.board_write dt {
+  margin-bottom: 10px; /* title의 각 dt 요소 간 간격 조절 */
+}
+
 
 
 .board_write .title dt,

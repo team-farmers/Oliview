@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("together")
+@RequestMapping("editTogether")
 @SessionAttributes
 public class EditTogetherController {
 
@@ -161,7 +161,7 @@ public class EditTogetherController {
 
 		model.addAttribute("together", together);
 
-		return "together/posting";
+		return "together/postingUpdate";
 	}
 					
 				
@@ -187,31 +187,28 @@ public class EditTogetherController {
 		Together together, 
 		String querystring, 
 		String deleteOrder, 
-		@RequestParam("images") List<MultipartFile> images,
+		@RequestParam("img") MultipartFile img,
 		RedirectAttributes ra ) throws IllegalStateException, IOException {
  
- 
-		together.setBoardNo(boardNo);
 		
-		int result = service.updateBoard(together, images, deleteOrder);
+		int result = service.updateBoard(together, img, deleteOrder);
 		
 		
 		String message = null;
-		String path = null;
 		
 		if(result > 0) {
 			message = "게시글 수정 성공 ";
-			path = "redirect:/together/" + boardNo;
+			
 		}
 		
 		else {
 			message = "게시글 수정 실패";
-			path = "redirect:/together/{boardNo}/update";
+			
 			
 		}
 		
 		ra.addFlashAttribute("message", message);
-		return path;
+		return "redirect:/together/" + boardNo;
 				
 	 }
 				 

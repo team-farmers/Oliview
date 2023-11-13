@@ -20,42 +20,35 @@
 		UPDATE "TOGETHER" SET
 		BOARD_TITLE = #{boardTitle},
 		BOARD_CONTENT = #{boardContent},
+		MAX_PEOPLE = #{maxPeople},
+		METTING_DATE = TO_DATE(#{mettingDate},'YYYY-MM-DD"T"HH24:MI')
+		
+		<!-- 이미지 삭제 -->
+		<if test='boardImg == "-1"'>
+			,BOARD_IMG = NULL
+		</if>
+		
+		<!-- 이미지 변경 -->
+		<if test='boardImg != null'>
+			,BOARD_IMG = #{boardImg}
+		</if>
+		
+		
 		WHERE BOARD_NO = #{boardNo}
-		AND DATE_CREATED = SYSDATE
 
 
 	</update>
 
 
-	<!-- 게시글 삭제-->
-	<update id="deleteBoard"> UPDATE "TOGETHER" SET BOARD_DEL_FL = 'Y" <!--삭제여부 --> WHERE
-		BOARD_NO = #{BOARD_NO} AND MEMBER_NO = #{memberNo} </update>
+	<!--게시글 삭제-->
+	<update id="deleteBoard">
+    	UPDATE "TOGETHER" SET
+   		BOARD_DEL_FL = 'Y'
+    	WHERE BOARD_NO = #{boardNo}
+    	AND MEMBER_NO = #{memberNo}
+	</update>
 
 
-	<!-- 이미지 삭제 -->
-	<delete id="imageDelete">
-
-		DELETE FROM "TOGETHER"
-		WHERE BOARD_NO = #{boardNo}
-		AND IMG_ORDER IN ( $ {deleteOrder})
-	</delete>
-
-
-	<!--이미지 하나 수정 -->
-	<update id="updateBoardImg"> UPDATE "TOGETHER_IMG" SET IMG_PATH = #{imgPath} <!--경로-->
-		IMG_RENAME = #{imgRename} <!-- 변경명 --> IMG_ORIGINAL_NAME = #{imgOriginalName} <!--원본명--> WHERE
-		BOARD_NO = #{boardNo} AND IMG_ORDER = #{imgOrder} </update>
-
-
-	<!-- 이미지 하나 삽입 -->
-	<insert id="boardImgInsert">
-		INSERT INTO "TOGETHER_IMG"
-		VALUES (SEQ_IMG_NO.NEXTVAL ,
-		#{imgRename}, #{imgPath}
-		#{imgOriginalName},
-		#{imgOrder}, #{boardNo}
-		)
-	</insert>
 
 
 </mapper>
