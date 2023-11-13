@@ -47,7 +47,7 @@
 
               <!-- 프로필 이미지가 있으면 프로필 이미지 -->
               <img th:unless="${session.loginMember.memberProfile == null}"
-              th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="50rem" id="profileImg">
+              th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="50rem"  height="50rem" id="profileImg">
             </a>
           </article>
         </section>
