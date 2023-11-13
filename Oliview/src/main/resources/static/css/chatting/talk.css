@@ -1,0 +1,112 @@
+/* 전체 컨테이너 */
+#chatting-container{
+  width: 100%;
+  height: 74rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 채팅방 제목 */
+h1{
+  margin: 2rem 2rem;
+  font-size: xx-large;
+}
+
+/* 채팅방 배경 */
+.chatting-content {
+  width: 100%;
+  padding: 40px 0;
+  background-color: #66B97E;
+}
+
+
+/* 채팅 내용 화면 */
+.display-chatting {
+	width: 100%;
+	height: 570px;
+
+	overflow: auto;
+	list-style: none;
+	padding: 1rem 1rem;
+}
+
+/* 채팅 라인별 설정 */
+.display-chatting > li{
+	margin: 10px 0;
+}
+
+.target-chat{
+	display: flex;
+	align-items: flex-start;
+}
+
+.target-chat > img{
+	width: 5rem;
+  height: 5rem;
+	margin-right: 5px;
+}
+
+#target-chat-nick{
+  font-size: 1.5rem;
+}
+
+/* 채팅내용 */
+.chat {
+	display: inline-block;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #eee;
+	max-width: 500px;
+
+  font-size: 1.5rem;
+  text-align: left;
+
+  word-break: break-all;
+	white-space: pre-wrap;
+}
+
+.my-chat {
+	text-align: right;
+}
+
+.my-chat>p {
+	background-color: yellow;
+}
+
+.chatDate {
+	font-size: 1.2rem;
+}
+
+
+/* 텍스트 입력 구간 */
+.input-area{
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 4vh;
+}
+
+/* 텍스트 입력인풋 */
+#inputChatting{
+  width: 90%;
+  height: 4vh;
+ 
+  color: black;
+  padding-left: 1rem;
+}
+ 
+/* 입력버튼 수정 */
+.input-area button{
+  height: 3rem;
+  width: 7rem;
+
+  border: 2px solid var(--main-color);
+  background-color: white;
+  color: var(--main-color);
+  cursor: pointer;
+
+  font-weight: bold;
+  height: 4vh;
+  width: 9.7%;
+}

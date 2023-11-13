@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>talk chat</title>
+  <link rel="stylesheet" href="/css/chatting/chat.css">
+  <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+ <main>
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <div class="con">
+
+      <!-- 채팅목록-->
+      <div>
+
+        <div class="title">
+          <h1>대화 목록</h1>
+          <button id="addTarget">추가하기</button>
+        </div>
+
+        <!-- 채팅멤버 추가 팝업 -->
+        <div id="addTargetPopupLayer" class="popup-layer-close">  
+          <span id="closeBtn">&times</span>
+    
+          <div class="target-input-area">
+            <input type="search" id="targetInput" placeholder="닉네임 또는 아이디를 입력하세요" autocomplete="off">
+          </div>
+    
+          <ul id="resultArea">
+            <!-- <li class="result-row" data-id="1">
+              <img class="result-row-img" src="/images/user.png">
+              <span> <mark>유저</mark>일</span>
+            </li>
+            <li class="result-row"  data-id="2">
+              <img class="result-row-img" src="/images/user.png">
+              <span><mark>유저</mark>이</span>
+            </li>
+    
+            <li class="result-row">일치하는 회원이 없습니다</li> -->
+          </ul>
+        </div>
+
+        <!-- 채팅 목록 -->
+        <div class="chatting-area">
+
+          <ul class="chatting-list">
+            <th:block th:each="room : ${roomList}">
+
+              <!-- th:chat-no : li 태그에 임의의 속성 chat-no를 추가,
+  		  				타임리프를 이용해 출력된 값을 chat-no 속성 값으로 대입 -->
+              <li class="chatting-item" th:chat-no="${room.chattingNo}" th:target-no="${room.targetNo}">
+
+                <div class="item-header">
+                  <!-- 채팅 프로필 있는경우 / 없는경우 -->
+                  <img th:if="${room.targetProfile}" class="list-profile" th:src="${room.targetProfile}">
+                  <img th:unless="${room.targetProfile}" class="list-profile" th:src="#{user.default.image}">
+                </div>
+
+                <div class="item-body">
+                  <p class="profile"> <!-- div->p로 js때문에 수정함 -->
+                    <span class="target-name" th:text="${room.targetNickname}">상대방 이름</span>
+                    <p class="recent-message" th:text="${room.lastMessage}">메세지 내용</p>
+                  </p>
+                  
+                  <div class="chat-status">
+                    <span class="recent-send-time" th:text="${room.sendTime}">메세지 보낸 시간</span>
+                    <p th:if="${room.notReadCount > 0}" class="not-read-count" th:text="${room.notReadCount}"></p>
+                  </div>
+                </div>
+
+              </li>
+            </th:block>
+          </ul>
+        </div>
+
+        <!--핑구 채팅 -->
+        <!-- <li>
+          <img src="/Oliview/src/main/resources/static/images/톡핑구.JPG" alt="핑구">
+          <div class = "profile">
+            <p class="friend-name">핑구</p>
+            <p class="chat-content">눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕</p>
+          </div>
+          <div class="chat-status">
+            <time datetime="15:39:00+09:00">오후 3:39</time>
+            <span class="chat-balloon">1</span>
+          </div>
+        </li> -->
+
+        <!-- 햄토리 채팅 -->
+        <!-- <li>
+          <img src="/Oliview/src/main/resources/static/images/톡햄토리.JPG" alt="햄토리">
+          <div class="profile">
+            <p class="friend-name">햄토리</p>
+            <p class="chat-content">해바라기씨해바라기씨해바라기씨해바라기씨해바라기씨해바라기씨</p>
+          </div>
+          <div class="chat-status">
+            <time datetime="15:39:00+09:00">오후 3:39</time>
+            <span class="chat-balloon">1</span>
+          </div>
+        </li> -->
+
+        <!-- 피카츄 채팅-->        
+        <!-- <li>
+          <img src="/Oliview/src/main/resources/static/images/톡피카츄.JPG" alt="피카츄">
+          <div class="profile">
+            <p class="friend-name">피카츄</p>
+            <p class="chat-content">전기 팔아요 전기 팔아요  전기 팔아요 아요 전기 팔아요 전기 팔아요 </p>
+          </div>
+          <div class="chat-status">
+            <time datetime="15:39:00+09:00">오후 3:39</time>
+            <span class="chat-balloon">1</span>
+          </div>
+        </li> -->
+
+        <!-- 호빵맨 채팅-->
+        <!-- <li>
+          <img src="/Oliview/src/main/resources/static/images/톡호빵맨.JPG" alt="호빵맨">
+          <div class="profile">
+            <p class="friend-name">호빵맨</p>
+            <p class="chat-content">팔아요  호빵 팔아요. 호빵 팔아요호빵 팔아요호빵 팔아요호빵 팔아요</p>
+          </div>
+          <div class="chat-status">
+            <time datetime="15:39:00+09:00">오후 3:39</time>
+            <span class="chat-balloon">1</span>
+        </div>
+        </li> -->
+
+
+        <!-- 파이리 채팅-->
+        <!-- <li>
+          <img src="/Oliview/src/main/resources/static/images/톡파이리.JPG" alt="파이리">
+          <div class="profile">
+            <p class="friend-name">파이리</p>
+            <p class="chat-content">불꽃 팝니다 불꽃 팝니불꽃 팝니다불꽃 팝니다불꽃 팝니다불꽃 팝니다</p>
+          </div>
+          <div class="chat-status">
+            <time datetime="15:39:00+09:00">오후 3:39</time>
+            <span class="chat-balloon">1</span>
+          </div>
+        </li> -->
+        
+      </div>
+    </div>
+
+  </main>
+  
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
+
+  <!-- sockjs를 이용한 WebSocket 구현을 위해 라이브러리 추가 -->
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+	<script th:inline="javascript">
+
+    // 로그인한 회원 번호
+		const loginMemberNo = /*[[${session.loginMember.memberNo}]]*/ '로그인한 회원번호';
+
+    // 같이먹어요에서 클릭해온 회원 번호??
+    
+		const userDefaultImage = /*[[#{user.default.image}]]*/ '프로필 기본 이미지' ;
+	</script>
+
+  <script src="/js/chatting/chat.js"></script>
+
+</body>
+
+</html>
