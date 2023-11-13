@@ -14,7 +14,7 @@
 
           <!-- 프로필 이미지가 있으면 프로필 이미지 -->
           <img th:unless="${session.loginMember.memberProfile == null}"
-           th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem">
+           th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem"  height="55rem">
         </a>
       </section>
 
@@ -30,7 +30,7 @@
 
     <!-- 채팅, 로그아웃 버튼 -->
     <section id="btns-container">
-      <button id="chatting-btn">채팅</button>
+      <button id="chatting-btn"><a href="/together/chat">채팅</a></button>
       <button id="logout-btn">로그아웃</button>
     </section>
 

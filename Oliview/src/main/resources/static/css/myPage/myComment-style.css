@@ -113,6 +113,11 @@ main::-webkit-scrollbar{
   background-color: var(--main-color);
 }
 
+#chatting-btn a{
+  text-decoration: none;
+  color: white;
+}
+
 #logout-btn{
   background-color: #afafaf;
 }

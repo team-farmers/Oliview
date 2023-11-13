@@ -100,6 +100,11 @@
   background-color: #afafaf;
 }
 
+#chatting-btn a{
+  text-decoration: none;
+  color: white;
+}
+
 /* 마이페이지 타이틀텍스트 */
 #myPage-title{
   height: 8rem;

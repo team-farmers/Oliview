@@ -289,6 +289,18 @@ nav a{
   color: #7C7C7C;
 }
 
+/* 리뷰 별점 */
+#review-stars{
+  font-size: 2rem;
+  user-select: none;
+  color: #f1c93b;
+  font-weight: bold;
+}
+
+#review-stars > i{
+  font-size: 2rem;
+}
+
 
 
 /*--- eating container ---*/

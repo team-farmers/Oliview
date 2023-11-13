@@ -90,9 +90,9 @@ public class MyPageController {
 		return path;
 	}
 
+	
+	
 	/* -------- 내프로필 정보수정 -------- */
-
-	/* -------- 프로필 이미지수정 -------- */
 
 	/**
 	 * 프로필 이미지 수정
@@ -131,6 +131,7 @@ public class MyPageController {
 
 	}
 
+	
 	/**
 	 * 닉네임 수정
 	 * 
@@ -138,9 +139,6 @@ public class MyPageController {
 	 * @param loginMember
 	 * @param ra
 	 * @return
-	 * 
-	 * 
-	 * 
 	 */
 	@PostMapping("info/profile")
 	public String editProfile(Member updateMember,
@@ -164,8 +162,14 @@ public class MyPageController {
 
 		return "redirect:/myPage/profile";
 	}
+	
 
-	// 이메일 수정
+	/** 이메일 수정
+	 * @param updateMember
+	 * @param loginMember
+	 * @param ra
+	 * @return
+	 */
 	@PostMapping("info/info")
 	public String editInfo(Member updateMember,
 			@SessionAttribute("loginMember") Member loginMember, RedirectAttributes ra) {
@@ -277,10 +281,6 @@ public class MyPageController {
 	 * @param paramMap
 	 * @return
 	 */
-
-
-	// 내가 쓴 댓글
-
 	@GetMapping("my-comment")
 	public String myComment(Model model,
 			@SessionAttribute("loginMember") Member loginMember,

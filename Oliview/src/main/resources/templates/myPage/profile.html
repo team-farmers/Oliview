@@ -61,7 +61,7 @@
           
                     <!-- 프로필 이미지가 있으면 프로필 이미지 -->
                     <img th:unless="${session.loginMember.memberProfile == null}"
-                      th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem" id="profileImg">
+                      th:src="${session.loginMember.memberProfile}" alt="프로필 이미지" width="55rem" height="55rem"  id="profileImg">
                     
                     <div class="profile-btn-area">
                       <label for="imageInput">이미지 선택</label>

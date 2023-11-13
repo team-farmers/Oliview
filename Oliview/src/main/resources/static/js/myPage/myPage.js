@@ -109,12 +109,12 @@ if(imageInput != null){ // #imageInput 존재할 때
 
   deleteImageBtn.addEventListener("click", ()=>{
 
-      profileImg.setAttribute("src", deleteImageBtn);
-      imageInput.value = "";
+    profileImg.setAttribute("src", defaultImage);
+    imageInput.value = "";
 
-      backupInput.value = "";
+    backupInput.value = "";
 
-      statusCheck = 0; // 있었는데 없어짐
+    statusCheck = 0; // 있었는데 없어짐
   });
 
 
