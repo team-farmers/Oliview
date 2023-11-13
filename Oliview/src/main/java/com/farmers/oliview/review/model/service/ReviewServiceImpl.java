@@ -62,8 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 	
-	
-	
+
 	// 검색 조회 
 	@Override
 	public Map<String, Object> searchReview(String searchInput, int cp, int sort) {
@@ -104,8 +103,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 	
+	
+	// ==============================================================================
 
-	// 최신순
+	// 최신순 조회 (비동기)
 	@Override
 	public Map<String, Object> sortLatest(String searchInput, int cp) {
 		
@@ -130,10 +131,30 @@ public class ReviewServiceImpl implements ReviewService {
 		return map;
 	}
 	
-	// 평점순
+
+	// 평점순 조회 (비동기)
 	@Override
-	public List<Review> sortRating(String searchInput) {
-		return mapper.sortRating(searchInput);
+	public Map<String, Object> sortRating(String searchInput, int cp) {
+		
+		
+		// 리뷰 수 조회
+		int reviewCount = mapper.searchRatingCount(searchInput);
+		
+		// Pagination 객체 생성
+		Pagination pagination = new Pagination(cp, reviewCount);
+		
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Review> reviewList =  mapper.sortRating(searchInput, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewList", reviewList);
+		map.put("pagination", pagination);
+		
+		return map;
 	}
 
 	// 평점순 가게조회

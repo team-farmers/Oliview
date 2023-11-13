@@ -8,14 +8,16 @@ import com.farmers.oliview.review.model.dto.Review;
 
 public interface ReviewService {
 
-	/** 전체 조회 - 인기순
+
+	
+	/** 전체 조회
 	 * @param cp
 	 * @param sort 
 	 * @return reviews
 	 */
 	Map<String, Object> allReview(int cp, int sort);
 
-	/** 검색 - 인기순
+	/** 검색 조회
 	 * @param searchInput
 	 * @param cp
 	 * @param sort 
@@ -23,24 +25,23 @@ public interface ReviewService {
 	 */
 	Map<String, Object> searchReview(String searchInput, int cp, int sort);
 	
+
+	// ==============================================================================
 	
-	
-	
-	
-	
-	
-	/** 최신순
+	/** 최신순 조회 (비동기)
 	 * @param searchInput
 	 * @param cp 
 	 * @return
 	 */
 	Map<String, Object> sortLatest(String searchInput, int cp);
+	
+	
 
-	/** 평점순
+	/** 평점순 조회 (비동기)
 	 * @param searchInput
 	 * @return
 	 */
-	List<Review> sortRating(String searchInput);
+	Map<String, Object> sortRating(String searchInput, int cp);
 
 	/** 평점순 가게 조회
 	 * @param reviewTitle
