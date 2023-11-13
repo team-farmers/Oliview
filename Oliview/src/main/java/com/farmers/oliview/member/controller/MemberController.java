@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.RequestAttributes;
@@ -24,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("member")
 @RequiredArgsConstructor
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "referer"})
 public class MemberController {
 	
 	private final MemberService service;
@@ -37,10 +38,10 @@ public class MemberController {
 	 * @return
 	 */
 	@GetMapping("login")
-	public String login(@RequestHeader("referer") String referer, Model model) {
+	public String login(@RequestHeader(value="referer", required = false) String referer, Model model) {
 		
 		// 이전페이지 주소 저장해 전달
-		model.addAttribute("referer", referer);
+		if(referer != null) model.addAttribute("referer", referer);
 		
 		return "member/login";
 	}
@@ -55,7 +56,7 @@ public class MemberController {
 	 */
 	@PostMapping("login")
 	public String login(Member inputMember, Model model, RedirectAttributes ra,
-			String saveId, HttpServletResponse resp, String referer) {
+			String saveId, HttpServletResponse resp, @SessionAttribute(value="referer", required = false) String referer) {
 		
 		// 로그인 서비스 호출
 		Member loginMember = service.login(inputMember);
@@ -78,14 +79,11 @@ public class MemberController {
 			// 회원정보 세션에 저장
 			model.addAttribute("loginMember", loginMember);
 			
-			// refer이 null일 경우 에러처리
-//			if(referer == null) {
-//				
-//			}
 			
 			// 이전페이지로 리다이렉트
-			return "redirect:/";
-//			return "redirect:" + referer; // referer 왜 안나옴?? 왜?!?!?!?!?!?!?
+			if(referer == null) 		return "redirect:/";
+			
+			return "redirect:" + referer; // 
 		} 
 		
 		// 로그인 정보 불일치시
