@@ -1,108 +1,110 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>posting</title>
-    <link rel="stylesheet" href="/css/together/posting.css">
-    <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
-   
+  <title>posting</title>
+  <link rel="stylesheet" href="/css/together/posting.css">
+  <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
+
 </head>
-<body>
-    <main>
-          <!-- header -->
-    <th:block th:replace="~{common/header}"></th:block>
-    <form action="posting" method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
 
-     
-    <div class="board_wrap">
+<body>
+  <main>
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
+    <form action="posting" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
+
+
+      <div class="board_wrap">
         <div class="board_title">
-            <h1>같이 먹어요 글쓰기</h1>
-            <h2>같이 먹을 사람들 구합니다</h2>
+          <h1>같이 먹어요 글쓰기</h1>
+          <h2>같이 먹을 사람들 구합니다</h2>
         </div>
 
 
         <div class="board_write_wrap">
-            <div class="board_write">
-                <div class="title">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력" name="boardTitle"></dd>
-                    </dl>
-                </div>
-
-
-
-
-                
-                 <!-- 참여인원 설정 -->
-                 <div class="info">
-                  <dl>
-                      <dt>채팅방 인원 설정</dt>
-                     
-                        <label for="maxUserCnt" class="col-form-label">
-                   
-                        <input type="text" class="form-control" id="maxUserCnt" name="maxPeople">
-                          </dl>
-
-                          
-
-                    <dt>날짜 및 시간</dt>
-                    <label for="date">
-                        <input type="datetime-local"
-                               id="date"
-                               max="2077-06-20"
-                               min="1900-06-05"
-                               name="mettingDate"
-                               >
-                      </label>
-                   
-
-                     
-                </div>
-
-                  <!-- 업로드 이미지 -->
-                  <h5>업로드 이미지</h5>
-                  <div class="board_img">
-
-                    <!-- img 1-->
-                    <label for="img1">
-                          <img class ="preview" src="">
-                    </label>
-                      <input type="file" name ="images" class="inputImage" id= img1 accept="image/*">
-                      <span class = "delete_image">&times;</span>
-                    </div>
-  
-                    
-                  <!-- 내용 -->
-                  <div class="cont">
-                   
-                      <textarea placeholder="내용 입력" name="boardContent"></textarea>
-                  </div>
-              </div>
-
-               
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd><input type="text" placeholder="제목 입력" name="boardTitle"></dd>
+              </dl>
             </div>
-          
-            <div class="bt">
-              <a href="board"> <button id="insertBtn">저장</button>  </a>
+
+
+
+
+
+            <!-- 참여인원 설정 -->
+            <div class="info">
+              <dl>
+                <dt>채팅방 인원 설정</dt>
+
+                <label for="maxUserCnt" class="col-form-label">
+
+                  <input type="text" class="form-control" id="maxUserCnt" name="maxPeople">
+              </dl>
+
+
+
+              <dt>날짜 및 시간</dt>
+              <label for="date">
+                <input type="datetime-local" id="date" max="2077-06-20" min="1900-06-05" name="mettingDate">
+              </label>
+
+
+
             </div>
+
+            <!-- 업로드 이미지 -->
+            <h5>업로드 이미지</h5>
+            <div class="board_img">
+
+              <!-- img 1-->
+              <label for="img1">
+                <img class="preview" src="">
+              </label>
+              <input type="file" name="img" class="inputImage" id=img1 accept="image/*">
+              <span class="delete_image">&times;</span>
+            </div>
+
+
+            <!-- 내용 -->
+            <div class="cont">
+
+              <textarea placeholder="내용 입력" name="boardContent"></textarea>
+            </div>
+          </div>
+
 
         </div>
-    </div>
-    <footer>
-      <article>
-        <a href="#">고객센터</a>
-        <span>|</span>
-        <a href="#">라이센스</a>
-      </article>
-      <article>
-        &copy Oliview Corp.
-      </article>
-    </footer>
+
+        <div class= "button-container">
+        <div class="bt">
+          <a href="board"> <button id="insertBtn">저장</button> </a>
+        </div>
+
+        <div class="bt-2">
+          <a href="board"> <button id="insertBtn">취소</button> </a>
+        </div>
+      </div>
+      </div>
+      </div>
+      <footer>
+        <article>
+          <a href="#">고객센터</a>
+          <span>|</span>
+          <a href="#">라이센스</a>
+        </article>
+        <article>
+          &copy Oliview Corp.
+        </article>
+      </footer>
     </form>
-</main>
+  </main>
   <script src="/js/posting/.js"></script>
 </body>
 

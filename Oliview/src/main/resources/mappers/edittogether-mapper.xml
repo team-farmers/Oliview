@@ -1,100 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.together.mapper.EditTogetherMapper">
-  		
-  		<!--게시글 작성 -->
-		<insert id="insertBoard" parameterType="Together" useGeneratedKeys="true">
-			
-			<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
-					SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL		
-			</selectKey>
-				INSERT INTO "TOGETHER"
-				VALUES( #{boardNo}, #{boardTitle},DEFAULT, 
-				#{boardImg}, #{boardContent},
-				DEFAULT, #{memberNo}, 
-				TO_DATE(#{mettingDate},'YYYY-MM-DD"T"HH24:MI'), DEFAULT, #{maxPeople})
+
+	<!--게시글 작성 -->
+	<insert id="insertBoard" parameterType="Together" useGeneratedKeys="true">
+
+		<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey> 
+		INSERT INTO "TOGETHER" VALUES( #{boardNo}, #{boardTitle},DEFAULT, #{boardImg},
+		#{boardContent}, DEFAULT, #{memberNo},
+		TO_DATE(#{mettingDate},'YYYY-MM-DD"T"HH24:MI'), DEFAULT, #{maxPeople}) 
+	</insert>
 
 
-		</insert>	
-		
-			
-			<!-- 업로드된 게시글 이미지 일괄 삽입-->
-		
-		 	<insert id="insertUploadList" parameterType="list">
-    			INSERT INTO "TOGETHER_IMG" 
-    		<foreach collection="list" item="img" separator="UNION">
-       			 SELECT TOGETHER_IMG(),
-              	 	#{img.imgNo},
-               		#{img.imgPath},
-               		#{img.imgRename},
-               		#{img.imgOriginalName},
-               		#{img.imgOrder},
-               		#{img.boardNo}
-       			 FROM DUAL
-    </foreach>
-</insert>
-			
-			
-				
-				
-				<!-- 게시글 부분만 수정 -->
-				<update id="updateBoard">
-					UPDATE "TOGETHER" SET
-					BOARD_TITLE = #{boardTitle},
-					BOARD_CONTENT = #{boardContent},
-					WHERE BOARD_NO = #{boardNo}
-					AND DATE_CREATED = SYSDATE
-				
-					
-				</update>
-				
-				
-				<!-- 게시글 삭제-->
-				<update id="deleteBoard">
-					UPDATE "TOGETHER" SET
-					BOARD_DEL_FL = 'Y" <!--삭제여부 -->
-					WHERE BOARD_NO = #{BOARD_NO}
-					AND MEMBER_NO = #{memberNo}
-				</update>
-		
-				
-				<!-- 이미지 삭제 -->
-				<delete id="imageDelete">
-					
-					DELETE FROM "TOGETHER"
-					WHERE BOARD_NO = #{boardNo}
-					AND IMG_ORDER IN ( $ {deleteOrder})		
-				</delete>
-		
-				
-				<!--이미지 하나 수정 -->
-				<update id="updateBoardImg">
-				UPDATE "TOGETHER_IMG" SET
-				IMG_PATH = #{imgPath} <!--경로-->
-				IMG_RENAME = #{imgRename} <!-- 변경명 -->
-				IMG_ORIGINAL_NAME = #{imgOriginalName} <!--원본명-->
-				WHERE BOARD_NO = #{boardNo} 
-				AND IMG_ORDER = #{imgOrder}
-				</update>
-		
-		
-		
-				<!-- 이미지 하나 삽입 -->
-				<insert id="boardImgInsert">
-					INSERT INTO "TOGETHER_IMG"
-					VALUES (SEQ_IMG_NO.NEXTVAL ,
-				    #{imgRename}, #{imgPath}
-					#{imgOriginalName},
-					#{imgOrder}, #{boardNo}				
-					)	
-				</insert>
-		
-		
-		
-		
-		
-		
-		
+	<!-- 게시글 부분만 수정 -->
+	<update id="updateBoard">
+		UPDATE "TOGETHER" SET
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		WHERE BOARD_NO = #{boardNo}
+		AND DATE_CREATED = SYSDATE
+
+
+	</update>
+
+
+	<!-- 게시글 삭제-->
+	<update id="deleteBoard"> UPDATE "TOGETHER" SET BOARD_DEL_FL = 'Y" <!--삭제여부 --> WHERE
+		BOARD_NO = #{BOARD_NO} AND MEMBER_NO = #{memberNo} </update>
+
+
+	<!-- 이미지 삭제 -->
+	<delete id="imageDelete">
+
+		DELETE FROM "TOGETHER"
+		WHERE BOARD_NO = #{boardNo}
+		AND IMG_ORDER IN ( $ {deleteOrder})
+	</delete>
+
+
+	<!--이미지 하나 수정 -->
+	<update id="updateBoardImg"> UPDATE "TOGETHER_IMG" SET IMG_PATH = #{imgPath} <!--경로-->
+		IMG_RENAME = #{imgRename} <!-- 변경명 --> IMG_ORIGINAL_NAME = #{imgOriginalName} <!--원본명--> WHERE
+		BOARD_NO = #{boardNo} AND IMG_ORDER = #{imgOrder} </update>
+
+
+	<!-- 이미지 하나 삽입 -->
+	<insert id="boardImgInsert">
+		INSERT INTO "TOGETHER_IMG"
+		VALUES (SEQ_IMG_NO.NEXTVAL ,
+		#{imgRename}, #{imgPath}
+		#{imgOriginalName},
+		#{imgOrder}, #{boardNo}
+		)
+	</insert>
+
 
 </mapper>

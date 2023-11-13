@@ -31,198 +31,189 @@ import lombok.RequiredArgsConstructor;
 @SessionAttributes
 public class EditTogetherController {
 
-		private final EditTogetherService service;
-		private final TogetherService togetherservice;
-		
-		/**
-		 * 게시글 삭제
-		 * @param boardNo
-		 * @param loginMember
-		 * @param ra
-		 * @param referer
-		 * @return
-		 */
-		
-		@GetMapping("{boardNo:[0-9]+}/delete")
-		public String deleteBoard(
-				@PathVariable("boardNo") int boardNo,
-				@SessionAttribute(value = "loginMember", required = false) Member loginMember,
-				RedirectAttributes ra, 
-				@RequestHeader("referer") String referer) {
+	private final EditTogetherService service;
+	private final TogetherService togetherservice;
+	
+	/**
+	 * 게시글 삭제
+	 * @param boardNo
+	 * @param loginMember
+	 * @param ra
+	 * @param referer
+	 * @return
+	 */
+	
+	@GetMapping("{boardNo:[0-9]+}/delete")
+	public String deleteBoard(
+		@PathVariable("boardNo") int boardNo,
+		@SessionAttribute(value = "loginMember", required = false) Member loginMember,
+		RedirectAttributes ra, 
+		@RequestHeader("referer") String referer) {
+	
+		if (loginMember == null) {
 			
-				if (loginMember == null) {
-					
-					ra.addAttribute("message", "로그인 후 이용해주세요");
-					return "redirect:/member/login";
-				}
-				
-				Map<String, Integer> paramMap = new HashMap<>();
-				paramMap.put("boardNo", boardNo);
-				paramMap.put("memberNo", loginMember.getMemberNo());
-				
-				int result = service.deleteBoard(paramMap);
-				
-				String path = null;
-				String message = null;
-				
-				if (result >0) {		
-					message ="삭제되었습니다";
-					path = "redirect:/together/inven";			
-				} else {
-					message = "삭제실패";
-					path = "redirect:/";
-					
-				}
-				 
-				ra.addAttribute("message",message);
-				return path;
-					
+			ra.addAttribute("message", "로그인 후 이용해주세요");
+			return "redirect:/member/login";
 		}
+		
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("boardNo", boardNo);
+		paramMap.put("memberNo", loginMember.getMemberNo());
+		
+		int result = service.deleteBoard(paramMap);
+		
+		String path = null;
+		String message = null;
+		
+		if (result >0) {		
+			message ="삭제되었습니다";
+			path = "redirect:/together/inven";			
+		} else {
+			message = "삭제실패";
+			path = "redirect:/";
+			
+		}
+		 
+		ra.addAttribute("message",message);
+		return path;
 				
-				/**
-				 * 게시글 작성 화면 전환
-				 * @param boardCode
-				 * @param loginMember
-				 * @return
-				 */
-				 @GetMapping("posting")
-					public String insertBoard(
-						@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
+	}
+				
+	/**
+	 * 게시글 작성 화면 전환
+	 * @param boardCode
+	 * @param loginMember
+	 * @return
+	 */
+	 @GetMapping("posting")
+	public String insertBoard( @SessionAttribute(value = "loginMember", required = false) Member loginMember) {
+		if (loginMember == null) {
+			return "redirect:/together/inven" ;
+		}
 
-						if (loginMember == null) {
-							return "redirect:/together/inven" ;
-
-						}
-
-						return "together/posting";
-
-				 		}
+		return "together/posting";
+	}
 				 	
 	//----------------------------------------------------------------------------------------------------
 				 
 				 
 				 
-				 /**
-				  * 게시글 수정
-				  * @param loginMember
-				  * @param together
-				  * @param images
-				  * @param ra
-				  * @return
-				  * @throws IllegalStateException
-				  * @throws IOException
-				  */
-				 
-					@PostMapping("posting")
-					public String insertBoard(
-							@SessionAttribute("loginMember") Member loginMember,
-							Together together,
-							@RequestParam("images") List<MultipartFile> images,
-							RedirectAttributes ra
+	 /**
+	  * 게시글 작성
+	  * @param loginMember
+	  * @param together
+	  * @param images
+	  * @param ra
+	  * @return
+	  * @throws IllegalStateException
+	  * @throws IOException
+	  */
+	 
+	@PostMapping("posting")
+	public String insertBoard(
+			@SessionAttribute("loginMember") Member loginMember,
+			Together together,
+			@RequestParam("img")MultipartFile img,
+			RedirectAttributes ra
 
-					) throws IllegalStateException, IOException {
-
-
-						together.setMemberNo(loginMember.getMemberNo());
+	) throws IllegalStateException, IOException {
 
 
-						int boardNo = service.insertBoard(together, images);
-					
+		together.setMemberNo(loginMember.getMemberNo());
 
-						if (boardNo > 0) {
-							ra.addFlashAttribute("message", "게시글 작성 성공");
-							return String.format("redirect:/together/%d", boardNo);
-						}
 
-						
-						ra.addAttribute("message", "게시글 작성 실패");
+		int boardNo = service.insertBoard(together, img);
+	
 
-						return "redirect:insert";
+		if (boardNo > 0) {
+			ra.addFlashAttribute("message", "게시글 작성 성공");
+			return String.format("redirect:/together/%d", boardNo);
+		}
 
-					}
+		
+		ra.addAttribute("message", "게시글 작성 실패");
 
-					
-					
-					
-					
-					
-					
-					
-					/**
-					 * 게시글 수정 화면 전환
-					 * @param boardNo
-					 * @param model
-					 * @return
-					 */
-					
-					@GetMapping("{boardNo:[0-9]+}/update")
-					public String updateBoard(
-							@PathVariable("boardNo") int boardNo,
-							Model model) {
+		return "redirect:insert";
+
+	}
 
 					
+					
+	
+	
+	/**
+	 * 게시글 수정 화면 전환
+	 * @param boardNo
+	 * @param model
+	 * @return
+	 */
+	
+	@GetMapping("{boardNo:[0-9]+}/update")
+	public String updateBoard(
+			@PathVariable("boardNo") int boardNo,
+			Model model) {
+	
 
-						Map<String, Object> map = new HashMap<>();
-						map.put("boardNo", boardNo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("boardNo", boardNo);
 
-						Together together = togetherservice.board(map);
+		Together together = togetherservice.board(map);
 
-						model.addAttribute("together", together);
+		model.addAttribute("together", together);
 
-						return "together/posting";
-					}
+		return "together/posting";
+	}
 					
 				
 					
 
 					
 					
-				/**
-				 * 게시글 수정
-				 * @param boardNo
-				 * @param together
-				 * @param querystring
-				 * @param deleteOrder
-				 * @param images
-				 * @param ra
-				 * @return
-				 * @throws IllegalStateException
-				 * @throws IOException
-				 */
-				 @PostMapping("{boardNo:[0-9]+}/update")
-				 public String updateBoard(
-						 @PathVariable("boardNo") int boardNo,
-							Together together, 
-							String querystring, 
-							String deleteOrder, 
-							@RequestParam("images") List<MultipartFile> images,
-							RedirectAttributes ra ) throws IllegalStateException, IOException {
-					 
-					 
-							together.setBoardNo(boardNo);
-							
-							int result = service.updateBoard(together, images, deleteOrder);
-							
-							
-							String message = null;
-							String path = null;
-							
-							if(result > 0) {
-								message = "게시글 수정 성공 ";
-								path = "redirect:/together/" + boardNo;
-							}
-							
-							else {
-								message = "게시글 수정 실패";
-								path = "redirect:/together/{boardNo}/update";
-								
-							}
-							
-							ra.addFlashAttribute("message", message);
-							return path;
-
-							
-				 }
+	/**
+	 * 게시글 수정
+	 * @param boardNo
+	 * @param together
+	 * @param querystring
+	 * @param deleteOrder
+	 * @param images
+	 * @param ra
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	 @PostMapping("{boardNo:[0-9]+}/update")
+	 public String updateBoard(
+		 @PathVariable("boardNo") int boardNo,
+		Together together, 
+		String querystring, 
+		String deleteOrder, 
+		@RequestParam("images") List<MultipartFile> images,
+		RedirectAttributes ra ) throws IllegalStateException, IOException {
+ 
+ 
+		together.setBoardNo(boardNo);
+		
+		int result = service.updateBoard(together, images, deleteOrder);
+		
+		
+		String message = null;
+		String path = null;
+		
+		if(result > 0) {
+			message = "게시글 수정 성공 ";
+			path = "redirect:/together/" + boardNo;
+		}
+		
+		else {
+			message = "게시글 수정 실패";
+			path = "redirect:/together/{boardNo}/update";
+			
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return path;
+				
+	 }
 				 
 
 

@@ -14,12 +14,12 @@ public interface EditTogetherService {
 	/**
 	 * 게시글 작성 삽입
 	 * @param together
-	 * @param images
+	 * @param img
 	 * @return
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	int insertBoard(Together together, List<MultipartFile> images) throws IllegalStateException, IOException;
+	int insertBoard(Together together, MultipartFile img) throws IllegalStateException, IOException;
 
 	
 	/**

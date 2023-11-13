@@ -48,27 +48,19 @@ public class TogetherController {
 
 	@GetMapping("inven")
 	public String inven(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam Map<String, Object> paramMap) {
+	        @RequestParam Map<String, Object> paramMap) {
 
-		if (paramMap.get("key") == null && paramMap.get("query") == null) {
+	    if (paramMap != null && paramMap.get("key") == null && paramMap.get("query") == null) {
+	        Map<String, Object> boardMap = service.selectBoardList(cp);
+	        model.addAttribute("map", boardMap);
+	    } else {
+	        Map<String, Object> searchMap = service.searchBoardList(paramMap, cp);
+	        model.addAttribute("map", searchMap);
+	    }
 
-			Map<String, Object> map = service.selectBoardList(cp);
-			model.addAttribute("map", map);
-
-		}
-
-		/* 검색인 경우 */
-
-		else {
-
-			// boardCode를 paramMap에 추가 (한번에 묶어서 sql 전달예정)
-			Map<String, Object> map = service.searchBoardList(paramMap, cp);
-			model.addAttribute("map", map);
-
-		}
-
-		return "together/inven";
+	    return "together/inven";
 	}
+
 
 	/**
 	 * 게시글 상세 조회
@@ -85,26 +77,25 @@ public class TogetherController {
 
 	@GetMapping("{boardNo:[0-9]+}")
 	public String board(@PathVariable("boardNo") int boardNo, Model model, RedirectAttributes ra,
-			@SessionAttribute(value = "loginMember", required = false) Member loginMember, HttpServletRequest req,
-			HttpServletResponse resp) throws ParseException {
+	        @SessionAttribute(value = "loginMember", required = false) Member loginMember, HttpServletRequest req,
+	        HttpServletResponse resp) throws ParseException {
 
-		Map<String, Object> map = new HashMap<>();
-		map.put("boardNo", boardNo);
+	    Map<String, Object> paramMap = new HashMap<>();
+	    paramMap.put("boardNo", boardNo);
 
-		Together together = service.board(map);
+	    Together together = service.board(paramMap);
 
-		/* 조회 결과 있으면 board.board/Detail로 포워드 */
-		String path = null;
+	    String path = null;
 
-		/* 조회 결과가 있을때 */
-		if (together != null) {
-			model.addAttribute("together", together);
+	    if (together != null) {
+	        model.addAttribute("together", together);
+	        path = "together/board";
+	    } else {
+	        // 조회 결과가 없을 때의 처리
+	        path = "redirect:/together/inven";
+	    }
 
-			path = "together/board";
-		}
-
-		return path;
-
+	    return path;
 	}
 
 }
