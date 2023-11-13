@@ -1,0 +1,45 @@
+<section id="profileInfo-container">
+  <section id="profile-img">
+    <img th:if="${session.loginMember.memberProfile == null}" th:src="#{user.default.image}" alt="프로필 이미지"
+      width="55rem">
+
+    <img th:unless="${session.loginMember.memberProfile == null}" th:src="${session.loginMember.memberProfile}"
+      alt="프로필 이미지" width="55rem">
+    </a>
+  </section>
+
+  <section id="member-id" th:object="${session.loginMember}">
+    <p th:text="*{memberNickname}">닉네임</p>
+  </section>
+
+  <section id="btn-container">
+    <button id="logout-btn">로그아웃</button>
+  </section>
+
+  <section>
+    <section id="page-change-container">
+      <artivle>
+        <a href="memberList">
+          <p>회원 관리</p>
+        </a>
+      </artivle>
+      <artivle>
+        <a href="boardList">
+          <p>r게시글 관리</p>
+        </a>
+      </artivle>
+      <artivle>
+        <a href="reportList">
+          <p>신고관리</p>
+        </a>
+      </artivle>
+      <artivle>
+        <a href="profile">
+          <p>홈페이지</p>
+        </a>
+      </artivle>
+    </section>
+
+    </body>
+
+    </html>

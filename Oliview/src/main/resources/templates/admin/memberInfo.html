@@ -6,7 +6,53 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>회원 정보</h1>
+    <table th:object="${memberInfo}">
+        <tr>
+            <td>회원 번호</td>
+            <td th:text="*{memberNo}">내용</td>
+        </tr>
+        <tr>
+            <td>회원 ID</td>
+            <td th:text="*{memberId}">내용</td>
+        </tr>
+        <tr>
+            <td>회원 이름</td>
+            <td th:text="*{memberName}"></td>
+        </tr>
+        <tr>
+            <td>회원 닉네임</td>
+            <td th:text="*{memberNickname}"></td>
+        </tr>
+        <tr>
+            <td>회원 이메일</td>
+            <td th:text="*{memberEmail}"></td>
+        </tr>
+        <tr>
+            <td>가입일</td>
+            <td th:text="*{memberEnrollDate}"></td>
+        </tr>
+
+        <tr>
+            <td>관리자 권한</td>
+            <th:block th:if="*{authority == 'N'}">일반 사용자</th:block>
+            <th:block th:if="*{authority == 'Y'}">관리자</th:block>
+    
+            <form action="changeAuthority" method="POST" style="display: inline;">
+              <input type="hidden" name="memberNo" th:value="*{memberNo}">
+              <input type="hidden" name="memberEmail" th:value="*{memberEmail}">
+              
+              <button th:if="*{authority == 'Y'}">관리자로 변경</button>
+              <button th:if="*{authority == 'N'}">일반 사용자로 변경</button>
+            </form>
+        </tr>
+        
+        <tr>
+            <td>탈퇴 여부</td>
+            <td th:text="*{memberDelFl}"></td>
+        </tr>
+
+
+    </table>
 
 </body>
 </html>

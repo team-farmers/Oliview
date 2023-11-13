@@ -10,8 +10,8 @@ import com.farmers.oliview.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
 
-@Transactional
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService{
 	
@@ -23,4 +23,9 @@ public class AdminServiceImpl implements AdminService{
 		return mapper.memberList();
 	}
 
+	// 권한 변경
+	@Override
+	public int changeAuthority(int memberNo) {
+		return mapper.changeAuthority(memberNo);
+	}
 }

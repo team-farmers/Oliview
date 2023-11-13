@@ -4,10 +4,17 @@
 <mapper namespace="com.farmers.oliview.admin.model.mapper.AdminMapper">
 
 	<select id="memberList" resultType="Member">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NICKNAME, MEMBER_EMAIL, MEMBER_ENROLL_DATE ,MEMBER_DEL_FL
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
+		MEMBER_ENROLL_DATE, MEMBER_DEL_FL
 		FROM "MEMBER"
 		ORDER BY MEMBER_NO DESC
 	</select>
+
+	<update id="changeAuthority">
+		UPDATE "MEMBER" SET
+		AUTHORITY = DECODE(AUTHORITY, 'N', 'Y', 'Y', 'N')
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 
 
 </mapper>
