@@ -50,13 +50,17 @@
           
                     <dd><pre th:text="*{dateCreated}">2023-10-23 오후 1:00</pre></dd>
                               
-                      </label>
                 </div>
 
+                <!-- 이미지 -->
+                <div>
+                  <img th:src="*{boardImg}">
+                </div>
                 
+                <!-- 내용 -->
                 <div class="cont">
-       
-                  <dd><pre th:text="*{boardContent}" >치킨</pre></dd>
+                  
+                  <pre th:text="*{boardContent}" >치킨</pre>
                 </div>
 
               

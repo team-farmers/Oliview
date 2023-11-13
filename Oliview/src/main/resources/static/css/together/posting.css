@@ -31,17 +31,47 @@ a {
   font-size: 1.4rem;
 }
 
-.btn{
+
+.button-container{
+  display:flex;
+  justify-content: space-between;
   margin-top: 30px;
-  text-align: center;
- font-size: 1rem;
-
 }
 
-.bt > button{
-color: #66B97E;
-
+.bt button, .bt-2 button{
+  flex :1;
+  padding : 10px 20px;
+  margin :0.5px;
+  border : none;
+  border-radius: 5px;
+  cursor:pointer;
+  transition: background-color 0.3s;
 }
+
+.bt button {
+  background-color: var(--main-color);
+  color:#fff;
+}
+
+.bt-2 button {
+  background-color: var(--main-color);
+  color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
