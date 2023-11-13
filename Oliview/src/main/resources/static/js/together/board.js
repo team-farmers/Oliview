@@ -49,35 +49,43 @@ if(goToListBtn != null){ // 화면에 목록으로 버튼이 있을 때만 수�
 
 
 // --------------------------------------------------------------
-
 /* 게시글 삭제 */
 const deleteBtn = document.getElementById("deleteBtn");
 
+// 만약 화면에 버튼이 없으면 null 반환
 
-if(deleteBtn != null){ // 삭제 버튼이 존재하는 경우
-  
-  deleteBtn.addEventListener("click", () => {
+if(deleteBtn != null){ // 삭제 버튼이 존재하는경우
 
-    // confirm : 확인 클릭 -> true / 취소 클릭 -> false 반환
-    if( confirm("삭제 하시겠습니까?") ){
+  deleteBtn.addEventListener ("click", () => {
+
+    // confirm : 확인 클릭 -> true / 취소 클릭 -> false반환
+    if(confirm("삭제하시겠습니까?")){
 
 
-      location.href 
-        = location.pathname.replace("together","editTogether") + "/delete"; 
+        // 상세조회 페이지 주소 : /board/{boardCode}/{boardNo}
+        // 상세조회 페이지 주소 : /board/{boardCode}/{boardNo}/delete(GET)
+
+      location.href
+      = location.pathname.replace("together", "editTogether") + "/delete";
 
     }
+
   });
+
 }
 
 // ---------------------------------------------------------
 
 /* 수정 버튼 클릭 시 수정 화면 요청 */
-const updateBtn2 = document.getElementById("updateBtn2");
+const updateBtn = document.getElementById("updateBtn");
 
-if(updateBtn2 != null){ // 수정 버튼 존재 시
-  updateBtn.addEventListener('click', ()=>{
-
+if (updateBtn != null) { // 수정 버튼 존재 시
+  updateBtn.addEventListener('click', () => {
+	  
     let url = `/editTogether/${boardNo}/update${location.search}`;
     location.href = url;
   });
 }
+
+
+

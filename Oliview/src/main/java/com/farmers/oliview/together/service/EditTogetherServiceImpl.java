@@ -2,9 +2,7 @@ package com.farmers.oliview.together.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -67,86 +65,38 @@ public class EditTogetherServiceImpl implements EditTogetherService {
 	}
 
 	
-	//게시글 수정
+	// 게시글 수정
 	@Override
-	public int updateBoard(Together together, List<MultipartFile> images, String deleteOrder) throws IllegalStateException, IOException {
-			
-			int result = mapper.updateBoard(together);
-			
-			if(result == 0) 
-				return 0;
-			
-			
-			/*deleteOrder의 내용이 존재하면 삭제 수행*/
-
-				if(!deleteOrder.equals("")) {
-					
-					Map <String,Object> map = new HashMap<>();
-					
-					map.put("boardNo",together.getBoardNo());
-					map.put("deleteOrder", "deleteOrder");
-					
-					result = mapper.imageDelete(map);
-					
-					if(result == 0) {
-						throw new BoardUpdateException("이미지 삭제 실패");
-					}
-
-				}
+	public int updateBoard(Together together, MultipartFile img, String deleteOrder) throws IllegalStateException, IOException {
 		
-	
-					List<BoardImg> uploadList = new ArrayList<>();
-					
-					for(int i=0 ; i<images.size() ; i++) {
-						
-						if(images.get(i).getSize() > 0) {
-							
-							BoardImg img = new BoardImg();
-							
-							
-							img.setBoardNo(together.getBoardNo()); /*몇번 게시글의 이미지*/
-							img.setImgOrder(i); /* 몇 번째 이미지*/
-							
-							
-							img.setImgOriginalName(images.get(i).getOriginalFilename()); /* 원본 파일명 */
-							
-							
-							img.setImgPath(webPath); /*웹 접근 경로*/
-							
-							img.setImgRename(Util.fileRename(images.get(i).getOriginalFilename())); /* 변경된 파일명 */
-							
-							img.setUploadFile(images.get(i));
-							
-							uploadList.add(img);
-							
-							
-							result = mapper.updateBoardImg(img); /* 있다 -> 변경 */
-							
-							
-							if(result == 0) {
-								mapper.boardImgInsert(img); /* 없다 -> 추가 */
-							}
-							
-							
-						}		
-						
-						
-						
-					}
-						
-					/* upload list에 있는 이미지를 서버에 저장*/
-					if( !uploadList.isEmpty() ) {
-						result = 1;
-						
-						for(BoardImg img : uploadList) {
-							
-							img.getUploadFile().transferTo(new File( folderPath + img.getImgRename() ) );
-						}
-					}
-				
-					return result;
-				}
-				
+		
+		// 1. 이미지를 삭제한 경우
+		if (!deleteOrder.equals("")) { 
+			together.setBoardImg("-1");
+		}
+		
+		// 2. 변경된 이미지가 있을 경우 
+		String rename = null;
+		if(img.getSize() > 0) {
+			rename = Util.fileRename(img.getOriginalFilename());
+			together.setBoardImg(webPath+rename);
+		}
+	    
+	    // 게시글(제목, 내용) 수정
+	    int result = mapper.updateBoard(together);
+
+	    // 수정 실패 시
+	    if(result == 0) return 0;
+
+
+	    // 3. 새로 업로드된 이미지 분류 작업
+	    if (img.getSize() > 0) { // 이미지가 업로드된 경우에만 처리
+	    	img.transferTo(new File(folderPath + rename));
+	    }
+
+	    return result;
+	}
+
 		
 		
 		

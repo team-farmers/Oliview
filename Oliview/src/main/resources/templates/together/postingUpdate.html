@@ -15,10 +15,10 @@
   <main>
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
-    <form action="posting" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
+    <form action="update" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
 
 
-      <div class="board_wrap">
+      <div class="board_wrap" th:object ="${together}">
         <div class="board_title">
           <h1>같이 먹어요 글쓰기</h1>
           <h2>같이 먹을 사람들 구합니다</h2>
@@ -30,17 +30,17 @@
             <div class="title">
               <dl>
                 <dt>제목</dt>
-                <dd><input type="text" placeholder="제목 입력" name="boardTitle"></dd>
-                </dl>
-
-                <dl>
-              <dt>모임날짜 및 시간</dt>
-              <label for="date2">
-                <input type="datetime-local" id="date2" max="2077-06-20" min="1900-06-05" name="mettingDate2">
-              </label>
-
+                <dd><input type="text" placeholder="제목 입력" name="boardTitle" th:value = "*{boardTitle}" ></dd>
               </dl>
+              <dl>
+                <dt>모임날짜 및 시간</dt>
+                <label for="date2">
+                  <input type="datetime-local" id="date2" max="2077-06-20" min="1900-06-05" name="mettingDate2">
+                </label>
+  
+                </dl>
             </div>
+
 
 
 
@@ -52,17 +52,16 @@
 
                 <label for="maxUserCnt" class="col-form-label">
 
-                  <input type="text" class="form-control" id="maxUserCnt" name="maxPeople">
+                  <input type="text" class="form-control" id="maxUserCnt" name="maxPeople" th:value = "*{maxPeople}">
               </dl>
 
 
-              <span class ="date_time"></span>
+
               <dt>날짜 및 시간</dt>
               <label for="date">
-                <input type="text" id="date" name="mettingDate">
+                <input type="datetime-local" id="date" max="2077-06-20" min="1900-06-05" name="mettingDate" th:value = "*{mettingDate}">
               </label>
-            </span>
-              
+
 
 
             </div>
@@ -73,17 +72,20 @@
 
               <!-- img 1-->
               <label for="img1">
-                <img class="preview" src="">
+                <img class="preview" th:src="*{boardImg}">
               </label>
-              <input type="file" name="img" class="inputImage" id=img1 accept="image/*">
+
+              <input type="file" name="img" class="inputImage" id=img1 accept="image/*" style="display: none;">
               <span class="delete_image">&times;</span>
             </div>
+
+            <input type="hidden" name="deleteOrder" value="">
 
 
             <!-- 내용 -->
             <div class="cont">
 
-              <textarea placeholder="내용 입력" name="boardContent"></textarea>
+              <textarea placeholder="내용 입력" name="boardContent" th:text = "*{boardContent}"></textarea>
             </div>
           </div>
 
@@ -112,6 +114,8 @@
         </article>
       </footer>
     </form>
+
+
   </main>
   <script src="/js/posting/.js"></script>
 </body>

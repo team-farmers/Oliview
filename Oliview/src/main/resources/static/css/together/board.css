@@ -128,7 +128,7 @@ img {
 
 .btn-contents {
   display: flex;
- justify-content: space-between  ;
+ justify-content: flex-end  ;
 }
 
 
@@ -137,7 +137,8 @@ img {
 .btn-1 button,
 .btn-2 button,
 .btn-3 button,
-.btn-4 button {
+.btn-4 button,
+.btn-5 button {
   margin-top: 10px; /* 버튼을 10px 만큼 아래로 이동 */
   background-color: #66B97E; /* 버튼 배경색 */
   color: #fff; /* 버튼 텍스트 색상 */
@@ -154,10 +155,15 @@ img {
 .btn-1 button:hover,
 .btn-2 button:hover,
 .btn-3 button:hover,
-.btn-4 button:hover {
+.btn-4 button:hover,
+.btn-5 button:hover {
   background-color: #2997b9; /* 호버 상태에서 배경색 변경 */
 }
 
+#date2{
+  margin-top: 20px; /* date2와 title 간 간격 조절 */
+  width: 21%; /* date2의 너비를 조절 (원하는 크기로 조절 가능) */
+}
 
 
 /*--------------------------------------------*/
