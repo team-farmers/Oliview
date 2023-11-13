@@ -44,7 +44,7 @@ public class ReviewController {
 	
 	
 	
-	/** 리뷰 조회, 검색(인기순 조회)
+	/** 전체 조회, 검색 조회
 	 * @param model
 	 * @param searchInput
 	 * @param cp
@@ -73,9 +73,11 @@ public class ReviewController {
 	}
 	
 	
-	/** 최신순 조회 
+//	=============================================================================================================================	
+
+	/** 최신순 조회 (비동기)
 	 * @param searchInput
-	 * @return
+	 * @return map(reviewList, cp)
 	 */
 	@ResponseBody
 	@GetMapping(value="sortLatest", produces="application/json")
@@ -85,24 +87,22 @@ public class ReviewController {
 		
 		return map;
 	}
+
 	
-	
-	
-	/** 평점순 조회
+	/** 평점순 조회 (비동기)
 	 * @param searchInput
-	 * @return
+	 * @return map(reviewList, cp)
 	 */
 	@ResponseBody
 	@GetMapping(value="sortRating", produces="application/json")
-	public List<Review> sortRating(String searchInput){
+	public Map<String, Object> sortRating(String searchInput, int cp){
 
-		List<Review> reviewList = service.sortRating(searchInput);
+		Map<String, Object> map = service.sortRating(searchInput, cp);
 
-		return reviewList;
+		return map;
 		
 	}
 
-	
 	/** 평점순 가게 조회
 	 * @param reviewTitle
 	 * @param model
@@ -120,9 +120,18 @@ public class ReviewController {
 	}
 	
 
-	
 //	=============================================================================================================================
 	
+	/** 리뷰 상세 조회
+	 * @param reviewNo
+	 * @param model
+	 * @param ra
+	 * @param loginMember
+	 * @param req
+	 * @param resp
+	 * @return
+	 * @throws ParseException
+	 */
 	@GetMapping("{reviewNo:[0-9]+}")
 	public String reviewDetail(@PathVariable("reviewNo") int reviewNo, Model model, RedirectAttributes ra,
 							@SessionAttribute(value="loginMember", required=false) Member loginMember,
