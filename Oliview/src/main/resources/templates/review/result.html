@@ -93,16 +93,16 @@
       <!-- ============ 조회 =========== -->
       <ul class="pagination" th:if="${param.searchInput == null}">
   
-        <li><a th:href="@{/review/searchReview(cp=1)}">&lt;&lt;</a></li>
-        <li><a th:href="@{/review/searchReview(cp=${pagination.prevPage})}">&lt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=1,sort=${param.sort})}">&lt;&lt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=${pagination.prevPage},sort=${param.sort})}">&lt;</a></li>
   
         <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
           <li th:if="${i == pagination.currentPage}"> <a class="current" th:text="${i}">1</a></li>
-          <li th:unless="${i == pagination.currentPage}"><a th:href="@{/review/searchReview(cp=${i})}" th:text="${i}">2</a></li>
+          <li th:unless="${i == pagination.currentPage}"><a th:href="@{/review/searchReview(cp=${i},sort=${param.sort})}" th:text="${i}">2</a></li>
         </th:block>
   
-        <li><a th:href="@{/review/searchReview(cp=${pagination.nextPage})}">&gt;</a></li>
-        <li><a th:href="@{/review/searchReview(cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=${pagination.nextPage},sort=${param.sort})}">&gt;</a></li>
+        <li><a th:href="@{/review/searchReview(cp=${pagination.maxPage},sort=${param.sort})}">&gt;&gt;</a></li>
   
       </ul>
 

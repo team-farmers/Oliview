@@ -33,7 +33,7 @@ sortPopular.addEventListener("click", () => {
 
 
   const params = new URL(location.href).searchParams;
-  const searchInput1 = params.get("searchInput"); // 검색어
+  const searchInput1 = params.get("searchInput")!= null ? params.get("searchInput") : "" ; // 검색어
 
   location.href = "/review/searchReview?searchInput=" + searchInput1
   
@@ -52,10 +52,9 @@ sortLatest.addEventListener("click", () => {
   sortRating.classList.remove("clicked");
 
   const params = new URL(location.href).searchParams;
-  const searchInput2 = params.get("searchInput"); // 검색어
+  const searchInput2 = params.get("searchInput")!= null ? params.get("searchInput") : "" ; // 검색어
 
-  // fetch("/review/searchReview?" + `searchInput=${searchWord}`)
-  fetch("/review/sortLatest?searchInput="+searchInput2)
+  fetch("/review/sortLatest?searchInput="+searchInput2 + "&cp=1")
 
   .then(response => response.json())
   .then((reviewList) => {
@@ -69,11 +68,16 @@ sortLatest.addEventListener("click", () => {
 
     
     /* 리뷰 리스트 가져오기 */
+    let i = 0;
+    let reviewRow;
     for(let review of reviewList){
       
-      /* 열 생성 */
-      const reviewRow = document.createElement("section");
-      reviewRow.classList.add("review-row");
+      /* 행 생성 */
+      if(i % 4 == 0){
+        reviewRow = document.createElement("section");
+        reviewRow.classList.add("review-row");
+        reviewFull.append(reviewRow);
+      }
 
       /* 리뷰 아티클 생성 */
       const reviewArticle = document.createElement("article");
@@ -118,11 +122,11 @@ sortLatest.addEventListener("click", () => {
       aImg.append(Img);
       reviewArticle.append(aImg, divTitle, divNSD);
       reviewRow.append(reviewArticle);
-      reviewFull.append(reviewRow);
+
 
       console.log("확인");
 
-
+      i++;
     }
 
 
@@ -142,7 +146,7 @@ sortRating.addEventListener("click", () => {
   sortRating.classList.add("clicked");
 
   const params = new URL(location.href).searchParams;
-  const searchInput3 = params.get("searchInput"); // 검색어
+  const searchInput3 = params.get("searchInput") != null ? params.get("searchInput") : "" ; // 검색어
 
   fetch("/review/sortRating?searchInput="+searchInput3)
 
@@ -158,14 +162,20 @@ sortRating.addEventListener("click", () => {
 
     let rank = 1;
     
+    
     /* 리뷰 리스트 가져오기 */
+    let i = 0;
+    let reviewRow;
+
     for(let review of reviewList){
 
-  
-      
-      /* 열 생성 */
-      const reviewRow = document.createElement("section");
-      reviewRow.classList.add("review-row");
+      /* 행 생성 */
+      if(i % 4 == 0){
+        reviewRow = document.createElement("section");
+        reviewRow.classList.add("review-row");
+
+        reviewFull.append(reviewRow);
+      }
 
       /* 리뷰 아티클 생성 */
       const reviewArticle = document.createElement("article");
@@ -175,8 +185,8 @@ sortRating.addEventListener("click", () => {
       const aImg = document.createElement("a");
       const Img = document.createElement("img");
       aImg.classList.add("review-img");
-      aImg.href="/review/reviewTitle?=" + review.reviewTitle;
-      // Img.src=
+      aImg.href="/review/store/" + review.reviewTitle;
+      Img.src= review.reviewImg;
 
 
       /* 랭킹 생성 */
@@ -209,10 +219,10 @@ sortRating.addEventListener("click", () => {
       aImg.append(Img);
       reviewArticle.append(aImg, divRank, divStar);
       reviewRow.append(reviewArticle);
-      reviewFull.append(reviewRow);
 
       console.log("확인");
 
+      i++;
 
     }
 

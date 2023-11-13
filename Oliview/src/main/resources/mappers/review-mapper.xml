@@ -37,8 +37,83 @@
 	</select>
 	
 	
+
+	<!-- 최신순 -->
+	<select id="sortLatest" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
+		OR REVIEW_MENU LIKE '%${searchInput}%'
+		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
+		ORDER BY WRITE_DATE DESC
+	</select>
 	
-	<!-- 검색 리뷰 수 조회 -->
+	
+	<!-- 평점순 가게 수 -->
+	<select id="ratingCount">
+		SELECT count(*) 
+		FROM ( SELECT 1
+			FROM "REVIEW" R1
+			GROUP BY REVIEW_TITLE)
+	</select>
+	
+	
+	<!-- 최신순 모든 리뷰 -->
+	<select id="allSortLatest" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, 
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		ORDER BY REVIEW_NO DESC
+	</select>
+	
+	<!-- 평점순 모든 리뷰 -->
+	<select id="allSortRating" resultType="Review">
+		SELECT REVIEW_TITLE , COUNT(*) STORE_COUNT, 
+				ROUND(AVG((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3),1) STORE_STAR_TOTAL_RATE,
+				(SELECT MAX(REVIEW_IMG) REVIEW_IMG FROM REVIEW R2 WHERE R2.REVIEW_TITLE = R1.REVIEW_TITLE) REVIEW_IMG
+		FROM "REVIEW" R1
+		GROUP BY REVIEW_TITLE
+		ORDER BY STORE_STAR_TOTAL_RATE DESC
+	</select>
+	
+	
+	<!-- 평점순 -->
+	<select id="sortRating" resultType="Review">
+		SELECT REVIEW_TITLE , COUNT(*) STORE_COUNT, 
+				ROUND(AVG((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3),1) STORE_STAR_TOTAL_RATE,
+				(SELECT MAX(REVIEW_IMG) REVIEW_IMG FROM REVIEW R2 WHERE R2.REVIEW_TITLE = R1.REVIEW_TITLE) REVIEW_IMG
+		FROM "REVIEW" R1
+		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
+		GROUP BY REVIEW_TITLE
+		ORDER BY STORE_STAR_TOTAL_RATE DESC
+	</select>
+	
+
+	<!-- 평점순 가게 리스트 조회 -->
+	<select id="ratingResult" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_ONELINE, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE,
+					(SELECT ROUND(AVG((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3),1) STORE_STAR_TOTAL
+					FROM "REVIEW"
+					WHERE REVIEW_TITLE = #{reviewTitle}
+					GROUP BY REVIEW_TITLE) STORE_STAR_TOTAL
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_TITLE = #{reviewTitle}
+		AND ROWNUM BETWEEN 1 AND 6
+		ORDER BY WRITE_DATE DESC
+	</select>
+	
+	<!-- =============================================================================================== -->
+	
+	
+		
+	<!-- 인기, 최신 리뷰 수 조회 -->
 	<select id="searchReviewCount" resultType="_int">
 		SELECT COUNT(*) FROM "REVIEW"
 		WHERE REVIEW_DEL_FL = 'N'
@@ -58,49 +133,23 @@
 		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
 		ORDER BY READ_COUNT DESC
 	</select>
-
-
-	<!-- 최신순 -->
-	<select id="sortLatest" resultType="Review">
-		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
-					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+	
+	
+	<!-- 평점순 리뷰 수 조회 -->
+	<select id="searchRatingCount" resultType="_int">
+		SELECT COUNT(*) STORE_COUNT 
 		FROM "REVIEW"
-		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
-		OR REVIEW_MENU LIKE '%${searchInput}%'
-		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
-		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
-		ORDER BY WRITE_DATE DESC
-	</select>
-	
-	
-	<!-- 평점순 -->
-	<select id="sortRating" resultType="Review">
-		SELECT REVIEW_TITLE , COUNT(*) STORE_COUNT, ROUND(AVG((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3),1) STORE_STAR_TOTAL_RATE
-		FROM "REVIEW"
-		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
-		GROUP BY REVIEW_TITLE
-		ORDER BY STORE_STAR_TOTAL_RATE DESC
-	</select>
-	
-	
-	
-	<!-- 평점순 가게 리스트 조회 -->
-	<select id="ratingResult" resultType="Review">
-		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_ONELINE, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
-					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE,
-					(SELECT ROUND(AVG((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3),1) STORE_STAR_TOTAL
-					FROM "REVIEW"
-					WHERE REVIEW_TITLE = #{reviewTitle}
-					GROUP BY REVIEW_TITLE) STORE_STAR_TOTAL
-		FROM "REVIEW"
-		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE = #{reviewTitle}
-		AND ROWNUM BETWEEN 1 AND 6
-		ORDER BY WRITE_DATE DESC
+		WHERE REVIEW_DEL_FL = 'N'
+		AND REVIEW_TITLE LIKE '%${searchInput}%'
+		GROUP BY REVIEW_TITLE;
 	</select>
 	
 
+	<!-- 검색 최신순 -->
+	
+	
+	
+	
 	
 	<!-- =============================================================================================== -->
 	
