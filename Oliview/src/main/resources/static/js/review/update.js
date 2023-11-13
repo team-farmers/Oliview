@@ -68,19 +68,19 @@ const quantityRating = document.getElementById('quantityRating');
 const cleanlinessRating = document.getElementById('cleanlinessyRating');
 
 
+const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
+const quantityStars = document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
+const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
+
+tasteRating.value = tasteStars.length;
+quantityRating.value = quantityStars.length;
+cleanlinessRating.value = cleanlinessStars.length;
 
 
 
 
 reviewWriteFrm.addEventListener("submit", e => {
 
-    const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
-    const quantityStars = document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
-    const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
-
-    tasteRating.value = tasteStars.length;
-    quantityRating.value = quantityStars.length;
-    cleanlinessRating.value = cleanlinessStars.length;
 
     if (title.value.trim().length == 0) {
         e.preventDefault();

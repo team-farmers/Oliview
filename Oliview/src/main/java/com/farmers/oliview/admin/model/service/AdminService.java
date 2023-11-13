@@ -9,4 +9,7 @@ public interface AdminService {
 	// 회원 목록 조회
 	List<Member> memberList();
 
+	// 관리자 권한 변경
+	int changeAuthority(int memberNo);
+
 }
