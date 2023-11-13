@@ -7,68 +7,49 @@
   <link rel="stylesheet" href="/css/together/chat.css">
   <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
 </head>
-
+<body>
  <main>
-  <header>
-    <section>
-      <img src="/images/original_16.png" alt="로고이미지" width="80rem">
-    </section>
-  
-    <section> 
-      <article>
-        <a href="#">로그아웃</a>
-      </article>
-  
-      <article>
-        <a href="#">마이페이지</a>
-      </article>
-  
-      <article>
-        <a href=""><img src="/images/profileImgEx.png" alt="프로필 이미지" width="50rem"></a>
-      </article>
-    </section>
-  </header>
-  <body>
-  <div class = "con">
+    <!-- header -->
+    <th:block th:replace="~{common/header}"></th:block>
 
+    <div class = "con">
 
-  <!-- 채팅목록-->
-    <div>
-      <div class="title">
-        <h1>대화 목록</h1>
-    </div>
+      <!-- 채팅목록-->
+      <div>
 
-
-   <!-- 커비 채팅 -->   
-      <ul>
-        <li>
-          <img src="/images/톡커비.JPG" alt="커비">
-          <div class="profile">
-          <p class="friend-name">커비</p>
-          <p class="chat-content">하압하압하압하압하압하압하압하압하하압하하압하하압하압하압하압하압하압하압하압</p>
+        <div class="title">
+          <h1>대화 목록</h1>
         </div>
-        <div class="chat-status">
-          <time datetime="15:40:00+09:00">오후 3:40</time>
-          <span class="chat-balloon">1</span>
-      </div>
-      </li>
 
-    <!--핑구 채팅 -->
-
-        <li>
-          <img src="/Oliview/src/main/resources/static/images/톡핑구.JPG" alt="핑구">
-          <div class = "profile">
-            <p class="friend-name">핑구</p>
-            <p class="chat-content">눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕</p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-                <span class="chat-balloon">1</span>
-        </div>
-        </li>
-
-    <!-- 햄토리 채팅-->
+        <ul>
+          <!-- 커비 채팅 -->   
           <li>
+            <img src="/images/톡커비.JPG" alt="커비">
+            <div class="profile">
+              <p class="friend-name">커비</p>
+              <p class="chat-content">하압하압하압하압하압하압하압하압하하압하하압하하압하압하압하압하압하압하압하압</p>
+            </div>
+          <div class="chat-status">
+            <time datetime="15:40:00+09:00">오후 3:40</time>
+            <span class="chat-balloon">1</span>
+          </div>
+          </li>
+
+          <!--핑구 채팅 -->
+          <!-- <li>
+            <img src="/Oliview/src/main/resources/static/images/톡핑구.JPG" alt="핑구">
+            <div class = "profile">
+              <p class="friend-name">핑구</p>
+              <p class="chat-content">눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕</p>
+            </div>
+            <div class="chat-status">
+              <time datetime="15:39:00+09:00">오후 3:39</time>
+              <span class="chat-balloon">1</span>
+            </div>
+          </li> -->
+
+          <!-- 햄토리 채팅 -->
+          <!-- <li>
             <img src="/Oliview/src/main/resources/static/images/톡햄토리.JPG" alt="햄토리">
             <div class="profile">
               <p class="friend-name">햄토리</p>
@@ -76,72 +57,57 @@
             </div>
             <div class="chat-status">
               <time datetime="15:39:00+09:00">오후 3:39</time>
-                  <span class="chat-balloon">1</span>
+              <span class="chat-balloon">1</span>
+            </div>
+          </li> -->
+
+          <!-- 피카츄 채팅-->        
+          <!-- <li>
+            <img src="/Oliview/src/main/resources/static/images/톡피카츄.JPG" alt="피카츄">
+            <div class="profile">
+              <p class="friend-name">피카츄</p>
+              <p class="chat-content">전기 팔아요 전기 팔아요  전기 팔아요 아요 전기 팔아요 전기 팔아요 </p>
+            </div>
+            <div class="chat-status">
+              <time datetime="15:39:00+09:00">오후 3:39</time>
+              <span class="chat-balloon">1</span>
+            </div>
+          </li> -->
+
+          <!-- 호빵맨 채팅-->
+          <!-- <li>
+            <img src="/Oliview/src/main/resources/static/images/톡호빵맨.JPG" alt="호빵맨">
+            <div class="profile">
+              <p class="friend-name">호빵맨</p>
+              <p class="chat-content">팔아요  호빵 팔아요. 호빵 팔아요호빵 팔아요호빵 팔아요호빵 팔아요</p>
+            </div>
+            <div class="chat-status">
+              <time datetime="15:39:00+09:00">오후 3:39</time>
+              <span class="chat-balloon">1</span>
           </div>
-          </li>
+          </li> -->
 
-    <!-- 피카츄 채팅-->        
 
-            <li>
-              <img src="/Oliview/src/main/resources/static/images/톡피카츄.JPG" alt="피카츄">
-              <div class="profile">
-                <p class="friend-name">피카츄</p>
-                <p class="chat-content">전기 팔아요 전기 팔아요  전기 팔아요 아요 전기 팔아요 전기 팔아요 </p>
-              </div>
-              <div class="chat-status">
-                <time datetime="15:39:00+09:00">오후 3:39</time>
-                    <span class="chat-balloon">1</span>
+          <!-- 파이리 채팅-->
+          <!-- <li>
+            <img src="/Oliview/src/main/resources/static/images/톡파이리.JPG" alt="파이리">
+            <div class="profile">
+              <p class="friend-name">파이리</p>
+              <p class="chat-content">불꽃 팝니다 불꽃 팝니불꽃 팝니다불꽃 팝니다불꽃 팝니다불꽃 팝니다</p>
             </div>
-            </li>
-
-    <!-- 호빵맨 채팅-->
-            <li>
-              <img src="/Oliview/src/main/resources/static/images/톡호빵맨.JPG" alt="호빵맨">
-              <div class="profile">
-                <p class="friend-name">호빵맨</p>
-                <p class="chat-content">팔아요  호빵 팔아요. 호빵 팔아요호빵 팔아요호빵 팔아요호빵 팔아요</p>
-              </div>
-              <div class="chat-status">
-                <time datetime="15:39:00+09:00">오후 3:39</time>
-                    <span class="chat-balloon">1</span>
+            <div class="chat-status">
+              <time datetime="15:39:00+09:00">오후 3:39</time>
+              <span class="chat-balloon">1</span>
             </div>
-            </li>
+          </li> -->
+        </ul>
+      </div>
+    </div>
 
-
-    <!-- 파이리 채팅-->
-              <li>
-                <img src="/Oliview/src/main/resources/static/images/톡파이리.JPG" alt="파이리">
-                <div class="profile">
-                  <p class="friend-name">파이리</p>
-                  <p class="chat-content">불꽃 팝니다 불꽃 팝니불꽃 팝니다불꽃 팝니다불꽃 팝니다불꽃 팝니다</p>
-                </div>
-                <div class="chat-status">
-                  <time datetime="15:39:00+09:00">오후 3:39</time>
-                      <span class="chat-balloon">1</span>
-              </div>
-              </li>
-
-
-      </ul>
-
-  </div>
-
-</div>
-
-
-<!-- footer -->
-<footer>
-  <article>
-    <a href="#">고객센터</a>
-    <span>|</span>
-    <a href="#">라이센스</a>
-  </article>
-  <article>
-    &copy Oliview Corp.
-  </article>
-</footer>
-</main>
-
+  </main>
+  
+  <!-- footer -->
+  <th:block th:replace="~{common/footer}"></th:block>
 
   
 </body>

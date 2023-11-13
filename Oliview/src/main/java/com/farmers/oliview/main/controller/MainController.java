@@ -57,12 +57,16 @@ public class MainController {
 	/** 로그인 상태에서 회원가입/로그인 페이지 접근 시
 	 * @param ra
 	 * @return
+	 * 
+	 * 
 	 */
 	@GetMapping("logoutError")
 	public String logoutError(RedirectAttributes ra) {
 		ra.addFlashAttribute("message", "정상적이지 않은 접근입니다.");
 		return "redirect:/";
 	}
+	
+	
 	
 	
 	/** 관리자권한 없는 경우 관리자페이지 접근 시

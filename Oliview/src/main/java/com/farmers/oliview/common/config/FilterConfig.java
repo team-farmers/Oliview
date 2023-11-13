@@ -50,10 +50,14 @@ public class FilterConfig {
 		filter.setFilter(new LogoutFilter()); // 사용할 로그인 필터 객체 추가
 		 
 		// 로그인 후) 로그인, 회원가입 페이지, 비밀번호 찾기, 아이디찾기 못들어가게 필터링 함
-		List<String> filteringUrl = new ArrayList<>();
 		 
-		filteringUrl.add("/member/*");
-		filter.setUrlPatterns(filteringUrl);
+		String[] filteringUrl = { "/member/signup", "/member/id-find-confirm",
+				"/member/id-find","/member/login","/member/pw-find-confirm","/member/pw-find",
+				"/member/signup-fin","/member/signup-info"};
+		
+		// 필터링할 주소 지정
+		filter.setUrlPatterns(Arrays.asList(filteringUrl));
+		
 		filter.setName("logoutFilter");
 		filter.setOrder(1);
 

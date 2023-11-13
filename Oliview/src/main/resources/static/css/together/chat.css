@@ -65,13 +65,17 @@ li > img{
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
 main{
   width: 144rem;
+  height: 100vh;
 }
+
 #user-input{
  width: 90%;
  height: 4vh;
