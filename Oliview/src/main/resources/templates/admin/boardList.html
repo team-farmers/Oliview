@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판 관리</title>
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+
+<body>
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <section class="conatiner">
+      <p>게시판 목록</p>
+
+      <section id="board-index-container">
+          <table id="board-table">
+              <tr id="baord-table-row">
+                  <th>게시판</th>
+                  <th>제목</th>
+                  <th>작성일</th>
+                  <th>신고 누적 횟수</th>
+                  <th>관리</th>
+              </tr>
+
+              <tr id="board-table-content" th:each="board : ${boardList}" th:object="${board}">
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+              </tr>
+          </table>
+      </section>
+
+  </section>
+
+
+  </main>
+
+</body>
+
+</html>
