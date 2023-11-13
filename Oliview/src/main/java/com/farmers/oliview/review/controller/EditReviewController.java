@@ -105,8 +105,8 @@ public class EditReviewController {
 
 	// 게시글 삭제
 	@GetMapping("{reviewNo:[0-9]+}/delete")
-	public String deleteReview(@PathVariable("reviewNo") int reviewNo,
-			@SessionAttribute(value = "loginMember", required = false) Member loginMember, RedirectAttributes ra) {
+	public String deleteReview(@PathVariable("reviewNo") int reviewNo, RedirectAttributes ra,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember ) {
 
 		if (loginMember == null) {
 			ra.addFlashAttribute("message", "로그인 후 이용해주세요");
@@ -114,7 +114,6 @@ public class EditReviewController {
 		}
 
 		Map<String, Integer> paramMap = new HashMap<>();
-
 		paramMap.put("reviewNo", reviewNo);
 		paramMap.put("memberNo", loginMember.getMemberNo());
 
@@ -125,7 +124,7 @@ public class EditReviewController {
 
 		if (result > 0) {
 			message = "게시글을 삭제했습니다.";
-			path = "redirect:/review/searchReview";
+			path = "redirect:/review/result";
 		} else {
 			message = "게시글 삭제를 실패했습니다.";
 			path = "redirect:/";
