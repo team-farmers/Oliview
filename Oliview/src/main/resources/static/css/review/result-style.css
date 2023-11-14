@@ -165,7 +165,7 @@ a{
   display: flex;
   font-size: 2.5rem;
 }
-.reviewRank> *{
+.reviewRank> section{
   padding: 0.2rem;
   margin-right: 0.2rem;
 }

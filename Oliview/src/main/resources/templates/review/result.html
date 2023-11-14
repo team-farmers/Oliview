@@ -28,10 +28,6 @@
 
     <!-- 정렬 선택 영역 -->
     <section class="sort">
-      <!-- style="color: #66b97e;" -->
-
-
-      <th:block th:text="${#strings.equals(param.sort,'2')}">sort</th:block>
       <a  class="sortBtn" id="sort-popular">인기순</a> 
       <span>|</span>
       <a class="sortBtn" id="sort-latest">최신순</a>
@@ -50,81 +46,84 @@
       </section>
     </div>
 
-    <!-- 리뷰 목록이 있을 때 + (인기순, 최신순) -->
-    <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0 and ${param.sort !=3}" id="reviewFull">
-      <th:block th:each="review, stat : ${map.reviewList}">
-  
-        <th:block th:if="${stat.index % 4 == 0}">
-          <section class="review-row" id="reviewRow">
-          </th:block>
-            <article class="review-col" th:object="${review}" id="reviewArticle">
+    <!-- 리뷰 목록이 있을 때 -->
+    <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0" id="reviewFull">
       
-              <!-- 이미지 -->
-              <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
-                <img th:src="*{reviewImg}" alt="리뷰이미지">
-              </a>
-      
-              <!-- 제목(가게명) -->
-              <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
-                th:text="*{reviewTitle}">가게이름</a>
-              </div>
-      
-              <!-- 닉네임/평점/작성일 -->
-              <div class="nickname-star-date">
-                <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
-                th:text="*{memberNickname}">닉네임</a>
-                <section class="star" th:text="*{starTotal}">평점</section>
-                <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
-                <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
-              </div>
+      <!-- 인기순, 최신순 -->
+      <th:block th:if="${{param.sort}}==1 or ${{param.sort}}==2">
+        <th:block th:each="review, stat : ${map.reviewList}">
     
-            </article>
-  
-          
-  
-        <th:block th:if="${stat.index % 4 == 3}">
-          </section>
+          <th:block th:if="${stat.index % 4 == 0}">
+            <section class="review-row" id="reviewRow">
+            </th:block>
+              <article class="review-col" th:object="${review}" id="reviewArticle">
+        
+                <!-- 이미지 -->
+                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                  <img th:src="*{reviewImg}" alt="리뷰이미지">
+                </a>
+        
+                <!-- 제목(가게명) -->
+                <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+                  th:text="*{reviewTitle}">가게이름</a>
+                </div>
+        
+                <!-- 닉네임/평점/작성일 -->
+                <div class="nickname-star-date">
+                  <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
+                  th:text="*{memberNickname}">닉네임</a>
+                  <section class="star" th:text="*{starTotal}">평점</section>
+                  <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+                  <section class="writeDate" th:text="*{writeDate}">2023.10.20.</section>
+                </div>
+      
+              </article>
+          <th:block th:if="${stat.index % 4 == 3}">
+            </section>
+          </th:block>
+    
         </th:block>
-  
+
       </th:block>
 
-    </div>
+      <!-- 최신순 -->
 
-    <!-- 리뷰 목록이 있을 때 + (평점순) -->
-    <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0 and ${param.sort ==3}" id="reviewFull">
-      <th:block th:each="review, stat : ${map.reviewList}">
-  
-        <th:block th:if="${stat.index % 4 == 0}">
-          <section class="review-row" id="reviewRow">
-          </th:block>
-            <article class="review-col" th:object="${review}" id="reviewArticle">
-      
-              <!-- 이미지 -->
-              <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
-                <img th:src="*{reviewImg}" alt="리뷰이미지">
-              </a>
-      
-              <!-- 제목(가게명) -->
-              <div class="reviewRank">
-                <section>#1</section>
-                <section th:text="*{reviewTitle}">가게이름</section>
-              </div>
-      
-              <!-- 평점 -->
-              <div class="star-count">
-                <section class="star" th:text="*{storeStarTotlaRate}"></section>
-                <span><i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></span>
-                <section class="starCount" th:text="|(*{storeCount})명|"></section>
-              </div>
+
+      <!-- 평점순 -->
+      <!-- <th:block th:if="${#strings.equals(param.sort,'3')}"> -->
+      <th:block th:if="${{param.sort}}==3">
+        <th:block th:each="review, stat : ${map.reviewList}">
     
-            </article>
-  
-          
-  
-        <th:block th:if="${stat.index % 4 == 3}">
-          </section>
+          <th:block th:if="${stat.index % 4 == 0}">
+            <section class="review-row" id="reviewRow">
+            </th:block>
+              <article class="review-col" th:object="${review}" id="reviewArticle">
+        
+                <!-- 이미지 -->
+                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                  <img th:src="*{reviewImg}" alt="리뷰이미지">
+                </a>
+        
+                <!-- 제목(가게명) -->
+                <div class="reviewRank">
+                  <span>#</span>
+                  <section th:text="(${{param.cp}}-1)*8+${stat.index+1}"></section>
+                  <section th:text="*{reviewTitle}">가게이름</section>
+                </div>
+        
+                <!-- 평점 -->
+                <div class="star-count">
+                  <section class="star" th:text="*{storeStarTotalRate}"></section>
+                  <span><i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></span>
+                  <section class="starCount" th:text="|(*{storeCount})명|"></section>
+                </div>
+      
+              </article>
+          <th:block th:if="${stat.index % 4 == 3}">
+            </section>
+          </th:block>
+    
         </th:block>
-  
       </th:block>
 
     </div>
