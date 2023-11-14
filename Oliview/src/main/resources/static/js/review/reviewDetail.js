@@ -86,7 +86,7 @@ if(updateBtn != null){ // 수정 버튼 존재 시
     // 바꾸고싶음 : /editBoard/{boardCode}/{boardNo}/update?cp=1
 
 
-    let url = `${reviewNo}/update${location.search}`;
+    let url = `/editReview/${reviewNo}/update${location.search}`;
 
     location.href = url;
   });

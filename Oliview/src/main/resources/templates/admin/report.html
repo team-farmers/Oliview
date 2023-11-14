@@ -11,7 +11,7 @@
 
   <main>
 
-    <form action="#">
+    <form action="report" method="POST">
 
       <header>
         신고하기
@@ -19,10 +19,10 @@
   
       <div class="report-info">
         <div>작성자 | &nbsp;
-          <section class="report-nickname">푸바오</section>
+          <section class="report-nickname" th:text="*{memberNickname}">푸바오</section>
         </div>
         <div>게시글 | &nbsp;
-          <section class="report-review">칠리칠리</section>
+          <section class="report-review" th:text="*{reviewTitle}">칠리칠리</section>
         </div>
       </div>
   

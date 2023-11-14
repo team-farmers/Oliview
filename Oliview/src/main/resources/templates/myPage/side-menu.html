@@ -51,7 +51,7 @@
       <article><a href="my-comment"><p>내가 쓴 댓글</p></a></article>
       <article><a href="choice-article"><p>찜한 글</p></a></article>
       <article><a href="secession"><p>회원 탈퇴</p></a></article>
-      <article><a href="/admin/memberList"><p>관리자 페이지</p></a></article>
+      <article th:if="${session.loginMember.authority == 'Y'}"><a href="/admin/memberList"><p>관리자 페이지</p></a></article>
 
     </section>
   </section>

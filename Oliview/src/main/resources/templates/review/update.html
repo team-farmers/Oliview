@@ -8,7 +8,7 @@
 
   <th:block th:replace="~{common/common}"></th:block>
 
-  <link rel="stylesheet" href="/css/review/insert.css">
+  <link rel="stylesheet" href="/css/review/update.css">
 </head>
 
 <body>
@@ -48,7 +48,7 @@
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star1" style="color: #f1c93b;"></i>
-              <input type="hidden" id="tasteRating" name="starTaste">
+              <input type="hidden" id="tasteRating" name="starTaste" th:value="*{starTaste}">
 
             </div>
 
@@ -60,7 +60,7 @@
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star2" style="color: #f1c93b;"></i>
-              <input type="hidden" id="quantityRating" name="starAmount">
+              <input type="hidden" id="quantityRating" name="starAmount" th:value="*{starAmount}">
 
 
             </div>
@@ -73,7 +73,7 @@
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
               <i class="fa-regular fa-star fa-2xl star3" style="color: #f1c93b;"></i>
-              <input type="hidden" id="cleanlinessyRating" name="starClean">
+              <input type="hidden" id="cleanlinessyRating" name="starClean" th:value="*{starClean}">
 
             </div>
           </div>
@@ -86,7 +86,9 @@
 
           <!-- 이미지 -->
           <div id="image-area">
-            <label for="image" class="title" id="image-text">이미지 첨부: </label>
+            <p class="title" id="image-text">이미지 첨부: </p>
+            <p id="image-title">이미지 파일 이름</p>
+            <label for="image"><div class="btn-upload">수정하기</div></label>
             <input type="file" id="image" accept="image/*" name="inputImg">
           </div>
 

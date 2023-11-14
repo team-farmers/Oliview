@@ -15,15 +15,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
 
 	public final AdminMapper mapper;
-	
-	// 회원 정보 조회
-	@Override
-	public Review memberInfo(Map<String, Object> map) {
-		return mapper.memberInfo(map);
-	}
 
 	// 회원 목록 조회
 	@Override
@@ -42,4 +36,10 @@ public class AdminServiceImpl implements AdminService{
 	public int restoration(int memberNo) {
 		return mapper.restoration(memberNo);
 	}
+
+	@Override
+	public Member memberInfo(int memberNo) {
+		return mapper.memberInfo(memberNo);
+	}
+	
 }

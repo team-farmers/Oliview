@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-#profile-img{
+#profile-img > img{
   width: 30%;
   height: 100%;
   display: flex;
