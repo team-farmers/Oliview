@@ -211,10 +211,7 @@ public class EditTogetherController {
 		return "redirect:/together/" + boardNo;
 				
 	 }
-	 
-	 
-	
-			 
+				 
 
 
 }

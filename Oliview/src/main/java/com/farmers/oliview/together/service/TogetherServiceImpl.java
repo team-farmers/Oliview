@@ -83,19 +83,11 @@ public class TogetherServiceImpl implements TogetherService {
 
 				return map;
 			}
-			
-			
-			/* 게시글 상세 조회 */
+		
 			@Override
 			public Together board(Map<String, Object> map) {
+				// TODO Auto-generated method stub
 				return mapper.board(map);
-			}
-			
-			
-			/* 조회수 증가 */
-			@Override
-			public int updateReadCount(int boardNo) {
-				return mapper.updateReadCount(boardNo);
 			}
 	
 

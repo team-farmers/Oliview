@@ -96,8 +96,6 @@ public class EditTogetherServiceImpl implements EditTogetherService {
 
 	    return result;
 	}
-	
-
 
 		
 		

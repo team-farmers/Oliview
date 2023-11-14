@@ -23,10 +23,6 @@
       </div>
 
 
-
-
-
-
       <!--상단 번호, 제목, 작성자, 작성일, 조회수-->
       <div class="board_list_wrap">
         <div class="board_list">
@@ -51,99 +47,76 @@
 
         </div>
 
+        <!--Pagination 페이지 숫자-->
+        <div class="board_page">
+          <a href="#" class="bt first">
+            <<
+              <a href="#" class="bt prev">
+                <
+                  <a href="#" class="num on">1</a>
+                  <a href="#" class="num">2</a>
+                  <a href="#" class="num">3</a>
+                  <a href="#" class="num">4</a>
+                  <a href="#" class="num">5</a>
+                  <a href="#" class="bt next">></a>
+                  <a href="#" class="bt last">>></a>
+ <ul class="pagination" th:unless="${param.searchInput == null}">
 
-
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-
-     
-     
-     
-     
-     
-     
-     
-      
-      <!--Pagination 페이지 숫자-->
-      <div class="pagination-area" th:if ="${#lists.size(boardList) > 0}">
-        
-        <!-- 검색 x -->
-        <ul class="pagination" th:unless="${param.temp == null}">
-
-          <li><a th:href="@{/together/inven(cp=1, key= ${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-          <li><a th:href="@{/together/inven(cp=${pagination.prevPage}, key= ${param.key}, query=${param.query})}">&lt;</a></li>
-
-
-          <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-              <li th:if="${i == pagination.currentPage}">
-                <a class="current" th:text="${i}">1</a>
-              </li>              
-              <li th:unless="${i == pagination.currentPage}"> 
-                  <a th:href="@{/together/inven(cp=${i}, key= ${param.key}, query=${param.query})}" th:text="${i}">2</a>
-              </li>
-          </th:block>
-
-
-          <li><a th:href="@{/together/inven(cp=${pagination.nextPage}, key= ${param.key}, query=${param.query})}">&gt;</a></li>
-          <li><a th:href="@{/together/inven(cp=${pagination.maxPage}, key= ${param.key}, query=${param.query})}">&gt;&gt;</a></li>
-        </ul>
-      </div>
-    
-      <!--Pagination 페이지 숫자-->
-      <ul class="pagination" th:unless="${param.temp == null}">
-
-        <li><a th:href="@{/together/inven(cp=1, key= ${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-        <li><a th:href="@{/together/inven(cp=${pagination.prevPage}, key= ${param.key}, query=${param.query})}">&lt;</a></li>
+        <li><a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp=1)}">&lt;&lt;</a></li>
+        <li><a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp=${pagination.prevPage})}">&lt;</a></li>
 
 
         <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-            <li th:if="${i == pagination.currentPage}">
-              <a class="current" th:text="${i}">1</a>
-            </li>              
+            <li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">1</a></li>              
             <li th:unless="${i == pagination.currentPage}"> 
-                <a th:href="@{/together/inven(cp=${i}, key= ${param.key}, query=${param.query})}" th:text="${i}">2</a>
+                <a th:href="@{/together/selectBoardList(searchInput=${param.searchInput}, cp = ${i})}" th:text="${i}">2</a>
             </li>
         </th:block>
 
 
-        <li><a th:href="@{/together/inven(cp=${pagination.nextPage}, key= ${param.key}, query=${param.query})}">&gt;</a></li>
-        <li><a th:href="@{/together/inven(cp=${pagination.maxPage}, key= ${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+        <li><a th:href="@{/together/searchReview(searchInput=${param.searchInput}, cp=${pagination.nextPage})}">&gt;</a></li>
+        <li><a th:href="@{/together/searchReview(searchInput=${param.searchInput}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
       </ul>
+ 
 
+  
+    </section>
+
+        </div>
+
+        <a href="/editTogether/posting"> <button id="insertBtn">글쓰기</button> </a>
+
+      </div>
+
+      <div class="bt_wrap">
+
+        <!--<a href="#">수정</a>-->
+      </div>
 
     </div>
 
-  
-    <!-- 검색창 -->
-    <form th:action="@{{boardNo}(boardNo=${boardNo})}" method="get" id="boardSearch">
-  
-      <select name="key" id="searchKey">
-        <option value="t">제목</option>
-        <option value="c">내용</option>
-      </select>
-  
-      <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
-  
-      <button>검색</button>
-    </form>
+    </div>
   </main>
 
-  <!-- 풋터 -->
-  <th:block th:replace="~{common/footer}"></th:block>
+  <!-- 검색창 -->
+  <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
 
+    <select name="key" id="searchKey">
+      <option value="t">제목</option>
+      <option value="c">내용</option>
+      <option value="tc">제목+내용</option>
+      <option value="w">작성자</option>
+    </select>
+
+    <input type="text" name="query" id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+    <button>검색</button>
+  </form>
   <script src="/js/together/inven.js"></script>
-
 </body>
+</main>
 
+<th:block th:replace="~{common/footer}"></th:block>
 
 
 

@@ -35,7 +35,7 @@
               <dl>
                 <dt>모임날짜 및 시간</dt>
                 <label for="date2">
-                  <input type="datetime-local" id="date2" max="2077-06-20" min="1900-06-05" name="mettingDate" th:value = "*{mettingDate2}">
+                  <input type="datetime-local" id="date2" max="2077-06-20" min="1900-06-05" name="mettingDate2">
                 </label>
   
                 </dl>
@@ -55,6 +55,15 @@
                   <input type="text" class="form-control" id="maxUserCnt" name="maxPeople" th:value = "*{maxPeople}">
               </dl>
 
+
+
+              <dt>날짜 및 시간</dt>
+              <label for="date">
+                <input type="datetime-local" id="date" max="2077-06-20" min="1900-06-05" name="mettingDate" th:value = "*{mettingDate}">
+              </label>
+
+
+
             </div>
 
             <!-- 업로드 이미지 -->
@@ -63,12 +72,10 @@
 
               <!-- img 1-->
               <label for="img1">
-                <img class="preview" th:src="*{boardImg}" >
-                파일 선택
+                <img class="preview" th:src="*{boardImg}">
               </label>
-              
+
               <input type="file" name="img" class="inputImage" id=img1 accept="image/*" style="display: none;">
-              
               <span class="delete_image">&times;</span>
             </div>
 
@@ -108,9 +115,10 @@
       </footer>
     </form>
 
+
   </main>
-  <script src="/js/together/postingUpdate.js"></script>
+  <script src="/js/posting/.js"></script>
 </body>
- 
+
 
 </html>

@@ -99,7 +99,7 @@ const changeImageFn = (imageInput , order) => {
     previewList[order].src = url;
 
     // 파일이 업로드된 input 태그를 복제해서 backupInputList에 추가
-    backupInputList[aorder] = imageInput.cloneNode(true);
+    backupInputList[order] = imageInput.cloneNode(true);
 
     // 파일이 업로드 되면 deleteOrderSet에서 해당 순서 제거
     deleteOrderSet.delete(order);

@@ -45,8 +45,6 @@ public interface EditTogetherService {
 	int updateBoard(Together together, MultipartFile img, String deleteOrder) throws IllegalStateException, IOException;
 
 
-
-
 	
 
 
