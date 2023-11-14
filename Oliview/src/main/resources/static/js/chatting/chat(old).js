@@ -1,5 +1,5 @@
-const addTarget = document.querySelector("#addTarget"); // 추가 버튼
-const addTargetPopupLayer = document.querySelector("#addTargetPopupLayer"); // 팝업 레이어
+// const addTarget = document.querySelector("#addTarget"); // 추가 버튼
+// const addTargetPopupLayer = document.querySelector("#addTargetPopupLayer"); // 팝업 레이어
 const closeBtn = document.querySelector("#closeBtn"); // 닫기 버튼
 const targetInput = document.querySelector("#targetInput"); // 사용자 검색
 const resultArea = document.querySelector("#resultArea"); // 검색 결과
@@ -8,82 +8,6 @@ let selectChattingNo; // 선택한 채팅방 번호
 let selectTargetNo; // 현재 채팅 대상
 let selectTargetName; // 대상의 이름
 let selectTargetProfile; // 대상의 프로필
-
-// 검색 팝업 레이어 열기
-addTarget.addEventListener("click", e => {
-	addTargetPopupLayer.classList.toggle("popup-layer-close");
-	targetInput.focus();
-});
-
-// 검색 팝업 레이어 닫기
-closeBtn.addEventListener("click", e => {
-	addTargetPopupLayer.classList.toggle("popup-layer-close");
-	resultArea.innerHTML = "";
-});
-
-
-
-/* ================= 사용자 검색(ajax) ================= */
-/* targetInput.addEventListener("input", e => {
-
-	const query = e.target.value.trim();
-
-	// 입력된게 없을 때
-	if(query.length == 0){
-		resultArea.innerHTML = ""; // 이전 검색 결과 비우기
-		return;
-	}
-
-	// 입력된게 있을 때 _ 비동기 검색
-	if(query.length > 0){
-		fetch("/chatting/selectTarget?query="+query)
-		.then(resp => resp.json())
-		.then(list => {
-
-			resultArea.innerHTML = ""; // 이전 검색 결과 비우기
-
-			// 검색된 회원 없음
-			if(list.length == 0){
-				const li = document.createElement("li");
-				li.classList.add("result-row");
-				li.innerText = "일치하는 회원이 없습니다";
-				resultArea.append(li);
-			}
-
-			// 검색된 회원 있음
-			for(let member of list){
-				// li요소 생성(한 행을 감싸는 요소)
-				const li = document.createElement("li");
-				li.classList.add("result-row");
-				li.setAttribute("data-id", member.memberNo);
-
-				// 프로필 이미지 요소
-				const img = document.createElement("img");
-				img.classList.add("result-row-img");
-				
-				// 프로필 이미지 여부에 따른 src 속성 선택
-				if(member.memberProfile == null) img.setAttribute("src", userDefaultImage); // 프로필X
-				else	img.setAttribute("src", member.memberProfile); // 프로필O
-
-				let nickname = member.memberNickname;
-				let id = member.memberId;
-
-				const span = document.createElement("span");
-				span.innerHTML = `${nickname} ${id}`.replace(query, `<mark>${query}</mark>`);
-
-				// 요소 조립(화면에 추가)
-				li.append(img, span);
-				resultArea.append(li);
-
-				// li요소에 클릭 시 채팅방에 입장하는 이벤트 추가
-				li.addEventListener('click', chattingEnter);
-			}
-
-		})
-		.catch(err => console.log(err) );
-	}
-}); */
-
 
 
 
@@ -476,3 +400,108 @@ document.addEventListener("DOMContentLoaded", ()=>{
 });
 
 
+//========================================================= 사망
+
+
+/* // 검색 팝업 레이어 열기
+addTarget.addEventListener("click", e => {
+	addTargetPopupLayer.classList.toggle("popup-layer-close");
+	targetInput.focus();
+});
+
+// 검색 팝업 레이어 닫기
+closeBtn.addEventListener("click", e => {
+	addTargetPopupLayer.classList.toggle("popup-layer-close");
+	resultArea.innerHTML = "";
+});
+ */
+
+
+/* ================= 사용자 검색(ajax) ================= */
+/* targetInput.addEventListener("input", e => {
+
+	const query = e.target.value.trim();
+
+	// 입력된게 없을 때
+	if(query.length == 0){
+		resultArea.innerHTML = ""; // 이전 검색 결과 비우기
+		return;
+	}
+
+	// 입력된게 있을 때 _ 비동기 검색
+	if(query.length > 0){
+		fetch("/chatting/selectTarget?query="+query)
+		.then(resp => resp.json())
+		.then(list => {
+
+			resultArea.innerHTML = ""; // 이전 검색 결과 비우기
+
+			// 검색된 회원 없음
+			if(list.length == 0){
+				const li = document.createElement("li");
+				li.classList.add("result-row");
+				li.innerText = "일치하는 회원이 없습니다";
+				resultArea.append(li);
+			}
+
+			// 검색된 회원 있음
+			for(let member of list){
+				// li요소 생성(한 행을 감싸는 요소)
+				const li = document.createElement("li");
+				li.classList.add("result-row");
+				li.setAttribute("data-id", member.memberNo);
+
+				// 프로필 이미지 요소
+				const img = document.createElement("img");
+				img.classList.add("result-row-img");
+				
+				// 프로필 이미지 여부에 따른 src 속성 선택
+				if(member.memberProfile == null) img.setAttribute("src", userDefaultImage); // 프로필X
+				else	img.setAttribute("src", member.memberProfile); // 프로필O
+
+				let nickname = member.memberNickname;
+				let id = member.memberId;
+
+				const span = document.createElement("span");
+				span.innerHTML = `${nickname} ${id}`.replace(query, `<mark>${query}</mark>`);
+
+				// 요소 조립(화면에 추가)
+				li.append(img, span);
+				resultArea.append(li);
+
+				// li요소에 클릭 시 채팅방에 입장하는 이벤트 추가
+				li.addEventListener('click', chattingEnter);
+			}
+
+		})
+		.catch(err => console.log(err) );
+	}
+}); */
+
+/* ================= 채팅방 입장 또는 선택 함수 =================*/
+
+function chattingEnter(e){
+
+	// 채팅방 입장 (동기식!)
+
+	fetch("/chatting/enter?selectChattingNo="+selectChattingNo)
+	.then(resp => resp.text())
+	.then(chattingNo => {
+		
+		setTimeout(()=>{ 
+			// 만약 채팅방 목록 중 이미 존재하는 채팅방이 있으면 클릭해서 입장
+
+			const itemList = document.querySelectorAll(".chatting-item")
+			for(let item of itemList) {		
+				if(item.getAttribute("chat-no") == chattingNo){
+					item.focus();
+					item.click();
+					targetInput.value = "";
+					resultArea.innerHTML = "";
+					return;
+				}
+			}
+		}, 200);
+	})
+	.catch(err => console.log(err));
+}

@@ -1,56 +1,25 @@
-let selectChattingNo; // 선택한 채팅방 번호
 let selectTargetNo; // 현재 채팅 대상
 let selectTargetName; // 대상의 이름
 let selectTargetProfile; // 대상의 프로필
 
 
-/* ================= 채팅방 입장 또는 선택 함수 =================*/
-
-function chattingEnter(e){
-
-	// 채팅방 입장 (동기식!)
-
-	fetch("/chatting/enter?selectChattingNo="+selectChattingNo)
-	.then(resp => resp.text())
-	.then(chattingNo => {
-		
-		setTimeout(()=>{ 
-			// 만약 채팅방 목록 중 이미 존재하는 채팅방이 있으면 클릭해서 입장
-
-			const itemList = document.querySelectorAll(".chatting-item")
-			for(let item of itemList) {		
-				if(item.getAttribute("chat-no") == chattingNo){
-					item.focus();
-					item.click();
-					addTargetPopupLayer.classList.toggle("popup-layer-close"); // 검색창 열려있으면 닫음
-					targetInput.value = "";
-					resultArea.innerHTML = "";
-					return;
-				}
-			}
-		}, 200);
-	})
-	.catch(err => console.log(err));
-}
-
-
 
 /* ============== talk.html 영역 ============== */
 
-// 채팅 메세지 영역
+// 채팅 메세지 영역 // 이거 왜필요하지??
 const display = document.getElementsByClassName("display-chatting")[0];
 
 // 비동기로 메세지 목록을 조회하는 함수 -> 동기로 ㄱㄱ!!!!
+// 이걸 들어오자마자 실행되도록~
 function selectChattingFn() {
 
 	fetch("/chatting/selectMessage?"+`chattingNo=${selectChattingNo}&memberNo=${loginMemberNo}`)
 	.then(resp => resp.json())
 	.then(messageList => {
-		console.log(messageList);
 
 		const ul = document.querySelector(".display-chatting");
 
-		ul.innerHTML = ""; // 이전 내용 지우기
+		ul.innerHTML = ""; // 이전 채팅 내용 지우기
 
 		// 메세지 만들어서 출력하기
 		for(let msg of messageList){
@@ -224,7 +193,7 @@ chattingSock.onmessage = function(e) {
 document.addEventListener("DOMContentLoaded", ()=>{
 	
   // 채팅방 입장 시 작동
-  chattingEnter();
+  // chattingEnter();
 
   // 채팅창에 대화 불러오기
   selectChattingFn();
