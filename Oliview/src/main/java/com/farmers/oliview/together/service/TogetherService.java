@@ -31,6 +31,13 @@ public interface TogetherService {
 	 */
 	Together board(Map<String, Object> map);
 	
+
+	/**조회수 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+	
 	
 	
 	

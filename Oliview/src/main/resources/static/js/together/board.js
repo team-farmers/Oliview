@@ -1,11 +1,11 @@
 /* 목록으로 버튼 */
 
-const goToListBtn = document.getElementById("goToListBtn");
+const invenBtn = document.getElementById("invenBtn");
 
-if(goToListBtn != null){ // 화면에 목록으로 버튼이 있을 때만 수행
+if(invenBtn != null){ // 화면에 목록으로 버튼이 있을 때만 수행
   
   // 함수 선언(변수 대입 형식)
-  const goToListFn = () => {
+  const invenBtn = () => {
 
 
     // location.href : 현재 주소 반환
@@ -39,14 +39,13 @@ if(goToListBtn != null){ // 화면에 목록으로 버튼이 있을 때만 수�
 
     
     // 2) 목록으로 돌아가기
-    location.href = `/board/${boardCode}?${tempParams.toString()}`;
+    location.href = `/together/${boardNo}?${tempParams.toString()}`;
   }
 
 
   // 이벤트 리스너 추가
-  goToListBtn.addEventListener("click", goToListFn);
+  // invenBtn.addEventListener("click", invenBtn);
 }
-
 
 // --------------------------------------------------------------
 /* 게시글 삭제 */
@@ -80,7 +79,7 @@ if(deleteBtn != null){ // 삭제 버튼이 존재하는경우
 const updateBtn = document.getElementById("updateBtn");
 
 if (updateBtn != null) { // 수정 버튼 존재 시
-  updateBtn.addEventListener('click', () => {
+  updateBtn.addEventListener("click", () => {
 	  
     let url = `/editTogether/${boardNo}/update${location.search}`;
     location.href = url;
@@ -88,4 +87,13 @@ if (updateBtn != null) { // 수정 버튼 존재 시
 }
 
 
+//=========================================================================
+/* 신고 팝업창 */
+function openReportPopup(){
 
+  const url = "../report";
+  const name = "신고하기";
+  const option = "width = 430, height = 620, top = 200, left = 200, location = no"
+
+  window.open(url, name, option);
+}

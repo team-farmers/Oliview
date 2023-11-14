@@ -63,7 +63,7 @@ public interface EditTogetherMapper {
 	void boardImgInsert(BoardImg img);
 
 
-
+	
 	
 	
 	
