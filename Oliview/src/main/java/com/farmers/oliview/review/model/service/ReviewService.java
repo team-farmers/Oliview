@@ -27,6 +27,15 @@ public interface ReviewService {
 	
 
 	// ==============================================================================
+
+	
+	/** 인기순 조회 (비동기)
+	 * @param searchInput
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> sortPopular(String searchInput, int cp);
+
 	
 	/** 최신순 조회 (비동기)
 	 * @param searchInput
@@ -34,7 +43,6 @@ public interface ReviewService {
 	 * @return
 	 */
 	Map<String, Object> sortLatest(String searchInput, int cp);
-	
 	
 
 	/** 평점순 조회 (비동기)
@@ -82,15 +90,6 @@ public interface ReviewService {
 	 * @return
 	 */
 	int reviewLike(Map<String, Object> paramMap);
-
-
-
-
-
-
-
-
-
 
 	
 	//===========================================================================

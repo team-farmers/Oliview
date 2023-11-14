@@ -28,7 +28,11 @@
 
     <!-- 정렬 선택 영역 -->
     <section class="sort">
-      <a  class="sortBtn" id="sort-popular" style="color: #66b97e;">인기순</a> <!-- 클릭시 색바꾸기 -->
+      <!-- style="color: #66b97e;" -->
+
+
+      <th:block th:text="${#strings.equals(param.sort,'2')}">sort</th:block>
+      <a  class="sortBtn" id="sort-popular">인기순</a> 
       <span>|</span>
       <a class="sortBtn" id="sort-latest">최신순</a>
       <span>|</span>
@@ -46,7 +50,8 @@
       </section>
     </div>
 
-    <div  class="review-full-container" th:unless="${#lists.size(map.reviewList)} == 0" id="reviewFull">
+    <!-- 리뷰 목록이 있을 때 + (인기순, 최신순) -->
+    <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0 and ${param.sort !=3}" id="reviewFull">
       <th:block th:each="review, stat : ${map.reviewList}">
   
         <th:block th:if="${stat.index % 4 == 0}">
@@ -85,6 +90,45 @@
 
     </div>
 
+    <!-- 리뷰 목록이 있을 때 + (평점순) -->
+    <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0 and ${param.sort ==3}" id="reviewFull">
+      <th:block th:each="review, stat : ${map.reviewList}">
+  
+        <th:block th:if="${stat.index % 4 == 0}">
+          <section class="review-row" id="reviewRow">
+          </th:block>
+            <article class="review-col" th:object="${review}" id="reviewArticle">
+      
+              <!-- 이미지 -->
+              <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                <img th:src="*{reviewImg}" alt="리뷰이미지">
+              </a>
+      
+              <!-- 제목(가게명) -->
+              <div class="reviewRank">
+                <section>#1</section>
+                <section th:text="*{reviewTitle}">가게이름</section>
+              </div>
+      
+              <!-- 평점 -->
+              <div class="star-count">
+                <section class="star" th:text="*{storeStarTotlaRate}"></section>
+                <span><i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></span>
+                <section class="starCount" th:text="|(*{storeCount})명|"></section>
+              </div>
+    
+            </article>
+  
+          
+  
+        <th:block th:if="${stat.index % 4 == 3}">
+          </section>
+        </th:block>
+  
+      </th:block>
+
+    </div>
+
 
     
     <section class="pagination-area" th:with="pagination=${map.pagination}" 
@@ -93,16 +137,16 @@
       <!-- ============ 조회 =========== -->
       <ul class="pagination" th:if="${param.searchInput == null}">
   
-        <li><a th:href="@{/review/searchReview(cp=1,sort=${param.sort})}">&lt;&lt;</a></li>
-        <li><a th:href="@{/review/searchReview(cp=${pagination.prevPage},sort=${param.sort})}">&lt;</a></li>
+        <li><a>&lt;&lt;</a></li>
+        <li><a>&lt;</a></li>
   
         <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
           <li th:if="${i == pagination.currentPage}"> <a class="current" th:text="${i}">1</a></li>
-          <li th:unless="${i == pagination.currentPage}"><a th:href="@{/review/searchReview(cp=${i},sort=${param.sort})}" th:text="${i}">2</a></li>
+          <li th:unless="${i == pagination.currentPage}"><a th:text="${i}">2</a></li>
         </th:block>
   
-        <li><a th:href="@{/review/searchReview(cp=${pagination.nextPage},sort=${param.sort})}">&gt;</a></li>
-        <li><a th:href="@{/review/searchReview(cp=${pagination.maxPage},sort=${param.sort})}">&gt;&gt;</a></li>
+        <li><a>&gt;</a></li>
+        <li><a>&gt;&gt;</a></li>
   
       </ul>
 
@@ -110,20 +154,19 @@
       <!-- ============ 검색 =========== -->
       <ul class="pagination" th:unless="${param.searchInput == null}">
 
-        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=1)}">&lt;&lt;</a></li>
-        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.prevPage})}">&lt;</a></li>
+        <li><a>&lt;&lt;</a></li>
+        <li><a>&lt;</a></li>
 
 
         <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
             <li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">1</a></li>              
             <li th:unless="${i == pagination.currentPage}"> 
-                <a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp = ${i})}" th:text="${i}">2</a>
+                <a th:text="${i}">2</a>
             </li>
         </th:block>
 
-
-        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.nextPage})}">&gt;</a></li>
-        <li><a th:href="@{/review/searchReview(searchInput=${param.searchInput}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+        <li><a>&gt;</a></li>
+        <li><a>&gt;&gt;</a></li>
       </ul>
  
 
@@ -138,7 +181,59 @@
   <!-- 풋터 -->
   <th:block th:replace="~{common/footer}"></th:block>
 
+  <script th:inline="javascript">
+    let sortValue = /*[[${param.sort}]]*/ "정렬값";
+    if(sortValue == null) sortValue = 1;
+    document.querySelectorAll(".sortBtn")[Number(sortValue)-1].classList.add("clicked");
 
+
+    // 페이지네이션을 클릭했을 때 비동기로 정렬 
+    (()=>{
+      const pg = /*[[${map.pagination}]]*/ "페이지네이션";
+
+      if(pg.listCount == 0) return;
+
+      const aList = document.querySelectorAll(".pagination a");
+
+      if(sortValue == 1){
+        for(let i=0 ; i<aList.length ; i++){
+          if(i == 0){ aList[i].addEventListener("click", ()=>{sortPopularFn(i)}); continue; } // <<
+          if(i == 1){ aList[i].addEventListener("click", ()=>{sortPopularFn(pg.prevpage)}); continue; } // <
+          if(i == aList.length-2){ aList[i].addEventListener("click", ()=>{sortPopularFn(pg.nextPage)}); continue; } // >
+          if(i == aList.length-1){ aList[i].addEventListener("click", ()=>{sortPopularFn(pg.maxPage)}); continue;  } // >>
+  
+          aList[i].addEventListener("click", ()=>{sortPopularFn(i-1)});
+        }
+        return;
+      }
+
+      if(sortValue == 2){
+        for(let i=0 ; i<aList.length ; i++){
+          if(i == 0){ aList[i].addEventListener("click", ()=>{sortLatestFn(i)}); continue; } // <<
+          if(i == 1){ aList[i].addEventListener("click", ()=>{sortLatestFn(pg.prevpage)}); continue; } // <
+          if(i == aList.length-2){ aList[i].addEventListener("click", ()=>{sortLatestFn(pg.nextPage)}); continue; } // >
+          if(i == aList.length-1){ aList[i].addEventListener("click", ()=>{sortLatestFn(pg.maxPage)}); continue;  } // >>
+  
+          aList[i].addEventListener("click", ()=>{sortLatestFn(i-1)});
+        }
+        return;
+      }
+
+      if(sortValue == 3){
+
+        for(let i=0 ; i<aList.length ; i++){
+          if(i == 0){ aList[i].addEventListener("click", ()=>{sortRatingFn(i)}); continue; } // <<
+          if(i == 1){ aList[i].addEventListener("click", ()=>{sortRatingFn(pg.prevpage)}); continue; } // <
+          if(i == aList.length-2){ aList[i].addEventListener("click", ()=>{sortRatingFn(pg.nextPage)}); continue; } // >
+          if(i == aList.length-1){ aList[i].addEventListener("click", ()=>{sortRatingFn(pg.maxPage)}); continue;  } // >>
+  
+          aList[i].addEventListener("click", ()=>{sortRatingFn(i-1)});
+        }
+        return;
+      }
+
+    })()
+  </script>
 
   
 

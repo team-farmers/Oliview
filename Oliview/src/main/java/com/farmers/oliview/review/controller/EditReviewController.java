@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("review")
+@RequestMapping("editReview")
 @SessionAttributes({ "loginMember" })
 public class EditReviewController {
 
