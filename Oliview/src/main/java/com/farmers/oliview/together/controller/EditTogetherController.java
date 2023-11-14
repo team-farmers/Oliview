@@ -126,6 +126,7 @@ public class EditTogetherController {
 	
 
 		if (boardNo > 0) {
+			
 			ra.addFlashAttribute("message", "게시글 작성 성공");
 			return String.format("redirect:/together/%d", boardNo);
 		}

@@ -16,22 +16,23 @@
     <div class="con">
 
       <!-- 채팅목록-->
-      <div>
+      <div class="con2">
 
         <div class="title">
           <h1>대화 목록</h1>
-          <button id="addTarget">추가하기</button>
+          <!-- <button id="addTarget">추가하기</button> --> <!-- 개인채팅은 사용X! --> 
         </div>
 
         <!-- 채팅멤버 추가 팝업 -->
         <div id="addTargetPopupLayer" class="popup-layer-close">  
-          <span id="closeBtn">&times</span>
+          <!-- <span id="closeBtn">&times</span>
     
           <div class="target-input-area">
             <input type="search" id="targetInput" placeholder="닉네임 또는 아이디를 입력하세요" autocomplete="off">
-          </div>
-    
-          <ul id="resultArea">
+          </div> -->
+          
+          <!-- 팝업 검색창 -->
+          <!-- <ul id="resultArea"> -->
             <!-- <li class="result-row" data-id="1">
               <img class="result-row-img" src="/images/user.png">
               <span> <mark>유저</mark>일</span>
@@ -42,7 +43,7 @@
             </li>
     
             <li class="result-row">일치하는 회원이 없습니다</li> -->
-          </ul>
+          <!-- </ul> -->
         </div>
 
         <!-- 채팅 목록 -->
@@ -57,13 +58,13 @@
 
                 <div class="item-header">
                   <!-- 채팅 프로필 있는경우 / 없는경우 -->
-                  <img th:if="${room.targetProfile}" class="list-profile" th:src="${room.targetProfile}">
-                  <img th:unless="${room.targetProfile}" class="list-profile" th:src="#{user.default.image}">
+                  <img th:if="${room.targetProfile}" class="list-profile" th:src="${room.targetProfile}" width="80rem" height="80rem">
+                  <img th:unless="${room.targetProfile}" class="list-profile" th:src="#{user.default.image}" width="80rem" height="80rem">
                 </div>
 
                 <div class="item-body">
                   <p class="profile"> <!-- div->p로 js때문에 수정함 -->
-                    <span class="target-name" th:text="${room.targetNickname}">상대방 이름</span>
+                    <span class="target-name" th:text="${room.targetNickname}">상대방 닉네임</span>
                     <p class="recent-message" th:text="${room.lastMessage}">메세지 내용</p>
                   </p>
                   
@@ -72,77 +73,11 @@
                     <p th:if="${room.notReadCount > 0}" class="not-read-count" th:text="${room.notReadCount}"></p>
                   </div>
                 </div>
-
               </li>
             </th:block>
           </ul>
         </div>
 
-        <!--핑구 채팅 -->
-        <!-- <li>
-          <img src="/Oliview/src/main/resources/static/images/톡핑구.JPG" alt="핑구">
-          <div class = "profile">
-            <p class="friend-name">핑구</p>
-            <p class="chat-content">눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕눕</p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-            <span class="chat-balloon">1</span>
-          </div>
-        </li> -->
-
-        <!-- 햄토리 채팅 -->
-        <!-- <li>
-          <img src="/Oliview/src/main/resources/static/images/톡햄토리.JPG" alt="햄토리">
-          <div class="profile">
-            <p class="friend-name">햄토리</p>
-            <p class="chat-content">해바라기씨해바라기씨해바라기씨해바라기씨해바라기씨해바라기씨</p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-            <span class="chat-balloon">1</span>
-          </div>
-        </li> -->
-
-        <!-- 피카츄 채팅-->        
-        <!-- <li>
-          <img src="/Oliview/src/main/resources/static/images/톡피카츄.JPG" alt="피카츄">
-          <div class="profile">
-            <p class="friend-name">피카츄</p>
-            <p class="chat-content">전기 팔아요 전기 팔아요  전기 팔아요 아요 전기 팔아요 전기 팔아요 </p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-            <span class="chat-balloon">1</span>
-          </div>
-        </li> -->
-
-        <!-- 호빵맨 채팅-->
-        <!-- <li>
-          <img src="/Oliview/src/main/resources/static/images/톡호빵맨.JPG" alt="호빵맨">
-          <div class="profile">
-            <p class="friend-name">호빵맨</p>
-            <p class="chat-content">팔아요  호빵 팔아요. 호빵 팔아요호빵 팔아요호빵 팔아요호빵 팔아요</p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-            <span class="chat-balloon">1</span>
-        </div>
-        </li> -->
-
-
-        <!-- 파이리 채팅-->
-        <!-- <li>
-          <img src="/Oliview/src/main/resources/static/images/톡파이리.JPG" alt="파이리">
-          <div class="profile">
-            <p class="friend-name">파이리</p>
-            <p class="chat-content">불꽃 팝니다 불꽃 팝니불꽃 팝니다불꽃 팝니다불꽃 팝니다불꽃 팝니다</p>
-          </div>
-          <div class="chat-status">
-            <time datetime="15:39:00+09:00">오후 3:39</time>
-            <span class="chat-balloon">1</span>
-          </div>
-        </li> -->
         
       </div>
     </div>

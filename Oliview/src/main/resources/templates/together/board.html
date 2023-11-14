@@ -86,8 +86,9 @@
           <button class="deleteBtn" id="deleteBtn">삭제하기</button>
         </div>
 
+        <!-- 참여하기 버튼 클릭 시 모임 단체채팅방 -->
         <div class="btn-5">
-          <button class="deleteBtn" id="deleteBtn">참여하기</button>
+          <a th:href="@{/chatting/talk/{boardNo}(boardNo=${boardNo})}"><button class="deleteBtn" id="deleteBtn">참여하기</button></a>
         </div>
   
       </div>
