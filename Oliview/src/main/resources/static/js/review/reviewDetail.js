@@ -107,3 +107,36 @@ function openReportPopup(){
 
   window.open(url, name, option);
 }
+
+
+
+//=========================================================================
+/* 목록으로 */
+
+const prevBtn = document.getElementById("prevBtn");
+
+
+prevBtn.addEventListener("click",() =>{
+
+  const goToPrevParam = new URL(location.href).searchParams;
+
+  const obj = {};
+
+  obj.searchInput = goToPrevParam.get("searchInput");
+  obj.cp = goToPrevParam.get("cp");
+  obj.sort=goToPrevParam.get("sort");
+  obj.reviewTitle = goToPrevParam.get("reviewTitle");
+
+  const tempParams = new URLSearchParams();
+
+  for(let k in obj){
+    if(obj[k] != null) tempParams.append(k, obj[k]);
+  }
+
+  console.log(tempParams.toString());
+
+  location.href = `/review/searchReview?${tempParams.toString()}`;
+
+
+});
+

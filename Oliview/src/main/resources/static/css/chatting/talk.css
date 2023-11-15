@@ -34,7 +34,7 @@ h1{
 
 /* 채팅 라인별 설정 */
 .display-chatting > li{
-	margin: 10px 0;
+	margin: 1.5rem 0;
 }
 
 .target-chat{
@@ -46,6 +46,11 @@ h1{
 	width: 5rem;
   height: 5rem;
 	margin-right: 5px;
+}
+
+/* 상대방 닉네임 */
+.target-chat b{
+  font-size: 1rem;
 }
 
 #target-chat-nick{
@@ -67,16 +72,25 @@ h1{
 	white-space: pre-wrap;
 }
 
+/* 내 채팅 */
 .my-chat {
 	text-align: right;
 }
 
 .my-chat>p {
 	background-color: yellow;
+  margin-left: 0.5rem;
 }
 
 .chatDate {
-	font-size: 1.2rem;
+  font-family: 'GmarketSans';
+  font-weight: 300;
+	font-size: 1rem;
+}
+
+/* 상대방 채팅 */
+.target-chat p{
+  margin-right: 0.5rem;
 }
 
 
@@ -110,3 +124,5 @@ h1{
   height: 4vh;
   width: 9.7%;
 }
+
+

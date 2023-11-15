@@ -105,6 +105,34 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	
 	// ==============================================================================
+	
+	
+	// 인기순 조회 (비동기)
+	@Override
+	public Map<String, Object> sortPopular(String searchInput, int cp) {
+
+		// 리뷰 수 조회
+		int reviewCount = mapper.searchReviewCount(searchInput);
+		
+		// Pagination 객체 생성
+		Pagination pagination = new Pagination(cp, reviewCount);
+		
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Review> reviewList =  mapper.sortPopular(searchInput, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewList", reviewList);
+		map.put("pagination", pagination);
+		
+		return map;
+	}
+	
+	
+	
 
 	// 최신순 조회 (비동기)
 	@Override

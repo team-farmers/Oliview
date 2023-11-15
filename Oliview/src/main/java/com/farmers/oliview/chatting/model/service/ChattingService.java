@@ -6,6 +6,7 @@ import java.util.Map;
 import com.farmers.oliview.chatting.model.dto.ChattingRoom;
 import com.farmers.oliview.chatting.model.dto.Message;
 import com.farmers.oliview.member.model.dto.Member;
+import com.farmers.oliview.together.dto.Together;
 
 public interface ChattingService {
 
@@ -21,9 +22,9 @@ public interface ChattingService {
 	 */
 	List<Member> selectTarget(Map<String, Object> map);
 
-	/** 채팅방 입장
+	/** 채팅방 존재유무확인
 	 * @param map
-	 * @return
+	 * @return CHATTING_NO
 	 */
 	int checkChattingNo(Map<String, Integer> map);
 
@@ -39,8 +40,22 @@ public interface ChattingService {
 	 */
 	int updateReadFlag(Map<String, Object> paramMap);
 
+	/** 채팅 불러오기
+	 * @param paramMap
+	 * @return
+	 */
 	List<Message> selectMessageList(Map<String, Object> paramMap);
 	
+	/** 입력된 메세지 DB 저장
+	 * @param msg
+	 * @return
+	 */
 	int insertMessage(Message msg);
+
+	/** 채팅 참여하는 같이먹어요 게시글 정보 조회
+	 * @param boardNo
+	 * @return
+	 */
+	Together talkTogether(int boardNo);
 
 }
