@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-#profile-img > img{
+#profile-img{
   width: 30%;
   height: 100%;
   display: flex;
@@ -145,6 +145,7 @@
   color: var(--main-color);
   text-decoration: none;
 }
+
 
 
 /* --- 내 프로필 내용 화면 --- */

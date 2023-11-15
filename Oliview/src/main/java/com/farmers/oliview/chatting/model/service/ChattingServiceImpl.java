@@ -102,4 +102,17 @@ public class ChattingServiceImpl implements ChattingService{
 		return mapper.talkTogether(boardNo);
 	}
 	
+	
+	/** 채팅방 목록에서 클릭 후 -> 채팅방이 존재하는지 여부 확인 
+	 *
+	 */
+	@Override
+	public int checkChattingPart(Map<String, Integer> map) {
+		return mapper.checkChattingPart(map);
+	}
+	
+	
+	
+	
+	
 }

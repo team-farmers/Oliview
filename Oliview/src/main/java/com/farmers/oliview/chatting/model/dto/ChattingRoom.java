@@ -21,4 +21,5 @@ public class ChattingRoom {
     
     private String boardImg; // 같이먹어요 게시글 이미지
     private String boardTitle; // 같이먹어요 게시글 타이틀
+    private int maxPeople; // 같이먹어요 참여인원
 }

@@ -58,4 +58,10 @@ public interface ChattingService {
 	 */
 	Together talkTogether(int boardNo);
 
+	/** 채팅방 목록에서 클릭 후 -> 채팅방이 존재하는지 여부 확인 
+	 * @param map
+	 * @return chattingNo
+	 */
+	int checkChattingPart(Map<String, Integer> map);
+
 }
