@@ -83,7 +83,7 @@ public class EditReviewController {
 
 	// 게시글 수정
 	@PostMapping("/{reviewNo:[0-9]+}/update")
-	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review,
+	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review, RedirectAttributes ra,
 			@RequestParam("inputImg") MultipartFile img) throws IllegalStateException, IOException {
 
 		review.setReviewNo(reviewNo);
@@ -100,7 +100,8 @@ public class EditReviewController {
 			message = "게시글 수정 실패...";
 			path = "redirect:/review/{reviewNo}/update";
 		}
-
+		
+		ra.addFlashAttribute("message", message);
 		return path;
 	}
 

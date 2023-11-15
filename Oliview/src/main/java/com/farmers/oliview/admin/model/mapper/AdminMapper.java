@@ -1,12 +1,11 @@
 package com.farmers.oliview.admin.model.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.together.dto.Together;
 
 @Mapper
 public interface AdminMapper {
@@ -20,10 +19,21 @@ public interface AdminMapper {
 	// 회원 탈퇴 복구
 	int restoration(int memberNo);
 
+	// 회원 조회
 	Member memberInfo(int memberNo);
 
-	
+	// 회원 탈퇴
+	int quit(int memberNo);
 
+	int delete(int reviewNo);
+
+	List<Review> reviewReportList();
+
+	Member reviewReportInfo(int reviewNo);
+
+	List<Together> togetherList();
+
+ 
 
 
 

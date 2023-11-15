@@ -5,7 +5,8 @@
 
 	<select id="memberList" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
-		MEMBER_ENROLL_DATE, MEMBER_DEL_FL
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
+		AS MEMBER_ENROLL_DATE , MEMBER_DEL_FL
 		FROM "MEMBER"
 		ORDER BY MEMBER_NO DESC
 	</select>
@@ -21,13 +22,62 @@
 		MEMBER_DEL_FL = 'N'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
-	
+
+	<!-- 회원 조회 -->
 	<select id="memberInfo" resultType="Member">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
-		MEMBER_ENROLL_DATE, AUTHORITY, MEMBER_DEL_FL
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_NAME,
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
+		AS MEMBER_ENROLL_DATE, AUTHORITY, MEMBER_DEL_FL
 		FROM "MEMBER"
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
+
+
+
+
+	<update id="quit">
+		UPDATE "MEMBER" SET
+		MEMBER_DEL_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+
+
+	<insert id="insertReport">
+		INSERT INTO "REPORT"
+		VALUES(#{reportNo},#{reportContent}, DEFAULT,NULL,NULL)
+	</insert>
+
+	<select id="reviewReportList" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_TITLE, MEMBER_NICKNAME,
+		TO_CHAR(WRITE_DATE , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
+		WRITE_DATE
+		FROM REVIEW
+		JOIN "MEMBER" USING (MEMBER_NO)
+		ORDER BY REVIEW_NO
+	</select>
+
+
+	<update id="delete">
+		UPDATE "REVIEW" SET
+		REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+
+	<!--	<select id="reviewReportInfo" resultType="Report">
+		SELECT REPORT_NO, REPORT_CONTENT
+		FROM "REVIEW_REPORT"
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>-->
+
+	<select id="togetherList" resultType="Together">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO, 
+		TO_CHAR(DATE_CREATED , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
+		DATE_CREATED
+		FROM "TOGETHER"
+		ORDER BY BOARD_NO
+	</select>
+
+
 
 
 </mapper>

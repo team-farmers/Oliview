@@ -19,53 +19,60 @@
         <table th:object="${memberInfo}">
             <tr>
                 <td>회원 번호</td>
-                <td th:text="${memberNo}">내용</td>
+                <td th:text="*{memberNo}">내용</td>
             </tr>
             <tr>
                 <td>회원 ID</td>
-                <td th:text="${memberId}">내용</td>
+                <td th:text="*{memberId}">내용</td>
             </tr>
             <tr>
                 <td>회원 이름</td>
-                <td th:text="${memberName}"></td>
+                <td th:text="*{memberName}"></td>
             </tr>
             <tr>
                 <td>회원 닉네임</td>
-                <td th:text="${memberNickname}"></td>
+                <td th:text="*{memberNickname}"></td>
             </tr>
             <tr>
                 <td>회원 이메일</td>
-                <td th:text="${memberEmail}"></td>
+                <td th:text="*{memberEmail}"></td>
             </tr>
             <tr>
                 <td>가입일</td>
-                <td th:text="${memberEnrollDate}"></td>
+                <td th:text="*{memberEnrollDate}"></td>
             </tr>
 
             <tr>
                 <td>관리자 권한</td>
-                <th:block th:if="${authority == 'N'}">일반 사용자</th:block>
-                <th:block th:if="${authority == 'Y'}">관리자</th:block>
+                <th:block th:if="*{authority == 'N'}">일반 사용자</th:block>
+                <th:block th:if="*{authority == 'Y'}">관리자</th:block>
 
                 <form action="changeAuthority" method="POST" style="display: inline;">
                     <input type="hidden" name="memberNo" th:value="${memberNo}">
                     <input type="hidden" name="memberEmail" th:value="${memberEmail}">
 
-                    <button th:if="${authority == 'Y'}">관리자로 변경</button>
-                    <button th:if="${authority == 'N'}">일반 사용자로 변경</button>
+                    <button th:if="*{authority == 'Y'}">관리자로 변경</button>
+                    <button th:if="*{authority == 'N'}">일반 사용자로 변경</button>
                 </form>
             </tr>
 
             <tr>
                 <td>탈퇴 여부</td>
                 <td>
-                    <th:block th:text="${memberDelFl}"></th:block>
+                    <th:block th:if="*{memberDelFl == 'N'}">활동</th:block>
+                    <th:block th:if="*{memberDelFl == 'Y'}">탈퇴</th:block>
 
-                    <th:block th:if="${memberDelFl == 'Y'}">
+                    <th:block th:unless="*{memberDelFl == 'Y'}">
+                        <form action="quit" method="POST" style="display:inline">
+                            <input type="hidden" th:value="*{memberNo}" name="memberNo">
+                            <button>탈퇴</button>
+                        </form>
+                    </th:block>
+
+                    <th:block th:if="*{memberDelFl == 'Y'}">
 
                         <form action="restoration" method="POST" style="display:inline">
-                            <input type="hidden" th:value="${memberNo}" name="memberNo">
-                            <input type="hidden" th:value="${memberEmail}" name="memberEmail">
+                            <input type="hidden" th:value="*{memberNo}" name="memberNo">
                             <button>복구</button>
                         </form>
 
@@ -76,7 +83,7 @@
 
         </table>
     </main>
-    
+
 </body>
 <th:block th:replace="~{common/footer}"></th:block>
 

@@ -55,7 +55,7 @@ public interface ReviewService {
 	 * @param reviewTitle
 	 * @return
 	 */
-	List<Review> ratingResult(String reviewTitle);
+	Map<String, Object> ratingResult(String reviewTitle, int cp);
 
 	
 	//===========================================================================

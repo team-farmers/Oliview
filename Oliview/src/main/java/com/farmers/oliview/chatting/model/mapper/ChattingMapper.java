@@ -63,4 +63,10 @@ public interface ChattingMapper {
 	 */
 	int searchOpenMember(Map<String, Integer> map);
 
+	/** 채팅방 목록에서 클릭 후 -> 채팅방이 존재하는지 여부 확인
+	 * @param map
+	 * @return
+	 */
+	int checkChattingPart(Map<String, Integer> map);
+
 }

@@ -127,10 +127,12 @@ public class ReviewController {
 	 * @return
 	 */
 	@GetMapping("store/{reviewTitle}")
-	public String reviewStore(@PathVariable("reviewTitle") String reviewTitle, Model model, RedirectAttributes ra) {
+	public String reviewStore(@PathVariable("reviewTitle") String reviewTitle, 
+			@RequestParam(value="cp", required = false, defaultValue="1") int cp, 
+			Model model, RedirectAttributes ra) {
 		
-		List<Review> reviewList = service.ratingResult(reviewTitle);
-		model.addAttribute(reviewList);
+		Map<String, Object> reviewMap = service.ratingResult(reviewTitle, cp);
+		model.addAttribute("map",reviewMap);
 		
 		return "review/rating-result";
 		

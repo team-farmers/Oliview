@@ -101,7 +101,7 @@ if(updateBtn != null){ // 수정 버튼 존재 시
 /* 신고 팝업창 */
 function openReportPopup(){
 
-  const url = "../report";
+  const url = `/report?reviewNo=${reviewNo}`;
   const name = "신고하기";
   const option = "width = 430, height = 620, top = 200, left = 200, location = no"
 
@@ -124,8 +124,9 @@ prevBtn.addEventListener("click",() =>{
 
   obj.searchInput = goToPrevParam.get("searchInput");
   obj.cp = goToPrevParam.get("cp");
+  obj.cp2=goToPrevParam.get("cp2")
   obj.sort=goToPrevParam.get("sort");
-  obj.reviewTitle = goToPrevParam.get("reviewTitle");
+  obj.store = goToPrevParam.get("store");
 
   const tempParams = new URLSearchParams();
 
@@ -135,7 +136,14 @@ prevBtn.addEventListener("click",() =>{
 
   console.log(tempParams.toString());
 
-  location.href = `/review/searchReview?${tempParams.toString()}`;
+  if(obj.store){
+    console.log("존재");
+    location.href = `/review/store/${obj.store}?cp=${obj.cp2}`
+    
+  }
+  else{
+    location.href = `/review/searchReview?${tempParams.toString()}`;
+  }
 
 
 });

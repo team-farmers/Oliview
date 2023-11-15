@@ -187,8 +187,27 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 평점순 가게조회
 	@Override
-	public List<Review> ratingResult(String reviewTitle) {
-		return mapper.ratingResult(reviewTitle);
+	public Map<String, Object> ratingResult(String reviewTitle, int cp) {
+		
+		
+		// 리뷰 수 조회
+		int ratingResultCount = mapper.ratingResultCount(reviewTitle);
+		
+		// Pagination 객체 생성
+		Pagination pagination = new Pagination(cp, ratingResultCount);
+	
+		// RowBounds 객체 생성
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		int limit = pagination.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<Review> ratingReviewList =  mapper.ratingResult(reviewTitle, rowBounds);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("reviewList", ratingReviewList);
+		map.put("pagination", pagination);
+		
+		return map;
 	}
 
 	

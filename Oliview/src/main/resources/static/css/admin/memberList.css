@@ -1,6 +1,6 @@
 .conatiner {
   margin: 9.6rem 0rem 2.6rem 0rem;
-  width: 100%;
+  width: 80%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -28,12 +28,13 @@ a:hover {
 }
 
 /* 사이드 메뉴 */
-#profileInfo-container{
+/* #profileInfo-container{
   width: 20%;
   min-height: 74rem;
 
   background-color: #FFFADD
 }
+
 
 #profileInfo-container > section:first-child{
   width: 100%;
@@ -41,7 +42,7 @@ a:hover {
   background-color: #F1EB90;
 
   border-bottom: 0.5rem solid #F1C93B;
-}
+} */
 
 #member-table {
   box-sizing: border-box;

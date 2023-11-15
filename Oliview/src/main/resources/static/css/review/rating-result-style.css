@@ -3,12 +3,13 @@
 .outerBox{
   display: flex;
   flex-direction: row;
+  justify-content: center;
   min-height: 100vh;
 }
 
 /* 왼쪽 가게 정보 영역 */
 .info{
-  width: 25%;
+  width: 20%;
   padding: 10rem 3rem;
   font-size: 4rem;
 }
@@ -43,14 +44,18 @@
 
 /* 오른쪽 리뷰 모음 영역 */
 .reviews{
-  width: 70%;
+  width: 80%;
   display: flex;
+  flex-direction: column;
 }
 
+.review-area{
+  height: 75rem;
+}
 
 .review-row{
   width: 100%;
-  height: 36rem;
+  height: 35rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -59,7 +64,7 @@
 }
 
 .review-col{
-  width: 30%;
+  width: 25rem;
   height: 100%;
   margin: 0 1.5%;
   border-radius: 1rem;
@@ -81,8 +86,11 @@
 }
 
 .title{
-  font-size: 2.5rem ;
-  padding: 1.3rem 1rem 0;
+  font-size: 2rem ;
+  padding: 1rem 1rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nickname-star-date{
@@ -90,20 +98,91 @@
   flex-direction: row;
   align-items: end;
 }
-.nickname{
-  font-size: 1.5rem;
-  padding: 0 1rem;
+
+.nickname-star-date > i{
+  font-size: 1rem;
+  padding-left: 0.2rem;
+  padding-bottom: 0.5rem;
 }
+
+#nickname{
+  width: 8rem;
+  font-size: 1.5rem;
+  padding: 0 0 0 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .star{
   font-size: 1.5rem;
+  color: #f1c93b;
 }
 .date{
   font-size: 1.2rem;
-  padding: 0 2rem;
+  padding: 0 1rem;
   color: #808080;
 }
 
 a{
   text-decoration: none;
   color: inherit;
+}
+
+/* =========================================================== */
+/* 페이지 */
+.pagination-area{
+  padding-top: 2rem;
+  height: 6rem;
+}
+
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.pagination a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--main-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.current{
+  font-weight: bold;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  color: white !important;
+  letter-spacing: 0 !important;
+}
+
+/* =========================================================== */
+/* 평점순 목록으로 */
+.goToList{
+  display: flex;
+  justify-content: end;
+  padding: 0 2rem;
+}
+
+.goToListBtn{
+  font-size: 2rem;
+  font-family: 'GmarketSansMedium';
+  width: 17rem;
+  height: 3rem;
+  color: white;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  background-color: var(--main-color);
 }
