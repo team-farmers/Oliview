@@ -24,6 +24,7 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
+// ------------------------------------------------------------------
 // 별점
 const ratingStars1 = [...document.querySelectorAll(".fa-regular.fa-star.fa-2xl.star1")];
 const ratingStars2 = [...document.querySelectorAll(".fa-regular.fa-star.fa-2xl.star2")];
@@ -54,33 +55,53 @@ executeRating(ratingStars3);
 
 
 // ------------------------------------------------------------------
-const reviewWriteFrm = document.querySelector("#reviewWriteFrm");
-
-const title = document.getElementById("input-title");
-const locaton = document.getElementById("locatonContent");
-const menu = document.getElementById("input-menu");
-const writeReview = document.getElementById("writeReview");
-const image = document.getElementById("image");
-
+// 별점 DB에서 가지고 오기
 
 const tasteRating = document.getElementById('tasteRating');
 const quantityRating = document.getElementById('quantityRating');
 const cleanlinessRating = document.getElementById('cleanlinessyRating');
 
 
-const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
-const quantityStars = document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
-const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
+const taste = document.querySelectorAll(".star1");
+const amount = document.querySelectorAll(".star2");
+const clean = document.querySelectorAll(".star3");
 
-tasteRating.value = tasteStars.length;
-quantityRating.value = quantityStars.length;
-cleanlinessRating.value = cleanlinessStars.length;
+for (let i = 0; i < tasteRating.value; i++) taste[i].classList.add("fa-sharp", "fa-solid");
+for (let i = 0; i < quantityRating.value; i++) amount[i].classList.add("fa-sharp", "fa-solid");
+for (let i = 0; i < cleanlinessRating.value; i++) clean[i].classList.add("fa-sharp", "fa-solid");
 
 
+
+// ------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------
+// 유효성 검사
+
+const reviewWriteFrm = document.querySelector("#reviewWriteFrm");
+const title = document.getElementById("input-title");
+const locaton = document.getElementById("locatonContent");
+const menu = document.getElementById("input-menu");
+const writeReview = document.getElementById("writeReview");
 
 
 reviewWriteFrm.addEventListener("submit", e => {
 
+    const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
+    const quantityStars = document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
+    const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
+
+    tasteRating.value = tasteStars.length;
+    quantityRating.value = quantityStars.length;
+    cleanlinessRating.value = cleanlinessStars.length;
 
     if (title.value.trim().length == 0) {
         e.preventDefault();
@@ -91,7 +112,7 @@ reviewWriteFrm.addEventListener("submit", e => {
 
     if (locaton.value.trim().length == 0) {
         e.preventDefault();
-        alert("위치을 입력해주세요");
+        alert("위치를 입력해주세요");
         locaton.focus();
         return;
     }
@@ -125,7 +146,7 @@ reviewWriteFrm.addEventListener("submit", e => {
 
     }
 
-    if (image.files.length == 0) {
+    if (imageInput.files.length == 0) {
         e.preventDefault();
         alert("이미지를 첨부해주세요");
         menu.focus();

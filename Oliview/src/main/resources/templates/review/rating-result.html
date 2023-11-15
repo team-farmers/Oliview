@@ -50,7 +50,7 @@
                 </a>
         
                 <!-- 제목(가게명) -->
-                <div class="title"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+                <div class="title"><a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, reviewTitle=${review.reviewTitle})}"
                   th:text="*{reviewTitle}">가게이름</a>
                 </div>
         

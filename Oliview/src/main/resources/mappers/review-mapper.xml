@@ -94,10 +94,11 @@
 					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
 		FROM "REVIEW"
 		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
+		WHERE REVIEW_DEL_FL = 'N'
+		AND ( REVIEW_TITLE LIKE '%${searchInput}%'
 		OR REVIEW_MENU LIKE '%${searchInput}%'
 		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
-		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%')
 		ORDER BY READ_COUNT DESC
 	</select>
 	
@@ -107,10 +108,11 @@
 					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
 		FROM "REVIEW"
 		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
+		WHERE REVIEW_DEL_FL = 'N'
+		AND ( REVIEW_TITLE LIKE '%${searchInput}%'
 		OR REVIEW_MENU LIKE '%${searchInput}%'
 		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
-		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%' )
 		ORDER BY REVIEW_NO DESC
 	</select>
 	
@@ -130,16 +132,32 @@
 	<!--=====================================================================================================================-->
 
 
+	<!-- 인기순 (비동기) -->
+	<select id="sortPopular" resultType="Review">
+		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
+					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_DEL_FL = 'N'
+		AND ( REVIEW_TITLE LIKE '%${searchInput}%'
+		OR REVIEW_MENU LIKE '%${searchInput}%'
+		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%')
+		ORDER BY READ_COUNT DESC
+	</select>
+
+
 	<!-- 최신순 (비동기) -->
 	<select id="sortLatest" resultType="Review">
 		SELECT REVIEW_NO, REVIEW_IMG, REVIEW_TITLE, MEMBER_NICKNAME, STAR_TASTE, STAR_AMOUNT, STAR_CLEAN, ROUND((STAR_TASTE+STAR_AMOUNT+STAR_CLEAN)/3,1) STAR_TOTAL ,
 					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
 		FROM "REVIEW"
 		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE LIKE '%${searchInput}%'
+		WHERE REVIEW_DEL_FL = 'N'
+		AND ( REVIEW_TITLE LIKE '%${searchInput}%'
 		OR REVIEW_MENU LIKE '%${searchInput}%'
 		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
-		OR MEMBER_NICKNAME LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%' )
 		ORDER BY REVIEW_NO DESC
 	</select>
 	
@@ -215,7 +233,8 @@
 					TO_CHAR(WRITE_DATE, 'YYYY"." MM"." DD"."') WRITE_DATE
 		FROM "REVIEW"
 		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE REVIEW_TITLE = #{reviewTitle}
+		WHERE REVIEW_DEL_FL = 'N'
+		AND REVIEW_TITLE = #{reviewTitle}
 		AND REVIEW_NO != #{reviewNo}
 		AND ROWNUM BETWEEN 1 AND 4
 		ORDER BY READ_COUNT

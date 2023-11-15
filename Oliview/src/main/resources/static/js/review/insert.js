@@ -23,7 +23,7 @@ function sample6_execDaumPostcode() {
     }
   }).open();
 }
-
+// ------------------------------------------------------------------------------------------------
 // 별점
 const ratingStars1 = [...document.querySelectorAll(".fa-regular.fa-star.fa-2xl.star1")];
 const ratingStars2 = [...document.querySelectorAll(".fa-regular.fa-star.fa-2xl.star2")];
@@ -52,19 +52,20 @@ executeRating(ratingStars1);
 executeRating(ratingStars2);
 executeRating(ratingStars3);
 
+// ------------------------------------------------------------------------------------------------
+// 이미지
 
 
 
 
 
-// ------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 const reviewWriteFrm = document.querySelector("#reviewWriteFrm");
-
 const title = document.getElementById("input-title");
 const locaton = document.getElementById("locatonContent");
 const menu = document.getElementById("input-menu");
 const writeReview = document.getElementById("writeReview");
-const image = document.getElementById("image");
+
 
 
 const tasteRating = document.getElementById('tasteRating');

@@ -52,15 +52,19 @@ public class EditReviewServiceImpl implements EditReviewService {
 	@Override
 	public int updateReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
 
+		// 변경된 파일이 있는 경우
+		String rename = null;
+		if (img.getSize() > 0) {
+			rename = Util.fileRename(img.getOriginalFilename());
+			review.setReviewImg(webPath + rename);
+		}
+
 		int result = mapper.updateReview(review);
 
-		if (result > 0) {
-			String rename = Util.fileRename(img.getOriginalFilename());
-			review.setReviewImg(webPath + rename);
+		if (result == 0)
+			return 0;
 
-			img.transferTo(new File(folderPath + rename));
-
-		}
+		img.transferTo(new File(folderPath + rename));
 
 		return review.getReviewNo();
 	}

@@ -11,17 +11,20 @@ import com.farmers.oliview.review.model.dto.Review;
 @Mapper
 public interface AdminMapper {
 
-	// 회원 정보 조회
-	Review memberInfo(Map<String, Object> map);
-
 	// 회원 목록 조회
 	List<Member> memberList();
 
-	// 관리자 권한 변경
+	// 회원 권한 변경
 	int changeAuthority(int memberNo);
 
-	//회원 복구
+	// 회원 탈퇴 복구
 	int restoration(int memberNo);
+
+	Member memberInfo(int memberNo);
+
+	
+
+
 
 
 }

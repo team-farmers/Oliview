@@ -85,6 +85,13 @@ public interface ReviewMapper {
 	
 
 	//=====================================================================	
+
+	/** 인기순 조회 (비동기)
+	 * @param searchInput
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Review> sortPopular(String searchInput, RowBounds rowBounds);	
 	
 	/** 최신순 조회 (비동기)
 	 * @param searchInput
@@ -145,6 +152,8 @@ public interface ReviewMapper {
 	 * @return result
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
+
+
 
 
 
