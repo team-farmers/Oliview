@@ -20,30 +20,10 @@
 
         <div class="title">
           <h1>대화 목록</h1>
-          <!-- <button id="addTarget">추가하기</button> --> <!-- 개인채팅은 사용X! --> 
         </div>
 
         <!-- 채팅멤버 추가 팝업 -->
         <div id="addTargetPopupLayer" class="popup-layer-close">  
-          <!-- <span id="closeBtn">&times</span>
-    
-          <div class="target-input-area">
-            <input type="search" id="targetInput" placeholder="닉네임 또는 아이디를 입력하세요" autocomplete="off">
-          </div> -->
-          
-          <!-- 팝업 검색창 -->
-          <!-- <ul id="resultArea"> -->
-            <!-- <li class="result-row" data-id="1">
-              <img class="result-row-img" src="/images/user.png">
-              <span> <mark>유저</mark>일</span>
-            </li>
-            <li class="result-row"  data-id="2">
-              <img class="result-row-img" src="/images/user.png">
-              <span><mark>유저</mark>이</span>
-            </li>
-    
-            <li class="result-row">일치하는 회원이 없습니다</li> -->
-          <!-- </ul> -->
         </div>
 
         <!-- 채팅 목록 -->
@@ -54,17 +34,17 @@
 
               <!-- th:chat-no : li 태그에 임의의 속성 chat-no를 추가,
   		  				타임리프를 이용해 출력된 값을 chat-no 속성 값으로 대입 -->
-              <li class="chatting-item" th:chat-no="${room.chattingNo}" th:target-no="${room.targetNo}">
+              <li class="chatting-item" th:chat-no="*{room.chattingNo}">
 
                 <div class="item-header">
                   <!-- 채팅 프로필 있는경우 / 없는경우 -->
-                  <img th:if="${room.targetProfile}" class="list-profile" th:src="${room.targetProfile}" width="80rem" height="80rem">
-                  <img th:unless="${room.targetProfile}" class="list-profile" th:src="#{user.default.image}" width="80rem" height="80rem">
+                  <!-- <img th:if="${room.targetProfile}" class="boardImg" th:src="${room.targetProfile}" width="80rem" height="80rem">
+                  <img th:unless="${room.targetProfile}" class="boardImg" th:src="#{user.default.image}" width="80rem" height="80rem"> -->
                 </div>
 
                 <div class="item-body">
                   <p class="profile"> <!-- div->p로 js때문에 수정함 -->
-                    <span class="target-name" th:text="${room.targetNickname}">상대방 닉네임</span>
+                    <span class="boardTitle" th:text="${room.boardTitle}">게시글 제목</span>
                     <p class="recent-message" th:text="${room.lastMessage}">메세지 내용</p>
                   </p>
                   
@@ -77,8 +57,6 @@
             </th:block>
           </ul>
         </div>
-
-        
       </div>
     </div>
 
@@ -99,7 +77,7 @@
 
     const loginMember = /*[[${session.loginMember}]]*/ '로그인회원';
 
-    const selectChattingNo = /*[[${session.together?.boardNo}]]*/ '채팅방번호(같이먹어요 게시글번호)';
+    let selectChattingNo = /*[[${session.together?.boardNo}]]*/ '채팅방번호(같이먹어요 게시글번호)';
     
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '프로필 기본 이미지' ;
 	</script>
