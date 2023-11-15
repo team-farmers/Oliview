@@ -225,7 +225,6 @@ if(inputChatting != null){
 }
 
 
-
 // 서버가 보낸 메세지를 받는 코드
 // WebSocket 객체 chattingSock이 서버로 부터 메세지를 통지 받으면 자동으로 실행될 콜백 함수
 chattingSock.onmessage = function(e) {
@@ -290,18 +289,6 @@ chattingSock.onmessage = function(e) {
 /* 문서 로딩 완료 후 수행할 기능 */
 document.addEventListener("DOMContentLoaded", ()=>{
 	
-  // 채팅방 입장 시 작동
-  // chattingEnter();
-
-  // 채팅창에 대화 불러오기
-  // selectChattingFn();
-
-  // 채팅방 목록에 클릭 이벤트 추가
-	// roomListAddEvent(); 
-
-	// 보내기 버튼에 이벤트 추가
-	// send.addEventListener("click", sendMessage);
-
 	// 채팅목록 불러오기
 	selectRoomList();
 });
