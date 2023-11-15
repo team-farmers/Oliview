@@ -24,15 +24,6 @@ public interface TogetherMapper {
 	 */
 	List<Together> selectBoardList(String temp, RowBounds rowBounds);
 
-
-
-	/**
-	 * 조회수 증가
-	 * @param boardNo
-	 * @return
-	 */
-
-	int updateReadCount(int boardNo);
 	
 	/**
 	 *  검색어 일치 게시글 수 조회
@@ -58,6 +49,17 @@ public interface TogetherMapper {
 	 */
 
 	Together board(Map<String, Object> map);
+
+	
+	/**
+	 * 조회수 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+
+
+
 
 
 	

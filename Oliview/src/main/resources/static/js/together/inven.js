@@ -11,7 +11,6 @@ if(insertBtn != null){
 // ------------------------------------------------------------
 
 /* 검색창에 이전 검색 기록 남겨두기 */
-const options = document.querySelectorAll("#searchKey > option");
 const searchQuery = document.getElementById("searchQuery");
 
 // 즉시 실행 함수 (해석되자 마자 실행되는 함수, 속도가 빠름)
@@ -19,7 +18,7 @@ const searchQuery = document.getElementById("searchQuery");
   // 주소에 있는 파라미터(쿼리스트링) 얻어오기
   const params = new URL(location.href).searchParams;
 
-  const key = params.get("key"); // t, c, tc, w 중 하나
+  const key = params.get("key"); // t, c 중 하나
   const query = params.get("query"); // 검색어
 
   // 검색을 했을 경우
@@ -33,5 +32,8 @@ const searchQuery = document.getElementById("searchQuery");
       }
     }
   }
+
+  
+
 
 })();

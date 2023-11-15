@@ -25,73 +25,69 @@
         </div>
 
 
-
-
         <div class="board_write_wrap">
           
-            <div class="board_write">
-                <div class="title">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd><pre th:text="*{boardTitle}">치킨 같이 먹어요</pre></dd>
-                      </dl>
-                     
-                  
-                </div>
-
-
-                
-                <div class="info">
-                    <dl>
-                        <dt>참여인원</dt>
-                        <dd><pre th:text="|*{currentPeople}/*{maxPeople}|">3/6</pre></dd>
-                    </dl>
-                    <dt>날짜 및 시간</dt>
-          
-                    <dd><pre th:text="*{dateCreated}">2023-10-23 오후 1:00</pre></dd>
-                              
-                </div>
-
-                <!-- 이미지 -->
-                <div>
-                  <img th:src="*{boardImg}">
-                </div>
-                
-                <!-- 내용 -->
-                <div class="cont">
-                  
-                  <pre th:text="*{boardContent}" >치킨</pre>
-                </div>
-
-              
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd><pre th:text="*{boardTitle}">치킨 같이 먹어요</pre></dd>
+              </dl>
+              <dl>
+                <dt>날짜 및 시간</dt>
+                <dd><pre th:text="*{mettingDate}"></pre></dd>
+              </dl>
             </div>
 
-           <!-- 버튼 기능 구현-->
-         <div class="btn-contents">
-        	<div class="btn-1">
-          <button class="reportBtn"><a onclick="openReportPopup()">
-           신고하기</a></button>
-        </div>
-        
-        
-         <div class="btn-2">
-          <button class="invenBtn" id="invenBtn">목록으로</button>
-        </div>
-      
-        <div class="btn-3">
-          <button class="updateBtn" id="updateBtn">수정하기</button>
-        </div>
-        
-        <div class="btn-4">
-          <button class="deleteBtn" id="deleteBtn">삭제하기</button>
-        </div>
+            <div class="info">
+              <dl>
+                  <dt>참여인원</dt>
+                  <dd><pre th:text="|*{currentPeople}/*{maxPeople}|">3/6</pre></dd>
+              </dl>
+              <dt>글 작성일</dt>
+              <dd><pre th:text="*{dateCreated}"></pre></dd>
+                          
+            </div>
 
-        <!-- 참여하기 버튼 클릭 시 모임 단체채팅방 -->
-        <div class="btn-5">
-          <a th:href="@{/chatting/talk/{boardNo}(boardNo=${boardNo})}"><button class="deleteBtn" id="deleteBtn">참여하기</button></a>
+            <!-- 이미지 -->
+            <div>
+              <img th:src="*{boardImg}">
+            </div>
+            
+            <!-- 내용 -->
+            <div class="cont">
+              
+              <pre th:text="*{boardContent}" >치킨</pre>
+            </div>
+            
+          </div>
+
+           <!-- 버튼 기능 구현-->
+        <div class="btn-contents">
+
+          <div class="btn-1">
+            <button class="reportBtn"><a onclick="openReportPopup()">
+            신고하기</a></button>
+          </div>
+        
+        
+          <div class="btn-2">
+            <button class="invenBtn" id="invenBtn">목록으로</button>
+          </div>
+        
+          <div class="btn-3">
+            <button class="updateBtn" id="updateBtn">수정하기</button>
+          </div>
+          
+          <div class="btn-4">
+            <button class="deleteBtn" id="deleteBtn">삭제하기</button>
+          </div>
+
+          <div class="btn-5">
+            <button class="deleteBtn" id="deleteBtn">참여하기</button>
+          </div>
+    
         </div>
-  
-      </div>
           
            
           </th:block>
