@@ -68,14 +68,14 @@ const sortPopularFn = (cp) => {
       const aImg = document.createElement("a");
       const Img = document.createElement("img");
       aImg.classList.add("review-img");
-      aImg.href="/review/" + review.reviewNo;
+      aImg.href="/review/" + review.reviewNo + "?searchInput=" + searchInput1 + "&cp=" + cp + "&sort=1";
       Img.src=review.reviewImg;
 
       /* 가게명 생성 */
       const divTitle = document.createElement("div");
       const aTitle = document.createElement("a");
       divTitle.classList.add("reviewTitle");
-      aTitle.href="/review/" + review.reviewNo;
+      aTitle.href="/review/" + review.reviewNo + "?searchInput=" + searchInput1 + "&cp=" + cp + "&sort=1";
       aTitle.innerHTML=review.reviewTitle;
 
       /* 닉네임,평점,작성일 생성 */
@@ -245,14 +245,14 @@ const sortLatestFn = (cp) => {
       const aImg = document.createElement("a");
       const Img = document.createElement("img");
       aImg.classList.add("review-img");
-      aImg.href="/review/" + review.reviewNo;
+      aImg.href="/review/" + review.reviewNo + "?searchInput=" + searchInput2 + "&cp=" + cp + "&sort=2";
       Img.src=review.reviewImg;
 
       /* 가게명 생성 */
       const divTitle = document.createElement("div");
       const aTitle = document.createElement("a");
       divTitle.classList.add("reviewTitle");
-      aTitle.href="/review/" + review.reviewNo;
+      aTitle.href="/review/" + review.reviewNo + "?searchInput=" + searchInput2 + "&cp=" + cp + "&sort=2";
       aTitle.innerHTML=review.reviewTitle;
 
       /* 닉네임,평점,작성일 생성 */

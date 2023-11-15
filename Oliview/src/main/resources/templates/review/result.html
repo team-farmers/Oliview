@@ -50,7 +50,7 @@
     <div  class="review-full-container" th:if="${#lists.size(map.reviewList)} != 0" id="reviewFull">
       
       <!-- 인기순, 최신순 -->
-      <th:block th:if="${{param.sort}}==1 or ${{param.sort}}==2">
+      <th:block th:if="${{param.sort}}==1 or ${{param.sort}}==2 or ${{param.sort}} == null">
         <th:block th:each="review, stat : ${map.reviewList}">
     
           <th:block th:if="${stat.index % 4 == 0}">
@@ -59,12 +59,14 @@
               <article class="review-col" th:object="${review}" id="reviewArticle">
         
                 <!-- 이미지 -->
-                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo}, searchInput=${param.searchInput},
+                 cp=${map.pagination.currentPage}, sort=${{param.sort}})}" class="review-img">
                   <img th:src="*{reviewImg}" alt="리뷰이미지">
                 </a>
         
                 <!-- 제목(가게명) -->
-                <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}"
+                <div class="reviewTitle"><a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo},
+                   searchInput=${param.searchInput}, cp=${map.pagination.currentPage}, sort=${{param.sort}})}"
                   th:text="*{reviewTitle}">가게이름</a>
                 </div>
         
@@ -100,7 +102,7 @@
               <article class="review-col" th:object="${review}" id="reviewArticle">
         
                 <!-- 이미지 -->
-                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
+                <a th:href="@{/review/store/{reviewTitle} (reviewTitle=*{reviewTitle})}" class="review-img">
                   <img th:src="*{reviewImg}" alt="리뷰이미지">
                 </a>
         
