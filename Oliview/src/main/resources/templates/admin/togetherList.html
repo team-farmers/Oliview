@@ -13,9 +13,28 @@
   <main>
     <th:block th:replace="~{common/header}"></th:block>
 
+    <section id="navigation-container">
+      <nav>
+        <ul id="page-change-container">
+          <li>
+            <a th:href="@{/admin/memberList}">회원 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
     <section class="conatiner">
 
-      <p> 목록</p>
+      <p id="list">같이 먹어요 게시판 관리</p>
 
       <section id="report-index-container">
         <table id="report-table">
@@ -40,9 +59,14 @@
             </td>
             <td th:text="*{memberNo}"></td>
             <td th:text="*{dateCreated}">작성일</td>
+            <td></td>
             <td>
-              <a><button>상세조회</button></a>
-            </td>
+              <th:block th:if="*{boardDelFl == 'N'}">
+                <button id="delBtn">삭제하기</button>
+              </th:block>
+              <th:block th:if="*{boardDelFl != 'N'}">
+                <button id="returnBtn">복구하기</button>
+              </th:block>
 
           </tr>
         </table>

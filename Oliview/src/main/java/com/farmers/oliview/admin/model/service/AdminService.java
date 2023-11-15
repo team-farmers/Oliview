@@ -31,6 +31,10 @@ public interface AdminService {
 
 	List<Together> togetherList();
 
+	int deletReview(int reviewNo);
+
+	int returnReview(int reviewNo);
+
 
 
 	

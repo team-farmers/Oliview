@@ -33,6 +33,10 @@ public interface AdminMapper {
 
 	List<Together> togetherList();
 
+	int deletReview(int reviewNo);
+
+	int returnReview(int reviewNo);
+
  
 
 

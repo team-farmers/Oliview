@@ -1,7 +1,5 @@
 package com.farmers.oliview.review.model.service;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class ReportServiceImpl implements ReportService {
 
-	private final ReportMapper mapper;
-
+//	private final ReportMapper mapper;
+//
 //	@Override
 //	public Review report(int reviewNo) {
 //		return mapper.report(reviewNo);

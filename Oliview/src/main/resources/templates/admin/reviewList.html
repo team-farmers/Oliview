@@ -13,9 +13,28 @@
   <main>
     <th:block th:replace="~{common/header}"></th:block>
 
+    <section id="navigation-container">
+      <nav>
+        <ul id="page-change-container">
+          <li>
+            <a th:href="@{/admin/memberList}">회원 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+          </li>
+          <li>
+            <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
     <section class="conatiner">
 
-      <p> 목록</p>
+      <p id="list"> review 게시판 목록</p>
 
       <section id="report-index-container">
         <table id="report-table">
@@ -40,25 +59,28 @@
             </td>
             <td th:text="*{memberNickname}">작성자</td>
             <td th:text="*{writeDate}">작성일</td>
+            <td></td>
             <td>
-              <a th:href="@{/admin/reviewReportInfo(reviewNo=*{reviewNo})}"><button>상세조회</button></a>
-            </td>
-            <td> <!-- th:if="${reportAccrue >= 3}" -->
-              
-              <form action="delete" method="POST" style="display:inline">
-                <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
-                <th:block th:if="*{reviewDelFl == 'N'}">삭제</th:block>
-                <th:block th:if="*{reviewDelFl == 'Y'}">복구</th:block>
-              </form>
+              <th:block th:if="*{reviewDelFl == 'N'}">
+                <form action="deletReview" method="POST" style="display:inline">
+                  <button id="delBtn">삭제하기</button>
+                </form>
+              </th:block>
+              <th:block th:if="*{reviewDelFl != 'N'}">
+                <form action="returnReview" method="POST" style="display:inline">
+                  <button id="returnBtn">복구하기</button>
+                </form>
+
+              </th:block>
+
+
             </td>
           </tr>
         </table>
       </section>
-
-
-
-
     </section>
+
+
 
   </main>
 

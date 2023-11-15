@@ -54,8 +54,88 @@ executeRating(ratingStars3);
 
 // ------------------------------------------------------------------------------------------------
 // 이미지
+// 미리보기 관련 요소 얻어오기
+const preview = document.querySelector(".preview");
+const inputImage = document.querySelector(".inputImage");
+const deleteImage = document.querySelector(".delete-image");
 
+// 파일 선택/취소 시 백업용 변수
+let backupInput;
 
+/* 이미지 선택 시 수행할 함수 */
+const changeImageFn = () => {
+  // 업로드 파일 최대 크기(10MB)
+  const maxSize = 1024 * 1024 * 5
+  const uploadFile = inputImage.files[0];
+
+  // 파일을 선택한 후 취소했을 때
+  if (uploadFile === undefined) {
+    console.log("파일 선택이 취소됨");
+
+    // 1) 백업한 요소를 복제
+    const temp = backupInput.cloneNode(true);
+
+    // 2) 화면에 원본 input을 temp로 바꾸기
+    inputImage.after(temp);
+    inputImage.remove();
+    inputImage = temp;
+
+    // 복제본은 이벤트가 복제 안되니까 다시 이벤트를 추가
+    inputImage.addEventListener("change", changeImageFn);
+
+    return;
+  }
+
+  // 선택된 파일의 크기가 지정된 크기를 초과하는 경우
+  if (uploadFile.size > maxSize) {
+    alert("10MB 이하의 이미지를 선택해주세요");
+
+    // 추가한 경우
+    if (backupInput === undefined) {
+      inputImage.value = ''; // 선택된 파일을 제거
+    } else {
+      // 1) 백업한 요소를 복제
+      const temp = backupInput.cloneNode(true);
+
+      // 2) 화면에 원본 input을 temp로 바꾸기
+      inputImage.after(temp);
+      inputImage.remove();
+      inputImage = temp;
+
+      // 복제본은 이벤트가 복제 안되니까 다시 이벤트를 추가
+      inputImage.addEventListener("change", changeImageFn);
+    }
+
+    return;
+  }
+
+  // 선택된 이미지 파일을 읽어와 미리 보기 만들기
+  const reader = new FileReader();
+  reader.readAsDataURL(uploadFile);
+
+  reader.onload = (e) => {
+    const url = e.target.result;
+    preview.src = url;
+
+    // 파일이 업로드된 input 태그를 복제해서 백업에 저장
+    backupInput = inputImage.cloneNode(true);
+  };
+};
+
+/* 이미지 선택 또는 취소 시 */
+inputImage.addEventListener("change", changeImageFn);
+
+/* x버튼 클릭 시 */
+deleteImage.addEventListener("click", () => {
+  // 미리보기 삭제
+  preview.removeAttribute("src");
+
+  // input 태그 파일 제거
+  inputImage.value = '';
+
+  // 백업 요소 제거
+  backupInput = undefined;
+});
 
 
 
@@ -76,7 +156,7 @@ const cleanlinessRating = document.getElementById('cleanlinessyRating');
 reviewWriteFrm.addEventListener("submit", e => {
 
   const tasteStars = document.querySelectorAll(".rating-option:first-of-type i.fa-sharp");
-  const quantityStars =document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
+  const quantityStars = document.querySelectorAll(".rating-option:nth-of-type(2) i.fa-sharp");
   const cleanlinessStars = document.querySelectorAll(".rating-option:last-of-type i.fa-sharp");
 
   tasteRating.value = tasteStars.length;
@@ -126,7 +206,7 @@ reviewWriteFrm.addEventListener("submit", e => {
 
   }
 
-  if(image.files.length == 0){
+  if (image.files.length == 0) {
     e.preventDefault();
     alert("이미지를 첨부해주세요");
     menu.focus();

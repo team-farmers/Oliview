@@ -13,6 +13,7 @@
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
+        
         <section id="content">
             <p>회원 상세 정보</p>
         </section>
@@ -44,16 +45,18 @@
 
             <tr>
                 <td>관리자 권한</td>
-                <th:block th:if="*{authority == 'N'}">일반 사용자</th:block>
-                <th:block th:if="*{authority == 'Y'}">관리자</th:block>
-
-                <form action="changeAuthority" method="POST" style="display: inline;">
-                    <input type="hidden" name="memberNo" th:value="${memberNo}">
-                    <input type="hidden" name="memberEmail" th:value="${memberEmail}">
-
-                    <button th:if="*{authority == 'Y'}">관리자로 변경</button>
-                    <button th:if="*{authority == 'N'}">일반 사용자로 변경</button>
-                </form>
+                <td>
+                    <th:block th:if="*{authority == 'N'}">일반 사용자</th:block>
+                    <th:block th:if="*{authority == 'Y'}">관리자</th:block>
+    
+                    <form action="changeAuthority" method="POST" style="display: inline;">
+                        <input type="hidden" name="memberNo" th:value="${memberNo}">
+                        <input type="hidden" name="memberEmail" th:value="${memberEmail}">
+    
+                        <button th:if="*{authority == 'Y'}">관리자로 변경</button>
+                        <button th:if="*{authority == 'N'}">일반 사용자로 변경</button>
+                    </form>
+                </td>
             </tr>
 
             <tr>

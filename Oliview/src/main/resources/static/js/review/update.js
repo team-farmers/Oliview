@@ -73,10 +73,90 @@ for (let i = 0; i < cleanlinessRating.value; i++) clean[i].classList.add("fa-sha
 
 
 // ------------------------------------------------------------------
+// 이미지
+// 미리보기 관련 요소 얻어오기
+const preview = document.querySelector(".preview");
+const inputImage = document.querySelector(".inputImage");
+const deleteImage = document.querySelector(".delete-image");
+
+let backupInput;
+
+
+if (inputImage != null) {
+
+    const changeImageFn = e => {
+
+        const uploadFile = e.target.files[0];
+
+        // --------------파일을 한 번 선택한 후 취소했을 때 -----
+        if (uploadFile == undefined) {
+            console.log("파일 선택이 취소됨");
+
+            if (backupInput == undefined) return;
+
+            // 1) backup한 요소를 복제
+            const temp = backupInput.cloneNode(true);
+
+            // 2) 화면에 원본 input을 temp로 바꾸기
+            inputImage.after(temp);
+            inputImage.remove();
+
+
+            inputImage = temp;
+            inputImage.addEventListener("change", changeImageFn);
+            return;
+        }
+
+
+        // -------------- 선택된 파일의 크기가 지정된 크기를 초과하는 경우 ---------------
+        const maxSize = 1024 * 1024 * 5; // 5MB  (byte 단위)
+
+        if (uploadFile.size > maxSize) {
+            alert("5MB 이하의 이미지만 업로드 가능합니다");
+
+            const temp = backupInput.cloneNode(true);
+
+            inputImage.after(temp);
+            inputImage.remove();
+            inputImage = temp;
+            inputImage.addEventListener("change", changeImageFn);
+
+            return;
+        }
 
 
 
+        // --------------- 선택된 이미지 파일을 읽어와 미리보기 만들기 --------------------
+        const reader = new FileReader();
 
+        reader.readAsDataURL(uploadFile)
+
+        // 파일을 다 읽은 후
+        reader.onload = e => {
+            preview.setAttribute("src", reader.result);
+            backupInput = inputImage.cloneNode(true);
+        }
+
+    }
+
+    /* 이미지 선택 버튼을 클릭하여 선택된 파일이 변햇을 때 함수 수행 */
+    inputImage.addEventListener("change", changeImageFn);
+
+
+    //-------------------------- x버튼 클릭 시 기본 이미지로 변경 ---------
+    deleteImage.addEventListener('click', () => {
+
+        document.querySelector("[for='img1']").innerHTML = "<span>파일 선택</span>";
+
+        preview.removeAttribute("src");
+        inputImage.value = "";
+
+        backupInput.value = "";
+
+        statusCheck = 0;
+    });
+
+}
 
 
 
@@ -146,7 +226,7 @@ reviewWriteFrm.addEventListener("submit", e => {
 
     }
 
-    if (imageInput.files.length == 0) {
+    if (inputImage.files.length == 0) {
         e.preventDefault();
         alert("이미지를 첨부해주세요");
         menu.focus();

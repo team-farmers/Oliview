@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 
   <main>
 
-    <form th:action="@{report/(reviewNo=*{reviewNo})}" method="POST">
+    <form action="report" method="POST">
 
       <header>
         신고하기
@@ -54,6 +54,9 @@
         <button type="submit">신고하기</button>
       </div>
     </form>
+
+
+    
   </main>
 
 

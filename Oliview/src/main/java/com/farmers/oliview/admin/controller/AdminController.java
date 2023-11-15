@@ -160,4 +160,39 @@ public class AdminController {
 
 		return "admin/togetherList";
 	}
+	
+
+
+	@PostMapping("deletReview")
+	public String deletReview(int reviewNo, RedirectAttributes ra) {
+
+		int result = service.deletReview(reviewNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글을 삭제했습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 삭제를 실패했습니다.");
+		}
+
+		return "redirect:reviewList";
+	}
+
+	// 회원 복구
+
+	@PostMapping("returnReview")
+	public String returnReview(int reviewNo, RedirectAttributes ra) {
+
+		int result = service.returnReview(reviewNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 복구 처리가 완료 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 복구 처리에  실패했습니다.");
+		}
+
+		return "redirect:reviewList";
+	}
+	
+	
+	
 }

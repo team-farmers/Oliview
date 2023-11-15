@@ -33,8 +33,6 @@
 	</select>
 
 
-
-
 	<update id="quit">
 		UPDATE "MEMBER" SET
 		MEMBER_DEL_FL = 'Y'
@@ -47,6 +45,13 @@
 		VALUES(#{reportNo},#{reportContent}, DEFAULT,NULL,NULL)
 	</insert>
 
+
+	<update id="delete">
+		UPDATE "REVIEW" SET
+		REVIEW_DEL_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+
 	<select id="reviewReportList" resultType="Review">
 		SELECT REVIEW_NO, REVIEW_TITLE, MEMBER_NICKNAME,
 		TO_CHAR(WRITE_DATE , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
@@ -57,27 +62,25 @@
 	</select>
 
 
-	<update id="delete">
+	<select id="togetherList" resultType="Together">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO,
+		TO_CHAR(DATE_CREATED , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
+		DATE_CREATED, BOARD_DEL_FL
+		FROM "TOGETHER"
+		ORDER BY BOARD_NO
+	</select>
+
+	<update id="deletReview">
 		UPDATE "REVIEW" SET
 		REVIEW_DEL_FL = 'Y'
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
 
-	<!--	<select id="reviewReportInfo" resultType="Report">
-		SELECT REPORT_NO, REPORT_CONTENT
-		FROM "REVIEW_REPORT"
+	<update id="returnReview">
+		UPDATE "REVIEW" SET
+		REVIEW_DEL_FL = 'N'
 		WHERE REVIEW_NO = #{reviewNo}
-	</select>-->
-
-	<select id="togetherList" resultType="Together">
-		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO, 
-		TO_CHAR(DATE_CREATED , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
-		DATE_CREATED
-		FROM "TOGETHER"
-		ORDER BY BOARD_NO
-	</select>
-
-
+	</update>
 
 
 </mapper>

@@ -51,8 +51,9 @@ public class EditReviewServiceImpl implements EditReviewService {
 	// 게시글 수정
 	@Override
 	public int updateReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
+		
+		
 
-		// 변경된 파일이 있는 경우
 		String rename = null;
 		if (img.getSize() > 0) {
 			rename = Util.fileRename(img.getOriginalFilename());
@@ -64,9 +65,12 @@ public class EditReviewServiceImpl implements EditReviewService {
 		if (result == 0)
 			return 0;
 
-		img.transferTo(new File(folderPath + rename));
+		if (img.getSize() > 0) { 
+			img.transferTo(new File(folderPath + rename));
+		}
 
-		return review.getReviewNo();
+		return result;
+
 	}
 
 	// 게시글 삭제
