@@ -14,8 +14,9 @@ let backupInput;
 
 
 /* 이미지 선택 시 수행할 함수 */
-const changeImageFn = (imageInput , order) => {
+const changeImageFn = (event) => {
 
+  const imageInput =event.target;
   // imageInput : 파일이 선택/취소된 input 태그
   // order : input 태그 순서(썸네일 0, 나머지 1~4)
 
@@ -75,24 +76,26 @@ const changeImageFn = (imageInput , order) => {
 
   reader.readAsDataURL(uploadFile)
 
-  reader.onload = e => {
+  reader.onload = (e) => {
 
-    preview.setAttribute("src", reader.result);
+    preview.setAttribute("src", e.target.result);
+    
 
     // 파일이 추가된 input을 backup 해두기
     backupInput = imageInput.cloneNode(true);
 
-}
 
-}
+};
 
-imageInput.addEventListener("change" , changeImageFn);
+};
 
+
+inputImage.addEventListener("change", changeImageFn);
 
   /* x버튼 클릭 시 */
   deleteImage.addEventListener('click', () => {
 
-   document.querySelector("[for='img1']").innerHTML="<span>파일 선택</span>";
+   document.querySelector("[for='img1']").innerHTML="<span>파일선택</span>";
 
    preview.removeAttribute("src")
    imageInput.value= "";
@@ -102,6 +105,7 @@ imageInput.addEventListener("change" , changeImageFn);
    statusCheck = 0;
    
   });
+
 //--------------------------------------------------
 
   // //------------------- 프로필 이미지 변경 form 태그 제출 시 동작
