@@ -17,6 +17,7 @@ public class Together {
 	private String boardTitle; // 제목
 	private int numberPeople; // 참여인원
 	private String dateCreated; // 작성일
+
 	
 	private String boardImg; // 이미지
 	private String boardContent; // 게시글 내용

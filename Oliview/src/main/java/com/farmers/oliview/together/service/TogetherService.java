@@ -11,7 +11,7 @@ public interface TogetherService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectBoardList( int cp);
+	Map<String, Object> selectBoardList(int cp);
 	
 	/** 검색 목록 조회
 	 * @param cp
@@ -21,8 +21,6 @@ public interface TogetherService {
 	Map<String, Object> searchBoardList(Map<String, Object> paramMap, int cp);
 	
 	
-
-	
 	
 	/**
 	 * 게시글 상세조회
@@ -30,6 +28,13 @@ public interface TogetherService {
 	 * @return
 	 */
 	Together board(Map<String, Object> map);
+	
+
+	/**조회수 증가
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
 	
 	
 	
