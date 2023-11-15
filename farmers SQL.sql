@@ -1024,3 +1024,12 @@ COMMIT;
 --같이먹어요 게시글 조회
 SELECT * FROM TOGETHER
 WHERE BOARD_NO = 144;
+
+
+-- 보드이미지 얻어오기
+SELECT "boardImg"
+FROM CHATTING_ROOM
+JOIN 
+
+
+

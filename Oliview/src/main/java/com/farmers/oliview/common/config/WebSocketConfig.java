@@ -37,7 +37,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 		    // withSockJS : SockJS 지원 + 브라우저 호환성 증가 // sockJS 함께 사용할거야!
 		
 			registry.addHandler(chattingWebsocketHandler, "/chattingSock")
-					.setAllowedOriginPatterns("http://localhost/", "http://127.0.0.1/")
+					.setAllowedOriginPatterns("http://localhost/", "http://127.0.0.1/", "http://192.168.10.22/")
 					.addInterceptors(handshakeInterceptor)
 					.withSockJS();
 		}

@@ -82,11 +82,11 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
                 // 로그인된 회원 정보 중 회원 번호 얻어오기 // session은 처음엔 이름밖에 모르기에 중간에 가로채서 보다 많은 정보를 얻어옴
             	HttpSession temp = (HttpSession)s.getAttributes().get("session");
             	
-            	// 꺼내온 세션에서 채팅번호 얻어오기. 이 채팅방에만 채팅을 보내겠다 // 이게 굳이 필요함???
+            	// 꺼내온 세션에서 채팅번호 얻어오기. 이 채팅방에만 채팅을 보내겠다
                 int chattingNo = ((Together)temp.getAttribute("together")).getBoardNo();
                 log.debug("chattingNo : " + chattingNo);
                 
-                // 로그인 상태인 회원 중 chattingNo가 일치하는 회원에게 메세지 전달 // ???? 이게 맞나,,,ㅋㅎ,,,,
+                // 로그인 상태인 회원 중 chattingNo가 일치하는 회원에게 메세지 전달
                 if(chattingNo == msg.getChattingNo()) {
                     s.sendMessage(new TextMessage(new Gson().toJson(msg)));
                 }

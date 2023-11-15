@@ -15,13 +15,12 @@
     <th:block th:replace="~{common/header}"></th:block>
 
     <section class="hh">
-      <h1 th:text="*{boardTitle}">채팅방 제목(같이먹어요 게시글)</h1>
+      <h1 th:text="*{boardTitle}">채팅방 제목(같이먹어요 게시글)</h1> 
     </section>
     
     <section id="chatting-container">
       <div class="chatting-content">
         <ul class="display-chatting">
-
           <!-- 메세지 목록 조회 -->
           <!-- 내 채팅 -->
           <!-- <li class="my-chat">
@@ -48,7 +47,7 @@
 
       <div class="input-area">
         <input type="text" id="inputChatting">
-        <button onclick="readValue()" id="send">입력</button>
+        <button id="send">입력</button>
       </div>
     </section>
   </main>
@@ -60,14 +59,17 @@
 
 	<script th:inline="javascript">
 		// 로그인한 회원 번호
+		const loginMember = /*[[${session.loginMember}]]*/ '로그인회원';
 		const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ '로그인회원번호';
 
     const selectChattingNo = /*[[${session.together?.boardNo}]]*/ '채팅방번호(같이먹어요 게시글번호)';
 
 		const userDefaultImage = /*[[#{user.default.image}]]*/ '기본 이미지' ;
+
+    console.log(selectChattingNo);
 	</script>
 
-	<script src="/js/chatting/chat.js"></script>
+	<script src="/js/chatting/talk.js"></script>
 
 </body>
 </html>

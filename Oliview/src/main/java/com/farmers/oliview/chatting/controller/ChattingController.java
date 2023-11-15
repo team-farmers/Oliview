@@ -25,11 +25,31 @@ import com.farmers.oliview.together.dto.Together;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "together"})
 @RequiredArgsConstructor
 public class ChattingController {
 	
 	private final ChattingService service;
+	
+	
+	/** 채팅페이지 포워드
+	 * @param boardNo : 같이먹어요에서 넘어온 게시글 번호(채팅방 번호로 사용 예정)
+	 * @param model
+	 * @return 
+	 */
+	@RequestMapping("/chatting/talk/{boardNo:[0-9]+}")
+	public String talk( @PathVariable("boardNo") int boardNo, Model model) {
+		
+		// 같이먹어요 게시글 정보 조회 후 넘기기(together 안에 memberNo(개설자), boardTitle 등 넘어옴)
+		Together together = service.talkTogether(boardNo);
+		
+		model.addAttribute("together", together);
+		
+		return "chatting/talk";
+	}
+	
+	
+	
 	
 	/** 채팅목록 포워드
 	 * @return
@@ -43,22 +63,6 @@ public class ChattingController {
 		return "chatting/chat";
 	}
 	
-	
-	/** 채팅페이지 포워드
-	 * @param boardNo : 같이먹어요에서 넘어온 게시글 번호(채팅방 번호로 사용 예정)
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/chatting/talk/{boardNo:[0-9]+}")
-	public String talk( @PathVariable("boardNo") int boardNo, Model model) {
-		
-		// 같이먹어요 게시글 정보 조회 후 넘기기
-		Together together = service.talkTogether(boardNo);
-		
-		model.addAttribute("together", together);
-		
-		return "chatting/talk";
-	}
 	
     
     /** 채팅 상대 검색

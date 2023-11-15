@@ -18,4 +18,7 @@ public class ChattingRoom {
     private int notReadCount;
     private int maxMessageNo;
     
+    
+    private String boardImg; // 같이먹어요 게시글 이미지
+    private String boardTitle; // 같이먹어요 게시글 타이틀
 }
