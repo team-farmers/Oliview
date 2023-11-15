@@ -30,12 +30,13 @@
                     <tr id="member-table-content" th:each="member : ${memberList}" th:object="${member}">
                         <td th:text="*{memberNo}">회원번호</td>
                         <td>
-                            <a th:href="@{'/admin/memberInfo/' + *{memberId}}" th:text="*{memberId}"></a>
+                            
+                            <a th:href="@{/admin/memberInfo}" th:text="*{memberId}"></a>
                         </td>
                         <td th:text="*{memberNickname}">닉네임</td>
                         <td th:text="*{memberEmail}">이메일</td>
                         <td th:text="*{memberEnrollDate}">가입일자</td>
-                        <td th:text="*{memberDelFl}">탈퇴</td>
+                        <td th:text="*{memberDelFl}">탈퇴여부</td>
                     </tr>
                 </table>
             </section>

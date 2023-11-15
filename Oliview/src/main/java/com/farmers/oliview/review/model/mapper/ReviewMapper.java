@@ -14,50 +14,54 @@ import com.farmers.oliview.review.model.dto.Review;
 @Mapper
 public interface ReviewMapper {
 
-	/** 전체 리뷰 수
+	
+	// ================ 전체 리뷰 allReview ================
+	
+	/** 전체 리뷰 개수 (인기순, 최신순)
 	 * @return reviewCount
 	 */
 	int getReviewCount();
+	
+	/** 평점 리뷰 개수 (평점순)
+	 * @return reiviewCount(store)
+	 */
+	int ratingCount();
+	
 
-	/** 리뷰 조회
+	/** 전체 리뷰 조회 (인기순)
 	 * @param rowBounds
 	 * @return reviewList
 	 */
 	List<Review> allReview(RowBounds rowBounds);
-
-	/** 평점순 가게수 조회
-	 * @return
-	 */
-	int ratingCount();
 	
-	/** 최신순 
+
+	/** 전체 리뷰 조회 (최신순)
 	 * @param rowBounds
 	 */
 	List<Review> allSortLatest(RowBounds rowBounds);
 
-	/** 평점순
+	/** 전체 리뷰 조회 (평점순)
 	 * @param rowBounds
 	 */
-	List<Review> allSortRating(RowBounds rowBounds);
-
+	List<Review> allSortRating(RowBounds rowBounds);	
+	
+	// ================ 검색 리뷰 searchReview ================
 	
 	
-	//=====================================================================
-	
-	
-	/** 검색 리뷰 수 조회
+	/** 검색 리뷰 개수 (인기순, 최신순)
 	 * @param searchInput
 	 * @return reviewCount
 	 */
 	int searchReviewCount(String searchInput);
 
-	/** 검색 리뷰 수 조회(평점순)
+	/** 검색 평점 리뷰 개수 (평점순)
 	 * @param searchInput
 	 * @return
 	 */
 	int searchRatingCount(String searchInput);
+	
 
-	/** 검색 리뷰 조회
+	/** 검색 리뷰 조회 (인기순)
 	 * @param searchInput
 	 * @param rowBounds
 	 * @return reviewList
@@ -65,14 +69,14 @@ public interface ReviewMapper {
 	List<Review> searchReview(String searchInput, RowBounds rowBounds);
 	
 
-	/** 검색 리뷰 조회 최신순
+	/** 검색 리뷰 조회 (최신순)
 	 * @param searchInput 
 	 * @param rowBounds
 	 * @return
 	 */
 	List<Review> searchSortLatest(String searchInput, RowBounds rowBounds);
 
-	/** 검색 리뷰 조회 평점순
+	/** 검색 리뷰 조회 (평점순)
 	 * @param searchInput 
 	 * @param rowBounds
 	 * @return
@@ -82,18 +86,18 @@ public interface ReviewMapper {
 
 	//=====================================================================	
 	
-	/** 최신순
+	/** 최신순 조회 (비동기)
 	 * @param searchInput
 	 * @param rowBounds 
 	 * @return
 	 */
 	List<Review> sortLatest(String searchInput, RowBounds rowBounds);
 
-	/** 평점순
+	/** 평점순 조회 (비동기)
 	 * @param searchInput
 	 * @return
 	 */
-	List<Review> sortRating(String searchInput);
+	List<Review> sortRating(String searchInput, RowBounds rowBounds);
 	
 
 	/** 평점순 가게리스트 조회

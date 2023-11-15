@@ -192,19 +192,6 @@ a{
 
 
 /* =========================================================== */
-/* 다음 페이지 화살표 */
-
-.next-row{
-  font-size: 2rem;
-  color: var(--main-color);
-  height: 18rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-/* =========================================================== */
 /* 페이지 */
 .pagination-area{
   height: 8rem;
@@ -230,6 +217,7 @@ a{
   height: 100%;
   color: var(--main-color);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .current{
