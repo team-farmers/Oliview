@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.together.dto.Together;
 
 public interface AdminService {
 
@@ -22,13 +23,15 @@ public interface AdminService {
 	// 회원 탈퇴
 	int quit(int memberNo);
 
-//	int insertReport(Review review);
-
 	int delete(int reviewNo);
 
 	List<Review> reviewReportList();
 
 	Member reviewReportInfo(int reviewNo);
+
+	List<Together> togetherList();
+
+
 
 	
 

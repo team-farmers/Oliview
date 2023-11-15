@@ -47,7 +47,8 @@
               
               <form action="delete" method="POST" style="display:inline">
                 <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
-                <button >삭제</button>
+                <th:block th:if="*{reviewDelFl == 'N'}">삭제</th:block>
+                <th:block th:if="*{reviewDelFl == 'Y'}">복구</th:block>
               </form>
             </td>
           </tr>

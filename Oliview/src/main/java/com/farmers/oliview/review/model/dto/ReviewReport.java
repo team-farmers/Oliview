@@ -1,11 +1,11 @@
-package com.farmers.oliview.admin.model.dto;
+package com.farmers.oliview.review.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Report {
+public class ReviewReport {
    
    private int reportNo;
    private String reportContent;

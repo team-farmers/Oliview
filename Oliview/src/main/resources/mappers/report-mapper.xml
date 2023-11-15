@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
+<mapper namespace="com.farmers.oliview.review.model.mapper.ReportMapper">
+
+<!--	<select id="report" resultType="Review">
+		SELECT REVIEW_TITLE, MEMBER_NICKNAME
+		FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE REVIEW_NO = #{reviewNo}
+	</select>
+
+	<insert id="insertReport">
+		INSERT INTO "REVIEW_REPORT"
+		VALUES(SEQ_REPORT_NO.NEXTVAL, #{reportContent}, DEFAULT, #{reviewNo})
+	</insert>-->
+
+</mapper>

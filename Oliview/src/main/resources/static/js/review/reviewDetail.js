@@ -101,7 +101,7 @@ if(updateBtn != null){ // 수정 버튼 존재 시
 /* 신고 팝업창 */
 function openReportPopup(){
 
-  const url = "../admin/report";
+  const url = `/report?reviewNo=${reviewNo}`;
   const name = "신고하기";
   const option = "width = 430, height = 620, top = 200, left = 200, location = no"
 

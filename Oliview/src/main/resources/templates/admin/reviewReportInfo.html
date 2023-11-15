@@ -29,9 +29,9 @@
                         <td class="report-table-title" colspan="6">신고내역이 존재하지 않습니다.</td>
                     </tr>
 
-                    <tr id="report-table-content" th:each="member : ${reportList}" th:object="${report}">
+                    <tr id="report-table-content" th:each="report : ${reportList}" th:object="${report}">
                         <td th:text="*{reportNo}">번호</td>
-                        <td th:text="*{memberEmail}">신고내용</td>
+                        <td th:value="*{reportContent}">신고내용</td>
                     </tr>
                 </table>
             </section>
