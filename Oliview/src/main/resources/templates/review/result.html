@@ -146,8 +146,8 @@
                 <!-- 제목(가게명) -->
                 <div class="reviewRank">
                   <span>#</span>
-                  <section th:text="(${{param.cp}}-1)*8+${stat.index+1}"></section>
-                  <section th:text="*{reviewTitle}">가게이름</section>
+                  <section class="rankNo" th:text="(${{param.cp}}-1)*8+${stat.index+1}">랭킹</section>
+                  <section class="reviewTitle" th:text="*{reviewTitle}">가게이름</section>
                 </div>
         
                 <!-- 평점 -->
