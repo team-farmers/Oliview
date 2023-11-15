@@ -253,10 +253,16 @@ nav a{
 #review-title{
   font-size: 3rem;
   margin: 0 1rem 0.5rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #reviewer{
   font-size: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #reviewer > a{

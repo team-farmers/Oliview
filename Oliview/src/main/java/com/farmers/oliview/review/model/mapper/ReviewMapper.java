@@ -107,11 +107,18 @@ public interface ReviewMapper {
 	List<Review> sortRating(String searchInput, RowBounds rowBounds);
 	
 
+	/** 평점순 가게리스트 개수 조회
+	 * @param reviewTitle
+	 * @return
+	 */
+	int ratingResultCount(String reviewTitle);
+
+	
 	/** 평점순 가게리스트 조회
 	 * @param reviewTitle
 	 * @return
 	 */
-	List<Review> ratingResult(String reviewTitle);
+	List<Review> ratingResult(String reviewTitle, RowBounds rowBounds);
 	
 	//=====================================================================
 	
@@ -152,6 +159,7 @@ public interface ReviewMapper {
 	 * @return result
 	 */
 	int insertReviewLike(Map<String, Object> paramMap);
+
 
 
 

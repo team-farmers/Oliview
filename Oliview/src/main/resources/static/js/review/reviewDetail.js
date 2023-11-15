@@ -124,8 +124,9 @@ prevBtn.addEventListener("click",() =>{
 
   obj.searchInput = goToPrevParam.get("searchInput");
   obj.cp = goToPrevParam.get("cp");
+  obj.cp2=goToPrevParam.get("cp2")
   obj.sort=goToPrevParam.get("sort");
-  obj.reviewTitle = goToPrevParam.get("reviewTitle");
+  obj.store = goToPrevParam.get("store");
 
   const tempParams = new URLSearchParams();
 
@@ -135,7 +136,14 @@ prevBtn.addEventListener("click",() =>{
 
   console.log(tempParams.toString());
 
-  location.href = `/review/searchReview?${tempParams.toString()}`;
+  if(obj.store){
+    console.log("존재");
+    location.href = `/review/store/${obj.store}?cp=${obj.cp2}`
+    
+  }
+  else{
+    location.href = `/review/searchReview?${tempParams.toString()}`;
+  }
 
 
 });
