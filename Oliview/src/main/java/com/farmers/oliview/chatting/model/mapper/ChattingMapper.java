@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.farmers.oliview.chatting.model.dto.ChattingRoom;
 import com.farmers.oliview.chatting.model.dto.Message;
 import com.farmers.oliview.member.model.dto.Member;
+import com.farmers.oliview.together.dto.Together;
 
 @Mapper
 public interface ChattingMapper {
@@ -24,7 +25,7 @@ public interface ChattingMapper {
 	 */
 	List<Member> selectTarget(Map<String, Object> map);
 
-	/** 채팅방 입장
+	/** 채팅방 존재유무확인
 	 * @param map
 	 * @return
 	 */
@@ -42,8 +43,24 @@ public interface ChattingMapper {
 	 */
 	int updateReadFlag(Map<String, Object> paramMap);
 
+	/** 채팅 불러오기
+	 * @param parseInt
+	 * @return
+	 */
 	List<Message> selectMessageList(int parseInt);
 
 	int insertMessage(Message msg);
+
+	/** 채팅 참여하는 같이먹어요 게시글 정보 조회
+	 * @param boardNo
+	 * @return
+	 */
+	Together talkTogether(int boardNo);
+
+	/** 채팅방 개설자 회원번호 조회
+	 * @param map
+	 * @return
+	 */
+	int searchOpenMember(Map<String, Integer> map);
 
 }
