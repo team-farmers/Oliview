@@ -84,7 +84,7 @@
               </div>
             
               <div class="btn-5" th:if="${session.loginMember != null and session.loginMember.memberNo != together.memberNo}">
-                <button class="deleteBtn" id="deleteBtn">참여하기</button>
+                <a th:href="@{/chatting/talk/{boardNo}(boardNo=${boardNo})}"><button class="deleteBtn" id="deleteBtn">참여하기</button></a>
               </div>
         
             </div>
