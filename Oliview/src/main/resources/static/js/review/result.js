@@ -434,9 +434,13 @@ const sortRatingFn = (cp) => {
       /* 랭킹 생성 */
       const divRank = document.createElement("div");
       divRank.classList.add("reviewRank")
+      const spanRankNo = document.createElement("span");
       const sectionRankNo = document.createElement("section");
       const sectionTitle = document.createElement("section");
-      sectionRankNo.innerHTML="#" + rank;
+      sectionRankNo.classList.add("rankNo");
+      sectionTitle.classList.add("reviewTitle");
+      spanRankNo.innerHTML="#";
+      sectionRankNo.innerHTML=rank;
       rank++;
       sectionTitle.innerHTML = review.reviewTitle;
   
@@ -457,7 +461,7 @@ const sortRatingFn = (cp) => {
   
       /* 정렬! */
       divStar.append(sectionStar, spanI, sectionCount)
-      divRank.append(sectionRankNo, sectionTitle);
+      divRank.append(spanRankNo,sectionRankNo, sectionTitle);
       aImg.append(Img);
       reviewArticle.append(aImg, divRank, divStar);
       reviewRow.append(reviewArticle);

@@ -178,7 +178,9 @@ a{
   padding: 0.2rem;
   margin-right: 0.2rem;
 }
-
+.reviewRank> span{
+  padding: 0.2rem 0 0.2rem 0.2rem;
+}
 .star-count{
   padding-left: 1rem;
   display: flex;
