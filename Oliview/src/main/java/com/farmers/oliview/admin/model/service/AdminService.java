@@ -8,17 +8,17 @@ import com.farmers.oliview.review.model.dto.Review;
 
 public interface AdminService {
 
-	// 회원 정보 
-	Review memberInfo(Map<String, Object> map);
-	
-	// 회원 목록 조회
+
+	// 회원 목록조회 
 	List<Member> memberList();
 
-	// 관리자 권한 변경
+	//관리자 권한 변경
 	int changeAuthority(int memberNo);
 
 	// 회원 복구
 	int restoration(int memberNo);
 
+	// 회원 조회
+	Member memberInfo(int memberNo);
 
 }

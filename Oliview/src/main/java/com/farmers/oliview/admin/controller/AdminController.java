@@ -1,15 +1,14 @@
 package com.farmers.oliview.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.farmers.oliview.admin.model.service.AdminService;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.together.dto.Together;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("admin")
-@SessionAttributes({"loginMember"})
+@SessionAttributes({ "loginMember" })
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -35,21 +35,18 @@ public class AdminController {
 		return "admin/report";
 	}
 	
-	// 회원 정보 조회
-	@GetMapping("{memberNo:[0-9]+}")
-	public String memberInfo(@PathVariable("memberNo") int memberNo, Model model, RedirectAttributes ra,
+	// 회원 조회
+	@GetMapping("memberInfo")
+	public String memberInfo(int memberNo, Model model, RedirectAttributes ra,
 			@SessionAttribute(value="loginMember", required=false) Member loginMember) {
 		
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("memberNo", memberNo);
-		
-		Review memberInfo = service.memberInfo(map);
+		Member review = service.memberInfo(memberNo);
 		
 		String path = null;
-		if(memberInfo != null) {
-			model.addAttribute("memberInfo", memberInfo);
-			path = "redirect:/admin/memberInfo";
+		if(review != null) {
+			model.addAttribute("memberInfo", review);
+			path = "/admin/memberInfo";
 		} else {
 			path = "redirect/memberList";
 		}
@@ -57,6 +54,7 @@ public class AdminController {
 		return path;
 		
 	}
+	
 
 	// 회원 목록 조회
 	@GetMapping("memberList")
@@ -68,47 +66,38 @@ public class AdminController {
 
 		return "admin/memberList";
 	}
-	
-	// 회원 정보 
-	@GetMapping("memberInfo")
-	public String memberInfo() {
-		return "admin/memberInfo";
-	}
-	
+
 	// 관리자 권한 변경
+
 	@PostMapping("changeAuthority")
 	public String changeAuthority(int memberNo, String memberEmail, RedirectAttributes ra) {
-	
+
 		int result = service.changeAuthority(memberNo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			ra.addFlashAttribute("message", "권한 변경을 성공했습니다.");
-		}else {
+		} else {
 			ra.addFlashAttribute("message", "권한 변경을 실패했습니다.");
 		}
-		
+
 		return "redirect:memberInfo";
 	}
-	
+
 	// 회원 복구
+
 	@PostMapping("restoration")
-	public String restoration(
-		int memberNo, String memberEmail, 
-		RedirectAttributes ra) {
-		
+	public String restoration(int memberNo, String memberEmail, RedirectAttributes ra) {
+
 		int result = service.restoration(memberNo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			ra.addFlashAttribute("message", "회원이 복구 되었습니다.");
-		}else {
+		} else {
 			ra.addFlashAttribute("message", "회원 복구를 실패했습니다.");
 		}
-		
-		// selectMember?inputEmail=test06@kh.com
+
 		return "redirect:memberList";
 	}
 	
-	
-	
-	
+
 }

@@ -14,6 +14,7 @@
         <th:block th:replace="~{common/header}"></th:block>
 
         <section class="conatiner">
+
             <p>회원 목록</p>
 
             <section id="member-index-container">
@@ -27,11 +28,15 @@
                         <th>탈퇴여부</th>
                     </tr>
 
+                    <tr th:if="${#lists.size(memberList) == 0}">
+                        <td class="myPage-table-title" colspan="6">회원이 존재하지 않습니다.</td>
+                      </tr>
+
                     <tr id="member-table-content" th:each="member : ${memberList}" th:object="${member}">
                         <td th:text="*{memberNo}">회원번호</td>
                         <td>
-                            
-                            <a th:href="@{/admin/memberInfo}" th:text="*{memberId}"></a>
+
+                            <a th:href="@{/admin/memberInfo (memberNo=*{memberNo})}" th:text="*{memberId}"></a>
                         </td>
                         <td th:text="*{memberNickname}">닉네임</td>
                         <td th:text="*{memberEmail}">이메일</td>
@@ -41,9 +46,16 @@
                 </table>
             </section>
 
+        
+
+
         </section>
 
     </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
 </body>
 
 </html>
