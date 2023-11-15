@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>posting</title>
+   
+ 
   <link rel="stylesheet" href="/css/together/posting.css">
   <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
 
@@ -84,24 +86,16 @@
           <a href="board"> <button id="insertBtn">저장</button> </a>
         </div>
 
-        <div class="bt-2">
-          <a href="board"> <button id="deleteBtn">취소</button> </a>
-        </div>
-
         
       </div>
       </div>
       </div>
-      <footer>
-        <article>
-          <a href="#">고객센터</a>
-          <span>|</span>
-          <a href="#">라이센스</a>
-        </article>
-        <article>
-          &copy Oliview Corp.
-        </article>
-      </footer>
+     
+     
+      <th:block th:replace="~{common/footer}"></th:block>
+
+
+     
     </form>
   </main>
   <script src="/js/posting/.js"></script>
