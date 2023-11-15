@@ -76,7 +76,7 @@ public class TogetherServiceImpl implements TogetherService {
 				
 				
 				/* Map에 담아서 변환 */
-				Map<String, Object>map = new HashMap<>();
+				Map<String, Object> map = new HashMap<>();
 				map.put("boardList", boardList);
 				map.put("pagination", pagination);
 				

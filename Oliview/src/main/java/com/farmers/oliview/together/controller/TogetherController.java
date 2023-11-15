@@ -81,7 +81,7 @@ public class TogetherController {
 
 	    Map<String, Object> map = new HashMap<>();
 	    map.put("boardNo", boardNo);
-
+//        map.put("memberNo", loginMember.getMemberNo());
 
 	    Together together = service.board(map);
 
@@ -111,7 +111,7 @@ public class TogetherController {
 
                if (cookies != null) { // 쿠키가 존재할 경우
 
-                  // 쿠키 중 "readBoardNo"라는 쿠키를 찾아서 c에 대입
+                  // 쿠키 중 "BoardNo"라는 쿠키를 찾아서 c에 대입
                   for (Cookie cookie : cookies) {
                      if (cookie.getName().equals("boardNo")) {
                         c = cookie;
@@ -189,13 +189,8 @@ public class TogetherController {
                   // 클라이언트에게 전달
                }
             }
-            map.put("memberNo", loginMember.getMemberNo());
-        
-           
+
             
-      
-     
-	    
 
 	    return path;
 	}

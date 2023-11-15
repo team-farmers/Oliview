@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <main th:with = "boardList = ${map.boardList}, pagination = ${map.pagination}">
+  <main th:with = "boardList = ${map.boardList}, pagination=${map.pagination}">
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
 
@@ -42,42 +42,25 @@
 
           <div th:each="board : ${boardList}">
             <div class="num" th:text = "${board.boardNo}"></div>
-            <div class="title"><a th:href="${board.boardNo}" th:text = "${board.boardTitle}"></a></div>
+            <div class="title"><a th:href="@{/together/{boardNo}(boardNo=${board.boardNo},cp=${pagination.currentPage}, key= ${param.key}, query=${param.query})}" 
+               th:text = "${board.boardTitle}"></a></div>
             <div class="people" th:text = "${board.numberPeople}">0/100</div>
             <div class="writer"  th:text = "${board.memberNickname}">파이리</div>
             <div class="date"  th:text = "${board.dateCreated}">2021.1.15</div>
             <div class="count"  th:text = "${board.readCount}">33</div>
           </div>
-
+          <a href="/editTogether/posting"> <button id = "insertBtn">글쓰기</button></a>
         </div>
 
 
 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-
-     
-     
-     
-     
-     
-     
      
       
       <!--Pagination 페이지 숫자-->
       <div class="pagination-area" th:if ="${#lists.size(boardList) > 0}">
         
         <!-- 검색 x -->
-        <ul class="pagination" th:unless="${param.temp == null}">
+        <ul class="pagination">
 
           <li><a th:href="@{/together/inven(cp=1, key= ${param.key}, query=${param.query})}">&lt;&lt;</a></li>
           <li><a th:href="@{/together/inven(cp=${pagination.prevPage}, key= ${param.key}, query=${param.query})}">&lt;</a></li>
@@ -97,32 +80,13 @@
           <li><a th:href="@{/together/inven(cp=${pagination.maxPage}, key= ${param.key}, query=${param.query})}">&gt;&gt;</a></li>
         </ul>
       </div>
-    
-      <!--Pagination 페이지 숫자-->
-      <ul class="pagination" th:unless="${param.temp == null}">
 
-        <li><a th:href="@{/together/inven(cp=1, key= ${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-        <li><a th:href="@{/together/inven(cp=${pagination.prevPage}, key= ${param.key}, query=${param.query})}">&lt;</a></li>
+      
 
 
-        <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
-            <li th:if="${i == pagination.currentPage}">
-              <a class="current" th:text="${i}">1</a>
-            </li>              
-            <li th:unless="${i == pagination.currentPage}"> 
-                <a th:href="@{/together/inven(cp=${i}, key= ${param.key}, query=${param.query})}" th:text="${i}">2</a>
-            </li>
-        </th:block>
 
 
-        <li><a th:href="@{/together/inven(cp=${pagination.nextPage}, key= ${param.key}, query=${param.query})}">&gt;</a></li>
-        <li><a th:href="@{/together/inven(cp=${pagination.maxPage}, key= ${param.key}, query=${param.query})}">&gt;&gt;</a></li>
-      </ul>
 
-
-    </div>
-
-  
     <!-- 검색창 -->
     <form th:action="@{{boardNo}(boardNo=${boardNo})}" method="get" id="boardSearch">
   
