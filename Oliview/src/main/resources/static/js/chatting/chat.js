@@ -19,13 +19,14 @@ function selectRoomList(){
 		// 채팅방 목록 지우기
 		chattingList.innerHTML = "";
 
+		console.log(chattingList);
+
 		// 조회한 채팅방 목록을 화면에 추가
 		for(let room of roomList){
-			
+
 			const li = document.createElement("li");
 			li.classList.add("chatting-item");
 			li.setAttribute("chat-no", room.chattingNo);
-			li.setAttribute("target-no", room.targetNo);
 
 			if(room.chattingNo == selectChattingNo){
 				li.classList.add("select");
@@ -36,15 +37,16 @@ function selectRoomList(){
 			itemHeader.classList.add("item-header");
 
       // 프로필 이미지 요소 생성
-			const listProfile = document.createElement("img");
-			listProfile.classList.add("list-profile");
+			const boardImg = document.createElement("img");
+			boardImg.classList.add("boardImg");
 
-			if(room.targetProfile == undefined)	
-				listProfile.setAttribute("src", userDefaultImage);
-			else								
-				listProfile.setAttribute("src", room.targetProfile);
+			if(room.boardImg == undefined){
+				boardImg.setAttribute("src", userDefaultImage);
+			} else{
+				boardImg.setAttribute("src", room.boardImg);
+			}
 
-			itemHeader.append(listProfile);
+			itemHeader.append(boardImg);
 
 
 			// item-body 부분
@@ -55,11 +57,11 @@ function selectRoomList(){
 			const p = document.createElement("p");
 			p.classList.add("profile"); // 추가함
 
-      // 닉네임
-			const targetName = document.createElement("span");
-			targetName.classList.add("target-name");
-			targetName.innerText = room.targetNickname;
-
+      // 같이먹어요 게시글 제목(채팅방명)
+			const boardTitle = document.createElement("span");
+			boardTitle.classList.add("boardTitle");
+			boardTitle.innerText = room.boardTitle;
+			
       // 메세지 내용 요소 생성
 			const recentMessage = document.createElement("p");
 			recentMessage.classList.add("recent-message");
@@ -68,8 +70,8 @@ function selectRoomList(){
 				recentMessage.innerHTML = room.lastMessage;
 			}
 			
-			// item-body > p(1)에 닉네임, 메세지 내용 요소 추가
-			p.append(targetName, recentMessage);
+			// item-body > p(1)에 닉네임, 참여인원, 메세지 내용 요소 추가
+			p.append(boardTitle, recentMessage);
 			
 
 			// item-body > div(2) 요소 생성
@@ -135,7 +137,8 @@ function roomListAddEvent(){
 			//const arr = id.split("-");
 			// 전역변수에 채팅방 번호, 상대 번호, 상태 프로필, 상대 이름 저장
 			selectChattingNo = item.getAttribute("chat-no");
-			selectTargetNo = item.getAttribute("target-no");
+
+			console.log(selectChattingNo);
 
 			selectTargetProfile = item.children[0].children[0].getAttribute("src");
 			selectTargetName = item.children[1].children[0].children[0].innerText;
@@ -150,11 +153,8 @@ function roomListAddEvent(){
 			// 현재 클릭한 채팅방에 select 클래스 추가
 			item.classList.add("select");
 	
-			// 비동기로 메세지 목록을 조회하는 함수 호출 --> 동기로!!
-			selectChattingFn();
-
-			// 채팅방 목록 클릭 시 채팅룸으로 이동		
-			location.href='/chatting/talk';
+			// 채팅방 목록 클릭 시 채팅룸으로 이동		// 맞는지 확인!! 아마 아닐거거든!^^ 쿼리스트링~~
+			location.href='/chatting/talk/' + selectChattingNo;
 		});
 	}
 }
@@ -294,11 +294,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
   // chattingEnter();
 
   // 채팅창에 대화 불러오기
-  selectChattingFn();
+  // selectChattingFn();
 
   // 채팅방 목록에 클릭 이벤트 추가
 	// roomListAddEvent(); 
 
 	// 보내기 버튼에 이벤트 추가
 	// send.addEventListener("click", sendMessage);
+
+	// 채팅목록 불러오기
+	selectRoomList();
 });

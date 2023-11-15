@@ -11,25 +11,32 @@
 				ORDER BY MESSAGE_NO DESC) 
 				WHERE ROWNUM = 1) LAST_MESSAGE <!--가장 최신 메세지 1개 가져옴-->
 				
-			,TO_CHAR(NVL((SELECT MAX(SEND_TIME) SEND_TIME 
-					FROM MESSAGE M
-					WHERE R.CHATTING_NO  = M.CHATTING_NO), CREATE_DATE), 
-					'YYYY.MM.DD') SEND_TIME
-					
-			,NVL2((SELECT OPEN_MEMBER FROM CHATTING_ROOM R2
-				WHERE R2.CHATTING_NO = R.CHATTING_NO
-				AND R2.OPEN_MEMBER = #{memberNo}),
-				(SELECT MEMBER_NICKNAME FROM MEMBER WHERE MEMBER_NO = R.PARTICIPANT),
-				(SELECT MEMBER_NICKNAME FROM MEMBER WHERE MEMBER_NO = R.OPEN_MEMBER)
-				) TARGET_NICKNAME	<!--상대의 닉네임 // 보드 타이틀로 얻어와야!-->
+			,( SELECT SEND_TIME FROM
+				<![CDATA[ (SELECT CASE
+						WHEN SYSDATE - SEND_TIME < 1/24/60
+						THEN FLOOR( (SYSDATE - SEND_TIME) * 24 * 60 * 60 ) || '초 전'
+						WHEN SYSDATE - SEND_TIME < 1/24
+						THEN FLOOR( (SYSDATE - SEND_TIME) * 24 * 60) || '분 전'
+						WHEN SYSDATE - SEND_TIME < 1
+						THEN FLOOR( (SYSDATE - SEND_TIME) * 24) || '시간 전'
+						ELSE TO_CHAR(SEND_TIME, 'YYYY-MM-DD')
+					END  SEND_TIME ]]>
+				FROM MESSAGE M
+				WHERE M.CHATTING_NO = R.CHATTING_NO
+				ORDER BY MESSAGE_NO DESC)
+			  WHERE ROWNUM = 1
+			) "SEND_TIME"	
+			
+			<!--게시글 이미지, 타이틀, 참여인원 얻어옴-->
+			,(SELECT BOARD_IMG FROM TOGETHER T
+				WHERE R.CHATTING_NO = T.BOARD_NO) BOARD_IMG
 				
-			,NVL2((SELECT OPEN_MEMBER FROM CHATTING_ROOM R2
-				WHERE R2.CHATTING_NO = R.CHATTING_NO
-				AND R2.OPEN_MEMBER = #{memberNo}),
-				(SELECT MEMBER_PROFILE FROM MEMBER WHERE MEMBER_NO = R.PARTICIPANT),
-				(SELECT MEMBER_PROFILE FROM MEMBER WHERE MEMBER_NO = R.OPEN_MEMBER)
-				) TARGET_PROFILE <!--상대의 프로필 이미지 얻어옴 // 이걸 보드 이미지로 얻어와야할듯!-->
-
+			, (SELECT BOARD_TITLE FROM TOGETHER T
+				WHERE R.CHATTING_NO = T.BOARD_NO) BOARD_TITLE
+				
+			,(SELECT MAX_PEOPLE
+				FROM TOGETHER T
+				WHERE R.CHATTING_NO = T.BOARD_NO) MAX_PEOPLE
 							
 			,(SELECT COUNT(*) FROM MESSAGE M WHERE M.CHATTING_NO = R.CHATTING_NO AND READ_FL = 'N' AND SENDER_NO != #{memberNo}) NOT_READ_COUNT <!--안읽은 메세지-->
 			,(SELECT MAX(MESSAGE_NO) SEND_TIME FROM MESSAGE M WHERE R.CHATTING_NO  = M.CHATTING_NO) MAX_MESSAGE_NO <!--마지막 메세지, sender 없는거 해결하새요-->
@@ -60,11 +67,6 @@
 
 	<!-- 채팅방 생성 -->
 	<insert id="createChattingRoom" parameterType="map" useGeneratedKeys="true">
-	
-		<selectKey keyProperty="chattingNo" order="BEFORE" resultType="_int">
-			SELECT SEQ_ROOM_NO.NEXTVAL FROM DUAL
-		</selectKey>
-	
 		INSERT INTO CHATTING_ROOM
 		VALUES(#{chattingNo}, DEFAULT, #{openMemberNo}, #{loginMemberNo})
 	</insert>
@@ -110,6 +112,16 @@
 		SELECT * FROM TOGETHER
 		WHERE BOARD_NO = #{boardNo}
 	</select>
+	
+	<!-- 채팅방 목록에서 클릭 후 -> 채팅방이 존재하는지 여부 확인 -->
+	<select id="checkChattingPart" resultType="_int">
+		SELECT NVL(SUM(CHATTING_NO), 0) CHATTING_NO
+		FROM CHATTING_ROOM
+		WHERE CHATTING_NO = #{chattingNo}
+		AND PARTICIPANT = #{loginMemberNo}
+	</select>
+	
+	
 	
 	
 	

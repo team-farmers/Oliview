@@ -32,6 +32,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 
+
 	<update id="quit">
 		UPDATE "MEMBER" SET
 		MEMBER_DEL_FL = 'Y'
@@ -73,6 +74,7 @@
 		FROM "TOGETHER"
 		ORDER BY BOARD_NO
 	</select>
+
 
 
 </mapper>

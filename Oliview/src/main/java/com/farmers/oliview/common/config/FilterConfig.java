@@ -28,8 +28,8 @@ public class FilterConfig {
 
 		// 로그인 전) 마이페이지, 리뷰/같이먹어요 글쓰기/수정/채팅 못들어가게 필터링함
 
-		String[] filteringUrl = { "/myPage/*", "/together/boardUpdate", "/together/chat", "/together/posting",
-				"/together/talk", "/review/insert", "/review/update" };
+		String[] filteringUrl = { "/myPage/*", "/together/boardUpdate", "/together/posting",
+				"/review/insert", "/review/update", "/chatting/chat", "/chatting/talk" };
 		
 		// 필터링할 주소 지정
 		filter.setUrlPatterns(Arrays.asList(filteringUrl));

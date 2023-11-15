@@ -18,14 +18,14 @@
     <div class="outerBox" >
 
       <!-- 왼쪽 가게 정보 영역 -->
-      <section class="info" th:object="${reviewList}">
+      <section class="info" th:object="${map.reviewList}">
         <!-- <section id="info-rankNo">#1</section> -->
         <section id="info-title" th:text="${reviewTitle}">가게이름</section>
         <div class="info-star-i">
-          <section id="info-star" style="color: #f1c93b;" th:text="${reviewList[0].storeStarTotal}">가게총평점</section>
+          <section id="info-star" style="color: #f1c93b;" th:text="${map.reviewList[0].storeStarTotal}">가게총평점</section>
           <span><i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i></span>
         </div>
-        <section id="info-tag" th:text="|# ${reviewList[0].reviewOneLine}|">#한줄평</section>
+        <section id="info-tag" th:text="|# ${map.reviewList[0].reviewOneLine}|">#한줄평</section>
       </section>
 
       <div>
@@ -37,51 +37,85 @@
       <!-- 오른쪽 리뷰 모음 영역 -->
 
       <div  class="reviews">
-        <th:block th:each="review, stat : ${reviewList}">
-    
-          <th:block th:if="${stat.index % 3 == 0}">
-            <section class="review-row">
-            </th:block>
-              <article class="review-col" th:object="${review}">
-        
-                <!-- 이미지 -->
-                <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" class="review-img">
-                  <img th:src="*{reviewImg}" alt="리뷰이미지">
-                </a>
-        
-                <!-- 제목(가게명) -->
-                <div class="title"><a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, reviewTitle=${review.reviewTitle})}"
-                  th:text="*{reviewTitle}">가게이름</a>
-                </div>
-        
-                <!-- 닉네임/평점/작성일 -->
-                <div class="nickname-star-date">
-                  <section id="nickname">
-                    <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
-                    th:text="*{memberNickname}">닉네임</a>
-                  </section>
 
-                  <section class="star" th:text="*{starTotal}">평점</section>
-                  <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
-                  <section class="date" th:text="*{writeDate}">2023.10.20.</section>
-                </div>
+
+        <div class="review-area">
+          <th:block th:each="review, stat : ${map.reviewList}">
       
-              </article>
-    
-            
-    
-          <th:block th:if="${stat.index % 3 == 2}">
-            </section>
+            <th:block th:if="${stat.index % 4 == 0}">
+              <section class="review-row">
+              </th:block>
+                <article class="review-col" th:object="${review}">
+          
+                  <!-- 이미지 -->
+                  <a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, store=*{reviewTitle}, cp2=${map.pagination.currentPage})}" class="review-img">
+                    <img th:src="*{reviewImg}" alt="리뷰이미지">
+                  </a>
+          
+                  <!-- 제목(가게명) -->
+                  <div class="title"><a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, store=*{reviewTitle})}"
+                    th:text="*{reviewTitle}">가게이름</a>
+                  </div>
+          
+                  <!-- 닉네임/평점/작성일 -->
+                  <div class="nickname-star-date">
+                    <section id="nickname">
+                      <a class="nickname" th:href="@{/review/searchReview?searchInput={memberNickname} (memberNickname=*{memberNickname})}"
+                      th:text="*{memberNickname}">닉네임</a>
+                    </section>
+  
+                    <section class="star" th:text="*{starTotal}">평점</section>
+                    <i class="fa-sharp fa-solid fa-star fa-ml" style="color: #f1c93b;"></i>
+                    <section class="date" th:text="*{writeDate}">2023.10.20.</section>
+                  </div>
+        
+                </article>
+      
+              
+      
+            <th:block th:if="${stat.index % 4 == 3}">
+              </section>
+            </th:block>
+      
           </th:block>
-    
-        </th:block>
+
+        </div>
+
+
+        
+        <div class="pagination-area">
+
+          <ul class="pagination" th:with="pagination=${map.pagination}">
+                  
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=1)}">&lt;&lt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.prevPage})}">&lt;</a></li>
+  
+  
+            <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
+                <!-- 현재 보고있는 페이지 -->
+                <li th:if="${i == pagination.currentPage}">
+                    <a class="current" th:text="${i}">1</a>
+                </li>
+  
+                <!-- 보고있지 않은 페이지 -->                    
+                <li th:unless="${i == pagination.currentPage}"> 
+                    <a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp= ${i})}" th:text="${i}">2</a>
+                </li>
+            </th:block>
+  
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.nextPage})}">&gt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+          </ul>
+        </div>
+
+        <div class="goToList">
+          <button class="goToListBtn" id="goToListBtn">평점순 목록으로</button>
+        </div>
+
   
       </div>
 
-      
-
-
-
+   
   </main>
   
 
