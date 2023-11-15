@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.farmers.oliview.admin.model.dto.Report;
 import com.farmers.oliview.admin.model.mapper.AdminMapper;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
@@ -30,16 +31,42 @@ public class AdminServiceImpl implements AdminService {
 	public int changeAuthority(int memberNo) {
 		return mapper.changeAuthority(memberNo);
 	}
-	
+
 	// 회원 복구
 	@Override
 	public int restoration(int memberNo) {
 		return mapper.restoration(memberNo);
 	}
 
+	// 회원 조회
 	@Override
 	public Member memberInfo(int memberNo) {
 		return mapper.memberInfo(memberNo);
 	}
+
+	@Override
+	public int quit(int memberNo) {
+		return mapper.quit(memberNo);
+	}
+
+//	@Override
+//	public int insertReport(Review review) {
+//		return mapper.insertReport(review);
+//	}
 	
+	@Override
+	public List<Review> reviewReportList() {
+		return mapper.reviewReportList();
+	}
+	
+
+	@Override
+	public int delete(int reviewNo) {
+		return mapper.delete(reviewNo);
+	}
+	
+	@Override
+	public Member reviewReportInfo(int reviewNo) {
+		return mapper.reviewReportInfo(reviewNo);
+	}
 }

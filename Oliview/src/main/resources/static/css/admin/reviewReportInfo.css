@@ -1,6 +1,6 @@
 .conatiner {
   margin: 9.6rem 0rem 2.6rem 0rem;
-  width: 80%;
+  width: 100%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -15,12 +15,13 @@
   color: #66b97e;
   font-family: Gmarket Sans TTF, 'Source Sans Pro';
   white-space: nowrap;
-  flex-shrink: 0;  
+  flex-shrink: 0;
 }
 
-a{
+
+a {
   text-decoration: none;
-  color : black;
+  color: black;
 }
 
 a:hover {
@@ -44,7 +45,7 @@ a:hover {
   border-bottom: 0.5rem solid #F1C93B;
 } */
 
-#member-table {
+#report-table {
   box-sizing: border-box;
   padding: 2.9rem 6.1rem 0rem 0rem;
   width: 100%;
@@ -56,7 +57,7 @@ a:hover {
   margin-right: 2rem;
 }
 
-#member-table-row {
+#report-table-row {
   box-sizing: border-box;
   padding: 2.5rem 3.85rem 2rem 1.4rem;
   width: 100%;
@@ -67,42 +68,29 @@ a:hover {
   flex-shrink: 0;
 }
 
-#member-table-row > th:nth-child(1){
+#report-table>tr {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+
+#report-table-row>th:nth-child(1) {
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.2575;
   color: #ffffff;
   width: 10rem;
 }
-#member-table-row > th:nth-child(2){
+
+#report-table-row>th:nth-child(2) {
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.2575;
   color: #ffffff;
   width: 30rem;
 }
-#member-table-row > th:nth-child(3){
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1.2575;
-  color: #ffffff;
-  width: 20rem;
-}
-#member-table-row > th:nth-child(4){
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1.2575;
-  color: #ffffff;
-  width: 30rem;
-}
-#member-table-row > th:nth-child(5){
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1.2575;
-  color: #ffffff;
-  width: 20rem;
-}
-#member-table-row > th:nth-child(6){
+
+#report-table-row>th:nth-child(3) {
   font-size: 1.8rem;
   font-weight: 500;
   line-height: 1.2575;
@@ -110,7 +98,31 @@ a:hover {
   width: 20rem;
 }
 
-#member-table-content{
+#report-table-row>th:nth-child(4) {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2575;
+  color: #ffffff;
+  width: 30rem;
+}
+
+#report-table-row>th:nth-child(5) {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2575;
+  color: #ffffff;
+  width: 20rem;
+}
+
+#report-table-row>th:nth-child(6) {
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.2575;
+  color: #ffffff;
+  width: 20rem;
+}
+
+#report-table-content {
   border-bottom: 1px solid gray;
   box-sizing: border-box;
   padding: 2.5rem 3.85rem 2rem 1.4rem;
@@ -122,7 +134,7 @@ a:hover {
   height: 1rem;
 }
 
-#member-table-content > td:nth-child(1){
+#report-table-content>td:nth-child(1) {
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
@@ -130,32 +142,17 @@ a:hover {
   width: 10rem;
   text-align: center;
 }
-#member-table-content > td:nth-child(2){
-  font-size: 1.4rem;
-    font-weight: 500;
-  line-height: 1.2575;
-  color: black;
-  width: 30rem;
-  text-align: center;
-}
-#member-table-content > td:nth-child(3){
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1.2575;
-  color: black;
-  width: 20rem;
-  text-align: center;
-}
-#member-table-content > td:nth-child(4){
+
+#report-table-content>td:nth-child(2) {
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
   width: 30rem;
   text-align: center;
-
 }
-#member-table-content > td:nth-child(5){
+
+#report-table-content>td:nth-child(3) {
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
@@ -163,12 +160,31 @@ a:hover {
   width: 20rem;
   text-align: center;
 }
-#member-table-content > td:nth-child(6){
+
+#report-table-content>td:nth-child(4) {
+  font-size: 1.4rem;
+  color: black;
+  width: 30rem;
+  text-align: center;
+
+}
+
+#report-table-content>td:nth-child(5) {
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.2575;
   color: black;
   width: 20rem;
   text-align: center;
+}
 
+#report-table-content>td:nth-child(6) {
+  text-align: center;
+}
+
+
+button{
+  border: none;
+  width: 7rem;
+  height: 4rem;
 }

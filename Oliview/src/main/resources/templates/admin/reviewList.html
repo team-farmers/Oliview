@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리</title>
+  <link rel="stylesheet" th:href="@{/css/admin/reviewList.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+
+<body>
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <section class="conatiner">
+
+      <p> 목록</p>
+
+      <section id="report-index-container">
+        <table id="report-table">
+          <tr id="report-table-row">
+            <th>게시판 번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>신고</th>
+            <th>관리</th>
+          </tr>
+
+          <tr th:if="${#lists.size(reviewReportList) == 0}">
+            <th colspan="6"> 게시글이 존재하지 않습니다.</th>
+          </tr>
+
+          <tr id="report-table-content" th:each="review : ${reviewReportList}" th:object="${review}">
+            <td th:text="*{reviewNo}">번호</td>
+            <td>
+
+              <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" th:text="*{reviewTitle}">게시글 제목</a>
+            </td>
+            <td th:text="*{memberNickname}">작성자</td>
+            <td th:text="*{writeDate}">작성일</td>
+            <td>
+              <a th:href="@{/admin/reviewReportInfo(reviewNo=*{reviewNo})}"><button>상세조회</button></a>
+            </td>
+            <td> <!-- th:if="${reportAccrue >= 3}" -->
+              
+              <form action="delete" method="POST" style="display:inline">
+                <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
+                <button >삭제</button>
+              </form>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+
+
+
+    </section>
+
+  </main>
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리</title>
+  <link rel="stylesheet" th:href="@{/css/admin/memberList.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+
+<body>
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <section class="conatiner">
+
+      <p>신고 목록</p>
+
+      <section id="member-index-container">
+        <table id="member-table">
+          <tr id="member-table-row">
+            <th>번호</th>
+            <th>게시글 제목</th>
+            <th>작성자</th>
+            <th>신고내용</th>
+            <th>신고 누적</th>
+            <th>관리</th>
+          </tr>
+<!-- 
+          <tr th:if="${#lists.size(reportList) == 0}">
+            <td class="report-table-title" colspan="6">신고내역이 존재하지 않습니다.</td>
+          </tr> -->
+
+          <tr id="report-table-content" th:each="member : ${reportList}" th:object="${report}">
+            <td th:text="*{reportNo}">번호</td>
+            <td>
+
+              <a th:href="@{/admin/memberInfo(memberNo=*{memberNo})}" th:text="*{memberId}">게시글 제목</a>
+            </td>
+            <td th:text="*{memberNickname}">작성자</td>
+            <td th:text="*{memberEmail}">신고내용</td>
+            <td th:text="*{memberEnrollDate}">신고 누적</td>
+            <td>
+              <button>삭제</button>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+
+
+
+    </section>
+
+  </main>
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+</body>
+
+</html>
