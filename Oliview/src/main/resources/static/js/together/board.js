@@ -37,64 +37,15 @@ if(invenBtn != null) { // 화면에 목록으로 버튼이 있을때만 수행
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // --------------------------------------------------------------
 /* 게시글 삭제 */
-const deleteBtn = document.getElementById("deleteBtn");
+const deleteBtn2 = document.getElementById("deleteBtn2");
 
 // 만약 화면에 버튼이 없으면 null 반환
 
-if(deleteBtn != null){ // 삭제 버튼이 존재하는경우
+if(deleteBtn2 != null){ // 삭제 버튼이 존재하는경우
 
-  deleteBtn.addEventListener ("click", () => {
+  deleteBtn2.addEventListener ("click", () => {
 
     // confirm : 확인 클릭 -> true / 취소 클릭 -> false반환
     if(confirm("삭제하시겠습니까?")){
