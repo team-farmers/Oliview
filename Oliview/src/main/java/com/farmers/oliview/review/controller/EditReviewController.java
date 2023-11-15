@@ -27,8 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("review")
-@SessionAttributes({ "loginMember" })
+@RequestMapping("editReview")
+@SessionAttributes({"loginMember"})
 public class EditReviewController {
 
 	private final EditReviewService service;
@@ -81,6 +81,7 @@ public class EditReviewController {
 		return "review/update";
 	}
 
+	// 게시글 수정
 	@PostMapping("/{reviewNo:[0-9]+}/update")
 	public String updateReview(@PathVariable("reviewNo") int reviewNo, Review review,
 			@RequestParam("inputImg") MultipartFile img) throws IllegalStateException, IOException {
@@ -124,7 +125,7 @@ public class EditReviewController {
 
 		if (result > 0) {
 			message = "게시글을 삭제했습니다.";
-			path = "redirect:/review/result";
+			path = "redirect:/review/searchReview";
 		} else {
 			message = "게시글 삭제를 실패했습니다.";
 			path = "redirect:/";

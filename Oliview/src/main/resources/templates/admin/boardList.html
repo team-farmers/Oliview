@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게시판 관리</title>
+  <link rel="stylesheet" th:href="@{/css/admin/boardList.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
 
@@ -16,30 +17,26 @@
       <p>게시판 목록</p>
 
       <section id="board-index-container">
-          <table id="board-table">
-              <tr id="baord-table-row">
-                  <th>게시판</th>
-                  <th>제목</th>
-                  <th>작성일</th>
-                  <th>신고 누적 횟수</th>
-                  <th>관리</th>
-              </tr>
+        <table id="board-table">
+          <tr id="baord-table-row">
+            <th>게시판</th>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>신고 누적 횟수</th>
+            <th>관리</th>
+          </tr>
 
-              <tr id="board-table-content" th:each="board : ${boardList}" th:object="${board}">
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
-              </tr>
-          </table>
+
+        </table>
       </section>
 
-  </section>
+    </section>
 
 
   </main>
-
+  
 </body>
+
+<th:block th:replace="~{common/footer}"></th:block>
 
 </html>

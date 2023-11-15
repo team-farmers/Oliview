@@ -3,13 +3,6 @@
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.admin.model.mapper.AdminMapper">
 
-	<select id="memberInfo">
-		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
-		MEMBER_ENROLL_DATE, AUTHORITY, MEMBER_DEL_FL
-		FROM "MEMBER"
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-
 	<select id="memberList" resultType="Member">
 		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
 		MEMBER_ENROLL_DATE, MEMBER_DEL_FL
@@ -28,6 +21,13 @@
 		MEMBER_DEL_FL = 'N'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="memberInfo" resultType="Member">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_EMAIL, MEMBER_NICKNAME,
+		MEMBER_ENROLL_DATE, AUTHORITY, MEMBER_DEL_FL
+		FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 
 
 </mapper>

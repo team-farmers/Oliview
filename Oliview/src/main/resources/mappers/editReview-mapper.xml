@@ -33,6 +33,7 @@
 		STAR_AMOUNT = #{starAmount},
 		STAR_CLEAN = #{starClean},
 		REVIEW_ONELINE =#{reviewOneLine},
+		REVIEW_IMG = #{reviewImg},
 		REVIEW_MENU = #{reviewMenu}
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
