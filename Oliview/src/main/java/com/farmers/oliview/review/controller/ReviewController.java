@@ -75,6 +75,23 @@ public class ReviewController {
 	
 //	=============================================================================================================================	
 
+	
+	/** 인기순 조회 (비동기)
+	 * @param searchInput
+	 * @param cp
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping(value="sortPopular", produces="application/json")
+	public Map<String, Object> sortPopular(String searchInput, int cp){
+		
+		Map<String, Object> map = service.sortPopular(searchInput, cp);
+		
+		return map;
+	}
+	
+	
+	
 	/** 최신순 조회 (비동기)
 	 * @param searchInput
 	 * @return map(reviewList, cp)
@@ -142,20 +159,20 @@ public class ReviewController {
 		map.put("reviewNo", reviewNo);
 		
 		Review review = service.reviewDetail(map);
-		
-		// 다른 리뷰 같이 호출
-		Map<String, Object> map2 = new HashMap<>();
-		map2.put("reviewNo", reviewNo);
-		map2.put("reviewTitle", review.getReviewTitle());
-		
-		List<Review> otherReview = service.otherReview(map2);
-		
+
 		
 		// 리턴 Path
 		String path = null;
 		
 		// ==================== 리뷰가 존재 ========================
 		if(review != null) {
+			
+			// 다른 리뷰 같이 호출
+			Map<String, Object> map2 = new HashMap<>();
+			map2.put("reviewNo", reviewNo);
+			map2.put("reviewTitle", review.getReviewTitle());
+			
+			List<Review> otherReview = service.otherReview(map2);
 			
 			// 상세 리뷰, 다른 리뷰 데이터 전달
 			model.addAttribute("review", review);
@@ -213,7 +230,6 @@ public class ReviewController {
 						result = service.updateReadCount(reviewNo);
 					}
 					
-					
 				}
 				
 
@@ -223,7 +239,6 @@ public class ReviewController {
 		               review.setReadCount(review.getReadCount() + 1);
 		               // 조회된 review 조회 수와 DB 조회 수 동기화
 
-		               
 		               // 적용 경로 설정
 		               c.setPath("/"); // "/" 이하 경로 요청 시 쿠키 서버로 전달
 
@@ -236,15 +251,9 @@ public class ReviewController {
 
 		               // java.util.Date
 		               Date a = new Date(); // 현재 시간
-		               // 2023-10-31 2:30:14
-
 		               Date temp = new Date(cal.getTimeInMillis()); // 다음날 (24시간 후)
-		               // 2023-11-01 2:30:14
-
 		               Date b= sdf.parse(sdf.format(temp)); // 다음날 0시 0분 0초
-		               // 2023-11-01 00:00:00
 
-		               // 다음날 0시 0분 0초 - 현재 시간 => 9시간 30분
 		               long diff = (b.getTime() - a.getTime()) / 1000;
 		               // -> 다음날 0시 0분 0초까지 남은 시간을 초단위로 반환
 
@@ -254,19 +263,14 @@ public class ReviewController {
 		               resp.addCookie(c); // 응답 객체를 이용해서
 		                              // 클라이언트에게 전달					
 				}
-
 			}
-			//=====================================================================
-			
-			
-			
+
+		}else {
+			path =  "redirect:/review/searchReview";
+			ra.addFlashAttribute("message", "삭제되거나 존재하지 않는 리뷰입니다.");
+
 		}
-		// review == null
-		else {
-			path = "redirect:/review/result";
-			ra.addFlashAttribute("message", "해당 리뷰가 존재하지 않습니다");
-		}
-		
+
 		
 		return path;
 		
@@ -288,7 +292,6 @@ public class ReviewController {
 		return service.reviewLike(paramMap);
 	}
 	
-//	=============================================================================================================================
 	
 
 	
