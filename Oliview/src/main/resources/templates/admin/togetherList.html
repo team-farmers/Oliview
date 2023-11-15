@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원 관리</title>
+  <link rel="stylesheet" th:href="@{/css/admin/togetherList.css}">
+  <th:block th:replace="~{common/common}"></th:block>
+</head>
+
+<body>
+  <main>
+    <th:block th:replace="~{common/header}"></th:block>
+
+    <section class="conatiner">
+
+      <p> 목록</p>
+
+      <section id="report-index-container">
+        <table id="report-table">
+          <tr id="report-table-row">
+            <th>게시판 번호</th>
+            <th>제목</th>
+            <th>회원 번호</th>
+            <th>작성일</th>
+            <th>신고</th>
+            <th>관리</th>
+          </tr>
+
+          <tr th:if="${#lists.size(togetherList) == 0}">
+            <th colspan="6"> 게시글이 존재하지 않습니다.</th>
+          </tr>
+
+          <tr id="report-table-content" th:each="together : ${togetherList}" th:object="${together}">
+            <td th:text="*{boardNo}">번호</td>
+            <td>
+
+              <a th:href="@{/review/{reviewNo} (boardNo=*{boardNo})}" th:text="*{boardTitle}">게시글 제목</a>
+            </td>
+            <td th:text="*{memberNo}"></td>
+            <td th:text="*{dateCreated}">작성일</td>
+            <td>
+              <a><button>상세조회</button></a>
+            </td>
+
+          </tr>
+        </table>
+      </section>
+
+
+
+
+    </section>
+
+  </main>
+
+  <th:block th:replace="~{common/footer}"></th:block>
+
+
+</body>
+
+</html>

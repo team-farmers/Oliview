@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(rollbackFor = Exception.class)
+@Transactional
 @PropertySource("classpath:/config.properties")
 public class EditReviewServiceImpl implements EditReviewService {
 
