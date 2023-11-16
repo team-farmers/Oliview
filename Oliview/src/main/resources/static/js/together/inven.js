@@ -12,6 +12,8 @@ if(insertBtn != null){
 
 /* 검색창에 이전 검색 기록 남겨두기 */
 const searchQuery = document.getElementById("searchQuery");
+const options = document.querySelectorAll("#searchKey > option");
+
 
 // 즉시 실행 함수 (해석되자 마자 실행되는 함수, 속도가 빠름)
 (()=>{
