@@ -27,7 +27,6 @@ public interface AdminMapper {
 
 	List<Review> reviewReportList();
 
-	Member reviewReportInfo(int reviewNo);
 
 	List<Together> togetherList();
 

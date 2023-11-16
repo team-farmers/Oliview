@@ -39,12 +39,12 @@
       <section id="report-index-container">
         <table id="report-table">
           <tr id="report-table-row">
-            <th>게시판 번호</th>
+            <th>게시글 번호</th>
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
             <th>신고 누적 횟수</th>
-            <th>관리</th>
+            <th>게시글 관리</th>
           </tr>
 
           <tr th:if="${#lists.size(reviewReportList) == 0}">
@@ -60,14 +60,20 @@
             <td th:text="*{memberNickname}">작성자</td>
             <td th:text="*{writeDate}">작성일</td>
             <td></td>
-              <td>
-                <th:block th:if="*{reviewDelFl == 'N'}">
-                  <button id="delBtn">삭제하기</button>
-                </th:block>
-                <th:block th:if="*{reviewDelFl == 'Y'}">
-                  <button id="returnBtn">복구하기</button>
-                </th:block>
-              </td>
+            <td>
+                <form action="reviewadmin" method="POST" style="display:inline">
+                  <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
+
+                  <th:block th:if="*{reviewDelFl == 'N'}">
+                    <span>게시중</span>
+                    <button th:if="*{reviewDelFl == 'N'}">삭제</button>
+                  </th:block>
+                  <th:block>
+                    <span>삭제됨</span>
+                    <button th:if="*{reviewDelFl == 'Y'}">복구</button>
+                  </th:block>
+                </form>
+            </td>
           </tr>
         </table>
       </section>

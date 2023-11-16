@@ -14,8 +14,8 @@ public interface ReportMapper {
 
 	Review report(int reviewNo);
 
-//	Together tReport(int boardNo);
-//
+	Together tReport(int boardNo);
+
 //	int insertTReport(TogetherReport report);
 
 

@@ -60,6 +60,19 @@ public class AdminController {
 	}
 
 	// 관리자 권한 변경
+	@PostMapping("admin")
+	public String admin(int memberNo,RedirectAttributes ra) {
+		
+		int result = service.admin(memberNo);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "권한을 관리자로 변경했습니다");
+		} else {
+			ra.addFlashAttribute("message", "권한을 관리자로 변경하지 못했습니다.");
+		}
+		
+		return "redirect:memberInfo";
+	}
 
 	@PostMapping("user")
 	public String user(int memberNo,RedirectAttributes ra) {
@@ -67,39 +80,9 @@ public class AdminController {
 		int result = service.user(memberNo);
 
 		if (result > 0) {
-			ra.addFlashAttribute("message", "권한 변경을 성공했습니다.");
+			ra.addFlashAttribute("message", "권한을 일반 사용자로 변경했습니다.");
 		} else {
-			ra.addFlashAttribute("message", "권한 변경을 실패했습니다.");
-		}
-
-		return "redirect:memberInfo";
-	}
-
-	@PostMapping("admin")
-	public String admin(int memberNo,RedirectAttributes ra) {
-		
-		int result = service.admin(memberNo);
-		
-		if (result > 0) {
-			ra.addFlashAttribute("message", "권한 변경을 성공했습니다.");
-		} else {
-			ra.addFlashAttribute("message", "권한 변경을 실패했습니다.");
-		}
-		
-		return "redirect:memberInfo";
-	}
-	
-	// 회원 복구
-
-	@PostMapping("restoration")
-	public String restoration(int memberNo, RedirectAttributes ra) {
-
-		int result = service.restoration(memberNo);
-
-		if (result > 0) {
-			ra.addFlashAttribute("message", "회원 복구 처리가  되었습니다.");
-		} else {
-			ra.addFlashAttribute("message", "회원 복구 처리가  실패했습니다.");
+			ra.addFlashAttribute("message", "권한을 일반 사용자로 변경하지 못했습니다.");
 		}
 
 		return "redirect:memberInfo";
@@ -107,20 +90,35 @@ public class AdminController {
 
 	// 회원 탈퇴
 	@PostMapping("quit")
-	public String quit(int memberNo, String memberEmail, RedirectAttributes ra) {
-
+	public String quit(int memberNo, RedirectAttributes ra) {
+		
 		int result = service.quit(memberNo);
-
+		
 		if (result > 0) {
-			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었습니다.");
+			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었	습니다.");
 		} else {
 			ra.addFlashAttribute("message", "회원 탈퇴 처리가 실패했습니다.");
+		}
+		
+		return "redirect:memberInfo";
+	}
+	
+	// 회원 복구
+	@PostMapping("restoration")
+	public String restoration(int memberNo, RedirectAttributes ra) {
+
+		int result = service.restoration(memberNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "회원 복구 처리가 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "회원 복구 처리가 실패했습니다.");
 		}
 
 		return "redirect:memberList";
 	}
 
-
+// ************************************************************************************************************
 
 	@GetMapping("reviewList")
 	public String selectALL( Model model, RedirectAttributes ra) {
@@ -133,7 +131,7 @@ public class AdminController {
 	}
 	
 
-	@PostMapping("delete")
+	@PostMapping("reviewadmin")
 	public String deleteReview(int reviewNo, RedirectAttributes ra) {
 		
 		int result = service.delete(reviewNo);
@@ -147,23 +145,8 @@ public class AdminController {
 		return "redirect:reviewReportList";
 	}
 	
-	@GetMapping("reviewReportInfo")
-	public String reviewReportInfo(int reviewNo, Model model, RedirectAttributes ra) {
+	
 
-		Member reviewReportInfo = service.reviewReportInfo(reviewNo);
-
-		String path = null;
-
-		if (reviewReportInfo != null) {
-			model.addAttribute("reviewReportInfo", reviewReportInfo);
-			path = "admin/reviewReportInfo";
-		} else {
-			path = "redirect:reviewList";
-		}
-
-		return path;
-
-	}
 
 	@GetMapping("togetherList")
 	public String togetherList(Model model, RedirectAttributes ra) {

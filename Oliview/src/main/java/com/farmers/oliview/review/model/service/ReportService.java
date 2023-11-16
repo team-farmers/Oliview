@@ -13,7 +13,7 @@ public interface ReportService {
 	Review report(int reviewNo);
 
 	Together tReport(int boardNo);
-//
+
 //	int insertTReport(TogetherReport report);
 
 

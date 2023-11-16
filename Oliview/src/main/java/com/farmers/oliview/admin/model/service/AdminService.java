@@ -24,17 +24,13 @@ public interface AdminService {
 
 	List<Review> reviewReportList();
 
-	Member reviewReportInfo(int reviewNo);
-
 	List<Together> togetherList();
 
 	int user(int memberNo);
 
 	int admin(int memberNo);
 	
-	
 
-//	int changeDelFl(int reviewNo);
 
 
 
