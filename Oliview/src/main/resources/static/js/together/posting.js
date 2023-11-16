@@ -1,10 +1,10 @@
 // 미리보기 관련 요소 모두 얻어오기
 
 // img 
-const preview = document.querySelector(".preview");
+const preview = document.getElementsByClassName("preview")[0];
 
 // input type="file"
-let inputImage = document.querySelector("#img1");
+let imageInput = document.querySelector("#img");
 
 // x버튼
 const deleteImage = document.querySelector(".delete_image");
@@ -14,17 +14,11 @@ let backupInput;
 
 
 /* 이미지 선택 시 수행할 함수 */
-const changeImageFn = (event) => {
+const changeImageFn = e => {
+  const uploadFile = e.target.files[0];
 
-  const imageInput =event.target;
   // imageInput : 파일이 선택/취소된 input 태그
   // order : input 태그 순서(썸네일 0, 나머지 1~4)
-
-  // 업로드 파일 최대 크기(5MB)
-  const maxSize = 1024 * 1024 * 5;
-
-  // 업로드한 파일 정보가 담긴 객체
-  const uploadFile = imageInput.files[0];
 
 
   // ---------- 파일을 한 번 선택한 후 취소했을 때 ----------
@@ -50,7 +44,7 @@ const changeImageFn = (event) => {
 
 
   // ---------- 선택된 파일의 크기가 지정된 크기를 초과하는 경우 ----------
-  
+  const maxSize = 1024 * 1024 * 5;
 
   if(uploadFile.size > maxSize){
     alert("5MB 이하의 이미지를 선택 해주세요");
@@ -64,8 +58,8 @@ const changeImageFn = (event) => {
       imageInput = temp; // temp를 imageInput 변수에 대입
 
       // 복제본은 이벤트가 복제 안되니까 다시 이벤트를 추가
-      imageInput.addEventListener("change",
-        changeImageFn);
+      imageInput.addEventListener("change", () =>{
+        changeImageFn});
     return;
   }
 
@@ -74,37 +68,39 @@ const changeImageFn = (event) => {
 
   const reader = new FileReader();
 
-  reader.readAsDataURL(uploadFile)
+  reader.readAsDataURL(uploadFile);
+
 
   reader.onload = (e) => {
 
-    preview.setAttribute("src", e.target.result);
+
+    preview.setAttribute("src", reader.result);
     
 
     // 파일이 추가된 input을 backup 해두기
     backupInput = imageInput.cloneNode(true);
+  };
+
+}
 
 
-};
+/* 이미지 선택 버튼을 클릭하여 선택된 파일이 변햇을 때 함수 수행 */
 
-};
+imageInput.addEventListener("change", changeImageFn);
 
+/* x버튼 클릭 시 */
+deleteImage.addEventListener('click', () => {
 
-inputImage.addEventListener("change", changeImageFn);
+//  document.querySelector("[for='img1']").innerHTML="<span>파일선택</span>";
 
-  /* x버튼 클릭 시 */
-  deleteImage.addEventListener('click', () => {
+  preview.removeAttribute("src")
+  imageInput.value= "";
 
-   document.querySelector("[for='img1']").innerHTML="<span>파일선택</span>";
+  backupInput.value = "";
 
-   preview.removeAttribute("src")
-   imageInput.value= "";
-
-   backupInput.value = "";
-
-   statusCheck = 0;
-   
-  });
+  statusCheck = 0;
+  
+});
 
 //--------------------------------------------------
 
@@ -131,3 +127,13 @@ inputImage.addEventListener("change", changeImageFn);
 
   // });
 
+
+
+
+  document.querySelector("#boardWriteFrm").addEventListener("submit",()=>{
+    
+    if(imageInput==null)  {
+      imageInput.value=0;
+      backupInput.value = 0;
+    }
+  })

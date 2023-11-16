@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>posting</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
+
   <link rel="stylesheet" href="/css/together/posting.css">
   <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
 
@@ -72,7 +75,7 @@
               <span class="delete_image">&times;</span>
             </div>
 
-            <input type="hidden" name="deleteOrder" value="">
+            <input type="hidden" id="deleteOrder" name="deleteOrder" value="">
 
 
             <!-- 내용 -->

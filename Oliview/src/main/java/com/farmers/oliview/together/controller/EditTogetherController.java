@@ -113,7 +113,7 @@ public class EditTogetherController {
 	public String insertBoard(
 			@SessionAttribute("loginMember") Member loginMember,
 			Together together,
-			@RequestParam("img")MultipartFile img,
+			@RequestParam(value="img", required=false) MultipartFile img,
 			RedirectAttributes ra
 
 	) throws IllegalStateException, IOException {

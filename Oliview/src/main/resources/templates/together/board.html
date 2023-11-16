@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>board</title>
+    <th:block th:replace="~{common/common}"></th:block>
+
     <link rel="stylesheet" href="/css/together/board.css">
     <script src="https://kit.fontawesome.com/39f6050202.js" crossorigin="anonymous"></script>
 
@@ -50,8 +52,8 @@
               </div>
 
               <!-- 이미지 -->
-              <div>
-                <img th:src="*{boardImg}">
+              <div t>
+                <img class="boardImg" th:src="*{boardImg}">
               </div>
               
               <!-- 내용 -->
@@ -88,9 +90,7 @@
               </div>
         
             </div>
-          
-           
-          
+                
           </div>
           
 
@@ -98,15 +98,6 @@
 
 
     <th:block th:replace="~{common/footer}"></th:block>
-
-
-
-
-
-
-
-
-
 
 
   </main>

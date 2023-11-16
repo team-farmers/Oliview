@@ -42,8 +42,11 @@ public class EditTogetherServiceImpl implements EditTogetherService {
 	@Override
 	public int insertBoard(Together together, MultipartFile img) throws IllegalStateException, IOException {
 		
-		String rename = Util.fileRename(img.getOriginalFilename());
-		together.setBoardImg(webPath+rename);
+		String rename  = null;
+		if(!img.isEmpty()) {
+			rename = Util.fileRename(img.getOriginalFilename());
+			together.setBoardImg(webPath+rename);
+		}
 				
 		int result = mapper.insertBoard(together);
 		
@@ -51,7 +54,9 @@ public class EditTogetherServiceImpl implements EditTogetherService {
 		if(result == 1) {
 			boardNo = together.getBoardNo();
 			
-			img.transferTo(new File(folderPath + rename));
+			if(!img.isEmpty()) {
+				img.transferTo(new File(folderPath + rename));
+			}
 		}
 			
 		return boardNo;
