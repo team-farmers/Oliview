@@ -44,7 +44,7 @@
               <div class="info">
                 <dl>
                     <dt>희망인원</dt>
-                    <dd><pre th:text="*{maxPeople}"></pre></dd>
+                    <dd><pre th:text="|*{currentPeople}/*{maxPeople}|">6</pre></dd>
                 </dl>
                 <dt>글 작성일</dt>
                 <dd><pre th:text="*{dateCreated}"></pre></dd>S
@@ -85,7 +85,7 @@
                 <button class="deleteBtn2" id="deleteBtn2">삭제하기</button>
               </div>
             
-              <div class="btn-5" th:if="${session.loginMember != null and session.loginMember.memberNo != together.memberNo}">
+              <div class="btn-5" th:if="${session.loginMember != null}">
                 <a th:href="@{/chatting/talk/{boardNo}(boardNo=${boardNo})}"><button class="deleteBtn" id="deleteBtn">참여하기</button></a>
               </div>
         

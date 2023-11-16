@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.farmers.oliview.chatting.model.service.ChattingService;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.together.dto.Together;
 import com.farmers.oliview.together.service.EditTogetherService;
@@ -33,6 +34,7 @@ public class EditTogetherController {
 
 	private final EditTogetherService service;
 	private final TogetherService togetherservice;
+	private final ChattingService chattingService;
 	
 	/**
 	 * 게시글 삭제
@@ -126,6 +128,14 @@ public class EditTogetherController {
 	
 
 		if (boardNo > 0) {
+			
+			Map<String, Integer> map = new HashMap<>();
+			map.put("chattingNo", boardNo); // 게시글번호 -> 채팅방번호로 입력
+			map.put("openMemberNo", loginMember.getMemberNo()); // 채팅방오픈회원 -> 같이먹어요 게시글 작성 회원
+			map.put("loginMemberNo", loginMember.getMemberNo()); //채팅방참여회원 -> 현재 로그인한 회원번호
+			
+			// 채팅룸 생성
+			int chattingNo = chattingService.createChattingRoom(map);
 			
 			ra.addFlashAttribute("message", "게시글 작성 성공");
 			return String.format("redirect:/together/%d", boardNo);
