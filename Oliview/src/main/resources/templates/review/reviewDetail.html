@@ -103,7 +103,7 @@
           <span class="hits-text"><i class="fa-solid fa-eye" style="color: #d9d9d9;"></i></span>
           <span class="hits" th:text="*{readCount}">조회수</span>
         </section>
-        <section class="foot-2">
+        <section class="foot-2" th:if="${session.loginMember != null and session.loginMember.memberNo != review.memberNo}">
           <button class="reportBtn"><a onclick="openReportPopup()">
             <i class="fa-solid fa-triangle-exclamation"></i> 신고하기</a></button>
         </section>
