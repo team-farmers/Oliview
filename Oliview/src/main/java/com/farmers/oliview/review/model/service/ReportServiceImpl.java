@@ -28,10 +28,10 @@ public class ReportServiceImpl implements ReportService {
 		return mapper.insertReport(report);
 	}
 	
-//	@Override
-//	public Together tReport(int boardNo) {
-//		return mapper.tReport(boardNo);
-//	}
+	@Override
+	public Together tReport(int boardNo) {
+		return mapper.tReport(boardNo);
+	}
 //	
 //	@Override
 //	public int insertTReport(TogetherReport report) {
