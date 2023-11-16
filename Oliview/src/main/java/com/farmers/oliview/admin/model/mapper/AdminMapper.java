@@ -13,8 +13,6 @@ public interface AdminMapper {
 	// 회원 목록 조회
 	List<Member> memberList();
 
-	// 회원 권한 변경
-	int changeAuthority(int memberNo);
 
 	// 회원 탈퇴 복구
 	int restoration(int memberNo);
@@ -32,6 +30,12 @@ public interface AdminMapper {
 	Member reviewReportInfo(int reviewNo);
 
 	List<Together> togetherList();
+
+	int user(int memberNo);
+
+	int admin(int memberNo);
+
+//	int changeDelFl(int reviewNo);
 
  
 

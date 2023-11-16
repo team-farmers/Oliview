@@ -33,8 +33,16 @@
 		STAR_AMOUNT = #{starAmount},
 		STAR_CLEAN = #{starClean},
 		REVIEW_ONELINE =#{reviewOneLine},
-		REVIEW_IMG = #{reviewImg},
 		REVIEW_MENU = #{reviewMenu}
+		<if test='reviewImg == "-1"'>
+			,REVIEW_IMG = NULL
+		</if>
+		
+		<!-- 이미지 변경 -->
+		<if test='reviewImg != null'>
+			,REVIEW_IMG = #{reviewImg}
+		</if>
+		
 		WHERE REVIEW_NO = #{reviewNo}
 	</update>
 

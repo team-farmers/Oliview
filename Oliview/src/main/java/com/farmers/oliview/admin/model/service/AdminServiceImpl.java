@@ -27,8 +27,8 @@ public class AdminServiceImpl implements AdminService {
 
 	// 권한 변경
 	@Override
-	public int changeAuthority(int memberNo) {
-		return mapper.changeAuthority(memberNo);
+	public int user(int memberNo) {
+		return mapper.user(memberNo);
 	}
 
 	// 회원 복구
@@ -67,4 +67,10 @@ public class AdminServiceImpl implements AdminService {
 	public List<Together> togetherList() {
 		return mapper.togetherList();
 	}
+	
+	@Override
+	public int admin(int memberNo) {
+		return mapper.admin(memberNo);
+	}
+
 }

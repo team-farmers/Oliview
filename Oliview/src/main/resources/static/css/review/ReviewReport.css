@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    margin: 2rem;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+header {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.report-info {
+    margin-top: 1rem;
+}
+
+.report-info div {
+    margin-bottom: 1rem;
+}
+
+.report-info section {
+    font-weight: bold;
+}
+
+.report-button {
+    margin-top: 1rem;
+}
+
+.report-button ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.report-button li {
+    margin-bottom: 0.5rem;
+}
+
+.report-comment {
+    margin-top: 1rem;
+}
+
+textarea {
+    width: 100%;
+}
+
+.submit {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0.3rem;
+}
+
+button:hover {
+    background-color: #45a049;
+}

@@ -12,11 +12,29 @@
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
-        <th:block th:replace="~{admin/adminSideMenu}"></th:block>
-        
+
+        <section id="navigation-container">
+            <nav>
+                <ul id="page-change-container">
+                    <li>
+                        <a th:href="@{/admin/memberList}">회원 관리</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
         <section class="conatiner">
 
-            <p>회원 목록</p>
+            <p id="list">회원 목록</p>
 
             <section id="member-index-container">
                 <table id="member-table">
@@ -36,7 +54,6 @@
                     <tr id="member-table-content" th:each="member : ${memberList}" th:object="${member}">
                         <td th:text="*{memberNo}">회원번호</td>
                         <td>
-
                             <a th:href="@{/admin/memberInfo(memberNo=*{memberNo})}" th:text="*{memberId}"></a>
                         </td>
                         <td th:text="*{memberNickname}">닉네임</td>
@@ -49,9 +66,6 @@
                     </tr>
                 </table>
             </section>
-
-
-
 
         </section>
 

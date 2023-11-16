@@ -83,20 +83,29 @@
             <label for="menu" class="title" id="menu">내가 먹은 메뉴: </label>
             <input type="text" th:value="*{reviewMenu}" class="textbox" id="input-menu" name="reviewMenu">
           </div>
-
-          <!-- 이미지 -->
-          <div id="image-area">
-            <p class="title" id="image-text">이미지 첨부: </p>
-            <p id="image-title">이미지 파일 이름</p>
-            <label for="image"><div class="btn-upload">수정하기</div></label>
-            <input type="file" id="image" accept="image/*" name="inputImg">
-          </div>
-
+          
           <!-- 한줄평 -->
           <div id="comment-area">
             <label for="comment" class="title" id="comment">한줄평: </label>
             <textarea id="writeReview" th:text="*{reviewOneLine}" name="reviewOneLine"></textarea>
           </div>
+
+          
+          <!-- 이미지 -->
+          <div id="image-area">
+            <sapn class="title" id="image-text">이미지 첨부: </sapn>
+            <div class="boardImg" th:src="*{reviewImg}">
+              <label for="img1">
+                <img class="preview">
+              </label>
+              <input type="file" name="inputImage" class="inputImage" id="img1" accept="image/*">
+              <span class="delete-image">&times;</span>
+            </div>
+          </div>
+
+
+
+
       </section>
 
 
