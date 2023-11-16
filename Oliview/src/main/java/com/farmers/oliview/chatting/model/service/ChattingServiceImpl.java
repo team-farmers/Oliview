@@ -89,6 +89,9 @@ public class ChattingServiceImpl implements ChattingService{
 	}
 	
 	
+	/** 채팅 메세지 DB 입력
+	 *
+	 */
 	@Override
 	public int insertMessage(Message msg) {
 		return mapper.insertMessage(msg);

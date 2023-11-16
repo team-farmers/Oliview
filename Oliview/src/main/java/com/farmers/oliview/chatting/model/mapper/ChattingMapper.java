@@ -49,6 +49,10 @@ public interface ChattingMapper {
 	 */
 	List<Message> selectMessageList(int parseInt);
 
+	/** 메세지 DB 입력
+	 * @param msg
+	 * @return
+	 */
 	int insertMessage(Message msg);
 
 	/** 채팅 참여하는 같이먹어요 게시글 정보 조회
