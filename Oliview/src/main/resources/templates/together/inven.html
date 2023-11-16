@@ -33,7 +33,7 @@
           <div class="top">
             <div class="num">번호</div>
             <div class="title">제목</div>
-            <div class="people">참여인원</div>
+            <div class="people">희망인원</div>
             <div class="writer">작성자</div>
             <div class="date">작성일</div>
             <div class="count">조회</div>
@@ -44,7 +44,7 @@
             <div class="num" th:text = "${board.boardNo}"></div>
             <div class="title"><a th:href="@{/together/{boardNo}(boardNo=${board.boardNo},cp=${pagination.currentPage}, key= ${param.key}, query=${param.query})}" 
                th:text = "${board.boardTitle}"></a></div>
-            <div class="people" th:text = "${board.numberPeople}">0/100</div>
+            <div class="people" th:text = "${board.maxPeople}">0/100</div>
             <div class="writer"  th:text = "${board.memberNickname}">파이리</div>
             <div class="date"  th:text = "${board.dateCreated}">2021.1.15</div>
             <div class="count"  th:text = "${board.readCount}">33</div>
