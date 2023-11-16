@@ -78,7 +78,7 @@ public class ReportController {
 	
 //	// 리뷰 게시판 신고하기
 //	@PostMapping("togetherReport")
-//	public String togetherReport(RedirectAttributes ra, TogetherReport report,
+//	public String togetherReport(RedirectAttributes ra, TogetherReport report, Model model,
 //			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
 //		
 //		

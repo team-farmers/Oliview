@@ -71,17 +71,17 @@
                         <th:block th:if="*{memberDelFl == 'N'}">활동</th:block>
                         <th:block th:if="*{memberDelFl == 'Y'}">탈퇴</th:block>
     
-                        <th:block th:unless="*{memberDelFl == 'Y'}">
+                        <th:block th:if="*{memberDelFl == 'N'}">
                             <form action="quit" method="POST" style="display:inline">
                                 <input type="hidden" th:value="*{memberNo}" name="memberNo">
                                 <button>탈퇴</button>
                             </form>
                         </th:block>
     
-                        <th:block th:if="*{memberDelFl == 'Y'}">
-    
+                        <th:block th:unless="*{memberDelFl == 'N'}">
                             <form action="restoration" method="POST" style="display:inline">
                                 <input type="hidden" th:value="*{memberNo}" name="memberNo">
+                                <span>삭제됨</span>
                                 <button>복구</button>
                             </form>
     

@@ -24,7 +24,8 @@
 
 <!--	<insert id="insertTReport" parameterType="togetherReport">
 		INSERT INTO "TOGETHER_REPORT"
-		VALUES (SEQ_TOGETHER_REPORT.NEXTVAL, #{tReportContent}, DEFAULT, #{boardNo})
+		VALUES (SEQ_TOGETHER_REPORT.NEXTVAL, #{tReportContent}, DEFAULT,
+		#{boardNo})
 	</insert>-->
 
 

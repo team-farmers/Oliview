@@ -58,10 +58,7 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.delete(reviewNo);
 	}
 
-	@Override
-	public Member reviewReportInfo(int reviewNo) {
-		return mapper.reviewReportInfo(reviewNo);
-	}
+	
 
 	@Override
 	public List<Together> togetherList() {
@@ -72,5 +69,6 @@ public class AdminServiceImpl implements AdminService {
 	public int admin(int memberNo) {
 		return mapper.admin(memberNo);
 	}
+
 
 }

@@ -54,8 +54,7 @@
           <tr id="report-table-content" th:each="together : ${togetherList}" th:object="${together}">
             <td th:text="*{boardNo}">번호</td>
             <td>
-
-              <a th:href="@{/review/{reviewNo} (boardNo=*{boardNo})}" th:text="*{boardTitle}">게시글 제목</a>
+              <a th:href="@{/together/{boardNo}(boardNo=${board.boardNo},cp=${pagination.currentPage}, key= ${param.key}, query=${param.query})}" th:text="*{boardTitle}">게시글 제목</a>
             </td>
             <td th:text="*{memberNo}"></td>
             <td th:text="*{dateCreated}">작성일</td>
