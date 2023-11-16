@@ -64,37 +64,30 @@ let backupInput;
 
 /* 이미지 선택 시 수행할 함수 */
 const changeImageFn = () => {
-  // 업로드 파일 최대 크기(10MB)
+  
   const maxSize = 1024 * 1024 * 5
   const uploadFile = inputImage.files[0];
 
-  // 파일을 선택한 후 취소했을 때
   if (uploadFile === undefined) {
     console.log("파일 선택이 취소됨");
 
-    // 1) 백업한 요소를 복제
     const temp = backupInput.cloneNode(true);
 
-    // 2) 화면에 원본 input을 temp로 바꾸기
     inputImage.after(temp);
     inputImage.remove();
     inputImage = temp;
 
-    // 복제본은 이벤트가 복제 안되니까 다시 이벤트를 추가
     inputImage.addEventListener("change", changeImageFn);
 
     return;
   }
 
-  // 선택된 파일의 크기가 지정된 크기를 초과하는 경우
   if (uploadFile.size > maxSize) {
-    alert("10MB 이하의 이미지를 선택해주세요");
-
-    // 추가한 경우
+    alert("5MB 이하의 이미지를 선택해주세요");
+   
     if (backupInput === undefined) {
-      inputImage.value = ''; // 선택된 파일을 제거
+      inputImage.value = ''; 
     } else {
-      // 1) 백업한 요소를 복제
       const temp = backupInput.cloneNode(true);
 
       // 2) 화면에 원본 input을 temp로 바꾸기

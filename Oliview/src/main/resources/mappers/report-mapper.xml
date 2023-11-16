@@ -2,17 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 연결할 인터페이스의 패키지명.인터페이스명을 작성 -->
 <mapper namespace="com.farmers.oliview.review.model.mapper.ReportMapper">
-<!--
+
 	<select id="report" resultType="Review">
-		SELECT REVIEW_TITLE, MEMBER_NICKNAME
+		SELECT REVIEW_NO, REVIEW_TITLE, MEMBER_NICKNAME
 		FROM "REVIEW"
 		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE REVIEW_NO = #{reviewNo}
 	</select>
 
-<insert id="insertReport" parameterType="ReviewReport">
-    INSERT INTO "REVIEW_REPORT" ("reportNo", "reportContent", "reportAccrue", "reviewNo", "reportDelFl")
-    VALUES (SEQ_REPORT_NO.NEXTVAL, #{reportContent}, DEFAULT, #{reviewNo}, DEFAULT)
-</insert>
--->
+	<insert id="insertReport" parameterType="ReviewReport">
+		INSERT INTO "REVIEW_REPORT"
+		VALUES (SEQ_REPORT_NO.NEXTVAL, #{reportContent}, DEFAULT, #{reviewNo})
+	</insert>
+
+	<select id="tReport" resultType="Together">
+		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME
+		FROM "TOGETHER"
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+
+<!--	<insert id="insertTReport" parameterType="togetherReport">
+		INSERT INTO "TOGETHER_REPORT"
+		VALUES (SEQ_TOGETHER_REPORT.NEXTVAL, #{tReportContent}, DEFAULT, #{boardNo})
+	</insert>-->
+
+
 </mapper>

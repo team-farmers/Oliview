@@ -52,7 +52,7 @@ public class EditReviewServiceImpl implements EditReviewService {
 	@Override
 	public int updateReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
 		
-		
+		String backup = review.getReviewImg();
 
 		String rename = null;
 		if (img.getSize() > 0) {
@@ -67,6 +67,8 @@ public class EditReviewServiceImpl implements EditReviewService {
 
 		if (img.getSize() > 0) { 
 			img.transferTo(new File(folderPath + rename));
+		} else {
+			review.setReviewImg(backup);
 		}
 
 		return result;

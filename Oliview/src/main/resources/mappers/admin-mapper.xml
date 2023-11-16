@@ -11,9 +11,15 @@
 		ORDER BY MEMBER_NO DESC
 	</select>
 
-	<update id="changeAuthority">
+	<update id="user">
 		UPDATE "MEMBER" SET
-		AUTHORITY = DECODE(AUTHORITY, 'N', 'Y', 'Y', 'N')
+		AUTHORITY = 'N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<update id="admin">
+		UPDATE "MEMBER" SET
+		AUTHORITY = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 
@@ -54,8 +60,7 @@
 
 	<select id="reviewReportList" resultType="Review">
 		SELECT REVIEW_NO, REVIEW_TITLE, MEMBER_NICKNAME,
-		TO_CHAR(WRITE_DATE , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
-		WRITE_DATE
+		TO_CHAR(WRITE_DATE , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') WRITE_DATE,
 		FROM REVIEW
 		JOIN "MEMBER" USING (MEMBER_NO)
 		ORDER BY REVIEW_NO
@@ -70,17 +75,11 @@
 		ORDER BY BOARD_NO
 	</select>
 
-	<update id="deletReview">
+<!--	<update id="changeAuthority">
 		UPDATE "REVIEW" SET
-		REVIEW_DEL_FL = 'Y'
+		REVIEW_DEL_FL = DECODE(REVIEW_DEL_FL, 'N', 'Y', 'Y', 'N')
 		WHERE REVIEW_NO = #{reviewNo}
-	</update>
-
-	<update id="returnReview">
-		UPDATE "REVIEW" SET
-		REVIEW_DEL_FL = 'N'
-		WHERE REVIEW_NO = #{reviewNo}
-	</update>
+	</update>-->
 
 
 </mapper>

@@ -11,9 +11,6 @@ public interface AdminService {
 	// 회원 목록조회
 	List<Member> memberList();
 
-	// 관리자 권한 변경
-	int changeAuthority(int memberNo);
-
 	// 회원 복구
 	int restoration(int memberNo);
 
@@ -31,9 +28,14 @@ public interface AdminService {
 
 	List<Together> togetherList();
 
-	int deletReview(int reviewNo);
+	int user(int memberNo);
 
-	int returnReview(int reviewNo);
+	int admin(int memberNo);
+	
+	
+
+//	int changeDelFl(int reviewNo);
+
 
 
 

@@ -133,6 +133,8 @@ if (inputImage != null) {
 
         // 파일을 다 읽은 후
         reader.onload = e => {
+            console.log(reader.result);                // 읽은 파일의 URL
+
             preview.setAttribute("src", reader.result);
             backupInput = inputImage.cloneNode(true);
         }
@@ -153,7 +155,6 @@ if (inputImage != null) {
 
         backupInput.value = "";
 
-        statusCheck = 0;
     });
 
 }
@@ -229,7 +230,6 @@ reviewWriteFrm.addEventListener("submit", e => {
     if (inputImage.files.length == 0) {
         e.preventDefault();
         alert("이미지를 첨부해주세요");
-        menu.focus();
         return;
     }
 

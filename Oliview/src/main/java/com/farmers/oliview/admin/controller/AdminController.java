@@ -61,10 +61,10 @@ public class AdminController {
 
 	// 관리자 권한 변경
 
-	@PostMapping("changeAuthority")
-	public String changeAuthority(int memberNo, String memberEmail, RedirectAttributes ra) {
+	@PostMapping("user")
+	public String user(int memberNo,RedirectAttributes ra) {
 
-		int result = service.changeAuthority(memberNo);
+		int result = service.user(memberNo);
 
 		if (result > 0) {
 			ra.addFlashAttribute("message", "권한 변경을 성공했습니다.");
@@ -75,6 +75,20 @@ public class AdminController {
 		return "redirect:memberInfo";
 	}
 
+	@PostMapping("admin")
+	public String admin(int memberNo,RedirectAttributes ra) {
+		
+		int result = service.admin(memberNo);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "권한 변경을 성공했습니다.");
+		} else {
+			ra.addFlashAttribute("message", "권한 변경을 실패했습니다.");
+		}
+		
+		return "redirect:memberInfo";
+	}
+	
 	// 회원 복구
 
 	@PostMapping("restoration")
@@ -88,7 +102,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "회원 복구 처리가  실패했습니다.");
 		}
 
-		return "redirect:memberList";
+		return "redirect:memberInfo";
 	}
 
 	// 회원 탈퇴
@@ -120,7 +134,7 @@ public class AdminController {
 	
 
 	@PostMapping("delete")
-	public String deleteReview(int reviewNo,RedirectAttributes ra) {
+	public String deleteReview(int reviewNo, RedirectAttributes ra) {
 		
 		int result = service.delete(reviewNo);
 
@@ -161,37 +175,20 @@ public class AdminController {
 		return "admin/togetherList";
 	}
 	
+//	@PostMapping("changeDelFl")
+//	public String changeDelFl(int reviewNo, RedirectAttributes ra) {
+//
+//		int result = service.changeDelFl(reviewNo);
+//
+//		if (result > 0) {
+//			ra.addFlashAttribute("message", "게시글 상태 변경을 성공했습니다.");
+//		} else {
+//			ra.addFlashAttribute("message", "게시글 상태 변경을 실패했습니다.");
+//		}
+//
+//		return "redirect:reviewList";
+//	}
 
-
-	@PostMapping("deletReview")
-	public String deletReview(int reviewNo, RedirectAttributes ra) {
-
-		int result = service.deletReview(reviewNo);
-
-		if (result > 0) {
-			ra.addFlashAttribute("message", "게시글을 삭제했습니다.");
-		} else {
-			ra.addFlashAttribute("message", "게시글 삭제를 실패했습니다.");
-		}
-
-		return "redirect:reviewList";
-	}
-
-	// 회원 복구
-
-	@PostMapping("returnReview")
-	public String returnReview(int reviewNo, RedirectAttributes ra) {
-
-		int result = service.returnReview(reviewNo);
-
-		if (result > 0) {
-			ra.addFlashAttribute("message", "게시글 복구 처리가 완료 되었습니다.");
-		} else {
-			ra.addFlashAttribute("message", "게시글 복구 처리에  실패했습니다.");
-		}
-
-		return "redirect:reviewList";
-	}
 	
 	
 	

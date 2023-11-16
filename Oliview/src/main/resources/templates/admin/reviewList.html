@@ -43,7 +43,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>신고</th>
+            <th>신고 누적 횟수</th>
             <th>관리</th>
           </tr>
 
@@ -60,21 +60,14 @@
             <td th:text="*{memberNickname}">작성자</td>
             <td th:text="*{writeDate}">작성일</td>
             <td></td>
-            <td>
-              <th:block th:if="*{reviewDelFl == 'N'}">
-                <form action="deletReview" method="POST" style="display:inline">
+              <td>
+                <th:block th:if="*{reviewDelFl == 'N'}">
                   <button id="delBtn">삭제하기</button>
-                </form>
-              </th:block>
-              <th:block th:if="*{reviewDelFl != 'N'}">
-                <form action="returnReview" method="POST" style="display:inline">
+                </th:block>
+                <th:block th:if="*{reviewDelFl == 'Y'}">
                   <button id="returnBtn">복구하기</button>
-                </form>
-
-              </th:block>
-
-
-            </td>
+                </th:block>
+              </td>
           </tr>
         </table>
       </section>

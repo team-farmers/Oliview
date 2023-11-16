@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.farmers.oliview.review.model.dto.Review;
 import com.farmers.oliview.review.model.dto.ReviewReport;
 import com.farmers.oliview.review.model.mapper.ReportMapper;
+import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.dto.TogetherReport;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,16 +16,28 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class ReportServiceImpl implements ReportService {
 
-//	private final ReportMapper mapper;
-//
+	private final ReportMapper mapper;
+
+	@Override
+	public Review report(int reviewNo) {
+		return mapper.report(reviewNo);
+	}
+
+	@Override
+	public int insertReport(ReviewReport report) {
+		return mapper.insertReport(report);
+	}
+	
 //	@Override
-//	public Review report(int reviewNo) {
-//		return mapper.report(reviewNo);
+//	public Together tReport(int boardNo) {
+//		return mapper.tReport(boardNo);
 //	}
-//
+//	
 //	@Override
-//	public int insertReport(ReviewReport report) {
-//		return mapper.insertReport(report);
+//	public int insertTReport(TogetherReport report) {
+//		return mapper.insertTReport(report);
 //	}
+	
+	
 
 }
