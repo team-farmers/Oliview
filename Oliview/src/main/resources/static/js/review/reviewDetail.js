@@ -138,7 +138,7 @@ prevBtn.addEventListener("click",() =>{
 
   if(obj.store){
     console.log("존재");
-    location.href = `/review/store/${obj.store}?cp=${obj.cp2}`
+    location.href = `/review/store/${obj.store}?cp2=${obj.cp2}`
     
   }
   else{
