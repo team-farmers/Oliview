@@ -88,7 +88,7 @@ header > #main-header{
   align-items: center;
 
   height: 25rem;
-  padding-top: 8rem;
+  padding-top: 20.5rem;
 }
 
 
@@ -123,7 +123,7 @@ header > #main-header{
 
   font-size: 1.8rem;
   font-weight: 100;
-  color: white;
+  color: var(--main-color);
   
   padding: 1rem 2rem;
   width: 92%;
@@ -131,7 +131,7 @@ header > #main-header{
 }
 
 #query::placeholder{
-  color: white;
+  color: var(--main-color);
 }
 
 
@@ -141,7 +141,7 @@ header > #main-header{
   cursor: pointer;
   border: none;
   background-color: #ffffff00;
-  color: white;
+  color: var(--main-color);
 
   font-size: 2rem;
 }
@@ -456,6 +456,10 @@ footer a {
   text-decoration: none;
   color: white;
   line-height: 5.5rem;
+}
+
+.buttons-fixed a:nth-child(2){
+  margin-bottom: 3rem;
 }
 
 .buttons-fixed{
