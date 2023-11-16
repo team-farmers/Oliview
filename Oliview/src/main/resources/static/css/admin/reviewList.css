@@ -1,5 +1,4 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -9,8 +8,6 @@ main {
   margin: 2rem;
   background-color: #fff;
   padding: 2rem;
-  border-radius: 0.8rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
 header {
@@ -90,12 +87,12 @@ a {
   color: inherit;
 }
 
-#navigation-container {
+#navigation-container {   
   margin-bottom: 5rem;
   background-color: #333;
-}
-
-
+}    
+   
+   
 #page-change-container {
   list-style-type: none;
   padding: 0;

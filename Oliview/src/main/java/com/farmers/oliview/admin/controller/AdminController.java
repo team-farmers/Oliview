@@ -71,7 +71,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "권한을 관리자로 변경하지 못했습니다.");
 		}
 		
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 
 	@PostMapping("user")
@@ -85,7 +85,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "권한을 일반 사용자로 변경하지 못했습니다.");
 		}
 
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 
 	// 회원 탈퇴
@@ -100,7 +100,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "회원 탈퇴 처리가 실패했습니다.");
 		}
 		
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 	
 	// 회원 복구
@@ -139,10 +139,10 @@ public class AdminController {
 		if (result > 0) {
 			ra.addFlashAttribute("message", "게시글이 삭제 되었습니다.");
 		} else {
-			ra.addFlashAttribute("message", "게시글이 삭제 되었습니다.");
+			ra.addFlashAttribute("message", "게시글이 복구 되었습니다.");
 		}
 		
-		return "redirect:reviewReportList";
+		return "redirect:reviewList";
 	}
 	
 	
