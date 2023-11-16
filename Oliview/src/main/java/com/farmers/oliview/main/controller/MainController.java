@@ -50,7 +50,7 @@ public class MainController {
 	@GetMapping("loginError")
 	public String loginError(RedirectAttributes ra) {
 		ra.addFlashAttribute("message", "로그인 후 이용해주세요");
-		return "redirect:/";
+		return "redirect:/member/login";
 	}
 	
 	
