@@ -95,7 +95,7 @@ public class AdminController {
 		int result = service.quit(memberNo);
 		
 		if (result > 0) {
-			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었	습니다.");
+			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었습니다.");
 		} else {
 			ra.addFlashAttribute("message", "회원 탈퇴 처리가 실패했습니다.");
 		}
@@ -148,15 +148,15 @@ public class AdminController {
 	
 
 
-	@GetMapping("togetherList")
-	public String togetherList(Model model, RedirectAttributes ra) {
-
-		List<Together> togetherList = service.togetherList();
-
-		model.addAttribute("togetherList", togetherList);
-
-		return "admin/togetherList";
-	}
+//	@GetMapping("togetherList")
+//	public String togetherList(Model model, RedirectAttributes ra) {
+//
+//		List<Together> togetherList = service.togetherList();
+//
+//		model.addAttribute("togetherList", togetherList);
+//
+//		return "admin/togetherList";
+//	}
 	
 //	@PostMapping("changeDelFl")
 //	public String changeDelFl(int reviewNo, RedirectAttributes ra) {

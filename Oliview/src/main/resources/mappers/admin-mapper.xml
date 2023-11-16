@@ -69,13 +69,13 @@
 	</select>
 
 
-	<select id="togetherList" resultType="Together">
+<!--	<select id="togetherList" resultType="Together">
 		SELECT BOARD_NO, BOARD_TITLE, MEMBER_NO,
 		TO_CHAR(DATE_CREATED , 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
 		DATE_CREATED, BOARD_DEL_FL
 		FROM "TOGETHER"
 		ORDER BY BOARD_NO
-	</select>
+	</select>-->
 
 
 </mapper>
