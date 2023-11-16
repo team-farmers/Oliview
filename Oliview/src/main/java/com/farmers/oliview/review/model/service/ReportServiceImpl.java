@@ -32,11 +32,11 @@ public class ReportServiceImpl implements ReportService {
 	public Together tReport(int boardNo) {
 		return mapper.tReport(boardNo);
 	}
-
-//	@Override
-//	public int insertTReport(TogetherReport report) {
-//		return mapper.insertTReport(report);
-//	}
+	
+	@Override
+	public int insertTReport(TogetherReport report) {
+		return mapper.insertTReport(report);
+	}
 	
 	
 

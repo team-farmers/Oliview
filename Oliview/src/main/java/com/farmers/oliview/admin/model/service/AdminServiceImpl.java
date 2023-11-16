@@ -59,11 +59,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-
-	@Override
-	public List<Together> togetherList() {
-		return mapper.togetherList();
-	}
+//
+//	@Override
+//	public List<Together> togetherList() {
+//		return mapper.togetherList();
+//	}
 	
 	@Override
 	public int admin(int memberNo) {

@@ -71,7 +71,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "권한을 관리자로 변경하지 못했습니다.");
 		}
 		
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 
 	@PostMapping("user")
@@ -85,7 +85,7 @@ public class AdminController {
 			ra.addFlashAttribute("message", "권한을 일반 사용자로 변경하지 못했습니다.");
 		}
 
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 
 	// 회원 탈퇴
@@ -95,12 +95,12 @@ public class AdminController {
 		int result = service.quit(memberNo);
 		
 		if (result > 0) {
-			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었	습니다.");
+			ra.addFlashAttribute("message", "회원 탈퇴 처리가 되었습니다.");
 		} else {
 			ra.addFlashAttribute("message", "회원 탈퇴 처리가 실패했습니다.");
 		}
 		
-		return "redirect:memberInfo";
+		return "redirect:memberList";
 	}
 	
 	// 회원 복구
@@ -139,24 +139,24 @@ public class AdminController {
 		if (result > 0) {
 			ra.addFlashAttribute("message", "게시글이 삭제 되었습니다.");
 		} else {
-			ra.addFlashAttribute("message", "게시글이 삭제 되었습니다.");
+			ra.addFlashAttribute("message", "게시글이 복구 되었습니다.");
 		}
 		
-		return "redirect:reviewReportList";
+		return "redirect:reviewList";
 	}
 	
 	
 
 
-	@GetMapping("togetherList")
-	public String togetherList(Model model, RedirectAttributes ra) {
-
-		List<Together> togetherList = service.togetherList();
-
-		model.addAttribute("togetherList", togetherList);
-
-		return "admin/togetherList";
-	}
+//	@GetMapping("togetherList")
+//	public String togetherList(Model model, RedirectAttributes ra) {
+//
+//		List<Together> togetherList = service.togetherList();
+//
+//		model.addAttribute("togetherList", togetherList);
+//
+//		return "admin/togetherList";
+//	}
 	
 //	@PostMapping("changeDelFl")
 //	public String changeDelFl(int reviewNo, RedirectAttributes ra) {

@@ -22,11 +22,10 @@
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 
-<!--	<insert id="insertTReport" parameterType="togetherReport">
+	<insert id="insertTReport" parameterType="togetherReport">
 		INSERT INTO "TOGETHER_REPORT"
-		VALUES (SEQ_TOGETHER_REPORT.NEXTVAL, #{tReportContent}, DEFAULT,
-		#{boardNo})
-	</insert>-->
+		VALUES (SEQ_T_REPORT_NO.NEXTVAL, #{tReportContent}, DEFAULT, #{boardNo})
+	</insert>
 
 
 </mapper>

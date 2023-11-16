@@ -14,7 +14,7 @@ public interface ReportService {
 
 	Together tReport(int boardNo);
 
-//	int insertTReport(TogetherReport report);
+	int insertTReport(TogetherReport report);
 
 
 

@@ -76,22 +76,22 @@ public class ReportController {
 		return "together/togetherReport";
 	}
 	
-//	// 리뷰 게시판 신고하기
-//	@PostMapping("togetherReport")
-//	public String togetherReport(RedirectAttributes ra, TogetherReport report, Model model,
-//			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
-//		
-//		
-//		int reportNo = service.insertTReport(report);
-//		
-//		if (reportNo > 0) {
-//			ra.addFlashAttribute("message", "게시글 신고가 완료되었습니다.");
-//			return String.format("redirect:/review/%d", report.getBoardNo());
-//		}
-//		
-//		ra.addFlashAttribute("message", "게시글 신고가 실패되었습니다.");
-//		return "redirect:/";
-//		
-//	}
+	// 리뷰 게시판 신고하기
+	@PostMapping("togetherReport")
+	public String togetherReport(RedirectAttributes ra, TogetherReport report, Model model,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
+		
+		
+		int reportNo = service.insertTReport(report);
+		
+		if (reportNo > 0) {
+			ra.addFlashAttribute("message", "게시글 신고가 완료되었습니다.");
+			return String.format("redirect:/together/%d", report.getBoardNo());
+		}
+		
+		ra.addFlashAttribute("message", "게시글 신고가 실패되었습니다.");
+		return "redirect:/";
+		
+	}
 
 }

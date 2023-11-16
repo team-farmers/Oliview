@@ -16,10 +16,7 @@ public interface ReportMapper {
 
 	Together tReport(int boardNo);
 
-
-
-
-//	int insertTReport(TogetherReport report);
+	int insertTReport(TogetherReport report);
 
 
 }

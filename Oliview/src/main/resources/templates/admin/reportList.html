@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신고 게시판</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리</title>
+    <link rel="stylesheet" th:href="@{/css/admin/reviewList.css}">
+    <th:block th:replace="~{common/common}"></th:block>
+  </head>
+
+  <body>
+    <main>
+      <th:block th:replace="~{common/header}"></th:block>
+
+      <section id="navigation-container">
+        <nav>
+          <ul id="page-change-container">
+            <li>
+              <a th:href="@{/admin/memberList}">회원 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/reportList}">신고 게시판</a>
+            </li>
+            <li>
+              <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+
+      <section class="conatiner">
+
+        <p id="list"> 신고 게시판 목록</p>
+
+        <section id="report-index-container">
+          <table id="report-table">
+            <tr id="report-table-row">
+              <th>신고 번호</th>
+              <th>글 제목</th>
+              <th>신고내용</th>
+              <th>관리</th>
+            </tr>
+
+            <tr th:if="${#lists.size(reportList) == 0}">
+              <th colspan="6"> 게시글이 존재하지 않습니다.</th>
+            </tr>
+
+            <tr id="report-table-content" th:each="report : ${reportList}" th:object="${report}">
+              <td th:text="*{reportNo}">번호</td>
+              <td th:text=""></td>
+              <td th:text="*{memberNickname}">작성자</td>
+              <td th:text="*{writeDate}">작성일</td>
+              <td></td>
+              <td>
+                <form action="reviewadmin" method="POST" style="display:inline">
+                  <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
+
+                  <th:block th:if="*{reviewDelFl == 'N'}">
+                    <span>게시중</span>
+                    <button th:if="*{reviewDelFl == 'N'}">삭제</button>
+                  </th:block>
+                  <th:block>
+                    <span>삭제됨</span>
+                    <button th:if="*{reviewDelFl == 'Y'}">복구</button>
+                  </th:block>
+                </form>
+              </td>
+            </tr>
+          </table>
+        </section>
+      </section>
+
+
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+  </body>
+
+  </html>
+
+</body>
+
+</html>
