@@ -4,6 +4,7 @@
 const preview = document.querySelector(".preview"); // img 태그
 let imageInput = document.querySelector("#img1"); // input 태그
 const deleteImage = document.querySelector(".delete_image"); // x 버튼
+const deleteOrder = document.querySelector("#deleteOrder"); // 삭제 여부 저장 input
 
 //input type ="file" 태그의  값이 변경 되었을 때 변경된 상태를 백업해둘 변수
 // 요소.cloneNode(true/false) : 요소복제 (true이면 하위요소도 복제)
@@ -31,9 +32,9 @@ if (imageInput != null) { // #imageInput 존재할 때
           // 2) 화면에 원본 input을 temp로 바꾸기
           imageInput.after(temp); 
           imageInput.remove();
-          
-
           imageInput =temp;
+
+          
           imageInput.addEventListener("change",changeImageFn);
           return;
       }
@@ -101,14 +102,16 @@ if (imageInput != null) { // #imageInput 존재할 때
   // 2) input태그에 value 값을 빈칸으로 변경
   deleteImage.addEventListener('click' , () => {
     
-    document.querySelector("[for='img1']").innerHTML = "<span>파일 선택</span>";
+    // document.querySelector("[for='img1']").innerHTML = "<span>파일 선택</span>";
 
     preview.removeAttribute("src");
     imageInput.value="";
 
-    backupInput.value = "";
+    if(backupInput != undefined){
+      backupInput.value = "";
+    }
 
-    statusCheck = 0; // 있었는데 없어짐
+    deleteOrder.value = 1; // 있었는데 없어짐
   });
 
 }

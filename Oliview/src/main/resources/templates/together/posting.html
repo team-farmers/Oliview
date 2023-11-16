@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>posting</title>
+
+  <th:block th:replace="~{common/common}"></th:block>
    
  
   <link rel="stylesheet" href="/css/together/posting.css">
@@ -17,6 +19,8 @@
   <main>
     <!-- header -->
     <th:block th:replace="~{common/header}"></th:block>
+
+
     <form action="posting" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">
 
 
@@ -60,12 +64,12 @@
             <div class="board_img">
 
               <!-- img 1-->
-              <label for="img1">
-                <img class="preview" th:src="*{boardImg}">
+              <label for="img">
+                <img class="preview" onerror="this.style.display='none'">
                 파일선택
               </label>
               
-              <input type="file" name="img" class="inputImage" id=img1 accept="image/*"  style="display: none;">
+              <input type="file" name="img" class="inputImage" id="img" accept="image/*" >
               <span class="delete_image">&times;</span>
             </div>
             <input type="hidden" name="deleteOrder" value="">
@@ -98,7 +102,7 @@
      
     </form>
   </main>
-  <script src="/js/posting/.js"></script>
+  <script src="/js/together/posting.js"></script>
 </body>
 
 

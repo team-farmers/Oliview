@@ -24,12 +24,12 @@
 		METTING_DATE = TO_DATE(#{mettingDate},'YYYY-MM-DD"T"HH24:MI')
 		
 		<!-- 이미지 삭제 -->
-		<if test='boardImg == "-1"'>
+		<if test='boardImg != null and boardImg == "-1"'>
 			,BOARD_IMG = NULL
 		</if>
 		
 		<!-- 이미지 변경 -->
-		<if test='boardImg != null'>
+		<if test='boardImg != null and boardImg != "-1"'>
 			,BOARD_IMG = #{boardImg}
 		</if>
 		
