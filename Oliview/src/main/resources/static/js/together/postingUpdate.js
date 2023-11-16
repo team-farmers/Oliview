@@ -86,7 +86,7 @@ if (imageInput != null) { // #imageInput 존재할 때
           // 파일이 추가된 input을 backup 해두기
           backupInput = imageInput.cloneNode(true);
 
-      }
+      };
 
   }
 

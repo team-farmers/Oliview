@@ -22,7 +22,8 @@
       <form id="searchReview" action="searchReview">
         <input type="text" class="searchInput" name="searchInput" id="searchInput">
       </form>
-      <button form="searchReview" id="searchReview"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
+      <button class="resetBtn" id="resetBtn"><i class="fa-solid fa-x" style="color: #66b97e;"></i></button>
+      <button class="searchReviewBtn" form="searchReview" id="searchReview"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #66b97e;"></i></button>
     </section>
 
 
@@ -39,7 +40,7 @@
     <!-- 리뷰 목록 영역 -->
 
     <!-- 리뷰 목록이 없을 때 -->
-    <div class="review-full-container-no" th:if="${#lists.size(map.reviewList)} == 0">
+    <div class="review-full-container" th:if="${#lists.size(map.reviewList)} == 0" id="reviewFullNo">
       <section class="result-no">
         <i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>
         검색 결과가 없습니다
@@ -146,8 +147,8 @@
                 <!-- 제목(가게명) -->
                 <div class="reviewRank">
                   <span>#</span>
-                  <section th:text="(${{param.cp}}-1)*8+${stat.index+1}"></section>
-                  <section th:text="*{reviewTitle}">가게이름</section>
+                  <section class="rankNo" th:text="(${{param.cp}}-1)*8+${stat.index+1}">랭킹</section>
+                  <section class="reviewTitle" th:text="*{reviewTitle}">가게이름</section>
                 </div>
         
                 <!-- 평점 -->

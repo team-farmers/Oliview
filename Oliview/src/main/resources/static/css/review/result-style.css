@@ -21,9 +21,20 @@
   color: var(--main-color);
 }
 
+
 input:focus {outline:none;}
 
-.search button{
+.resetBtn{
+  height: 4.5rem;
+  width: 3rem;
+  border: 0.2rem solid var(--main-color);
+  border-style: solid none solid none;
+  background-color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.searchReviewBtn{
   height: 4.5rem;
   width: 5rem;
   border: 0.2rem solid var(--main-color);
@@ -70,9 +81,6 @@ input:focus {outline:none;}
 
 
 /* 리뷰가 존재하지 않을 때 */
-.review-full-container-no{
-  height: 70rem;
-}
 
 .result-no{
   display: flex;
@@ -81,7 +89,7 @@ input:focus {outline:none;}
   justify-content: center;
   font-size: 3rem;
   color: #b6b6b6;
-  height: 50vh;
+  height:30rem;
   border: 0.1rem solid var(--footer-color);
 }
 
@@ -178,7 +186,9 @@ a{
   padding: 0.2rem;
   margin-right: 0.2rem;
 }
-
+.reviewRank> span{
+  padding: 0.2rem 0 0.2rem 0.2rem;
+}
 .star-count{
   padding-left: 1rem;
   display: flex;

@@ -91,24 +91,13 @@ function selectRoomList(){
 
 
 			// 현재 채팅방을 보고있는게 아니고 읽지 않은 개수가 0개 이상인 경우 -> 읽지 않은 메세지 개수 출력
-			if(room.notReadCount > 0 && room.chattingNo != selectChattingNo ){
-			// if(room.chattingNo != selectChattingNo ){
+			if(room.notReadCount > 0 ){
+
 				const notReadCount = document.createElement("p");
 				notReadCount.classList.add("not-read-count");
 				notReadCount.innerText = room.notReadCount;
 				div.append(notReadCount);
 
-			}else{
-				// 현재 채팅방을 보고있는 경우
-				// 비동기로 해당 채팅방 글을 읽음으로 표시 --> 이건 내거에서 필요한가??
-				fetch("/chatting/updateReadFlag",{
-					method : "PUT",
-					headers : {"Content-Type": "application/json"},
-					body : JSON.stringify({"chattingNo" : selectChattingNo, "memberNo" : loginMemberNo})
-				})
-				.then(resp => resp.text())
-				.then(result => console.log(result))
-				.catch(err => console.log(err));
 			}
 			
 			li.append(itemHeader, itemBody);
@@ -153,7 +142,7 @@ function roomListAddEvent(){
 			// 현재 클릭한 채팅방에 select 클래스 추가
 			item.classList.add("select");
 	
-			// 채팅방 목록 클릭 시 채팅룸으로 이동		// 맞는지 확인!! 아마 아닐거거든!^^ 쿼리스트링~~
+			// 채팅방 목록 클릭 시 채팅룸으로 이동
 			location.href='/chatting/talk/' + selectChattingNo;
 		});
 	}
@@ -193,8 +182,8 @@ const sendMessage = () => {
 			"senderNo": loginMemberNo, // 누가
 			"chattingNo": selectChattingNo, // 몇번 채팅방에서
 			"messageContent": inputChatting.value, // 어떤 내용을 보냈다
-			"senderProfile" : loginMember.memberProfile,
-			"senderNickname" : loginMember.memberNickname
+			"senderProfile" : loginMember.memberProfile, // 보낸사람 프로필
+			"senderNickname" : loginMember.memberNickname // 보낸사람 닉네임
 		};
 		console.log(obj)
 
@@ -223,7 +212,6 @@ if(inputChatting != null){
 		}
 	})
 }
-
 
 
 // 서버가 보낸 메세지를 받는 코드
@@ -290,18 +278,6 @@ chattingSock.onmessage = function(e) {
 /* 문서 로딩 완료 후 수행할 기능 */
 document.addEventListener("DOMContentLoaded", ()=>{
 	
-  // 채팅방 입장 시 작동
-  // chattingEnter();
-
-  // 채팅창에 대화 불러오기
-  // selectChattingFn();
-
-  // 채팅방 목록에 클릭 이벤트 추가
-	// roomListAddEvent(); 
-
-	// 보내기 버튼에 이벤트 추가
-	// send.addEventListener("click", sendMessage);
-
 	// 채팅목록 불러오기
 	selectRoomList();
 });
