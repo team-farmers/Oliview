@@ -1123,11 +1123,11 @@ WHERE MEMBER_NO = 5;
 --안읽은 메세지 갯수 테스트
 SELECT COUNT(*) FROM MESSAGE M WHERE M.CHATTING_NO = 168 AND READ_FL = 'N' AND SENDER_NO != 1;
 
-
+SELECT * FROM "MEMBER" m ;
 
 -- 샘플 계정 생성
 INSERT INTO "MEMBER"
-VALUES (SEQ_MEMBER_NO.NEXTVAL, 'mem03', '$2a$10$RrOuvmAv4lsQYmmiE4XihOWr01LgZjZtENyap0qw3YplTnWK04Jkm', 'mem01@naver.com',
+VALUES (SEQ_MEMBER_NO.NEXTVAL, 'mem02', '$2a$10$RrOuvmAv4lsQYmmiE4XihOWr01LgZjZtENyap0qw3YplTnWK04Jkm', 'mem02@naver.com',
 	'김민정', '샘소나이트', 
 	NULL, DEFAULT, DEFAULT, DEFAULT, NULL);
 
