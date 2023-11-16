@@ -1,4 +1,17 @@
 /* ===================================================================== */
+/* 검색어 지우기 */
+
+
+const input = document.getElementById("searchInput");
+const resetBtn = document.getElementById("resetBtn");
+
+resetBtn.addEventListener("click",()=>{
+  input.value="";
+})
+
+
+
+/* ===================================================================== */
 /* 검색창에 이전 검색 기록 남겨두기 */
 const searchInput = document.getElementById("searchInput");
 
@@ -15,10 +28,6 @@ const searchInput = document.getElementById("searchInput");
 
   }
 })();
-
-/* ===================================================================== */
-
-
 
 
 /* ===================================================================== */
@@ -403,8 +412,23 @@ const sortRatingFn = (cp) => {
     reviewFull.innerHTML = "";
     const pagination = document.querySelector(".pagination");
     pagination.innerHTML = "";
-  
-    
+
+    if(map.reviewList.length == 0) {
+
+      const divNo = document.createElement("div");
+      const sectionNo = document.createElement("section");
+
+      divNo.classList.add("review-full-container-no");
+      sectionNo.classList.add("result-no");
+      sectionNo.innerHTML=`<i class="fa-solid fa-circle-xmark" style="color: #66b97e;"></i>검색 결과가 없습니다`;
+
+      sectionNo.append(divNo);
+      reviewFull.append(sectionNo);
+
+      console.log("확인");
+    }
+
+
     /* 리뷰 리스트 가져오기 */
     let i = 0;
     let reviewRow;
@@ -460,7 +484,7 @@ const sortRatingFn = (cp) => {
   
   
       /* 정렬! */
-      divStar.append(sectionStar, spanI, sectionCount)
+      divStar.append(sectionStar, spanI, sectionCount);
       divRank.append(spanRankNo,sectionRankNo, sectionTitle);
       aImg.append(Img);
       reviewArticle.append(aImg, divRank, divStar);
@@ -476,7 +500,9 @@ const sortRatingFn = (cp) => {
     const pg = map.pagination;
 
     // 조회 결과 없을 경우 페이지네이션 생성 X
-    if(map.reviewList.length == 0) return;
+    if(map.reviewList.length == 0) {
+      return;
+    }
 
 
     // 맨 앞(1페이지)

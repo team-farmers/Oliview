@@ -128,7 +128,7 @@ public class ReviewController {
 	 */
 	@GetMapping("store/{reviewTitle}")
 	public String reviewStore(@PathVariable("reviewTitle") String reviewTitle, 
-			@RequestParam(value="cp", required = false, defaultValue="1") int cp, 
+			@RequestParam(value="cp2", required = false, defaultValue="1") int cp, 
 			Model model, RedirectAttributes ra) {
 		
 		Map<String, Object> reviewMap = service.ratingResult(reviewTitle, cp);
@@ -137,6 +137,12 @@ public class ReviewController {
 		return "review/rating-result";
 		
 	}
+	
+	/*
+	 * +) 추가적으로 생각해보기/ 평점순 조회 시 평점순 목록으로 버튼을 눌렀을 경우,
+	 * DB에서 경로를 계산해서 그 페이지로 리다이렉트하기
+	 * 
+	 */
 	
 
 //	=============================================================================================================================

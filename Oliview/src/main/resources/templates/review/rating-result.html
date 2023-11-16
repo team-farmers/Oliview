@@ -53,7 +53,7 @@
                   </a>
           
                   <!-- 제목(가게명) -->
-                  <div class="title"><a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, store=*{reviewTitle})}"
+                  <div class="title"><a th:href="@{/review/{reviewNo}(reviewNo=*{reviewNo}, store=*{reviewTitle}, cp2=${map.pagination.currentPage})}"
                     th:text="*{reviewTitle}">가게이름</a>
                   </div>
           
@@ -87,8 +87,8 @@
 
           <ul class="pagination" th:with="pagination=${map.pagination}">
                   
-            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=1)}">&lt;&lt;</a></li>
-            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.prevPage})}">&lt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp2=1)}">&lt;&lt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp2=${pagination.prevPage})}">&lt;</a></li>
   
   
             <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
@@ -99,12 +99,12 @@
   
                 <!-- 보고있지 않은 페이지 -->                    
                 <li th:unless="${i == pagination.currentPage}"> 
-                    <a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp= ${i})}" th:text="${i}">2</a>
+                    <a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp2= ${i})}" th:text="${i}">2</a>
                 </li>
             </th:block>
   
-            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.nextPage})}">&gt;</a></li>
-            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp=${pagination.maxPage})}">&gt;&gt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp2=${pagination.nextPage})}">&gt;</a></li>
+            <li><a th:href="@{/review/store/{reviewTitle}(reviewTitle=${reviewTitle}, cp2=${pagination.maxPage})}">&gt;&gt;</a></li>
           </ul>
         </div>
 
