@@ -17,12 +17,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+
+  overflow: auto;
 }
 
 main{
   width: 144rem;
   height: 100vh;
+  overflow: auto;
+}
+
+main::-webkit-scrollbar{
+  display: none;
 }
 
 /* ========================================================================================= */
@@ -157,7 +164,7 @@ li > img{
 	font-size: 1.5rem;
   text-align: center;
 
-  background-color: red;
+  background-color: #66B97E;
   width: 2rem;
   height: 2rem;
 
