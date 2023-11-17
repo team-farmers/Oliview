@@ -73,16 +73,15 @@
                 <a th:href="@{/review/{reviewNo} (reviewNo=*{reviewNo})}" th:text="*{reviewTitle}">게시글 제목</a>
               </td>
               <td th:value="*{reportContent}" th:text="*{reportContent}"></td>
-              <td th:text="*{reviewDelFl}">후훟후</td>
               <td>
                 <form action="reviewAdminad" method="POST" style="display:inline">
                   <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
                   
-                  <th:block th:if="${reviewDelFl == 'N'}">
+                  <th:block th:if="*{reviewDelFl == 'N'}">
                     <span>게시중</span>
                     <button >삭제</button>
                   </th:block>
-                  <th:block th:unless="${reviewDelFl == 'N'}">
+                  <th:block th:unless="*{reviewDelFl == 'N'}">
                     <span >삭제됨</span>
                     <button>복구</button>
                   </th:block>
