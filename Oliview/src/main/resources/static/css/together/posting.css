@@ -38,15 +38,177 @@ a {
   margin-top: 30px;
 }
 
-.bt button, .bt-2 button{
-  flex :1;
-  padding : 10px 20px;
-  margin :0.5px;
-  border : none;
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
   border-radius: 5px;
-  cursor:pointer;
+  cursor: pointer;
   transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63);
+  color: white; 
 }
+
+
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D);
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
+.bt button,
+.bt-2 button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 0.5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background: linear-gradient(45deg, #66B97E, #4E8F63); /* Gradient background */
+  color: white; /* Text color */
+}
+
+/* Hover effect */
+.bt button:hover,
+.bt-2 button:hover {
+  background: linear-gradient(45deg, #4E8F63, #2E5C3D); /* Gradient background on hover */
+}
+
 
 .bt button {
   background-color: var(--main-color);
@@ -65,10 +227,8 @@ a {
 }
 
 
-
-
 .board_write {
-  border-top: 2px solid #66B97E;
+  border-top: 3px solid #66B97E;
 }
 
 .board_write .title,
@@ -78,7 +238,7 @@ a {
 
 .board_write .info {
   border-top: 2px dashed #ddd;
-  border-bottom: 2px solid #66B97E;
+  border-bottom: 3px solid #66B97E;
   font-size: 0;
 }
 
@@ -118,14 +278,14 @@ a {
   font-size: 1.4rem;
 }
 
+
+
 .col-form-label > .form-check-input{
 
   width: 10rem;
   height: 1.5rem;
   
 }
-
-
 
 .board_write .title dt,
 .board_write .info dt {
@@ -161,6 +321,10 @@ a {
   height: 10rem;
   width: 10rem;
 }
+
+
+
+
 
 
 
