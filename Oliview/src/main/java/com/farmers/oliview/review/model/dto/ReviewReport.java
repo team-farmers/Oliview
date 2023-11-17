@@ -9,10 +9,10 @@ public class ReviewReport {
    
    private int reportNo;
    private String reportContent;
-   private int reportAccrue;
    private int reviewNo;
    private String reportDelFl;
    
    private String memberNickname;
    private String reviewTitle;
+   private String reviewDelFl;
 }

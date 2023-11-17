@@ -14,7 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.farmers.oliview.admin.model.service.AdminService;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.review.model.dto.ReviewReport;
 import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.dto.TogetherReport;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -137,9 +139,9 @@ public class AdminController {
 		int result = service.delete(reviewNo);
 
 		if (result > 0) {
-			ra.addFlashAttribute("message", "게시글이 삭제 되었습니다.");
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
 		} else {
-			ra.addFlashAttribute("message", "게시글이 복구 되었습니다.");
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
 		}
 		
 		return "redirect:reviewList";
@@ -148,31 +150,83 @@ public class AdminController {
 	
 
 
-//	@GetMapping("togetherList")
-//	public String togetherList(Model model, RedirectAttributes ra) {
-//
-//		List<Together> togetherList = service.togetherList();
-//
-//		model.addAttribute("togetherList", togetherList);
-//
-//		return "admin/togetherList";
-//	}
+	@GetMapping("togetherList")
+	public String togetherList(Model model, RedirectAttributes ra) {
+		
+		List<Together> togetherList = service.togetherList();
+
+		model.addAttribute("togetherList", togetherList);
+		
+		return "admin/togetherList";
+	}
 	
-//	@PostMapping("changeDelFl")
-//	public String changeDelFl(int reviewNo, RedirectAttributes ra) {
-//
-//		int result = service.changeDelFl(reviewNo);
-//
-//		if (result > 0) {
-//			ra.addFlashAttribute("message", "게시글 상태 변경을 성공했습니다.");
-//		} else {
-//			ra.addFlashAttribute("message", "게시글 상태 변경을 실패했습니다.");
-//		}
-//
-//		return "redirect:reviewList";
-//	}
+	@PostMapping("boardadmin")
+	public String deleteTogether(int boardNo, RedirectAttributes ra) {
+		
+		int result = service.deleteTogether(boardNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		}
+		
+		return "redirect:togetherList";
+	}
+	
+	@GetMapping("reviewReportList")
+	public String reportlist(Model model, RedirectAttributes ra) {
+		
+		List<ReviewReport> reportlist = service.reportlist();
+
+		model.addAttribute("reportlist", reportlist);
+		
+		return "admin/reviewReportList";
+	}
+	
+	@GetMapping("togetherReportList")
+	public String togetherReportList(Model model, RedirectAttributes ra) {
+		
+		List<TogetherReport> togetherReportList = service.togetherReportList();
+		
+		model.addAttribute("togetherReportList", togetherReportList);
+		
+		return "admin/togetherReportList";
+	}
+	
+	@PostMapping("reviewAdminad")
+	public String deleteReviewad(int reviewNo, RedirectAttributes ra) {
+		
+		int result = service.deleteReviewad(reviewNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		}
+		
+		return "redirect:reviewReportList";
+	}
+	
+	@PostMapping("boardDelete")
+	public String boardDeleteAd(int boardNo, RedirectAttributes ra) {
+		
+		int result = service.boardDeleteAd(boardNo);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		}
+		
+		return "redirect:togetherReportList";
+	}
+	
 
 	
+
+
+		
 	
 	
 }

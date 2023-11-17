@@ -13,10 +13,10 @@ public class TogetherReport {
 
 	private int tReportNo;
 	private String tReportContent;
-	private int tReportDelFl;
+	private String tReportDelFl;
 	private int boardNo;
 
 	private String memberNickname;
 	private String boardTitle;
-
+	private String boardDelFl;
 }

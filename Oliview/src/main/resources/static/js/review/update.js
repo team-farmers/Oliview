@@ -78,6 +78,7 @@ for (let i = 0; i < cleanlinessRating.value; i++) clean[i].classList.add("fa-sha
 const preview = document.querySelector(".preview");
 const inputImage = document.querySelector(".inputImage");
 const deleteImage = document.querySelector(".delete-image");
+const deleteOrder = document.querySelector("#deleteOrder"); 
 
 let backupInput;
 
@@ -154,6 +155,8 @@ if (inputImage != null) {
         inputImage.value = "";
 
         backupInput.value = "";
+
+        deleteOrder.value = 1;
 
     });
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원 관리</title>
+  <title>같이 먹어요</title>
   <link rel="stylesheet" th:href="@{/css/admin/togetherList.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
@@ -26,7 +26,10 @@
             <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
           </li>
           <li>
-            <a th:href="@{/myPage/profile}">신고 게시판</a>
+            <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
+          </li>
+          <li>
+            <a th:href="@{/admin/togetherReportList}"> 같이 먹어요 신고 목록</a>
           </li>
           <li>
             <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
@@ -44,9 +47,7 @@
           <tr id="report-table-row">
             <th>게시판 번호</th>
             <th>제목</th>
-            <th>회원 번호</th>
             <th>작성일</th>
-            <th>신고</th>
             <th>관리</th>
           </tr>
 
@@ -54,21 +55,25 @@
             <th colspan="6"> 게시글이 존재하지 않습니다.</th>
           </tr>
 
-          <tr id="report-table-content" th:each="together : ${togetherList}" th:object="${together}">
+          <tr id="report-table-content" th:each="together: ${togetherList}" th:object="${together}">
             <td th:text="*{boardNo}">번호</td>
             <td>
-              <a th:href="@{/together/{boardNo}(boardNo=${board.boardNo},cp=${pagination.currentPage}, key= ${param.key}, query=${param.query})}" th:text="*{boardTitle}">게시글 제목</a>
+              <a th:href="@{/together/{boardNo}(boardNo=${together.boardNo})}" th:text="*{boardTitle}">게시글 제목</a>
             </td>
-            <td th:text="*{memberNo}"></td>
             <td th:text="*{dateCreated}">작성일</td>
-            <td></td>
             <td>
-              <th:block th:if="*{boardDelFl == 'N'}">
-                <button id="delBtn">삭제하기</button>
-              </th:block>
-              <th:block th:if="*{boardDelFl != 'N'}">
-                <button id="returnBtn">복구하기</button>
-              </th:block>
+              <form action="boardadmin" method="POST" style="display:inline">
+                <input type="hidden" th:value="*{boardNo}" name="boardNo">
+                <th:block th:if="${#strings.equals(together.boardDelFl, 'N')}">
+                  <span>게시중</span>
+                  <button>삭제</button>
+                </th:block>
+                <th:block th:unless="${#strings.equals(together.boardDelFl, 'N')}">
+                  <span>삭제됨</span>
+                  <button>복구</button>
+                </th:block>
+
+              </form>
             </td>
 
           </tr>

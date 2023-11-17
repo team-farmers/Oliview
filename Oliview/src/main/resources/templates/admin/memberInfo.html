@@ -13,6 +13,27 @@
     <main>
         <th:block th:replace="~{common/header}"></th:block>
 
+        <section id="navigation-container">
+            <nav>
+              <ul id="page-change-container">
+                <li>
+                  <a th:href="@{/admin/memberList}">회원 관리</a>
+                </li>
+                <li>
+                  <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+                </li>
+                <li>
+                  <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+                </li>
+                <li>
+                  <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
+                </li>
+                <li>
+                  <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+                </li>
+              </ul>
+            </nav>
+          </section>
         
         <section id="content">
             <p id="list">회원 상세 정보</p>
