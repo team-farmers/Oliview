@@ -21,7 +21,7 @@
           <!-- 댓글 프로필  -->
           <p class="comment-writer">
             <!-- 프로필 이미지 없을 경우 -->
-            <span class="comm-profileImg" th:unless="*{memberProfile}"><img th:src="*{user.default.image}"></span>
+            <span class="comm-profileImg" th:unless="*{memberProfile}"><img th:src="#{user.default.image}"></span>
             <!-- 프로필 이미지 있을 경우 -->
             <span class="comm-profileImg" th:if="*{memberProfile}"><img th:src="*{memberProfile}"></span>
 

@@ -73,8 +73,12 @@
 	<!-- 검색 리뷰 개수 (인기순, 최신순) -->
 	<select id="searchReviewCount" resultType="_int">
 		SELECT COUNT(*) FROM "REVIEW"
+		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE REVIEW_DEL_FL = 'N'
-		AND REVIEW_TITLE LIKE '%${searchInput}%'
+		AND ( REVIEW_TITLE LIKE '%${searchInput}%'
+		OR REVIEW_MENU LIKE '%${searchInput}%'
+		OR REVIEW_ADDRESS LIKE '%${searchInput}%'
+		OR MEMBER_NICKNAME LIKE '%${searchInput}%')
 	</select>
 
 	<!-- 검색 평점 리뷰 개수 (평점순) -->
@@ -82,8 +86,12 @@
 		SELECT COUNT(*)
 		FROM(SELECT 1
 			FROM "REVIEW"
+			JOIN "MEMBER" USING (MEMBER_NO)
 			WHERE REVIEW_DEL_FL = 'N'
-			AND REVIEW_TITLE LIKE '%${searchInput}%'
+			AND ( REVIEW_TITLE LIKE '%${searchInput}%'
+				OR REVIEW_MENU LIKE '%${searchInput}%'
+				OR REVIEW_ADDRESS LIKE '%${searchInput}%'
+				OR MEMBER_NICKNAME LIKE '%${searchInput}%')
 			GROUP BY REVIEW_TITLE)
 	</select>
 	
@@ -249,7 +257,7 @@
 		AND REVIEW_TITLE = #{reviewTitle}
 		AND REVIEW_NO != #{reviewNo}
 		AND ROWNUM BETWEEN 1 AND 4
-		ORDER BY READ_COUNT
+		ORDER BY READ_COUNT DESC
 	</select>
 	
 	<!-- 리뷰 찜 여부 확인 -->
