@@ -46,11 +46,13 @@ agreeSite.addEventListener("change", ()=>{
     // 사이트 이용약관 동의 체크시
     if(agreeSite.checked){
         agreements.agreeSite = true;
+        ifCheckAll();
     } else {
         agreements.agreeSite = false;
         agreeAll.checked = false;
     }
 })
+
 
 // 개인정보 이용약관 체크 확인
 agreePersonal.addEventListener("change", ()=>{
@@ -58,11 +60,35 @@ agreePersonal.addEventListener("change", ()=>{
     // 개인정보 이용약관 동의 체크시
     if(agreePersonal.checked){
         agreements.agreePersonal = true;
+        ifCheckAll();
     } else {
         agreements.agreePersonal = false;
         agreeAll.checked = false;
     }
 })
+
+
+// 선택약관 체크 확인
+agreeChoice.addEventListener("change", ()=>{
+
+    // 선택약관 동의 체크시
+    if(agreeChoice.checked){
+        agreements.agreeChoice = true;
+        ifCheckAll();
+    } else {
+        agreements.agreeChoice = false;
+        agreeAll.checked = false;
+    }
+})
+
+
+
+// 모든 약관이 동의로 체크되어있을 경우 전체동의하기에 체크하는 함수
+function ifCheckAll(){
+    if(agreeChoice.checked && agreePersonal.checked && agreeSite.checked){
+        agreeAll.checked=true;
+    }
+}
 
 
 // 제출버튼 유효성검사
@@ -75,57 +101,5 @@ agreeForm.addEventListener("submit", e=> {
         return;
     }
 }); 
-
-
-
-// agreeAll.addEventListener("click", e=>{
-
-//     const checked = e.target.checked;
-
-//     if(checked){
-//         agreeCheckBoxs.forEach((item) => {
-//             item.checked = true;
-//             agreements[item.id] = true;
-//             item.parentNode.classList.add('active');
-//         });
-
-//     } else {
-//         agreeCheckBoxs.forEach((item)=>{
-//             item.checked = false;
-//             agreements[item.id] = false;
-//             item.parentNode.classList.remove('active');
-//         });
-//     }
-    
-// })
-
-
-// // 동의사항 중 하나라도 빠지면 체크아웃됨
-// agreeCheckBoxs.forEach((item) => item.addEventListener("input", toggleAgreeCheckBoxs));
-
-
-// function agreeAllStatus(){
-//     const {agreeSite, agreePersonal, agreeChoice } = agreements;
-//     if(agreeSite && agreePersonal && agreeChoice) { // 모두 선택되면 전체동의
-//         agreeAll.checked = true;
-//     } else if(agreeSite && agreePersonal){
-//         agree
-//     }
-    
-//     else{
-//         agreeAll.checked = false;
-//     }
-// }
-
-
-// function toggleAgreeCheckBoxs(e){
-//     const { checked, id } = e.target;
-//     agreements[id] = checked;
-//     this.parentNode.classList.toggle('active');
-//     agreeAllStatus();
-// }
-
-
-
 
 
