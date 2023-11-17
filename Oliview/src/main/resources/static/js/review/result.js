@@ -135,7 +135,7 @@ const sortPopularFn = (cp) => {
     const a1 = document.createElement("a");
     // a1.setAttribute("onclick", "sortLatestFn(1)");
     a1.addEventListener("click", () => {
-      sortLatestFn(1);
+      sortPopularFn(1);
     });
     a1.innerHTML = "&lt;&lt;";
     li1.append(a1);
@@ -146,22 +146,11 @@ const sortPopularFn = (cp) => {
     const a2 = document.createElement("a");
     a2.innerHTML = "&lt;";
     a2.addEventListener("click", () => {
-      sortLatestFn(pg.prevPage);
+      sortPopularFn(pg.prevPage);
     });
     li2.append(a2);
     
     pagination.append(li1, li2);
-
-    // 1 페이지 모양 안보일때 보이게
-    if(pg.endPage==0){
-      const li0 = document.createElement("li");
-      const a0 = document.createElement("a");
-      a0.classList.add("current");
-      a0.innerText=1;
-
-      li0.append(a0);
-      pagination.append(li0);
-    }
 
     for(let i = pg.startPage; i<=pg.endPage; i++){
       const li = document.createElement("li");
@@ -338,17 +327,6 @@ const sortLatestFn = (cp) => {
     li2.append(a2);
     
     pagination.append(li1, li2);
-
-    // 1 페이지 모양 안보일때 보이게
-    if(pg.endPage==0){
-      const li0 = document.createElement("li");
-      const a0 = document.createElement("a");
-      a0.classList.add("current");
-      a0.innerText=1;
-
-      li0.append(a0);
-      pagination.append(li0);
-    }
 
 
     for(let i = pg.startPage; i<=pg.endPage; i++){
@@ -550,17 +528,6 @@ const sortRatingFn = (cp) => {
     li2.append(a2);
     
     pagination.append(li1, li2);
-
-    // 1 페이지 모양 안보일때 보이게
-    if(pg.endPage==0){
-      const li0 = document.createElement("li");
-      const a0 = document.createElement("a");
-      a0.classList.add("current");
-      a0.innerText=1;
-
-      li0.append(a0);
-      pagination.append(li0);
-    }
 
 
     for(let i = pg.startPage; i<=pg.endPage; i++){

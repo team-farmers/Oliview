@@ -56,7 +56,8 @@
           <article class="review-rating">
             <section class="rating-total"> 
               <section class="profile">
-                <section class="profile-img"><img th:src="*{memberProfile}" alt="프로필사진"></section>
+                <section class="profile-img" th:unless="*{memberProfile}"><img th:src="#{user.default.image}" alt="프로필사진"></section>
+                <section class="profile-img" th:if="*{memberProfile}"><img th:src="*{memberProfile}" alt="프로필사진"></section>
                 <span class="nickname" th:text="*{memberNickname}">닉네임</span>
               </section>
               <span class="star-total" th:text="*{starTotal}">총점</span>
@@ -190,6 +191,8 @@
 
     // session에 세팅된 loginMember 존재 여부 확인
     const loginCheck = /*[[${session.loginMember!=null ? true : false}]]*/ "로그인 여부";
+
+    const userDefaultImage = /*[[#{user.default.image}]]*/ "회원 기본 이미지";
 
   </script> 
 

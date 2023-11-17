@@ -196,9 +196,6 @@
         <li><a>&lt;&lt;</a></li>
         <li><a>&lt;</a></li>
 
-        <!-- 1 페이지 모양 안보일때 보이게 -->
-        <li th:if="${pagination.endPage == 0}"><a class="current">1</a></li>
-
         <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
             <li th:if="${i == pagination.currentPage}"><a class="current" th:text="${i}">1</a></li>              
             <li th:unless="${i == pagination.currentPage}"><a th:text="${i}">2</a></li>
