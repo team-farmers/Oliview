@@ -50,7 +50,7 @@ public class ChattingController {
 		map.put("openMemberNo", together.getMemberNo()); // 채팅방오픈회원 -> 같이먹어요 게시글 작성 회원
 		map.put("loginMemberNo", loginMember.getMemberNo()); //채팅방참여회원 -> 현재 로그인한 회원번호
 		
-		// 돌려받은 together에서 DB로 조회한 채팅룸 중에 멤버넘버가 참여자로 이미 있다면? 패스. 아니면 인서트 진행!
+		// 돌려받은 together에서 DB로 조회한 채팅룸 중에 로그인멤버넘버가 참여자로 이미 있다면? 패스. 아니면 인서트 진행!
 		// 채팅에 내가 참여자로 있는지 확인하기. (결과는 chattingNo)
 		int result = service.checkChattingPart(map);
 		
