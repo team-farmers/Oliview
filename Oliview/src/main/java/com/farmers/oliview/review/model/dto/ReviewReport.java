@@ -14,4 +14,5 @@ public class ReviewReport {
    
    private String memberNickname;
    private String reviewTitle;
+   private String reviewDelFl;
 }

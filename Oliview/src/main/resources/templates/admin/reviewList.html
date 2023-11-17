@@ -29,6 +29,9 @@
             <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
           </li>
           <li>
+            <a th:href="@{/admin/togetherReportList}"> 같이 먹어요 신고 목록</a>
+          </li>
+          <li>
             <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
           </li>
         </ul>
@@ -61,24 +64,27 @@
             </td>
             <td th:text="*{memberNickname}">작성자</td>
             <td th:text="*{writeDate}">작성일</td>
-            <td>
-                <form action="reviewadmin" method="POST" style="display:inline">
-                  <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
 
-                  <th:block th:if="*{reviewDelFl == 'N'}">
-                    <span>게시중</span>
-                    <button >삭제</button>
-                  </th:block>
-                  <th:block th:unless="*{reviewDelFl == 'N'}">
-                    <span>삭제됨</span>
-                    <button>복구</button>
-                  </th:block>
-                </form>
-            </td>
+            <td>
+
+              <form action="reviewadmin" method="POST" style="display:inline">
+                <input type="hidden" th:value="*{reviewNo}" name="reviewNo">
+
+                <th:block th:if="${reviewDelFl == 'N'}">
+                  <span>게시중</span>
+                  <button>삭제</button>
+                </th:block>
+                <th:block th:unless="${reviewDelFl == 'N'}">
+                  <span>삭제됨</span>
+                  <button>복구</button>
+                </th:block>
+              </form>
+              </td>
           </tr>
         </table>
       </section>
     </section>
+
 
 
 

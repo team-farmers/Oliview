@@ -79,5 +79,19 @@ public class AdminServiceImpl implements AdminService {
 	public List<ReviewReport> reportlist() {
 		return mapper.reportlist();
 	}
+	
+	@Override
+	public int deleteReviewad(int reviewNo) {
+		return mapper.deleteReviewad(reviewNo);
+	}
+	
+	@Override
+	public List<TogetherReport> togetherReportList() {
+		return mapper.togetherReportList();
+	}
 
+	@Override
+	public int boardDeleteAd(int boardNo) {
+		return mapper.boardDeleteAd(boardNo);
+	}
 }

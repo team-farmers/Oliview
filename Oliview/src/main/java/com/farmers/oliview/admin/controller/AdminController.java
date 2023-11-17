@@ -184,6 +184,44 @@ public class AdminController {
 		return "admin/reviewReportList";
 	}
 	
+	@GetMapping("togetherReportList")
+	public String togetherReportList(Model model, RedirectAttributes ra) {
+		
+		List<TogetherReport> togetherReportList = service.togetherReportList();
+		
+		model.addAttribute("togetherReportList", togetherReportList);
+		
+		return "admin/togetherReportList";
+	}
+	
+	@PostMapping("reviewAdminad")
+	public String deleteReviewad(int reviewNo, RedirectAttributes ra) {
+		
+		int result = service.deleteReviewad(reviewNo);
+
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		}
+		
+		return "redirect:reviewReportList";
+	}
+	
+	@PostMapping("boardDelete")
+	public String boardDeleteAd(int boardNo, RedirectAttributes ra) {
+		
+		int result = service.boardDeleteAd(boardNo);
+		
+		if (result > 0) {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		} else {
+			ra.addFlashAttribute("message", "게시글 상태가 변경 되었습니다.");
+		}
+		
+		return "redirect:togetherReportList";
+	}
+	
 
 	
 

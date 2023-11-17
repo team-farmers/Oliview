@@ -45,6 +45,17 @@ public interface AdminMapper {
 	List<ReviewReport> reportlist();
 
 
+	int deleteReviewad(int reviewNo);
+
+
+	List<TogetherReport> togetherReportList();
+
+
+	int boardDeleteAd(int boardNo);
+	
+	
+
+
 
 
 

@@ -39,6 +39,9 @@
               <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
             </li>
             <li>
+              <a th:href="@{/admin/togetherReportList}"> 같이 먹어요 신고 목록</a>
+            </li>
+            <li>
               <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
             </li>
           </ul>
@@ -56,6 +59,7 @@
               <th>신고 번호</th>
               <th>글 제목</th>
               <th>신고내용</th>
+              <th>관리</th>
             </tr>
 
             <tr th:if="${#lists.size(togetherReportList) == 0}">
@@ -64,9 +68,25 @@
 
             <tr id="report-table-content" th:each="TogetherReport : ${togetherReportList}" th:object="${TogetherReport}">
               <td th:text="*{tReportNo}">번호</td>
-              <td th:text="*{reviewTitle}"></td>
+              <td><a th:href="@{/together/{boardNo}(boardNo=*{boardNo})}" th:text="*{boardTitle}">게시글 제목</a></td>
               <td th:value="*{tReportContent}" th:text="*{tReportContent}"></td>
+              <td>
+                 <form action="boardDelete" method="POST" style="display:inline">
+                  <input type="hidden" th:value="*{boardNo}" name="boardNo">
+                  
+                  <th:block th:if="*{boardDelFl=='N'}">
+                    <span>게시중</span>
+                    <button>삭제</button>
+                  </th:block>
+                 
+                  <th:block th:unless="*{boardDelFl== 'N'}">
+                    <span>삭제됨</span>
+                    <button>복구</button>
+                  </th:block>
+                </form> 
+              </td>
             </tr>
+
           </table>
         </section>
       </section>
