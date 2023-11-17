@@ -83,12 +83,12 @@ public class EditReviewController {
 
 	// 게시글 수정
 	@PostMapping("/{reviewNo:[0-9]+}/update")
-	public String updateReview(@PathVariable("reviewNo") int reviewNo, 
+	public String updateReview(@PathVariable("reviewNo") int reviewNo, String deleteOrder
 			Review review, String deleteOrder,RedirectAttributes ra,
 			@RequestParam("inputImage") MultipartFile img) throws IllegalStateException, IOException {
 
 
-		int result = service.updateReview(review, img);
+		int result = service.updateReview(review, img, deleteOrder);
 
 		String message = null;
 		String path = null;

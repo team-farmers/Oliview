@@ -53,17 +53,6 @@ header {
   background-color: #f9f9f9;
 }
 
-#report-table-content button {
-
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  cursor: pointer;
-}
 
 #report-table-content button:hover {
   background-color: #2d2d2d;

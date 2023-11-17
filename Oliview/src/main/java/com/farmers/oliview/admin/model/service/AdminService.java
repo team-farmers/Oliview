@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.review.model.dto.ReviewReport;
 import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.dto.TogetherReport;
 
 public interface AdminService {
 
@@ -24,11 +26,19 @@ public interface AdminService {
 
 	List<Review> reviewReportList();
 
-//	List<Together> togetherList();
+	
 
 	int user(int memberNo);
 
 	int admin(int memberNo);
+
+	List<Together> togetherList();
+
+	int deleteTogether(int boardNo);
+
+	List<ReviewReport> reportlist();
+
+
 	
 
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원 관리</title>
+  <title>review 관리</title>
   <link rel="stylesheet" th:href="@{/css/admin/reviewList.css}">
   <th:block th:replace="~{common/common}"></th:block>
 </head>
@@ -26,7 +26,7 @@
             <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
           </li>
           <li>
-            <a th:href="@{/admin/reportList}">신고 게시판</a>
+            <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
           </li>
           <li>
             <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
@@ -46,7 +46,6 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-            <th>신고 누적 횟수</th>
             <th>게시글 관리</th>
           </tr>
 
@@ -62,7 +61,6 @@
             </td>
             <td th:text="*{memberNickname}">작성자</td>
             <td th:text="*{writeDate}">작성일</td>
-            <td></td>
             <td>
                 <form action="reviewadmin" method="POST" style="display:inline">
                   <input type="hidden" th:value="*{reviewNo}" name="reviewNo">

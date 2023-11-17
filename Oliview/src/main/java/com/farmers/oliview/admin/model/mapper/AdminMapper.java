@@ -3,9 +3,12 @@ package com.farmers.oliview.admin.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.review.model.dto.ReviewReport;
 import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.dto.TogetherReport;
 
 @Mapper
 public interface AdminMapper {
@@ -28,13 +31,23 @@ public interface AdminMapper {
 	List<Review> reviewReportList();
 
 
-//	List<Together> togetherList();
-
 	int user(int memberNo);
 
 	int admin(int memberNo);
 
-//	int changeDelFl(int reviewNo);
+
+	List<Together> togetherList();
+
+
+	int deleteTogether(int boardNo);
+
+
+	List<ReviewReport> reportlist();
+
+
+
+
+
 
  
 

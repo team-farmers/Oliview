@@ -51,7 +51,7 @@ public class EditReviewServiceImpl implements EditReviewService {
 	// 게시글 수정
 	@Override
 	public int updateReview(Review review, MultipartFile img) throws IllegalStateException, IOException {
-		
+
 		String backup = review.getReviewImg();
 
 		String rename = null;

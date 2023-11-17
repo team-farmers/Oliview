@@ -9,7 +9,6 @@ public class ReviewReport {
    
    private int reportNo;
    private String reportContent;
-   private int reportAccrue;
    private int reviewNo;
    private String reportDelFl;
    

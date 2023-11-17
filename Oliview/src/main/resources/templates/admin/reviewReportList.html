@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신고 게시판</title>
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신고 관리</title>
+    <link rel="stylesheet" th:href="@{/css/admin/reviewList.css}">
+    <th:block th:replace="~{common/common}"></th:block>
+  </head>
+
+  <body>
+    <main>
+      <th:block th:replace="~{common/header}"></th:block>
+
+      <section id="navigation-container">
+        <nav>
+          <ul id="page-change-container">
+            <li>
+              <a th:href="@{/admin/memberList}">회원 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/reviewList}">리뷰 게시판 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/togetherList}">같이 먹어요 게시판 관리</a>
+            </li>
+            <li>
+              <a th:href="@{/admin/reviewReportList}">리뷰 게시판 신고 목록</a>
+            </li>
+            <li>
+              <a th:href="@{/myPage/profile}">홈페이지로 돌아가기</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      </section>
+
+      <section class="conatiner">
+
+        <p id="list"> 신고 게시판 목록</p>
+
+
+        <section id="report-index-container">
+          <table id="report-table">
+            <tr id="report-table-row">
+              <th>신고 번호</th>
+              <th>글 제목</th>
+              <th>신고내용</th>
+            </tr>
+
+            <tr th:if="${#lists.size(reportlist) == 0}">
+              <th colspan="6"> 게시글이 존재하지 않습니다.</th>
+            </tr>
+
+            <tr id="report-table-content" th:each="ReviewReport : ${reportlist}" th:object="${ReviewReport}">
+              <td th:text="*{reportNo}">번호</td>
+              <td th:text="*{reviewTitle}"></td>
+              <td th:value="*{reportContent}" th:text="*{reportContent}"></td>
+              </td>
+            </tr>
+          </table>
+        </section>
+      </section>
+
+
+
+    </main>
+
+    <th:block th:replace="~{common/footer}"></th:block>
+
+
+  </body>
+
+  </html>
+
+</body>
+
+</html>

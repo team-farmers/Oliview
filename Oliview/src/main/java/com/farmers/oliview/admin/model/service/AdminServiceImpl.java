@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.farmers.oliview.admin.model.mapper.AdminMapper;
 import com.farmers.oliview.member.model.dto.Member;
 import com.farmers.oliview.review.model.dto.Review;
+import com.farmers.oliview.review.model.dto.ReviewReport;
 import com.farmers.oliview.together.dto.Together;
+import com.farmers.oliview.together.dto.TogetherReport;
 
 import lombok.RequiredArgsConstructor;
 
@@ -58,17 +60,24 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.delete(reviewNo);
 	}
 
-	
-//
-//	@Override
-//	public List<Together> togetherList() {
-//		return mapper.togetherList();
-//	}
-	
+	@Override
+	public List<Together> togetherList() {
+		return mapper.togetherList();
+	}
+
 	@Override
 	public int admin(int memberNo) {
 		return mapper.admin(memberNo);
 	}
 
+	@Override
+	public int deleteTogether(int boardNo) {
+		return mapper.deleteTogether(boardNo);
+	}
+
+	@Override
+	public List<ReviewReport> reportlist() {
+		return mapper.reportlist();
+	}
 
 }
