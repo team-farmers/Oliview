@@ -56,7 +56,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler{
         
         // Jackson에서 제공하는 객체
         // JSON String -> DTO Object
-        // 전달받은 내용 : {"senderNo":"4", "chattingNo":"8","messageContent":"실시간"}
+        // 전달받은 내용 : {"senderNo":"4", "chattingNo":"8","messageContent":"실시간", "senderProfile", "senderNickname"}
         ObjectMapper objectMapper = new ObjectMapper();
         
         Message msg = objectMapper.readValue( message.getPayload(), Message.class);
