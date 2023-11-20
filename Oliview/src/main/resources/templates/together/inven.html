@@ -64,7 +64,7 @@
         <ul class="pagination">
 
           <li><a th:href="@{/together/inven(cp=1, key= ${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-          <li><a th:href="@{/together/inven(cp=${pagination.prevPage}, key= ${param.key}, query=${param.query})}">&lt;</a></li>
+       
 
 
           <th:block th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage, 1)}">
@@ -77,7 +77,7 @@
           </th:block>
 
 
-          <li><a th:href="@{/together/inven(cp=${pagination.nextPage}, key= ${param.key}, query=${param.query})}">&gt;</a></li>
+
           <li><a th:href="@{/together/inven(cp=${pagination.maxPage}, key= ${param.key}, query=${param.query})}">&gt;&gt;</a></li>
         </ul>
       </div>
