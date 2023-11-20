@@ -142,27 +142,22 @@ if (content.value.trim().length==0) {
 }
 if (img.value.trim().length==0) {
   alert("이미지를 넣어주세요");
-  e.preventDefault();  // form 제출 x
-  content.value="";
-  content.focus();ㄴ
+  e.preventDefault();  // form 제출 
+  img.focus();
   return;
 }
 if (maxUserCnt.value.trim().length==0) {
   alert("인원을 입력 해주세요");
   e.preventDefault();  // form 제출 x
-  content.value="";
-  content.focus();
+  maxUserCnt.focus();
   return;
 }
 if (mettingDate.value.trim().length==0) {
   alert("모임시간을 입력 해주세요");
   e.preventDefault();  // form 제출 x
-  content.value="";
-  content.focus();
+  mettingDate.focus();
   return;
 }
-
-
 });
 
   // //------------------- 프로필 이미지 변경 form 태그 제출 시 동작
