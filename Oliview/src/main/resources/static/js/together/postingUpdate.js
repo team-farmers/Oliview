@@ -115,6 +115,56 @@ if (imageInput != null) { // #imageInput 존재할 때
   });
 
 }
+const boardWriteFrm = document.getElementById("boardWriteFrm");
+boardWriteFrm.addEventListener('submit', e  => {
+  
+const title = document.querySelector("[name='boardTitle']");
+const content = document.querySelector("[name='boardContent']")
+const img = document.querySelector("[name='img']")
+const maxPeople = document.querySelector("[name='maxPeople']")
+const mettingDate = document.querySelector("[name='mettingDate']")
+
+// 제목 미입력
+if (title.value.trim().length==0) {
+  alert("제목을 입력 해주세요");
+  e.preventDefault();  // form 제출 x
+  title.value="";
+  title.focus();
+  return;
+}
+// 내용 미입력
+if (content.value.trim().length==0) {
+  alert("내용을 입력 해주세요");
+  e.preventDefault();  // form 제출 x
+  content.value="";
+  content.focus();
+  return;
+}
+if (img.value.trim().length==0) {
+  alert("이미지를 넣어주세요");
+  e.preventDefault();  // form 제출 x
+  content.value="";
+  content.focus();ㄴ
+  return;
+}
+if (maxUserCnt.value.trim().length==0) {
+  alert("인원을 입력 해주세요");
+  e.preventDefault();  // form 제출 x
+  content.value="";
+  content.focus();
+  return;
+}
+if (mettingDate.value.trim().length==0) {
+  alert("모임시간을 입력 해주세요");
+  e.preventDefault();  // form 제출 x
+  content.value="";
+  content.focus();
+  return;
+}
+
+
+});
+
   // //------------------- 프로필 이미지 변경 form 태그 제출 시 동작
 
   // const profileFrm = document.getElementById("profileFrm");
