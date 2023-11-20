@@ -69,7 +69,7 @@
             <div class="btn-contents">
             
               <div class="btn-1">
-                <button class="reportBtn"><a onclick="openReportPopup()">
+                <button class="reportBtn"  th:if="${session.loginMember != null and session.loginMember.memberNo != together.memberNo}"><a onclick="openReportPopup()">
                 신고하기</a></button>
               </div>
             
