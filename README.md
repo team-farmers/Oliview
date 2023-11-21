@@ -39,5 +39,3 @@
 * [**일정 관리**(Notion)](https://www.notion.so/936ac6f1689940429ba59fd098d5eb06?v=9e839e7563d749babe87733c43fa5ad9)
 * [**DB 설계**(ERD-Cloud)](https://www.erdcloud.com/d/EnpvmrjxFPwKfuGG3)
 
-
-![010](https://github.com/team-farmers/Oliview/assets/122720744/6dd6b7ab-e924-4534-b3e1-8d04269b79e6)
