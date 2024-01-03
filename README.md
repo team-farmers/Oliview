@@ -34,6 +34,7 @@
 * **etc**: GitHub, Figma , ERD cloud
 
 ### 📌 상세 주소
+* [**프로젝트 보고서**(PDF)](https://drive.google.com/file/d/1gYQkMFvcbQ-saVw090GHCLMbZnpMj2sU/view?usp=drive_link)
 * [**요구사항 정의서**](https://docs.google.com/spreadsheets/d/1nK_HrtQ8RW08fiGmX7KkPlhcpy9ghWvo7W6r7TUsHEw/edit#gid=0)
 * [**화면 구성**(Figma)](https://www.figma.com/file/z1SN53PoU8umIZ4hhsquf2/Oliview-%ED%99%94%EB%A9%B4%EA%B5%AC%EC%84%B1-%EC%B5%9C%EC%A2%85?type=design&node-id=0-1&mode=design&t=8RWApvpnvIbGhhXr-0)
 * [**일정 관리**(Notion)](https://www.notion.so/936ac6f1689940429ba59fd098d5eb06?v=9e839e7563d749babe87733c43fa5ad9)
